@@ -1,4 +1,5 @@
 [[COMP34111]]
+[stackexchange](https://stats.stackexchange.com/questions/208661/whats-the-relation-between-game-theory-and-reinforcement-learning)
 
 - there are specific situations in which learning is preferred to minimax:
 	- good heuristics cannot be found
