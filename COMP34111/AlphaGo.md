@@ -1,6 +1,6 @@
 [[COMP34111]]
 
-- AlphaGo (created by Deepmind team) combines supervised learning, reinforcement learning and [[monte carlo tree search]]
+- AlphaGo (created by Deepmind team) combines supervised learning, reinforcement learning and [[MCTS - monte carlo tree search]]
 - alphago is based on a variant of MCTS - "Asynchronous policy and value MCTS"
 	- the value of the newly added node $s$ is a linear combination of the output of a value network, and the result of roll-outs (layouts),
 		$$V(s) = (1-\eta)V(s|W) + \eta Q(s)$$
