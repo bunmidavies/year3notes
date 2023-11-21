@@ -2,6 +2,7 @@
 
 - in monte carlo tree search, a game tree is built incrementally, but ==asymmetrically==
 - for each iteration, a tree policy is used to find the most urgent node to expand, using a strategy which balances exploration and exploitation
+- this urgent node then has a playout run from it i.e. typically random moves played to the end - according to the reward, the MCTS tree is updated accordingly (from the end game node back up to the original node where the playout started)
 - MCTS can be split up into 4 main phases, which each build on each other and require the 'output' of the previous stage in order to continue
 
 ***

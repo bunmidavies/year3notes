@@ -8,3 +8,5 @@
 2. generate inputs randomly from a probability distribution over the domain
 3. perform a deterministic computation on the inputs
 4. aggregate the results
+
+- in monte carlo learning specifically, ==you learn while you play, in between moves== - this contrasts to TD-learning, where you learn first, and then you play
