@@ -1,6 +1,6 @@
 [[COMP34111]]
 
-- UCT is an exploring strategy, similar to [[epsilon greedy selection]] 
+- UCT is an exploring strategy, similar to [[epsilon-greedy policy]] 
 
 - each node $v$ stores two quantities:
 	1. $Q(v)$ - the sum of all payoffs received (all playouts which pass through $v$)
