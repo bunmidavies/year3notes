@@ -17,7 +17,12 @@
 - Path tracing can handle all effects mentioned
 ## Question 4
 - The rendering equation with only a BRDF can handle the following effects:
-	- 
+	- specular highlights
+	- reflection
+	- colour blend
+	- penumbral shadows
+	- umbral shadows
+	- diffuse interreflection
 ## Question 5
 - texture baking can approximate the following effects, given the viewpoint is moving:
 	- colour bleed
