@@ -1,0 +1,27 @@
+- voice loops evolved into essential coordination support tools in space shuttle mission control, but also in other domains
+- general aim is cooperative work?
+- efforts must be coordinated on a 'moment to moment basis, in response to constantly changing circumstances' - between spatially separate people
+- paper essentially explains how voice loops help these activities, and are more or less essential for complex coordinated activity
+- maybe potentially talk about learning curves (?)
+- front rooms and back rooms, all helping to monitor separate subsystems
+- controllers (approx 20 of them supporting flight director) extract telemetry data from the subsystem of their responsibility
+- access to subsystem data not of your own usually doesnt happen, but the telemetry displays are available - awareness of surroundings allows for coordination
+- coordination is essential since many subsystems are connected (knock on effects etc)
+- support staff perform analysis to be given to controllers in front office
+- coordination across ==subsystems== = use of voice loops - multiple loops monitored in parallel, rather than a global loop
+- controllers monitor a min of 4 loops - main loop = flight director loop, air/ground loop for talking to astronauts (only done by another astronaut controller), front room to back room loop, and ad-hoc 'conference' loop (unused nutil needed)
+- ==monitoring multiple loops in parallel is the key to coordination==
+- little of conversations feel essentially coherent, but the idea is that experienced personnel dont necessarily 'listen', but moreso monitor
+- passive awareness + preattentive reference
+![](https://i.imgur.com/8c5ZuiW.png)
+- voice aids loop sync through allowing the tracking of the tempo of mission processes
+- emphasis on event level information cascading around through voice loops being essential - raw data is not passed, but moreso event level info
+- ==there is a lot of focus on cascading information, and how x affects y that affects z==
+- how common ground facilitates directed communcation
+- synchronous > asynchronous in the case of directed communication
+- internal + external cues allow attention to be directed towards whatever
+- loops are structured and have specific features/protocols to allow improved attention tracking
+- parallel loops = general overview of shuttle parallel to detailed info (front-to-back) - on demand principle
+- highly coded language
+- different volume levels of different loops
+- hierarchy of loops i.e. separation of functionality of loops is another factor which contributes to voice loop success - you only pay attention to loops relevant to your tasks and goals
