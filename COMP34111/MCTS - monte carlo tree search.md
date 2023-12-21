@@ -18,7 +18,7 @@
 - these rollouts require ==self-play== since the opponent cannot actually respond to these moves being made
 - whatever methodology is being used is typically called the ==default policy== 
 # backpropagation/backup
-- the reward received from the previous playout essentially makes its way back from the terminal node, up to the original node where the playout began
+- the reward received from the previous playout essentially makes its way back from the node from where the playout begun, up to the original node where the playout began
 - each node has its visit count incremented, and depending on whether the playout resulted in a win or not, the win count 
 
 ***
