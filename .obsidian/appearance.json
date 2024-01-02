@@ -1,5 +1,6 @@
 {
-  "accentColor": "#8ee190",
+  "accentColor": "#000000",
   "cssTheme": "Minimal",
-  "theme": "system"
+  "theme": "moonstone",
+  "interfaceFontFamily": "Avenir"
 }

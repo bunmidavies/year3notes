@@ -4,34 +4,122 @@
     "type": "split",
     "children": [
       {
-        "id": "92987e12de6b8645",
+        "id": "89bcbd49770b8ef1",
         "type": "tabs",
         "children": [
           {
-            "id": "9c87e04dbb2aa435",
+            "id": "6bd6fe59b6f68ef6",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP34111/AndreasNotesWithPrefaceNLinks.pdf"
+              }
+            }
+          },
+          {
+            "id": "a9ffee44711c9c68",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP33511/UX.pdf"
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "5a31db73b17fec84",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2a01c19da701365d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "COMP33511/COMP33511.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "da04812c99d63fe9",
+            "id": "6b361cc4cd829f4c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "COMP33511/COMP33511.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "12423860161b96fd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP33511/COMP33511.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "cef2d4d57f6e2ab2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP33511/COMP33511.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "74e4139d5b6122d2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP33511/COMP33511.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "004ccf60384b36b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP33511/COMP33511.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9f310d4d6d869c41",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP33511/3 properties of a good questionnaire.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -60,7 +148,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "game",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -85,8 +173,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -106,7 +193,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "COMP33511/3 properties of a good questionnaire.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +210,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "COMP33511/3 properties of a good questionnaire.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +233,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "COMP33511/3 properties of a good questionnaire.md"
               }
             }
           },
@@ -156,7 +243,9 @@
             "state": {
               "type": "all-properties",
               "state": {
-                "sortOrder": "frequency"
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
               }
             }
           }
@@ -177,26 +266,43 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9c87e04dbb2aa435",
+  "active": "228c244357d64d6c",
   "lastOpenFiles": [
-    "space_shuttle_notes.md",
-    "COMP32211_Deliverables.md",
+    "COMP33511/COMP33511.md",
+    "COMP33511/cons of laboratory-based evaluation.md",
+    "COMP33511/common evaluation tools.md",
+    "COMP33511/3 properties of a good questionnaire.md",
+    "COMP33511/quantitative + hybrid methods.md",
+    "COMP33511/qualitative evaluation methods.md",
+    "COMP33511/expert evaluation (walk-throughs + heuristic evaluation).md",
+    "COMP33511/UX.pdf",
+    "COMP33511/digital phenotyping.md",
+    "COMP33511/digital phenotypes.md",
+    "COMP33511/human in the loop systems (HITL).md",
+    "COMP34111/AndreasNotesWithPrefaceNLinks.pdf",
+    "COMP37111/COMP37111.md",
+    "README.md",
+    "COMP34111/GamesL3_2023.pdf",
+    "COMP34111/COMP34111.md",
+    "COMP34111/nash equilibrium point.md",
+    "COMP34111/strategy pair equilibrium point.md",
+    "Untitled.md",
+    "RevOverview.md",
+    "COMP34111/intuition of games.md",
+    "COMP34111/sub-game equilibrium point.md",
+    "COMP34111/best response.md",
+    "COMP34111/formal strategy definitions.md",
+    "COMP34111/formal definition of a game (extensive + normal).md",
+    "COMP34111/learningtoplay.pdf",
+    "COMP37111/rendering BSP trees.md",
+    "COMP37111/spatial-enumeration-and-culling-notes.pdf",
+    "COMP37111/continuity.md",
+    "COMP37111/bezier curves.md",
+    "COMP37111/detail culling.md",
     "32211SUBMISSION/extractpoints.py.txt",
     "32211SUBMISSION/generate_golden_data.py.txt",
     "32211SUBMISSION/COMP32211_Deliverables.pdf",
     "32211SUBMISSION/generate_golden_data.py.txt.txt",
-    "32211SUBMISSION/New Text Document.txt",
-    "32211SUBMISSION/extractpoints.py.txt.txt",
-    "32211SUBMISSION/extractpoints.py",
-    "32211SUBMISSION/generate_golden_data.py",
-    "32211SUBMISSION/generate_golden_data.txt.py",
-    "32211SUBMISSION/extractpoints.txt.py",
-    "README.md",
-    "COMP37111/COMP37111.md",
-    "COMP34111/COMP34111.md",
-    "COMP32211/COMP32211.md",
-    "Untitled.md",
-    "non-cs modules i like.md",
-    "yr3 modules.md"
+    "32211SUBMISSION/New Text Document.txt"
   ]
 }
