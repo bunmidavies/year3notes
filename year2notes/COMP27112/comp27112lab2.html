@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+
+        <body>
+            <script type="module">
+                import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.module.js";
+                import { OrbitControls } from "https://web.cs.manchester.ac.uk/three/three.js-master/examples/jsm/controls/OrbitControls.js";
+
+                var camera, scene, renderer;
+
+                const loader = new THREE.TextureLoader();
+                var sunTexture = loader.load('sun.jpg');
+                var earthTexture = loader.load('earth.jpg');
+                var moonTexture = loader.load('moon.jpg');
+
+                scene = new THREE.Scene();
+
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+                camera.position.set(0,30,500);
+
+                var sunGeometry, sunMaterial, sunMesh;
+                var earthGeometry, earthMaterial, earthMesh;
+                var moonGeometry, moonMaterial, moonMesh;
+
+                sunGeometry = new THREE.SphereGeometry(109, 400, 200);
+                sunMaterial = new THREE.MeshStandardMaterial(
+                    {
+                        emissive: 0xffd700,
+                        emissiveMap: sunTexture,
+                        emissiveIntensity: 1,
+                        wireframe: false
+                    }
+                );
+                sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
+                sunMesh.position.set(100,0,0);
+                scene.add(sunMesh);
+
+                earthGeometry = new THREE.SphereGeometry(25,50,50);
+                earthMaterial = new THREE.MeshPhongMaterial(
+                    {
+                        map: earthTexture
+                    }
+                );
+                earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+                scene.add(earthMesh);
+                //earthMesh.position.set(500,0,0);
+
+                moonGeometry = new THREE.SphereGeometry(5,40,20);
+                moonMaterial = new THREE.MeshPhongMaterial(
+                    {
+                        map: moonTexture
+                    }
+                )
+                moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
+
+                const light = new THREE.PointLight(0xffffff, 1, 4000);
+                light.position.set(0,0,0);
+                scene.add(light);
+
+                const ambientLight = new THREE.AmbientLight(0x404040);
+                ambientLight.position.set(0,0,0);
+                scene.add(ambientLight);
+                
+                var earthSystem;
+                earthSystem = new THREE.Group();
+                earthSystem.add(earthMesh);
+                earthSystem.add(moonMesh);
+                moonMesh.position.set(40,0,0);
+                scene.add(earthSystem);
+
+                var earthCurve;
+                earthCurve = new THREE.EllipseCurve(0,0,550,300,0,2*Math.PI,true,Math.PI);
+
+                var points = earthCurve.getPoints(360);
+                var pathGeometry = new THREE.BufferGeometry().setFromPoints(points);
+                var pathMaterial = new THREE.LineBasicMaterial({
+                    color: 0x5fa371
+                });
+                var orbitPath = new THREE.Line(pathGeometry, pathMaterial);
+                orbitPath.rotation.x = Math.PI / 2;
+                scene.add(orbitPath);
+                //earthCurve.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2));
+
+                // RENDERER + ANIMATE
+                renderer = new THREE.WebGLRenderer();
+                renderer.setClearColor(0x000000, 1.0);
+                renderer.setSize( window.innerWidth, window.innerHeight);
+                document.body.appendChild( renderer.domElement );
+
+                var controls;
+                controls = new OrbitControls(camera, renderer.domElement);
+                controls.autoRotate = true;
+
+                var time, point;
+
+                var sunRotationSpeed = 0.001;
+                // the sun and moon perform 1 full rotation every 27 days
+                // and since the earth performs 1 full rotation per day, it must rotate 27x faster
+                var earthRotationSpeed = sunRotationSpeed * 27; 
+                var moonRotationSpeed = sunRotationSpeed;
+                var moonSpeed = 20
+
+                animate();
+                function animate()
+                {
+                    
+                    time = 0.00025 * performance.now();
+                    time = (time % 1);
+                   
+                    point = earthCurve.getPoint(time);
+                    earthSystem.position.x = point.x;
+                    earthSystem.position.z = point.y;
+                    
+                    earthMesh.rotation.y += earthRotationSpeed;
+                    moonMesh.rotation.y += moonRotationSpeed;
+                    sunMesh.rotation.y += sunRotationSpeed;
+
+                    moonMesh.position.x = 50 * Math.cos(time * moonSpeed);
+                    moonMesh.position.z = 50 * Math.sin(time * moonSpeed);
+
+                    renderer.render(scene, camera);
+                    requestAnimationFrame(animate);
+                }
+
+
+
+            </script>
+        </body>
+    </head>
+</html>

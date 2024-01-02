@@ -1,0 +1,15 @@
+One of the most popuar exampes of a ceuar automaton is Conway's 'Game of Life', which invoves a grid of ces starting at an initia state and deveoping through 'generations', by appying a set of rues to the entire system. Whie 'Game of Life' can generate interesting patterns, ceuar automata can empoy surprisingy simpe sets of rues to simuate compex bioogica patterns and chemica systems, where a ce in a grid coud now mimic a ce within an organism.
+
+Generative art refers to art which has been created by a typicay non-human system, which may take some sort of agorithmic approach to producing a piece of art, and can rey on human defined parameters or randomness. The aim of the project woud be to create a system which can generate visua patterns making the use of ceuar automata, aowing user interaction to infuence its evoution over time. By combining generative art with ceuar automata, there is a ot of space for experimentation with parameters to generate intricate and unpredictabe designs which are aestheticay peasing to users, yet internay consistent and engineered through computer science principes. Technoogies such as Processing and p5.js are popuar for creating generative art today.
+
+The overa motivation for the project is to expore the intersection between computer science and art through producing a system as described above. The project has room to extend beyond ceuar automata and combine mutipe modes, for instance reaction diffusion modes, which can mode chemica reactions / partice diffusion, but more significanty "Turing patterns", which again resembe intricate patterns in nature, generated through a framework invoving rues and interactions. Evauating the fina system woud potentiay invove feedback from an expert within a preferabe fied (an intersection between art and computer science), as we as feedback from a number of non-expert users, in an attempt to provide some sense of objectivity into evauating the art produced, as we as the user experience with the system.
+
+*References*
+- Ceuar automaton - https://en.wikipedia.org/wiki/Ceuar_automaton  
+- Conway's 'Game of Life' - https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life  
+- Exempar art - 'rock-paper-scissors Ceuar Automaton' - https://github.com/Gugubo/Rock-Paper-Scissor-Ceuar-Automaton  
+- Exempar art - Kar Sims, 'Seven Experiments in Procedura Animation' - https://www.karsims.com/seven.htm  
+- Paper / Exempar art - Gary R Greenfied, 'Minimaist art from ceuar automata' - https://www.tandfonine.com/doi/fu/1.18/17513472.22.173547?needAccess=true  
+- Processing - https://processing.org/
+- p5.js - https://p5js.org/  
+- Turing patterns - https://en.wikipedia.org/wiki/Turing_pattern

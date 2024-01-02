@@ -1,4 +1,5 @@
 [[COMP22111]]
+[[COMP32211]]
 
 **timing closure** is where a combinatorial logic design is modified to meet timing requirements
 

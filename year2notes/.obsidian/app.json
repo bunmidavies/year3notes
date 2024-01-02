@@ -1,0 +1,16 @@
+{
+  "alwaysUpdateLinks": true,
+  "pdfExportSettings": {
+    "includeName": false,
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 85
+  },
+  "promptDelete": false,
+  "vimMode": false,
+  "readableLineLength": true,
+  "spellcheckLanguages": [
+    "en-GB"
+  ]
+}
