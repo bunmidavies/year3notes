@@ -8,6 +8,15 @@
 - the latch is asynchronous, so whenever En is high, D matches Q (thus the latch is 'transparent')
 - if En is low, then D will remain as whatever value it was, unaffected by Q
 ![300](https://i.imgur.com/D9aHbfv.png)
+- its also possible to make a simple latch from a DFF, though not quite identical
+```vhdl
+always @ (posedge clk)
+	if (Enable) register <= data_in;
+
+assign data_out = Enable ? data_in : register;
+``` 
+
+# tradeoffs
 
 - ==advantages==:
 	- silicon area of a latch is about half of a DFF, potentially making it cheaper
