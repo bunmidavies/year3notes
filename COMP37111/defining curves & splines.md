@@ -9,5 +9,5 @@
 - an example mapping function could look like:
 $$P : \mathbb{R} \in S \rightarrow \mathbb{R}^2, P(t) = \begin{pmatrix} x(t) \\ y(t)\end{pmatrix}$$
 
-- a spline in graphics can be thought of as a function representing a smooth curve that is defined by a number of control points
+- a spline in graphics is quite a general term, but can be thought of as a function representing a smooth curve that is defined by a number of control points
 - multiple types of splines exist, varying in the mathematical functions used and their properties 
