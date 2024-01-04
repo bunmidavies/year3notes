@@ -1,7 +1,4 @@
-theme = minimal with e-ink mode
-
-[Timetable](https://timetables.manchester.ac.uk)
-
+![200](https://upload.wikimedia.org/wikipedia/commons/4/4c/Point_cloud_torus.gif)
 [[COMP32211]] - Implementing System-on-Chip Designs
 [[COMP34111]] - AI and Games
 [[COMP37111]] - Advanced Computer Graphics
