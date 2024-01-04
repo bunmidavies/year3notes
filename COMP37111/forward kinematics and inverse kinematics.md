@@ -8,7 +8,8 @@
 - therefore, animators in this scenario provide positions of effectors and a computer calculates the angles at which effectors join at
 
 > [!Note] in short
-> - forward kinematics = find angles for desired position
-> - inverse kinematics = find position for desired angles
+> - forward kinematics = find position for desired angles
+> - inverse kinematics = find angles for desired position
+
 
 - forward/inverse kinematics are also important in robotics - it can be used to tell you how to move a robotic arm to reach some point in space, and vice versa
