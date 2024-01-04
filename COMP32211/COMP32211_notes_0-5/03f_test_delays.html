@@ -1,0 +1,229 @@
+<title>Delays in tests/testbenches</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<img src="figures/pipeline_simple.png" alt="Simple pipeline figure"
+     width=25% align="right">
+
+<h2>&lsquo;Cosmetic&rsquo; delays</h2>
+
+<p>
+In a simulation there is no need for time to pass for causality.
+</p>
+
+<p>
+In the &lsquo;real world&rsquo; things take finite times to happen.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk)<br>
+&nbsp; begin<br>
+&nbsp; data_1 <= value<br>
+&nbsp; data_2 <= data_1;<br>
+&nbsp; end<br>
+</p>
+</blockquote>
+
+<br clear="both">
+
+<div class="row">
+  <div class="column">
+
+  <center>
+  <img src="figures/pipeline_timing_Verilog.png" alt="Ideal pipeline timing"
+     width=70%>
+  </center>
+
+  </div>
+
+  <div class="column">
+
+  <center>
+  <img src="figures/pipeline_timing_real.png" alt="'Real' pipeline timing"
+     width=70%>
+  </center>
+
+  </div>
+</div clear="both">
+
+<p>The behavioural model above will work because:</p>
+
+<ul>
+<li> Non-blocking assignments happen simultaneously (regardless of
+  written order)
+</ul>
+<p>But</p>
+<ul>
+<li> This can be confusing to read from a trace
+</ul>
+
+<p>
+Two timing effects are shown on the right-hand side of the slide:
+</p>
+
+<ul>
+<li> The finite edge speed of the transitions
+<li> The propagation delay of the circuits
+</ul>
+
+<p>
+Both of these are governed by electrical effects in the final circuit
+implementation which are unknown at this time.  Futhermore, in a
+digital simulation, states switch instantaneously so there can be no
+direct representation of edge speed.
+</p>
+
+<p>
+However it is possible to represent delays within the circuit
+artificially.  This can improve legibility of a waveform file by
+delaying register changes until after the clock edge.
+</p>
+
+<p>
+At its simplest:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+always @ (posedge clk)<br>
+&nbsp; begin
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+begin<br>
+&nbsp; #2<br>
+&nbsp; data_1 <= value;
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+data_1 <= #2 value;<br>
+&nbsp; data_2 <= data_1;
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+data_2 <= #2 data_1;<br>
+&nbsp; end
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+end<br>
+</p>
+
+  <img src="figures/delay_time_1.png" alt="more legible traces"
+     width=60%>
+
+<p>This can make the values on the buses at the clock edge clearer.  A
+delay which is a &lsquo;small fraction&rsquo; of the clock cycle
+probably gives the clearest result.
+</p>
+
+<p>
+<font style="color:red;">The left hand code/figure is a bit risky in
+  that the delay occurs <i>before</i> the inputs are sampled.  It
+  relies on <i>all</i> the delays &ndash; including all corresponding
+  modules &ndash; using the same delay.</font><br>
+<font style="color:green;">The right hand code/figure is a bit longer
+  but is typically &lsquo;safer&rsquo;.  The inputs are <b>sampled</b>
+  at the clock edge and the output change is scheduled in the
+  future.</font><br>
+</p>
+
+<p>
+Delays are not synthesizable; they will be ignored when the circuit is
+built although the synthesizer may produce <i>warning</i>s to this effect.
+</p>
+
+<p>
+Delays can also be used in combinatorial blocks if an <i>estimate</i>
+of the performance of an assembly is available.
+</p>
+
+<img src="figures/memory_timing.png" alt="Memory timing model" align="left"
+     width=30%>
+
+<p>
+Another use for delays is in providing a more realistic simulation
+environment.  This has been done in the laboratory when the framestore
+RAM is modelled.  There is a delay in providing read data based on the
+manufacturer's (worst case) figures and the RAM output is undefined
+until that time.  This time is greater than a clock period.  A naive
+model could provide data as soon as it was requested; this could then
+be used in the next clock cycle and everything would, apparently,
+work.  However if this is attempted with the delay in place an
+undefined value will be propagated which <i>should</i> be detected
+further on in the simulation.
+</p>
+
+<p>
+Unlike an unitialised flip-flop, this is a situation where the test
+code can actively use unknown values to help find problems.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+always @ (data_valid)<br>
+begin<br>
+#1<br>
+if (data_valid)<br>
+&nbsp; fs_rdata <= {out_reg3, out_reg2, out_reg1, out_reg0};<br>
+else<br>
+&nbsp; fs_rdata <= 32'hxxxx;<br>
+end<br>
+</blockquote>
+
+<p>
+[From RAM model used in phase 3 lab.]
+</p>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03e_test_debug.html">Back</a> to debugging tests.</p>
+
+<p><a href="03g_test_tasks.html">Forward</a> to tasks for testing.</p>
+
+<hr><hr>
+
+</body>

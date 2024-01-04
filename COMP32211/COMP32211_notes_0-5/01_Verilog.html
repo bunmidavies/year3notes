@@ -1,0 +1,348 @@
+<title>Verilog Revision</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column3 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 5%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<h1>Verilog</h1>
+
+<h2>Verilog: a brief history</h2>
+
+<p>
+c.1977 First HDLs developed<br>
+1985 Verilog introduced by Gateway Design Automation<br>
+1990 Gateway purchased by Cadence Design Systems<br>
+1991 &lsquo;Opened&rsquo; as a language<br>
+1995 Made into IEEE standard #1364<br>
+2001 Second IEEE standard including extensions and improvements<br>
+2005 A new standard with some minor improvements<br>
+2005 SystemVerilog introduced: Verilog-2005 plus major
+     extensions&nbsp;&rArr;&nbsp;IEEE&nbsp;#1800<br>
+2009 SystemVerilog IEEE Std. 1800-2009 which merges 1364-2005 and
+     1800-2005 (stable release 2017)<br>
+2012 <a href="https://ieeexplore.ieee.org/document/6469140">SystemVerilog #1800-2012</a><br>
+</p>
+
+<p>
+The version used in this module is (more or less) Verilog-2001
+(<a href="https://standards.ieee.org/ieee/1364/2052/">IEEE&nbsp;1364-2001</a>).
+</p>
+
+<!--
+<p>[The schematic capture tools used are not compatible with all the
+features of SystemVerilog.]</p>
+-->
+
+<h2>Verilog versions</h2>
+
+<p>
+Most of the information in this module is based on Verilog-2001.  This
+is still common although the superset, SystemVerilog, is replacing
+this.
+</p>
+
+<p>
+Verilog was designed as a HDL &ndash; a <b>H</b>ardware
+<i><b>D</b>escription</i> <b>L</b>anguage &ndash;.  It was not orignially
+intended to be a hardware <i>design</i> tool although a significant
+subset is now very widely used to specify circuits at RTL and above.
+A wider range of constructs are useful in hardware <i>verification</i>
+and this is vital in the production of working designs.
+</p>
+
+<p>
+These pages cover some of the significant differences in the major versions.
+Verilog-95 is becoming obsolescent.  Examples of features absent include:
+</p>
+
+<ul>
+<li> fewer syntactic options e.g. <font style="font-family: 'Courier New', monospace;">always&nbsp;@&nbsp;(a&nbsp;or&nbsp;b&nbsp;or c)</font>
+2001 added <font style="font-family: 'Courier New', monospace;">always&nbsp;@&nbsp;(a,&nbsp;b,&nbsp;c)</font> and <font style="font-family: 'Courier New', monospace;">always&nbsp;@&nbsp;(*)</font>
+<li> No <i>signed</i> registers, <i>signed</i> shifts etc.
+<li> I/O type declarations inside port list<br>
+<font style="font-family: 'Courier New', monospace;">module&nbsp;and2&nbsp;(a,&nbsp;b,&nbsp;q) // This form for V-95<br>
+input&nbsp;a,&nbsp;b;<br>
+output&nbsp;q;<br>
+&hellip;</font>
+
+<li> Multi-dimension arrays
+<li> Generate blocks
+<li> Parameter passing by name
+<li> Most of the file support
+</ul>
+
+<p>
+This is not an exhaustive list; rather it is intended to be indicative
+of the type of enhancements.  Verilog-2001 is backwards compatible.
+</p>
+
+<p>
+Some of these features may be unfamiliar, at least in Verilog, the
+first time you read this.  You don't need to use them, although there
+will be some brief coverage, shortly.
+</p>
+
+
+<h2>Verilog language choices</h2>
+
+<p>
+Because Verilog syntax has evolved from (arguably) crude beginnings
+but maintained backward compatibility there are sometimes multiple
+ways to specify the same thing.  The choice of structure will be
+influenced by the author's stylistic prejudices.  The best advice is
+to try and make things as <u>simple and obvious</u> as you can.
+Sometimes there is an &lsquo;obviously better&rsquo; way but, like any
+piece of composition, sometimes it's the author's preferred style.
+</p>
+
+<p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+wire p; assign p = !a; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // This?<br>
+reg &nbsp;q; always @ (a) q = !a; &nbsp; &nbsp; &nbsp; // or this?
+</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+module inv1(input wire a, output wire q);<br>
+assign q = !a;<br>
+endmodule;<br>
+&nbsp;<br>
+module inv2(a, q);<br>
+input a;<br>
+output q;<br>
+wire a, q;<br>
+assign q = ~a;<br>
+endmodule;<br>
+</p>
+</blockquote>
+
+<p>
+Both these modules have the same effect.
+</p>
+
+<h2>Summary &ndash; Verilog &hellip;</h2>
+
+<ul>
+<li> &hellip; should be, to some extent, already familiar
+  <ul>
+  <li> Verilog has evolved
+  <li> Not always syntactically &lsquo;clean&rsquo;
+  <li> Multiple ways to write the same thing
+  </ul>
+<li> &hellip; is a Hardware Description Language
+  <ul>
+  <li> for <i>modelling</i> hardware
+  </ul>
+<li> &hellip; is designed for parallel programming
+<li> &hellip; can be synthesized into circuits
+  <ul>
+  <li> providing an <i>appropriate subset</i> is used
+  </ul>
+<li> &hellip; is used as a portable design format
+In this module we use Verilog for:
+  <ul>
+  <li> writing tests
+  <li> implementing hardware
+  <li> (invisibly) as part of the tool flow
+  </ul>
+<li> &hellip; has &lsquo;traps&rsquo; for the unwary
+  <ul>
+  <li> Synthesizers look for structures to implement
+  <li> Simulated and synthesized functions may not match (if language
+       &lsquo;abused&rsquo;)
+  <li> Helpful to keep implementation technology in mind.
+  <li> Care needed not to produce redundant hardware (e.g. latches)
+  </ul>
+<li> &hellip; is useful &hellip; with a degree of care
+</ul>
+
+<hr>
+
+<h2>SystemVerilog</h2>
+
+<p>
+SystemVerilog attempts to combine the merits of Verilog HDL with a
+Hardware Verification Language (HVL).  It is somewhat C++-like.  Some
+more features of SystemVerilog are expanded on
+<a href="01c_SystemVerilog.html">here</a>.
+</p>
+
+<p>
+A selection of additional features includes:
+</p>
+
+<ul>
+<li> Enumerated data types
+<li> Multi-dimensional arrays (bundles of buses)
+<li> Structures/Unions
+<li> Interfaces (related collections of I/O signals)
+<li> Object-oriented programming
+<li> Assertions
+<li> Coverage features
+<li> Improved thread synchronization
+<li> &hellip;
+</ul>
+
+<p>
+Other &lsquo;existing&rsquo; Verilog features have also been enhanced/regularised in places.
+Some of these features are for synthesizable RTL code, others are there to
+improve the modelling and verification features.
+</p>
+
+<p>
+The current standard is 2009; not all toolsets have caught up with this yet.
+</p>
+
+<p>
+We <i>don't</i> use SystemVerilog in the lab. because the Cadence
+implementation does not interoperate with some of the other tools we
+want to use.  (As far as we can make them work!)
+</p>
+
+
+<center>
+<div class="inset">
+
+<h3><a href="https://en.wikipedia.org/wiki/VHDL">VHDL</a></h3>
+
+<p>
+VHDL is a different HDL which has some popularity.  In principle it works
+largely in the same way as Verilog.  It has some advantages, such as
+stronger typing, and disadvantages, such as verbosity.  However converting
+from one to the other is largely a matter of new syntax.
+</p>
+
+<p>
+For further opinions there are
+<a href="https://www.google.com/search?q=vhdl+vs+verilog&oq=vhdl+vs+verilog&aqs=heirloom-srp..0l5">numerous VHDL vs. Verilog discussions</a> out
+there in Internet Land.
+</p>
+
+</div>
+</center>
+
+<hr id="index">
+
+<h2>Notes</h2>
+
+<p>
+This contains relevant notes in &lsquo;bite-sized&rsquo; pages.
+</p>
+
+<ul>
+<li> <a href="01a_Verilog_revision.html">Verilog revision</a>
+  <ul>
+  <li> <a href="01a_Verilog_revision.html#testbench">Testbenches</a>
+  <li> <a href="01a_Verilog_revision.html#circuit">RTL circuits</a>
+  <li> <a href="01a_Verilog_revision.html#hierarchy">Hierarchies</a>
+  <li> <a href="01a_Verilog_revision.html#synthesis">Synthesis</a>
+  </ul>
+<li> <a href="01b_Verilog_extras.html">More Verilog constructs</a>
+  <ul>
+  <li> <a href="01b_Verilog_extras.html#states">States &amp; truth tables</a>
+  <li> <a href="01b_Verilog_extras.html#tasks">Tasks &amp; functions</a>
+  <li> <a href="01b_Verilog_extras.html#directives">Directives</a>
+  <li> <a href="01b_Verilog_extras.html#generate">Generate</a>
+  <li> <a href="01b_Verilog_extras.html#parameters">Parameters</a>
+  </ul>
+</ul>
+
+<p><a href="02x_simulation.html">Forward</a> to next session (Simulation)</p>
+
+<!--
+
+
+<h4>In this session</h4>
+<ul>
+
+<li><a href="02d_functional_sim.html">Functional simulation</a></li>
+<li><a href="02e_parallel_sim.html">Simulation parallelism</a></li>
+<li><a href="02f_simulation_time.html">Simulation time</a> &
+    <a href="02f_simulation_time.html#delays">delays</a></li>
+<ul><li><a href="02a_event_driven_simulation.html">Short aside on Event
+    Driven Simulation</a></li>
+<li><a href="02c_trouble_with_glitches.html">Problems with glitches
+    in simulation</a></li>
+</ul>
+<li><a href="02h_simulation_events.html">Simulation events</a></li>
+<li><a href="02i_simulation_init.html">Simulation initialisation</a></li>
+<li><a href="02j_simulation_results.html">Simulation results</a></li>
+<li><a href="02k_simulation_if_xxx.html">Simulation IFs and Unknowns</a></li>
+</ul>
+
+<h4>Other</h4>
+<ul>
+<li><a href="01_Verilog.html">Previous session's notes</a>:
+  Verilog</li>
+<li><a href="03_testing.html">Next session's notes</a>: Verification &amp; Testing</li>
+<li><a href="index.html">Up to Index</a></li>
+</ul>
+
+<hr><hr>
+
+-->
+
+<hr><hr>
+
+</body>

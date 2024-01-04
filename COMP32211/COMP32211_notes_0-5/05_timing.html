@@ -1,0 +1,233 @@
+<title>Clocking</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<p align="center">
+<span style="color:green;">Pages marked <span style="color:red;font-size:24px">&star;</span>
+should be revision from COMP12111 or COMP22111.
+</p>
+
+<hr>
+
+<h1>Timing &amp; Clocking</h1>
+
+<p>
+The <b>synchronous model</b> is not the only means to build computing
+machinery but it provides an enormous simplification in designing
+working Finite State Machines.  Because of this it is widely supported
+by CAD tools languages etc.  It assumes <b>time is discrete</b>: the
+next state of a (&lsquo;whole&rsquo;) system can be derived from its
+current state and its (synchronised) inputs and it changes in response
+to a &lsquo;global&rsquo; stimulus &ndash; i.e. a <b>clock</b>.
+</p>
+
+<center>
+<img src="figures/state_diagram.png" alt="D-type flip-flop" width=25%>
+</center>
+
+<p>
+For this to work there is an assumption that the clock reaches (all)
+devices &lsquo;simultaneously&rsquo;.<br>
+i.e. there is minimal <b>clock skew</b>.
+</p>
+
+<h3>The D-type flip-flop
+    <span style="color:red;font-size:24px">&star;</span></h3>
+
+<p>The D-type Flip-Flop (DFF) is the current device-of-choice for most
+  state holding within &lsquo;logic&rsquo; circuits.  (The other major
+  state holding element is RAM &ndash; in its various incarnations.)
+  DFFs are used both individually (typically as part of
+  logic <i>control</i> and together to form <b>registers</b>.
+</p>
+
+<p>
+An ideal DFF will transfer the state of its data input to its output
+instantaneously in response to a(n instantaneous) clock <i>edge</i>.
+Of course, in reality these changes are not instantaneous: every
+change takes some finite time.
+</p>
+
+<div class="row">
+  <div class="column">
+  <center>
+  <img src="figures/one_flip_flop.png" alt="D-type flip-flop" width=80%>
+  </center>
+
+  <p>
+  In the synchronous model it is assumed that one flip-flop can feed
+  another which means this <span style="color:green">(points to figure
+  on right)</span> is possible.
+  </p>
+
+
+  </div>
+
+  <div class="column">
+
+  <ul>
+  <li>data <b>set up</b> time (t<sub>su</sub>)</li>
+
+    <ul>
+    <li>data stability before the clock</li>
+    </ul>
+
+  <li>data <b>hold</b> time (t<sub>hold</sub>)</li>
+
+    <ul>
+    <li> data stability after the clock</li>
+    </ul>
+
+  <li><b>propagation delay</b> (t<sub>pd</sub>)</li>
+    <ul>
+    <li>output lag after the clock</li>
+    </ul>
+  </ul>
+
+  <img src="figures/two_flip_flops.png" alt="Two D-type flip-flops" align="center" width=80%>
+
+  </div>
+</div>
+
+<center>
+<div class="inset">
+
+<h3>Data hold times</h3>
+
+<p>
+It is important to meet <u>all</u> the flip-flop timing constraints if a
+circuit is to work under all circumstances.  However observe:
+</p>
+
+<ul style="text-align:left">
+<li>The <b>set up</b> time depends on racing through any intervening logic
+  from one active clock edge to the <b>next</b>.</li>
+
+<li>The <b>hold</b> time depends on <i>not</i> passing through any
+  intervening logic so quickly
+  after an active clock edge that it affects subsequent flip-flops at
+  the <b>same</b> active clock edge.</li>
+</ul>
+
+<p>
+If a set up violation is
+introduced <span style="color:green">(oops!)</span> it can be avoided
+by increasing the clock period<sup>&dagger;</sup>.  A hold-time
+violation is fatal however, since nothing can be done externally.
+</p>
+
+<p>
+Don't worry <i>too</i> much; most CAD tools will look for possible
+hold violations and add some buffers (&lsquo;do nothing&rsquo; logic)
+to slow down signals which would otherwise be too fast.  You might see
+this in synthesis reports.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Assuming the application can tolerate the slow-down.
+</blockquote>
+
+</div>
+</center>
+
+<h4>Variations of DFFs</h4>
+
+<p>
+Many variations of DFFs with additional inputs may be present in a
+parts library.  From the HDL perspective this doesn't typically matter
+but for completeness here are some not-uncommon additional inputs:
+</p>
+
+<ul>
+<li><b>asynchronous clear</b>: if active <i>at any time</i> the output
+  is forced/held at &lsquo;0&rsquo;.</li>
+<li><b>synchronous clear</b>: if active the output
+  is forced/held at &lsquo;0&rsquo; following the next active clock edge.</li>
+<li>asynchronous/synchronous <b>set/preset</b>: like the
+  &lsquo;clears&rsquo; but resulting in an output &lsquo;1&rsquo;.
+<li><b>clock enable</b>: if inactive the clock edge is
+  ignored<sup>&dagger;</sup>.
+</ul>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>May or may not supersede a synchronous set/clear.
+</blockquote>
+
+<h4 style="color:green"; align="center">Latches: an &lsquo;aside&rsquo;
+  &mdash; <a href="05x_latches.html">click here</a></h4>
+
+<hr>
+
+<h3 id="index";>Timing: links</h3>
+
+<h4>In this session</h4>
+<ul>
+<li><a href="05x_latches.html">Aside: latches.</a></li>
+<li><a href="05a_timing_closure.html">Timing closure.</a></li>
+<li><a href="05b_clock_domains.html">Clock domains.</a></li>
+<li><a href="05c_time_stealing.html">Time stealing.</a></li>
+<li><a href="05d_clock_generation.html">Clock generation.</a></li>
+<li><a href="05e_timing_misc.html">Timing miscellany.</a></li>
+</ul>
+
+<h4>Other</h4>
+
+<ul>
+<li><a href="04_tradeoffs.html">Previous session's notes</a>: trade-offs.</li>
+<!--
+<li><a href="05_timing.html">Next session's notes</a>: timing.</li>
+-->
+<li><a href="index.html">Up to Index.</a></li>
+</ul>
+
+<p>End of part 1.</p>
+
+<hr><hr>
+
+</body>

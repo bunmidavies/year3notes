@@ -1,0 +1,382 @@
+<title>Clock generation</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Clock generation</a>
+
+<h3>Oscillators</h3>
+
+<h4><a href="https://en.wikipedia.org/wiki/Crystal_oscillator">Crystal oscillators</a></h4>
+
+<p>
+The normal clock source for digital logic is a crystal-controlled
+oscillator.  These use vibrations in a carefully machined (piezo
+electric, usually quartz) crystal to stabilise an electrical
+oscillator circuit.  Without any special care a frequency within about
+50ppm<sup>&dagger;</sup> is usual.  If it matters, much greater
+stability is, of course, achievable as is demonstrated by
+&lsquo;quartz clocks&rsquo;.
+</p>
+
+<ul>
+<li> No two <i>independent</i> oscillators will run at <i>exactly</i> the
+  same frequency.
+
+<li> If a constant phase relationship is required a single oscillator must
+be used.
+</ul>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Equivalent to about 4&nbsp;s error per day.
+</blockquote>
+
+<h4>Frequency examples</h4>
+
+<ul>
+<li> Digital logic is operated at frequencies of several GHz
+  <ul>
+  <li> For ASIC design, <i>typically</i> think 100s MHz
+  </ul>
+
+<li> Humans tend to prefer simple numbers such as 20&nbsp;MHz
+
+<li> A &lsquo;serial line&rsquo; (old fashioned now) has standard baud
+  rates of 9600, 19200, 38400, 115200 &hellip; Hence multiples of such
+  frequencies are not uncommon.
+  <ul>
+  <li> Example: 18.432&nbsp;MHz&nbsp;=&nbsp;30&nbsp;&times;&nbsp;16&nbsp;&times;&nbsp;38400&nbsp;=10&nbsp;&times;&nbsp;16&nbsp;&times;&nbsp;115200
+  </ul>
+
+<li> USB uses bit rates of 12&nbsp;Mb/s (USB 1),&nbsp;480 Mb/s (USB&nbsp;2)
+
+<li> In I/O applications there is commonly some tolerance.
+  <ul>
+  <li> E.g. RS232 &plusmn; a few percent
+  <li> USB&nbsp;480.00&nbsp;Mbit/s &plusmn;500&nbsp;ppm,
+  12.000&nbsp;Mbit/s&nbsp;&plusmn;2500 ppm
+  </ul>
+</ul>
+
+
+<center>
+<div class="inset">
+
+<h3>Frequency and phase</h3>
+</p>
+
+<p>
+It's only meaningful to talk about <i>frequency</i> with respect to
+repetitive signals.
+</p>
+
+<p>
+The <b>frequency</b> of a clock is the reciprocal of its <b>period</b>.
+&nbsp; &nbsp;
+f&nbsp;=&nbsp;1&frasl;T
+</p>
+
+<center>
+<img src="figures/frequency_1.png" alt="Frequency definition" width=50%>
+</center>
+
+<p>
+With two or more signals there may be a phase relationship.
+</p>
+
+<p>
+Same frequency, different phase.
+</p>
+
+<center>
+<img src="figures/frequency_2.png" alt="Frequency & phase" width=50%>
+</center>
+
+<p>
+Harmonic frequencies (phase relationship is fixed)
+</p>
+
+<center>
+<img src="figures/frequency_3.png" alt="Frequency harmonics" width=50%>
+</center>
+
+<p>
+Non-harmonic frequencies: phase relationship drifts
+</p>
+
+<center>
+<img src="figures/frequency_4.png" alt="Frequency non-harmonics" width=50%>
+</center>
+
+<p>
+It is increasingly common to have <b>blocks</b> running at different
+frequencies.  This is sometimes referred to as <b>GALS</b>
+<b>G</b>lobally <b>A</b>synchronous <b>L</b>ocally <b>S</b>ynchronous.
+</p>
+
+<p>
+Or possibly the same frequency, but &lsquo;uncertain&rsquo; phase.
+</p>
+
+<p>
+<ul style="text-align:left">
+<li> Sometimes just reduce (divide) master clock
+
+<li> Sometimes have separate clocks.
+</ul>
+
+</div>
+</center>
+
+<h3>Clocking, frequency and power</h3>
+
+<p>
+The majority of the power dissipation in CMOS logic is <i>dynamic</i>,
+i.e. it occurs when gates/wires <u>switch</u>.  Thus &ndash; when
+executing &ndash; the power dissipation is roughly proportional to the
+clock frequency.  Reducing the frequency saves power (dissipates less
+heat).
+</p>
+
+<p>
+The clock network is a significant source of power dissipation.  The
+power used is (effectively) proportional to clock frequency.  Thus it
+makes no sense to clock a circuit faster than is necessary.  <b>Clock
+gating</b> may be introduced to stop clocks when a block is unused
+&ndash; but this should be done with caution!
+</p>
+
+
+<center>
+<div class="inset">
+
+<h3>Clock Gating</h3>
+
+<p>
+If part of a device is not in use, its clock may be stopped
+(&lsquo;gated&rsquo;).  This is more power-economic than simply
+&lsquo;disabling&rsquo; the registers because it prevents (parts of)
+the clock tree from switching.
+</p>
+
+<p>
+However there are several concomitant hazards and it's easy to
+introduce unpleasant clock <b>skew</b> or even <b>glitches</b> if care
+is not exercised.  Don't do this &lsquo;by hand&rsquo; until you've
+lots of experience!
+</p>
+
+<p>
+Implementing clock gating is <b>best left to the tools</b> (if
+available).  Note that adding gating may compromise peak performance
+so is not always desirable.
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<h2>Changing frequency</h2>
+
+<img src="figures/clock_division.png" alt="Clock division
+	   multiplication" width= 50% align="right">
+
+Reducing frequency &ndash; by an integer factor &ndash; is easy.
+
+<ul>
+<li> Note that dividing by an odd number will result
+in an uneven duty-cycle
+  <ul>
+  <li> This may or may not matter to you
+  </ul>
+
+<li> The output clock will have a fixed (unknown) phase relationship
+  with the input.<br clear="right">
+</ul>
+
+<p>
+Increasing frequency is more difficult: use a Phase-Locked Loop (PLL)
+</p>
+
+<center>
+<img src="figures/clock_multiplication.png" alt="Clock multiplication"
+     width=80%>
+</center>
+
+<p align="center">
+These include some mixed-signal (analogue) components &hellip;<br>
+&hellip; but can usually be bought-in from a specialist designer.
+</p>
+
+
+<h3>Why bother?</h3>
+
+<ul>
+<li> It is difficult to carry UHF signals across a PCB; great care with
+tracking is required.
+
+<li> Switching signals dissipates power.  The more you switch, the more
+it costs.
+
+<li> Switching signals transmits Radio Frequency Interference (RFI).
+(Where do you think the power goes?)
+This is a Bad Thing, and may be illegal.
+
+<li> Generating stable clocks at UHF directly is impractical.
+</ul>
+
+<p>
+A typical clock source will be a crystal controlled oscillator.  These
+are cheap and quite precise.  Frequencies of the order 1-100&nbsp;MHz
+50ppm are readily available.  However modern computers are typically
+clocked much faster.
+</p>
+
+<p>
+So, the usual ploy is to supply a stable frequency (say 20&nbsp;MHz)
+to the chip and then multiply this on board to the desired clock rate.
+</p>
+
+<p>
+A bonus from this strategy is that the clock multiplier is digital and
+can be controlled (e.g. in software) allowing a trade-off between
+performance and power consumption.
+</p>
+
+<p>
+Another strategy is to reduce the clock rate &ndash; to reduce power
+dissipation &ndash; if the chip is becoming too hot.
+</p>
+
+<h3>Phase-Locked Loops (PLLs)</h3>
+
+<p>
+A <a href="https://en.wikipedia.org/wiki/PLL">PLL</a> is a machine
+capable of matching the frequency of an input signal.
+</p>
+
+<h4>Everyday example</h4>
+
+<p>
+Consider a television set.  It must display images at the same rate as
+they are broadcast.  Thus it needs <u>synchronisation</u> information so that
+it can adjust its internal timing to match the transmitter.  Of
+course, in modern sets at these slow speeds this can be done digitally
+by varying the number of &lsquo;local&rsquo; clock cycles in each
+line, frame, etc. slightly.<br>
+You can see this in the lab. (phase&nbsp;3) with the
+&lsquo;sync.&rsquo; signals running to(wards) the monitor.
+
+
+<h4>Clock multiplication</h4>
+
+<p>
+The figure above shows a clock multiplier which works by matching a
+division of an output clock to an input reference.
+</p>
+
+<center>
+<img src="figures/eq_1.png" alt="Frequency multiplication" width=30%>
+</center>
+
+<h4>LPF &ndash; Low Pass Filter</h4>
+
+<p>
+A typical phase comparator produces pulses on its outputs which
+indicate which input edge came first.  These need <b>integrating</b>
+(smoothing) to produce a voltage which is (approximately) stable over
+many clock periods.
+</p>
+
+<h4>VCO &ndash; Voltage Controlled Oscillator</h4>
+
+<p>
+An oscillator which runs &lsquo;naturally&rsquo; in a certain range of
+frequencies which is &lsquo;tuned&rsquo; by an analogue input voltage.
+</p>
+
+<p>
+Because a PLL circuit is controlled by feedback its output frequency
+will vary slightly around the nominal frequency.  This contributes
+to <b>clock jitter</b> &ndash; the perceived variation in clock
+frequency.  Jitter is a Bad Thing because the logic must always
+evaluate within the <i>shortest</i> clock period (<i>not</i> the
+average) and the more variation there is the shorter this minimum time
+will be.
+</p>
+
+<center>
+<div class="inset">
+
+<h3>Definitions to remember</h3>
+
+<ul style="text-align:left">
+<li> Skew: the difference in arrival time of a signal at different destinations.
+
+<li> Clock jitter: the variation of a clock frequency around its
+  specified value.
+</ul>
+
+</div>
+</center>
+
+<hr>
+
+<p><a href="05d_clock_domains.html">Back</a> to clock domains.</p>
+<!--
+<p><a href="05_timing.html">Next session's notes</a>: timing.</p>
+-->
+<p><a href="05_timing.html#index">Up to Clocking.</a></p>
+</ul>
+
+<hr><hr>
+
+</body>

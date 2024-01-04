@@ -1,0 +1,1072 @@
+<title>Display systems</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<h1><a href="https://en.wikipedia.org/wiki/Computer_terminal#VDUs">Video
+Display Unit (VDU)</a></h1>
+
+<p>Historically derived from
+<a href="https://en.wikipedia.org/wiki/Cathode-ray_tube">Cathode Ray
+  Tube (CRT)</a> technology.</p>
+
+<center>
+<img src="figures/VDU.png" alt="VDU scanning">
+</center>
+
+<p>
+A CRT scanned the display incessantly, so needed a <b>real time</b> stream of
+pixel data.
+</p>
+
+<p>
+Although in principle LCDs could be &lsquo;abused&rsquo; here,
+the <b>standard interface</b> has been retained.
+</p>
+
+<hr>
+
+
+<h2>Analogue TV & Monitors</h2>
+
+<p>
+For many decades televisions were analogue devices which worked as
+follows:
+</p>
+
+<ul>
+
+<li> A &lsquo;spot&rsquo; was <b>raster-scanned</b> across the screen,
+     &lsquo;slowly&rsquo; in one direction (traditionally
+     left-to-right when viewed from in front) then rapidly in the
+     other direction to its starting point (&lsquo;flyback&rsquo;).
+
+<li> Each <b>scan line</b> was displaced by a &lsquo;fixed&rsquo;
+     distance, stepping between sweeps (traditionally from top to
+     bottom); after sufficient scan-lines had been drawn the spot was
+     rapidly returned to the top line.
+
+<li> During these sweeps the spot&rsquo;s intensity was varied to
+     &lsquo;shade&rsquo; different intensities. Before, during and
+     after flyback &ndash; both horizontal and vertical &ndash; the
+     spot was &lsquo;<b>blanked</b>&rsquo; (i.e. set to minimum
+     intensity &ndash; black) so the flyback was invisible.
+
+<ul>
+  <li> Blanking covered an interval from near the end of a line until
+       the start of the next, and for several lines&rsquo; time for
+       vertical fly-back.
+
+  <li> Colour could be provided by directing three, independently
+       controlled spots onto adjacent
+       {<font style="color:red">red</font>, 
+        <font style="color:green">green</font>,
+        <font style="color:blue">blue</font>} phosphors.
+</ul>
+
+</ul>
+
+</p>
+The display generated is digital in the vertical dimension (it has
+discrete scan lines) but analogue horizontally as the spot sweeps
+continuously and its intensity is varied in real time.
+</p>
+
+<p>
+For a television it is important that the picture is displayed at the
+same rate as it is broadcast!  To achieve this, synchronisation
+signals are sent to initiate each fly-back. The display has
+Phase-Locked Loops (PLLs) which regulate its scan rates and these are
+governed by these &lsquo;<b>sync. pulses</b>&rsquo;.  Blanking is
+initiated some time before the sync. pulse (known as the &lsquo;front
+porch&rsquo;) and persists for some time afterwards (the &lsquo;back
+porch&rsquo;).
+</p>
+
+<p>
+Horizontal and vertical synchronisation is the same, in principle,
+although the vertical timing is much slower. The interval between
+vertical syncs. sets the <b>frame rate</b> of the display.  Analogue
+broadcast TV is an old standard and has/had relatively long blanking
+intervals when compared with the active video time.
+</p>
+
+<h3>Computer Interfaces (examples)</h3>
+
+<p>
+CRT computer monitors were derived from TV technology. The more modern
+devices have proportionately smaller blanking times so most of the time the
+interface is carrying active (useful) signals, but the principle is the same.
+</p>
+
+<h4><a href="https://en.wikipedia.org/wiki/VGA_connector">Video Graphics Array (VGA)</a></h4>
+
+<img src="figures/VGA_connector.png" alt="VGA connector" align="right" width=20%>
+
+<p>
+An ageing, though still useful, interface is the VGA, which
+has <b>analogue</b> signals driving the colour intensities and digital
+(true/false) sync. indicators.
+</p>
+
+<p>
+The use of analogue signals necessitates Digital to Analogue
+Converters (DACs) for the colour signals and makes electrical noise
+pick-up more of a problem.
+</p><br clear="right">
+
+
+<h4><a href="https://en.wikipedia.org/wiki/Digital_Visual_Interface">Digital
+Visual Interface (DVI)</a></h4>
+
+<center>
+<img src="figures/DVI.png" alt="DVI connector" width=35% align="right">
+</center>
+
+<ul>
+<li> Primarily digitally coded channels
+<li> Differential signal pairs in each colour
+  <ul>
+  <li>Not all the connections are implemented in all variants
+  </ul>
+<li> Two channels (available) to increase potential bandwidth
+<li> Digital communications for monitor type/status/control
+  <ul>
+  <li>Discover a particular monitor's resolution,
+  <a href="https://en.wikipedia.org/wiki/Display_aspect_ratio">aspect
+  ratio</a> etc. 
+  </ul>
+<li> Analogue signals for backwards compatibility
+</ul>
+
+<p>
+There are various DVI standards: DVI-A is a backward-compatible
+Analogue interface, DVI-D is the Digital form and DVI-I Integrates the
+two. In some digital interfaces, having two parallel links improves
+bandwidth allowing higher definition displays.
+</p>
+
+<p>
+As an example, in <b>DVI-D</b> high-speed digital data is conveyed on
+multiple serial channels.  Each channel comprises a Current Mode Logic
+(CML) twisted-wire differential pair; this helps to improve noise
+immunity. The data is encoded using a form of 8b/10b encoding.
+</p>
+
+<p>
+Data is sent uncompressed and in real time, thus the general pattern
+of the output scan is similar to that used for earlier displays such
+as CRTs.
+</p><br clear="right">
+
+
+<h4><a href="https://en.wikipedia.org/wiki/HDMI">High-Definition
+Multimedia Interface (HDMI)</a></h4>
+
+<img src="figures/HDMI.png" alt="HDMI connector" width=40% align="right">
+
+<!-- https://web.archive.org/web/20160305072940/http://www.microprocessor.org/HDMISpecification13a.pdf -->
+
+<p>
+HDMI is basically similar to DVI-D, only providing a single set of
+digital channels (no analogue).  HDMI uses the blanking period between
+active video scans to encode control and other information, such as
+audio channels in &ldquo;data islands&rdquo;.
+</p>
+
+<p>
+The data may be encoded in ways other than RGB
+(e.g. <a href="https://en.wikipedia.org/wiki/YCbCr">Y&prime;CrCb</a>).
+</p>
+
+<p>
+A single, serial Consumer Electronics Control (CEC) channel is also
+included to carry data such as that from &lsquo;remote control&rsquo;
+handsets.
+</p><br clear="right">
+
+<hr>
+
+
+<center>
+<div class="inset">
+
+<h3>Display Data Channel (DDC)</h3>
+
+<p>
+With the economic availability of LCD (Liquid Crystal Display)
+flat-panel displays came a wider range of displays. In particular, the
+typical aspect ratio of displays has moved from 4:3 to 16:9. Rather
+than distorting the picture, a better solution is to output the
+display in an appropriate form but this requires the computer to be
+aware of the type of display.
+</p>
+
+<p>
+The first forms of data sensing merely detected the monitor type.
+Current communications are more sophisticated with the computer
+communicating with an embedded controller on the monitor allowing the
+downloading of information on a monitor's aspect ratio, resolution,
+orientation et cetera. If you are sufficiently interested you can look
+up &ldquo;EDID&rdquo; (Extended Display Identification Data). With
+some it is also possible to write commands to the monitor, for
+instance to control brightness or contrast.
+</p>
+
+<p>
+The usual DDC is based on the two-wire
+<a href="https://en.wikipedia.org/wiki/I2c">I<sup>2</sup>C</a>
+bus which allows fairly low bandwidth communication using a
+bidirectional serial protocol.  This only requires a small addition to
+the connector and wiring requirement.
+</p>
+
+<p>
+The information available from a monitor can identify the manufacturer
+and model as well as the different resolutions which are supported,
+the timing characteristics, colour resolution etc. There may be a
+&lsquo;preferred&rsquo; mode which the monitor is designed to use.
+</p>
+
+</div>
+</center>
+
+<p></p>
+
+<center>
+<div class="inset">
+
+<h3><a href="https://en.wikipedia.org/wiki/8b/10b_encoding">8b/10b encoding</a></h3>
+
+<p>
+In summary, when sending data across a synchronous serial line it is
+necessary to include enough information for the receiver to recover
+the clock (to discriminate between adjacent bits) as well as read the
+data itself.  Clearly a pure binary signal is not adequate as it may
+consist of many consecutive &lsquo;0&rsquo;s or consecutive
+&lsquo;1&rsquo;s.
+</p>
+
+<p>
+Many coding schemes have been devised. The link can only be switched
+at a certain maximum rate; to get the best useful bandwidth, a scheme
+needs to provide &lsquo;enough&rsquo; information to recover the clock
+but not so much redundancy that the data rate is compromised.
+</p>
+
+<p>
+8b/10b is one such scheme which codes 8 bits of data into 10 bit-time
+symbols (i.e. has a constant 25% overhead). It was first patented (now
+expired) by IBM in the 1980s.
+</p>
+
+<p>
+An important property is that it has
+<a href="https://en.wikipedia.org/wiki/DC_bias">DC balance</a>
+&ndash; meaning that, averaged over time, the <i>symbols</i> contain
+the same number of &lsquo;0&rsquo;s and &lsquo;1&rsquo;s. This
+requires two possible codes per 8-bit byte.
+</p>
+
+<p>
+When symbols with insufficient transitions for clock recovery are
+discarded there are 268 legal codes, which allows any 8-bit data value
+to be sent plus allowing some control codes
+(&ldquo;<a href="https://en.wikipedia.org/wiki/8b/10b_encoding#Control_symbols">K-codes</a>&rdquo;)
+for the link (which the user need not know about).
+</p>
+
+<p>
+8b/10b is in common use, including for
+<a href="https://en.wikipedia.org/wiki/Digital_Visual_Interface">DVI</a>,
+<a href="https://en.wikipedia.org/wiki/PCI_Express">PCI Express</a>,
+<a href="https://en.wikipedia.org/wiki/InfiniBand">Infiniband</a>,
+<a href="https://en.wikipedia.org/wiki/SATA">SATA</a> &hellip;
+</p>
+
+</div>
+</center>
+
+<hr>
+
+
+<h2>VDU controller</h2>
+
+<p>
+The VDU controller's job is to:
+</p>
+
+<ul>
+<li> Generate the timing signals for active, blanking and sync. phases
+<li> Generate addresses and read the frame store memory to determine
+pixel values (colours) when appropriate
+<li> Serialise the pixel values and send them to the display at the pixel
+rate
+</ul>
+
+<center><img src="figures/video_timing.png" alt="Video timing" width=50%></center>
+
+<p>
+It is a fairly simple state machine although the various parameters
+may be programmable for different display hardware and screen
+resolutions.
+</p>
+
+<hr>
+
+<h2>Frame store</h2>
+
+<p>
+Based on a <b>2D array</b> of memory (<b>frame store</b>) with a
+&lsquo;numeric&rsquo; representation of a <b>pixel</b>'s colour.
+</p>
+
+<center>
+<img src="figures/frame_store.png" alt="Frame store address & data
+					format" width=60%>
+</center>
+
+<p>
+The display is made of pixels (&lsquo;picture elements&rsquo;) which
+are &lsquo;dots&rsquo;; typically these are rectangular and preferably
+more-or-less square. The screen comprises a 2D array of pixels at a
+particular resolution (vertical & horizontal).
+</p>
+
+<p>
+Each location has an <b>address</b>; this may be a byte, or several
+bytes, or even less than a byte.<br>
+(The first address does not <i>have</i> to be 0000_0000.)
+</p>
+
+<p>
+Each pixel's data represents a colour: e.g. one byte/pixel gives
+256 possible colours.
+</p>
+
+<p>
+Colours are often separated into <font style="color:red;"><b>R</b>ed</font>,
+<font style="color:green;"><b>G</b>reen</font> and
+<font style="color:blue;"><b>B</b>lue</font> intensities.
+</p>
+
+<p>
+An LCD has physical pixels which determine its maximum resolution.
+Lower resolution is possible by shading adjacent groups of pixels in
+the same way: for example a square of four physical pixels could
+represent a single logical one. If the mapping is non-integer then
+some distortion may occur.
+</p>
+
+<p>
+A standard, but now &lsquo;low&rsquo;, resolution display is the
+640&times;480 VGA (Video Graphics Array). This is specified for the older
+4:3 monitor aspect ratio.
+</p>
+
+<p>
+The pixel shade/colour is held in a memory called a <b>frame
+store</b>. Pixels are read successively from the frame store and
+serialised onto the display. A complete frame refresh is done
+frequently enough to allow successive frames to give the impression of
+movement and to avoid disturbing flickering. For computer monitors
+typical <b>frame rates</b> are in the region 50-100&nbsp;Hz.
+</p>
+
+<p>
+Colour displays are now standard. Each pixel has a colour which is
+specified by a number of bits. The usual representation for computers
+is to code intensities of the colours Red, Green and Blue (RGB)
+separately. This works because human eyes have a limited range of
+colour sensors; the only colours we actually perceive are centred in
+these spectral bands and other colours (such as yellow) are perceived
+from appropriate mixtures of stimuli (red & green for yellow).
+</p>
+
+<p>
+The colour outputs are &lsquo;analogue&rsquo; (i.e. multi-levelled)
+outputs where the number of bits used determines how many shades are
+available. Human eyes are not very sensitive to colour intensities so
+8 bits per colour is more than adequate (especially for blue, where
+perception is worse). Eight bits is, of course, a convenient number
+for digital computer implementation.<br>
+The conversion from the digital representation was historically done
+at the computer &lsquo;end&rsquo; but modern interfaces (HDMI etc.)
+use digital interfaces and the standard carries eight bits for each
+colour.
+</p>
+
+<p>
+Having three colours is less convenient, so often the entire pixel is
+mapped into 32 bits; the extra 8 bits can find other uses which need
+not concern us.
+</p>
+
+
+<h3>Addressing</h3>
+
+<p>
+Note: the traditional address mapping is to have the lowest address at
+the top-left corner and increment addresses in rows. Thus the x axis
+runs left to right and the y axis top to bottom.
+</p>
+
+<p>
+To move down one pixel (i.e.&nbsp;y&nbsp;:=&nbsp;y&nbsp;+&nbsp;1)
+requires adding the length of a row to the address.
+</p>
+
+<p>
+Also note that if (for example) we have (say) an ARM system with 32
+bits/pixel each pixel would occupy four addresses, so moving right one
+place (x&nbsp;:=&nbsp;x&nbsp;+&nbsp;1) would require adding 4 to the
+address. If the frame store width was 1024 pixels, moving down one
+pixel means adding 4*1024&nbsp;=&nbsp;4096 to the address.
+</p>
+
+<p>
+To calculate the address of pixel (x, y):
+</p>
+
+<img src="figures/displayed_fs.png" alt="Display as subset of frame store" align="right" width=30%>
+
+<p>
+address&nbsp;=&nbsp;screen_start_address&nbsp;+&nbsp;(y*width_in_pixels&nbsp;+&nbsp;x)&nbsp;*&nbsp;bytes_per_pixel
+</p>
+
+<p>
+Typical screen widths (e.g.&nbsp;640, 1024, 1280) are intended to make
+these multiplications easy.
+</p>
+
+<p>
+A frame store can be larger than the displayed area, although this may
+waste some memory. It could be made smaller, too, but that would make
+little sense!<br clear="right">
+</p>
+
+<center>
+<div class="inset">
+
+<h2>Colour spaces</h2>
+
+<p>
+For (colour) display output purposes the
+<a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>
+<a href="https://en.wikipedia.org/wiki/Color_space">colour space</a>
+is usually used.  Note that it is not the only way to represent colour
+images though.
+</p>
+
+<p>
+For digital video streams and image compression
+(e.g. <a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a>) other
+representations, such as
+<a href="https://en.wikipedia.org/wiki/YCbCr">YCbCr</a> may be more
+appropriate.  This separates the colour from the intensity.  There are
+a couple of advantages to this.
+</p>
+
+<ul>
+<li> It is easy to generate a monochrome image (discard the colour).
+<li> Eyes are more responsive to brightness than colour, so colours
+  can be stored at a <i>lower resolution</i> without noticeable
+  artefacts, saving space/bandwidth.
+</ul>
+
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<h2>Frame store accessing & bandwidth</h2>
+
+<p>Frame store can occupy significant memory.</p>
+
+<p align="center">
+Remember <i>doubling</i> the linear resolution multiplies the number
+of pixels by four.
+</p>
+
+<center>
+<img src="figures/VDU_control.png" alt="VDU controller" width=45%>
+</center>
+
+<ul>
+<li> Pixels need to be read many times per second to keep the display stable. This impacts:
+  <ul>
+  <li> The output rate to the DVI (or whatever).
+  <li> The need for RAM access to the frame store.
+  </ul>
+</ul>
+
+<p align="right">
+Frame store bandwidth is critical.
+</p>
+
+<h3>Screen update</h3>
+
+<p>
+Although it is not germane to the drawing process, the frame store is
+also constantly being read by hardware which is updating the
+display. This shares access to (typically Time Division Multiplexing)
+the frame store memory. Memory accesses are relatively slow so frame
+store bandwidth is always an &lsquo;issue&rsquo;, made worse as the
+screen resolution increases.
+</p>
+
+<p>
+As it has to be shared, the frame store may not be available exactly
+when you want it. This influences the interface design. The highest
+priority for access goes to the VDU read-out because if that fails to
+meet its real-time constraint there will be glitches visible on the
+screen. More than one other device may share access too: for example
+in the lab. both the microprocessor and the graphics accelerator
+compete for the remaining bandwidth.
+</p>
+
+
+<h3>Double buffering</h3>
+
+<p>
+In a system which may animate a display there is a conflict between
+using the frame store for what can currently be seen and the future
+picture under construction. This is typically resolved by double
+buffering: having a larger-than-needed frame store and displaying from
+one area whilst drawing in another.
+</p>
+
+<center>
+<img src="figures/double_buffer.png" alt="Double buffering" width=40%>
+</center>
+
+<!--
+<p style="color:red;">
+This can also forward-reference some architecture: e.g. have 'separate'
+memory 'banks' if extra bandwidth is required. (Block diagram?)
+</p>
+-->
+
+<p>
+In the absence of dual-port memory the accesses either must interleave
+in time (a typical solution) or two (smaller) separate and switchable
+frame store memories are needed (expensive).
+</p>
+
+
+<h3>Bandwidth requirements</h3>
+
+<h4>Some sums &hellip; and sensible approximations</h4>
+
+<p>
+Let's take a &lsquo;High Definition&rsquo; (HD) display resolution of
+1920&times;1080&nbsp;pixels with 4&nbsp;bytes per pixel. This requires
+1920&times;1080&times;4&nbsp;=&nbsp;8294400&nbsp;bytes of storage.
+</p>
+
+<p>
+Rather than reach for a calculator, let's rough it out.
+</p>
+
+<p>
+&lsquo;Almost 2000&rsquo;&nbsp;&times;&nbsp;&lsquo;just over
+1000&rsquo; is going to be around two million pixels so we need
+2M&times;4&nbsp;=&nbsp;8&nbsp;MB of frame store.
+</p>
+
+<p>
+Let's say<sup>&dagger;</sup> this supports a frame rate of 50&nbsp;Hz:
+it has to be copied to the display 50&nbsp;times a second, so there is
+a bandwidth requirement of around 400&nbsp;MB.s<sup>-1</sup>.
+</p>
+
+<p>
+Note: that's megabytes, not megabits. Minimum. It doesn't allow for
+other data, pauses for blanking, sync. etc.
+</p>
+
+<p>
+If you want a bit rate, multiply by 8 and add a bit more for
+overheads: calling it 4&nbsp;Gb.s<sup>-1</sup> won't be far wrong.
+</p>
+
+<p>
+Looked at another way, the pixel rate will be two million times 50 plus whatever
+the overhead is, so something over 100&nbsp;MHz &ndash; not too scary a frequency on-chip
+(these days) but quite aggressive on a PCB!
+</p>
+
+<p>
+The frame store needs to be read to supply this demand. If a single
+pixel (32-bit word) were read at this rate the memory would need to
+cycle in &lt;10&nbsp;ns; not really feasible for the &lsquo;big&rsquo;
+(multi-megabyte even assuming a single frame store and there could be
+more than one) memory devices needed. Thus there needs to be a means
+of increasing the memory bandwidth. Fortunately the read-out patterns
+are entirely predictable; it's easy enough to read the frame store at
+many words wide and then serialise this data.
+</p>
+
+<p>
+Also note, if implementing animation, at least, there is another
+bandwidth requirement to allow concurrent writing of the pixels
+&ndash; and a real-time limit too.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>To keep the numbers easy.
+</blockquote>
+
+<hr>
+
+<h1>Drawing Straight Lines</h1>
+
+<p align="center">
+An example of mapping an algorithm to hardware.
+</p>
+
+<p>
+y&nbsp;=&nbsp;m.x&nbsp;+&nbsp;c
+</p>
+
+<p>
+Line is <i>aliased</i> onto pixel array.
+</p>
+
+
+<center>
+<img src="figures/Bresenham.png" alt="Bresenham line example" width=60%>
+</center>
+
+<p>
+Constant &lsquo;width&rsquo; of 1 pixel looks least lumpy
+</p>
+
+<p>
+Shade in the &lsquo;nearest&rsquo; pixel to the desired point.
+</p>
+
+<hr>
+
+<img src="figures/line.png" alt="Line" width=60% align="Right">
+
+<h2>How <u>not</u> to plot a line</h2>
+
+<p>
+<u>Don't</u> calculate every point independently.
+</p>
+
+<p>y = m.x + c</p>
+
+<h4>Coordinates</h4>
+<p>
+(X<sub>0</sub>, Y<sub>0</sub>)<br>
+(X<sub>0</sub>+1, int(Y<sub>0</sub>+m+0.5))<br>
+(X<sub>0</sub>+2, int(Y<sub>0</sub>+2m+0.5))<br>
+(X<sub>0</sub>+3, int(Y<sub>0</sub>+3m+0.5))<br>
+( ... , ... )<br>
+</p>
+<p>
+int(y+0.5) rounds y to the nearest integer
+</p>
+
+
+<h4>Problems:</h4>
+
+<ul>
+<li> Division needed once
+<li> Multiplication needed constantly
+<li> Rounding errors
+</ul>
+
+
+<h2>Anti-aliasing</h2>
+
+<p>
+Figures drawn in square pixels &ndash; especially at low resolution
+&ndash; end up &lsquo;pixellated&rsquo;; lines look stepped.
+</p>
+
+<p>
+Anti-aliasing is a method of blurring these steps. All pixels the
+theoretical line crosses are shaded but the degree of shading is
+proportional to how much of the pixel the true line passes
+through. The line's colour is blended with the background.
+</p>
+
+<div class="row">
+  <div class="column";>
+
+  <center>
+  <img src="figures/Bresenham.png" alt="Bresenham line example" width=80%>
+
+  <p>Bresenham line</p>
+  </center>
+
+  </div>
+
+  <div class="column";>
+  <center>
+  <img src="figures/line_aliased.png" alt="Anti-aliased line example" width=80%>
+
+  <p>Anti-aliased line</p>
+  </center>
+  </div>
+
+</div>
+
+<p>
+Anti-aliasing requires considerably more calculation and more memory
+operations (including reading the pre-existing background).
+</p>
+
+<hr>
+
+<h2>Bresenham's line algorithm</h2>
+
+<ul>
+<li> Calculate each point iteratively from its predecessor
+<li> Avoid multiplication/division (by using similar triangles)
+<ul>
+  <li> Uses only integers: no rounding problems
+</ul>
+</ul>
+
+<div class="row">
+  <div class="column";>
+  <p>Principle</p>
+
+  <p style="font-family: 'Courier New', monospace;">
+  x = X0;<br>
+  y = Y0;<br>
+  plot (x,y);<br>
+  length = X1 - X0;<br>
+  m = (Y1 - Y0) / (X1 - X0);<br>
+  e = 0;<br>
+  for (length)<br>
+  &nbsp; x = x + 1;<br>
+  &nbsp; e = e + m;<br>
+  &nbsp; if (e >= 0.5)<br>
+  &nbsp; &nbsp; y = y + 1; &nbsp; &nbsp; // y integer step<br>
+  &nbsp; &nbsp; e = e - 1; &nbsp; &nbsp; // Keep |e| < 0.5<br>
+  &nbsp; plot (x,y);<br>
+  </p>
+
+  </div>
+
+  <div class="column";>
+  <p>Integer code</p>
+
+  <p style="font-family: 'Courier New', monospace;">
+  x = X0;<br>
+  y = Y0;<br>
+  plot (x,y);<br>
+  dx = X1 - X0;<br>
+  dy = Y1 - Y0;<br>
+  e = -dx; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Starting offset<br>
+  for (dx)<br>
+  &nbsp; x = x + 1;<br>
+  &nbsp; e = e + 2*dy;<br>
+  &nbsp; if (e >= 0) &nbsp; &nbsp; // Easy compare<br>
+  &nbsp; &nbsp; y = y + 1;<br>
+  &nbsp; &nbsp; e = e - 2*dx;<br>
+  &nbsp; plot (x,y);<br>
+  </p>
+  </div>
+
+</div>
+
+<hr>
+
+<h2>Octants</h2>
+
+<img src="figures/octants.png" alt="Octants" width=20% align="Right">
+
+<p>
+The foregoing assumes that the line is in the shaded octant, shown
+here. If it is not, the same approach can be followed with some slight
+variations.
+</p>
+
+<p>
+In this example, x is incremented and y is incremented conditionally.
+For the octant immediately below the x axis, x is incremented and y is
+conditionally <i>decremented</i>.  As long as the coordinates are
+modified in the correct way it the signs of the internal variables are
+irrelevant.
+</p>
+
+<p>
+Similarly, if the slope of the line is &gt;1 (i.e. &lsquo;steeper than
+45&deg;&rsquo;) then x and y are exchanged.  A similar transformation can
+be applied if the line is going &lsquo;right&rsquo; or
+&lsquo;down&rsquo;.<br clear="Right">
+</p>
+
+<h4>Similar triangles</h4>
+
+<img src="figures/triangles.png" alt="Similar triangles" align="left" width=30%>
+
+<p>
+The gradient (&lsquo;m&rsquo;) of a step from one pixel to the next is
+derived from the vertical/horizontal distances between end
+points.  Although &lsquo;m&rsquo; is typically fractional
+(0&nbsp;&le;&nbsp;m&nbsp;&le;&nbsp;1) the distances between endpoints
+are integers.
+</p>
+
+<p>
+Thus, when considering whether the y coordinate should change, instead
+of thinking of little steps (1, m) we can think of big ones (2dx, 2dy)
+and the decision will still be the same.
+</p>
+
+<p>
+(The extra factor of 2 is convenient because we want to step when
+half-way to round to the nearest pixel and this avoids the &frac12;).
+<br clear="Left">
+</p>
+
+
+<h2>Optimisation</h2>
+</p>
+
+<p>
+There is another optimisation which reduces the length of the loop by
+simplifying the &lsquo;plot&rsquo; operation.  Instead of translating
+coordinates on each iteration, simply work out the address of the
+starting point and retain that.  Using the assumptions of &lsquo;one
+address per pixel&rsquo; and &lsquo;640 pixels per line&rsquo;, the
+following translations take place:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+x = x + 1 &rArr; address = address + 1<br>
+y = y + 1 &rArr; address = address + 640<bt>
+</blockquote>
+
+<p>
+The plot no longer needs to do any translation, just the store.
+</p>
+
+<p>
+A disadvantage of this method is that running off the edge of the
+frame store is not apparent, as it may be if <i>clipping</i> the x and y
+coordinates.
+</p>
+
+<p>&nbsp;</p>
+
+<p>
+If you have more than one pixel/word in the frame store (as in the
+lab.) then one can speed up drawing by writing several pixels at
+once.  These pixels must be in the same word and so will form a
+horizontal group.  This is not very useful when drawing single lines
+because there will often not be several adjacent pixels within the
+same word.
+</p>
+
+<p>
+It is very useful when filling areas (e.g. clear screen) and similar
+(e.g. character drawing) where it can reduce drawing times by
+(e.g. 4&times;).
+</p>
+
+<hr>
+
+<h2>Parallelism</h2>
+
+<p>
+Identifying parallelism is a good plan: e.g. Bresenham's line
+algorithm.
+</p>
+
+
+<div class="row">
+  <div class="column";>
+  <p>2 clocks/iteration</p>
+  <p style="font-family: 'Courier New', monospace;">
+  &nbsp; x <= X0;<br>
+  &nbsp; y <= Y0;<br>
+  &nbsp; dx <= X1 - X0;<br>
+  &nbsp; dy <= Y1 - Y0;<br>
+  &nbsp; e <= -dx;<br>
+  &nbsp; for (dx)<br>
+  &nbsp; &nbsp; plot(x,y);<br>
+  &nbsp; &nbsp; x <= x + 1;<br>
+  &nbsp; &nbsp; e <= e + 2*dy;<br>
+  &nbsp; &nbsp; if (e >= 0)<br>
+  &nbsp; &nbsp; &nbsp; y <= y + 1;<br>
+  &nbsp; &nbsp; &nbsp; e <= e - 2*dx;<br>
+  &nbsp; plot(x,y);<br>
+  &nbsp;<br>
+  </p>
+
+  </div>
+
+  <div class="column">
+  <p> 1 clock/iteration</p>
+  <p style="font-family: 'Courier New', monospace;">
+  &nbsp; x <= X0;<br>
+  &nbsp; y <= Y0;<br>
+  &nbsp; dx <= X1 - X0;<br>
+  &nbsp; dy <= Y1 - Y0;<br>
+  &nbsp; e <= -dx;<br>
+  &nbsp; for (dx)<br>
+  &nbsp; &nbsp; plot(x,y);<br>
+  &nbsp; &nbsp; x <= x + 1;<br>
+  &nbsp; &nbsp; if (e + 2*dy >= 0)<br>
+  &nbsp; &nbsp; &nbsp; y <= y + 1;<br>
+  &nbsp; &nbsp; &nbsp; e <= e + 2*(dy - dx);<br>
+  &nbsp; &nbsp; else<br>
+  &nbsp; &nbsp; &nbsp; e <= e + 2*dy;<br>
+  &nbsp; plot(x,y);<br>
+  </p>
+  </div>
+
+</div>
+
+<p>
+Also note the <b>pipelining</b> here: plot overlaps with the next pixel
+calculation.
+</p>
+
+<p>
+In the second example the critical path is likely to be longer
+(&lsquo;if&rsquo; calculation followed by multiplexer) but not much
+worse (multiplexers are quick).
+</p>
+
+<p>
+Probably the biggest &lsquo;mistake&rsquo; made by people starting to
+develop HDL code is to think <i>serially</i>, as it a conventional
+(imperative) programming language.  In C, Java, assembly language
+etc. statements can be viewed as executing one after the other
+&hellip; because they need to (at least in principle).
+</p>
+
+<p>
+In hardware the only needs are due to dependencies and resources
+&ndash; and resources shouldn't be too much of an issue within this
+lab.  Thus statements need to be mapped into time slots but as many
+statements as possible can go in the same time.  This leads to a much
+faster implementation than a simple one-statement-per-clock machine.
+</p>
+
+<p>
+The number of serial processing steps which take place in a single
+cycle (i.e. the <b>critical path</b> length) also concerns the designer;
+however the cycle is generous in the lab. so it is not likely to be a
+major concern when describing logic.
+</p>
+
+<p>
+&nbsp;
+</p>
+
+<p>
+When developing your own code, <i>design</i> it before you implement.  Plan
+what should happen (e.g. on a piece of paper) in each clock cycle.
+</p>
+
+<p>
+Pay attention to which values are latched.  A common problem is that a
+value is only available after a clock edge when you want it in the
+current cycle.  The choice is then whether to derive the signal
+combinatorially so that it is available a bit earlier or whether to
+start work a cycle earlier.  See the problem on the right.
+</p>
+
+<hr>
+
+<h2>Problem</h2>
+
+<p>
+Fill in the timing diagram for this module.
+</p>
+
+<img src="figures/problem_1.png" alt="Timing diagram problem"
+  align="right" width=45%>
+
+<p style="font-family: 'Courier New', monospace;">
+  &nbsp; reg [3:0] counter;<br>
+  &nbsp; reg &nbsp; &nbsp; &nbsp; carry;<br>
+  &nbsp;<br>
+  &nbsp; always @ (posedge clk)<br>
+  &nbsp; if (en && carry_in) &nbsp; // Hint on fn. of 'carry'<br>
+  &nbsp; begin<br>
+  &nbsp; &nbsp; if (counter == 9)<br>
+  &nbsp; &nbsp; &nbsp; begin<br>
+  &nbsp; &nbsp; &nbsp; counter <= 0;<br>
+  &nbsp; &nbsp; &nbsp; carry &nbsp; <= 1;<br>
+  &nbsp; &nbsp; &nbsp; end<br>
+  &nbsp; &nbsp; else<br>
+  &nbsp; &nbsp; &nbsp; begin<br>
+  &nbsp; &nbsp; &nbsp; counter <= counter + 1;<br>
+  &nbsp; &nbsp; &nbsp; carry &nbsp; <= 1;<br>
+  &nbsp; &nbsp; &nbsp; end<br>
+  &nbsp; &nbsp; end<br clear="Right">
+</p>
+
+<p>
+The circuit is unlikely to be useful!  Rewrite the Verilog in <i>at least
+one</i> way to do what the designed (presumably) intended.
+</p>
+
+
+<hr>
+<ul>
+<li> <a href="01a_Verilog_revision.html">Next set of notes.</a>
+<li> <a href="index.html">Back to index.</a>
+</ul>
+
+<hr><hr>
+
+</body>

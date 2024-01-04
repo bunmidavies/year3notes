@@ -1,0 +1,237 @@
+<title>Debugging & verification</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Techniques for finding faults</h2>
+
+<ul>
+<li> Improve readability of trace
+  <ul>
+  <li> Choose a &lsquo;simple&rsquo; clock frequency (e.g.  &lsquo;1&nbsp;MHz&rsquo;) if no real-time considerations
+  <li> Add some artificial delays to signal changes
+  <li> Have test harness signal raised in trace on error
+    <ul>
+    <li> Most waveform viewers allow searches for particular signals
+      changing
+    </ul>
+  <li> Keep &lsquo;phase&rsquo; variable in trace &ndash; easy to see what was being tested
+  </ul>
+<li> Export diagnostic information
+  <ul>
+  <li> Print <font style="font-family: 'Courier New', monospace;">$time</font>
+        with error reports
+  <li> Print statements as simulation advances
+  <li> Maybe <font style="font-family: 'Courier New', monospace;">$stop;</font>
+        after an error occurs &hellip;
+  <li> &hellip; or stop reporting certain errors after N occurences of
+  the same thing
+  </ul>
+<li> Test the tests
+  <ul>
+  <li> Induce failures to make sure the tests find them!
+  </ul>
+</ul>
+
+
+<h3>Debugging</h3>
+
+<p>
+Every engineer has ideas on &lsquo;the best&rsquo; way to find
+faults.  We are not here to tell you how to do it.  Here are some tips
+and ideas on some things which might be useful.
+</p>
+
+<p>
+The two readily available methods for diagnosing simulations are using
+a wave- form view of selected signals and printing out diagnostic
+values.
+</p>
+
+<p>
+The first is most useful when first debugging a unit.  Errors are
+expected and the desired diagnostic information is unclear.  It gives a
+more interactive debugging route.  The second method is to check and
+print diagnostics into a log file.  This is most useful when tests are
+run repeatedly (such as checking to see that a fault has not been
+introduced) and automation is more important than interactivity.
+</p>
+
+<h4>Waveform trace</h4>
+
+<p>
+In small designs all the signals can be traced.  In large designs and
+long simulations keeping all the traces may not be feasible because it
+slows down the run and can fill the filestore quite quickly.
+</p>
+
+<ul>
+<li> Choose some key nodes which will give plenty of information.
+</ul>
+
+<p>
+These are often near the top level of the hierarchy although the
+control state of various FSMs can be very useful.
+</p>
+
+<ul>
+<li> As far as possible, keep signal names the same throughout the hierarchy.
+<li> Name (major) instances to simplify browsing.
+</ul>
+
+<p>
+These are points for the design rather than the test phase but can
+prove big time savers when diagnosing problems.  Having a few dozen
+different buses all called &ldquo;data&rdquo; on the display is not
+conducive to clarity!
+</p>
+
+<ul>
+<li> Mark points of failure within the run.
+</ul>
+
+<p>
+The simplest method is to stop just after a fault is found.  Don't stop
+immediately &ndash; it's useful to have a bit more trace to see the
+faulty values.  This makes the fault easy to find.
+</p>
+
+<p>
+Alternatively, a signal in the test harness can be switched or pulsed
+to flag up the position of an error.
+</p>
+
+<p>
+Most waveform viewers will allow searches for transitions on selected
+signals.  By creating a test variable which indicates a fault
+condition it is easy to locate a point of failure in a large trace.
+</p>
+
+<p>
+A related technique is to use a test state variable to indicate which
+phase of a long test is being executed.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+$display("Resetting");<br>
+test_state = 0;<br>
+&hellip;<br>
+&hellip;<br>
+$display("Phase 1");<br>
+test_state = test_state + 1;<br>
+&hellip;<br>
+&hellip;<br>
+</p>
+</blockquote>
+
+<p>
+This is useful as a test file grows to cover a large number of
+different tests.
+</p>
+
+<ul>
+<li> Keep a test state variable to show phases of a long test.
+</ul>
+
+<p>
+A variable in the test harness which changes according to which test
+is current is useful for navigating through long traces.  This is
+particularly useful when revisiting a waveform trace after a
+&lsquo;new&rsquo; problem has been found.
+</p>
+
+<h4>Log file</h4>
+
+<p>
+Commands such as
+<font style="font-family: 'Courier New', monospace;">$display</font> and
+<font style="font-family: 'Courier New', monospace;">$monitor</font>
+allow progress through a test to be checked.
+</p>
+
+<ul>
+<li> A few judicious printed strings help follow progress through a test.
+<li> Including the time can help if returning to a trace to diagnose a fault.
+<li> Printing &lsquo;okay&rsquo; at the end (if appropriate!) is reassuring.
+</ul>
+
+<p>
+At this stage it is likely that you want to know that an error has
+occurred but little else.  The sort of thing to look for may be an
+expected and an obtained value, and printing both in the case of a
+mismatch may be useful.  A printed heading will indicate which test
+failed.
+</p>
+
+<ul>
+<li> Use experience gained in debugging to set up appropriate tests.
+</ul>
+
+<h4>Finally &hellip;</h4>
+
+<p>
+As in software, conditional compilation
+(<font style="font-family: 'Courier New', monospace;">`ifdef</font>)
+may be used to embed debugging information in synthesizable blocks yet
+exclude it from synthesis.
+</p>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03d_test_ordering.html">Back</a> to test ordering.</p>
+
+<p><a href="03f_test_delays.html">Forward</a> to test delays.</p>
+
+<hr><hr>
+
+</body>

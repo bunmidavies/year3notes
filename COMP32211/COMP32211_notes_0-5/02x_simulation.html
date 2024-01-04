@@ -1,0 +1,389 @@
+<title>Simulation</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<h1>Simulation</h1>
+
+<p>
+Simulation is part of modelling; the accuracy of the model is refined
+as the design process progresses.
+</p>
+
+<ul>
+  <li>Assume that high-level modelling has been done
+  <ul>
+    <li>Already know the architecture and the algorithms: models exist
+    <li>Have block relationships but not exact (cycle accurate)
+        implementation/timing
+  </ul>
+  <li>In this module simulation is refined to verify:
+  <ul>
+    <li>The functionality of an RTL description
+    <li>The correctness of a completed chip
+    <li>The timing and electrical properties of the proposed product
+    <ul>
+      <li>Thermal too?
+    </ul>
+  </ul>
+</ul>
+
+<p style="color:blue">
+Caveat: The intention of this material is to give enough information
+to facilitate design.  It is not intended to be a complete description
+of all the available facilities.
+</p>
+
+<p align="right">
+&ldquo;A little inaccuracy sometimes saves tons of explanation.&rdquo;<br>
+Saki, <i>The Square Egg</i> (1924)
+</p>
+
+
+<p>
+The purpose of simulation is to verify that, when you build something,
+it will work.  First time and every time.  It is widely practised in
+engineering when something expensive or potentially dangerous is being
+built.  Examples include:
+</p>
+
+<ul>
+<li>Aerospace
+<li>Architecture
+<li>Bridges
+<li>Nuclear engineering
+<li>Silicon chips
+<li>&hellip;
+</ul>
+
+<p>
+Simulation is used at a number of levels from the design concept to
+the electrical (and, often, thermal) properties of the final
+product.  In practice this may not stop at the chip level as these
+properties are also important in larger structures, up to complete
+systems.
+</p>
+
+<p>
+Simulation gives the ability to determine the properties of a proposed
+system under a set of potential operating conditions.  Remember
+&ndash; it only gives an approximation to &lsquo;reality&rsquo; within
+the limits of the model used; this can still be very useful.
+</p>
+
+<p>
+There is a trade-off between the accuracy of the model and the effort
+required to produce it.  In our case this usually means that more
+accurate simulation takes longer and requires more expensive computers
+with more memory, file-store, etc.  Therefore there is usually a
+pragmatic compromise on accuracy at various stages of development.
+</p>
+
+<center>
+<div class="inset">
+   <h3>&ldquo;Accuracy&rdquo; vs.  &ldquo;Precision&rdquo;</h3
+
+   <p>
+   Scientifically, &lsquo;accuracy&rsquo; is usually used to indicate how
+   representative a value is to physical reality. &ldquo;Precision&rdquo;
+   is how repeatable a measurement is.  If you measure something twice
+   you may get different values; the question is how different?
+   Repeated similar readings give a precise answer; however if the end
+   was cut off the ruler they may not be very accurate!
+   </p>
+</div>
+</center>
+
+<h3>Observability</h3>
+
+<p>
+One big advantage of simulation is that the model gives
+<i>observability</i>.  Consider building a chip, ignoring the time and
+cost of manufacture for the moment.  If something is wrong then is it
+possible to diagnose the fault from the outside?  This may be feasible
+in a simple, combinatorial device this becomes difficult once there is
+hidden state.  At the System-on-Chip (SoC) scale then this is
+effectively impossible.
+</p>
+
+<p>
+Simulated models allow otherwise hidden nodes to be examined so that
+problems can be found much more easily.  Particular areas which are
+suspect can be examined in fine detail.
+</p>
+
+
+<center>
+<div class="inset">
+<h3>Tips to make your life easier</h3>
+
+<ul>
+<li>Take the trouble to give <b>meaningful names</b> to units in a hierarchy;
+    it makes identification <i>much</i> easier later.
+<li>As far as possible, keep signal names the same as they traverse
+    levels of a design; it avoids confusion.<br>
+    These may be &lsquo;variations on a theme&rsquo; (such
+    as <span style="font-family: 'Courier New',
+    monospace;">xyzzy</span> becoming <span style="font-family: 'Courier New',
+    monospace;">xyzzy_out</span> at a module boundary, for example)
+    &ndash; it's just a means of improving legibility.
+<li>Prefixes on related signal names can aid readability.  A bonus is
+    that they will be grouped together in an (alphabetical) browser menu.
+</ul>
+
+</div>
+</center>
+
+<hr>
+
+<h2>Simulation detail</h2>
+
+<p>
+To finalise an ASIC design a number of different &lsquo;levels&rsquo; of
+simulation must be performed.
+</p>
+
+<ul>
+<li>Functional
+<li>Timing
+<li>Electrical
+<li>Physical (maybe?)
+</ul>
+
+<p>
+Each looks at different aspects of the design.
+</p>
+
+<ul>
+<li>Require increasingly detailed models to perform
+<ul>
+<li>Simulations take longer to run
+<li>Consequences of &lsquo;respin&rsquo; increasingly expensive
+</ul>
+</ul>
+
+<p>
+This section concentrates on functional verification.
+</p>
+
+<ul>
+<li>Does the code (or schematics) perform the correct <b>logical</b>
+  operations?
+</ul>
+
+<p>
+The other aspects will be revisited later.
+</p>
+
+<h3>Functional tests</h3>
+
+<p>
+A high-level model (e.g. a TLM &ndash; <b>T</b>ransaction <b>L</b>evel
+<b>M</b>odel) can demonstrate the feasibility of an architecture.  It
+may be refined down to a <b>cycle-accurate</b> model &ndash; i.e.  one
+in which each operation can be timed by counting clock cycles &ndash;
+but not (sensibly) much further.
+</p>
+
+<p>
+There is then a need for translation into a <b>behavioural model</b> which is
+the function of a Hardware Description Language (HDL).  A behavioural
+model may be just that &ndash; a model &ndash; or it may be a synthesizeable
+Register Transfer Level (<b>RTL</b>) description which will eventually be
+converted into hardware.
+</p>
+
+<p>
+The translation process from TLM to RTL may be error-prone; there is
+also the possibility of discovering previously untested cases as the
+model is prepared in more detail.  There is therefore a need for
+simulation tests at the behavioural level.  These tests perform
+<b>functional verification</b>, i.e.  they check that the logic does what it
+is intended to.
+</p>
+
+<p>
+Functional tests do not guarantee that a resultant circuit will fulfil
+its requirements: for example the design may be too slow to be clocked
+sufficiently fast to meet real time requirements.  Neither do they
+guarantee that the result will be constructable.
+</p>
+
+<h3>Timing verification</h3>
+
+<p>
+Functional tests typically use assumptions of synchronous behaviour
+and do not give any absolute timing information; elapsed time is
+measured in clock cycles.  The designer may have a target clock speed
+in mind at this point; whether the design will achieve that is still
+unknown.  Thus a design may do what it is intended to do but may not
+meet real-time requirements.
+</p>
+
+<p>
+It is possible to annotate the HDL description with timing estimates
+to gain some idea of timing behaviour but these are necessarily
+imprecise.  Circuit speed is greatly influenced by its physical
+properties which are not yet known.
+</p>
+
+<p>
+Timing verification involves estimating and summing the various delays
+in an implementation to identify and isolate the <b>critical path</b>.
+This can only be achieved once a design has been synthesized into the
+target technology so that a netlist of gates, flip-flops etc.  is
+available.
+</p>
+
+<p>
+There are typically two phases to timing verification: pre- and
+post-layout.  Having obtained a netlist, CAD tools can produce an
+estimate of the critical path delay.  Modern tools are smart enough to
+try to factor in wiring loads as well as gate delays; however the true
+wiring delays are not yet known.  This will give a moderately accurate
+guide to the maximum clock frequency.  If the circuit is apparently
+too slow at this point it's &lsquo;back to the drawing board&rsquo;.
+</p>
+
+<p>
+Post-layout synthesis depends on a netlist following the
+Place-And-Route (<b>PAR</b>) stage and has a better estimate of
+timing.  As well as wiring delays, other factors such as the need to
+add buffers (electrical amplification) may have been introduced.  The
+simulation model used may be more precise, too.  All this means is
+that it takes longer and, if a problem is found here, it is more
+expensive to iterate the design again.
+</p>
+
+<p>
+Another concern here are the &lsquo;edge speeds&rsquo; &ndash; the
+time it takes to switch wires between digital states.  An edge which
+is too slow harms circuit performance but is also more vulnerable to
+electrical noise inducing extra switching.  Not all gates will have
+the same input threshold so a slow edge may apparently switch at
+different times when interpreted at different destinations.
+</p>
+
+<h3>Electrical characteristics</h3>
+
+<p>
+A real circuit needs power, something neglected up to this point.
+When a gate switches its output there is a surge of charge onto or off
+a power supply.  All these cause a (varying) current in the power
+supplies.  There are (at least!) two serious concerns:
+</p>
+
+<p>
+Are the wires big enough to handle the current? A too-small wire is a
+fuse and will blow! More likely, there may be a wire that's a bit
+thinner than is desirable which will &lsquo;age&rsquo; due to
+<a href="https://en.wikipedia.org/wiki/Electromigration"><b>electromigration</b></a>
+and shorten the lifetime of the device. 
+</p>
+
+<p>
+The gate models assume a supply of a certain voltage.  The power
+supplies carry current and have resistance, therefore will impose a
+voltage drop (Ohm's law).  Thus the supply voltage at the centre of a
+chip (furthest from the connections) will be lower than that at the
+edges.  The power supply wiring must be adequate to keep this drop
+within bounds for previous assumptions to remain valid.  In case of
+difficulty, the usual solution is to force an increase in the
+number/width of the supply wires.
+</p>
+
+<p>
+Of course the power that goes in comes out as heat.  Thus there may be
+<b>thermal modelling</b> ...  and so on ...
+</p>
+
+<hr>
+
+<h3 id="index";>Simulation: links</h3>
+
+<h4>In this session</h4>
+<ul>
+
+<li><a href="02d_functional_sim.html">Functional simulation</a></li>
+<li><a href="02e_parallel_sim.html">Simulation parallelism</a></li>
+<li><a href="02f_simulation_time.html">Simulation time</a> &
+    <a href="02f_simulation_time.html#delays">delays</a></li>
+<ul><li><a href="02a_event_driven_simulation.html">Short aside on Event
+    Driven Simulation</a></li>
+<li><a href="02c_trouble_with_glitches.html">Problems with glitches
+    in simulation</a></li>
+</ul>
+<li><a href="02h_simulation_events.html">Simulation events</a></li>
+<li><a href="02i_simulation_init.html">Simulation initialisation</a></li>
+<li><a href="02j_simulation_results.html">Simulation results</a></li>
+<li><a href="02k_simulation_if_xxx.html">Simulation IFs and Unknowns</a></li>
+</ul>
+
+<h4>Other</h4>
+<ul>
+<li><a href="01_Verilog.html">Previous session's notes</a>:
+  Verilog</li>
+<li><a href="03_testing.html">Next session's notes</a>: Verification &amp; Testing</li>
+<li><a href="index.html">Up to Index</a></li>
+</ul>
+
+<hr><hr>
+
+</body>

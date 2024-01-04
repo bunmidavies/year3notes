@@ -1,0 +1,173 @@
+<title>Test coverage</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Test Coverage</h2>
+
+<ul>
+<li> How do you know what you have (haven't) tested?
+<li> Wouldn't it be nice if there was CAD assistance?
+</ul>
+
+These days there are test coverage tools which assist with this task.
+Test coverage may indicate such things as:
+
+<ul>
+<li> which lines of a HDL were executed at least once
+<li> which decisions were taken during a simulation run
+<li> which wires have adopted both possible digital states
+<li> which states of an FSM have been visited
+  <ul>
+  <li> which transitions have been traversed
+  </ul>
+</ul>
+
+May even tell you things you didn't care about
+
+<ul>
+<li> e.g.  missing &lsquo;default&rsquo; in a case with all cases specified explicitly
+  <ul>
+  <li> except, perhaps the &lsquo;unknown&rsquo; case!
+  </ul>
+
+Works on the &lsquo;better safe than sorry&rsquo; principle!
+
+</ul>
+
+<img src="figures/FSM_coverage.png" alt="FSM coverage" align="left" width=15%>
+
+<p>&nbsp;</p>
+<p>
+Another possible visualisation of FSMs in the Cadence ICCR tool is a
+view of the state diagram.  This can reveal not only the states which
+have (not) been visited but also which transitions have (not) been
+taken.  The latter duplicates some of the &lsquo;block&rsquo; coverage
+in that, if all blocks have been executed all possible transitions
+must have happened.  However it does provide a (useful?) alternative
+view.<br clear="left">
+</p>
+
+<hr>
+
+<h2>Test coverage &lsquo;failures&rsquo;</h2>
+
+<p>
+There are some things which it cannot reveal:
+</p>
+
+<ul>
+<li> Things you forgot to put in
+<li> Scheduling issues
+<li> Some consequences of intenal state (see example below)
+<li> Implementation: the nodes which have toggled are bits as
+  specified in the <i>source</i> language; it is likely that a
+  gate-level implementation will introduce other wires not &lsquo;visible&rsquo; yet.
+</ul>
+
+<p>
+Here is an example of an inadequate test applied to two different circuits.
+</p>
+
+<div class="row">
+  <div class="column">
+
+<p style="font-family: 'Courier New', monospace;">
+// OR gate<br>
+assign q = a || b;
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial &nbsp; &nbsp; &nbsp; &nbsp; // Test<br>
+&nbsp; begin<br>
+&nbsp; a = 0; b = 0;<br>
+&nbsp; #100 b = 1;<br>
+&nbsp; #100 a = 1;<br>
+&nbsp; #100 b = 0;<br>
+&nbsp; #100 a = 0;<br>
+&nbsp; #100 $stop;<br>
+&nbsp; end<br>
+</p>
+</blockquote>
+
+  </div>
+
+  <div class="column">
+
+  <p style="font-family: 'Courier New', monospace;">
+  // Transparent latch<br>
+  always @ (a, b) if (!a) q = b;
+  </p>
+  <p>&nbsp;</p>
+
+  <img src="figures/inadequate_timing.png" alt="ambiguous output trace"
+     width=60%>
+
+  </div>
+</div>
+
+<p>
+In either case all the statements have been executed and all the nodes
+toggled.  &ldquo;100% test coverage&rdquo;; same
+&lsquo;function&rsquo;; two different circuits.
+</p>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03a_testing_what.html">Back</a> to &lsquo;what&nbsp;&hellip;&rsquo;.</p>
+
+<p><a href="03c_test_design.html">Forward</a> to test design.</p>
+
+<hr><hr>
+
+</body>

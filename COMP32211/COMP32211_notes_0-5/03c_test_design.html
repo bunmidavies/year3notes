@@ -1,0 +1,227 @@
+<title>Test design</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+
+<h2>How to stress things</h2>
+
+<p>
+There are various approaches to designing tests.  Here are some
+suggestions:
+</p>
+
+<ul>
+<li> Individual, deliberately targetted tests:
+  <ul>
+  <li> Manually contrived so that (at least) one case of every (known)
+  circumstance is used.
+  <li> Effective, expensive.
+  </ul>
+<li> Algorithmically generated:
+  <ul>
+  <li> E.g.  all possible cases of inputs, regular input patterns, &hellip;
+  <li> Relatively easy to do.
+  <li> Requires some design effort.
+  </ul>
+<li> Random patterns:
+  <ul>
+  <li> Typically gives high (but incomplete) coverage of common cases.
+  <li> Probably misses specific input combinations.
+  <li> Cheap to produce.
+  </ul>
+</ul>
+
+<p>
+In general a combination of the above may be appropriate<br>
+(e.g.  targetted state tests with random data.)
+</p>
+
+<p>
+<b>Black-box testing.</b> Tests &lsquo;in ignorance&rsquo; of the
+implementation of the unit.  The tester knows the interface and the
+intended function and attempts to find faults purely by applying input
+sequences.
+</p>
+
+<p>
+<b>White-box testing.</b> The tests are designed by looking at the
+implementation and intentionally stressing parts of its design.  This
+is also known as &lsquo;glass-box testing&rsquo; and by other names.
+</p>
+
+<p>
+Both have advantages and disadvantages.  A black-box test may fail to
+identify some special case which has to be &lsquo;trapped&rsquo; in
+the implementation.  On the other hand if the code (or schematic) is
+available it may influence the test strategy; verifying all the code
+may suggest that the system works but <i>what about the cases the
+designer didn't think of?</i><br>
+It's all too easy to follow an existing plan.
+</p>
+
+<h4>Specific tests</h4>
+
+<p>
+The tester inputs some (probably simple) values to check the expected
+function of the system.  For example a &lsquo;black box&rsquo; test of
+a division unit could have inputs which are positive, negative and
+zero.  [What is the defined behaviour of a division by zero? What about
+0&nbsp;&divide;&nbsp;0?] Thus nine test cases may cover much of the
+behaviour.
+</p>
+
+<p>
+Then consider some other questions.  Is this an integer divide? What
+should happen/does happen when the result is non-integer? Is the
+rounding/truncation correct? Try some more appropriate cases.
+</p>
+
+
+<h4>Algorithmic test cases</h4>
+
+Having decided on a particular test is should be fairly easy to repeat
+it, with some variation, a number of times.  Such tests can be
+programmed quite easily in Verilog.  In some cases it may be feasible
+to test exhaustively; in other cases this would be prohibitive and
+some sample data may be chosen which can be supplied by a simple
+algorithm.  Try to design this so it is likely to cover different test
+cases.
+</p>
+
+<h4>Random tests</h4>
+
+<p>
+So called &ldquo;<b>Monte Carlo</b>&rdquo; testing applies random input
+patterns.  This is often a cheap way of generating wide test coverage
+and has an advantage in that it may &lsquo;think of&rsquo; cases a human
+wouldn't.  However it offers no guarantees of complete coverage.
+</p>
+
+<p>
+The distribution of the random numbers may also be important:
+</p>
+
+<ul>
+<li>Adder: testing with linearly distributed random inputs will
+  exercise most functionality quite quickly.
+<li>&lsquo;CLZ&rsquo;: <i>linearly distributed</i> random inputs
+  unlikely to find most output patterns.
+</ul>
+
+<center>
+<div class="inset">
+
+<h3>&lsquo;Biasing&rsquo; random tests: an example</h3>
+
+<p>
+The 32-bit ARM processor has an instruction <b>C</b>ount
+<b>L</b>eading <b>Z</b>eros
+(<font style="font-family: 'Courier New', monospace;">CLZ</font>)
+which counts the number of consecutive &lsquo;0&rsquo; bits from the
+most significant end of a register.  The result can therefore range
+from 0 to 32 (decimal).
+</p>
+
+<p>
+The last case (32) is unusual in that, in binary, it is
+<font style="font-family: 'Courier New', monospace;">100000</font>
+and it only occurs for one input <font style="font-family: 'Courier
+New', monospace;">0000_0000</font> of the 2<sup>32</sup> possible
+inputs.  This is unlikely to occur in a couple of million linearly
+distributed random inputs yet it is important in that it is the only
+combination to output a &lsquo;<font style="font-family: 'Courier
+New', monospace;">1</font>&rsquo; in bit&nbsp;5.  This should be
+tested!
+</p>
+
+<p>
+Generating a random 32-bit pattern then right-shifting by (randomly)
+0-31 places will generate a much more appropriate spread of test
+values here.  (For example.)  Think about the distribution of data
+elements.
+</p>
+
+</div>
+</center>
+
+<h4>State</h4>
+
+<p>
+If a module has internal state &ndash; and many do &ndash; this state
+also forms part of the input.  Thus it may be necessary to test the
+unit with a particular set of inputs in each of its internal states.
+This can greatly enlarge the test set!
+</p>
+
+<p>
+To ensure(?!) that the unit is in the correct state may require a
+deliberate test sequence beforehand.  Thus the above categories should
+not be seen as exclusive: e.g. a particular set of inputs could be
+used to precede a random input set.
+</p>
+
+<p>
+As the design size increases (i.e. more modules are integrated)
+control of internal states becomes increasingly hard.  Thus confidence
+in each unit of the hierarchy is essential.
+</p>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03b_test_coverage.html">Back</a> to test coverage.</p>
+
+<p><a href="03d_test_ordering.html">Forward</a> to test ordering.</p>
+
+<hr><hr>
+
+</body>

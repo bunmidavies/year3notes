@@ -1,0 +1,642 @@
+<title>Simulation time</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+<hr>
+
+<h2>Simulation time</h2>
+
+<p>
+As far as physics currently understands time is a single continuous dimension.
+</p>
+
+<p>
+Simulation time is discrete but multidimensional! &nbsp; &nbsp;
+(Short aside: <a href="02a_event_driven_simulation.html">Event
+    Driven Simulation</a>.)
+</p>
+
+<ul>
+<li>There is a simulation time which represents real delays
+  <ul>
+  <li>This is available as <font style="font-family: 'Courier New',
+		    monospace;">$time</font>
+  <li>Resolution is controllable; may be a fraction of
+      &lsquo;<font style="font-family: 'Courier New',
+		    monospace;">#1</font>&rsquo;
+  </ul>
+<li>There is a list of things which happen simultaneously (in a given simulation) timestep
+  <ul>
+  <li>Some of these are ordered
+  <li>e.g.  blocking assignments within the same block
+  <li>Some are unpredictable
+  <li>e.g.  blocking assignments different blocks
+  <li>There are different phases
+  <li>first: <i>all</i> blocking assignments
+  <li>second: non-blocking assignments
+  </ul>
+</ul>
+
+<p>
+Naturally, none of this relates to the actual time taken to run the
+simulation, which depends on how much switching activity takes place
+in the design.
+</p>
+
+<hr>
+
+<h3>Assignment timing</h3>
+
+Assuming they are scheduled to happen at the same time:
+<ul>
+<li>Blocking assignments occur in <i>some</i> order
+  <ul>
+  <li>the order is only defined within a single statement
+  </ul>
+<li>Non-blocking assignments happen simultaneously
+  <ul>
+  <li>first all the results are calculated from the RHS expressions
+  <li>then all the LHS variables are altered
+  </ul>
+<li>Non blocking assignments happen after blocking assignments
+</ul>
+
+<h4>Example</h4>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) a = b; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Blocking<br>
+always @ (posedge clk) b = a; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Blocking<br>
+always @ (posedge clk) x &lt;= y; &nbsp;&nbsp;&nbsp;&nbsp;   // Non-blocking<br>
+always @ (posedge clk) y &lt;= x; &nbsp;&nbsp;&nbsp;&nbsp;   // Non-blocking<br>
+</p>
+</blockquote>
+
+<p>
+After a clock edge:
+</p>
+<ul>
+<li><span style="font-family: 'Courier New', monospace;">x</span> and
+<span style="font-family: 'Courier New', monospace;">y</span> will
+have been swapped</li
+<li><span style="font-family: 'Courier New', monospace;">a</span> and
+<span style="font-family: 'Courier New', monospace;">b</span> will be
+the same (as each other)</li>
+  <ul>
+  <li>but <i>which</i> value depends on the implementation<br>
+  i.e.  which of the blocking statements is scheduled first
+  </ul>
+</ul>
+
+<p>
+However:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk)<br>
+begin<br>
+a = b;<br>
+b = a;<br>
+end<br>
+</p>
+</blockquote>
+is entirely predictable &ndash; if rather pointless.
+</p>
+
+<h3>Potential pitfall</h3>
+
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) x <= a;      &nbsp; // Non-blocking<br>
+always @ (posedge clk) a = b; &nbsp;&nbsp; // Blocking<br>
+</p>
+
+<p>
+In simulation <font style="font-family: 'Courier New', monospace;">x</font>
+will always take the value from 
+<font style="font-family: 'Courier New', monospace;">b</font>.
+</p>
+
+</p>
+However a synthesizer will probably see this as two sequential flip-flops.
+</p>
+<p>
+<b>A synthesized circuit will behave differently from the simulation!</b>
+</p>
+<p>
+<i>Okay, that's the wrong thing to happen but complaining won't change it.</i>
+</p>
+
+<h3>Guidelines</h3>
+
+<ul>
+<li>Use <b>blocking</b> assignments for <b>combinatorial</b> logic
+  <ul>
+  <li>this should evaluate every time its inputs change
+  </ul>
+<li>Use <b>non-blocking</b> assignments for D-type
+  (edge-triggered) <b>registers</b>
+  <ul>
+  <li>typically &lsquo;posedge clk&rsquo;
+  </ul>
+<li>Don't mix blocking (=) and non-blocking (<=) assignments ...
+  <ul>
+  <li>...  to a particular variable
+  <li>...  within the same always block
+  </ul>
+<li>Keep all assignments to a particular variable in the same block
+<li>Try to avoid transparent latches<sup>&dagger;</sup><br>
+<font style="font-family: 'Courier New', monospace;">always
+                                      @ (D, En) if (En) Q = D;</font>
+  <ul>
+  <li>only do this if you must
+  <li>easily created accidentally: remember
+      &lsquo;<font style="font-family: 'Courier New', monospace;">else</font>&rsquo;s
+      and &lsquo;<font style="font-family: 'Courier New',
+		    monospace;">default</font>&rsquo;s
+  <li>may be functionally harmless but introduce redundant logic
+  <li>some tools may produce warnings if you do
+  </ul>
+</ul>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup> [<a href="05x_latches.html">Forward reference</a>]
+</blockquote>
+
+<hr>
+
+<h2>Stylistic pitfall (?)</h2>
+
+<p>
+When simulating synchronous circuit models the most convenient thing
+to write is:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk)<br>
+if (count &lt; 9) count &lt;= count + 1; else count &lt;= 0;<br>
+</p>
+</blockquote>
+
+<p>&lsquo;count&rsquo; then changes:
+<ul>
+<li>as a result of the clock edge
+<li>after the clock edge
+<li>at the same time as the clock edge
+</ul>
+</p>
+
+<p>
+The resulting trace may be slightly misleading although it is safe.
+</p>
+
+<p>
+But what if the inputs (RHS) are generated with a blocking assignment ...
+<ul>
+<li>as combinatorial logic? Okay &ndash; inputs settled in time
+<li><font style="font-family: 'Courier New', monospace;">@ (posedge clk)</font> ?
+    Bad news &ndash; inputs change before non-blocking statement<br>
+    (In simulation, maybe not in synthesized logic.)
+</ul>
+</p>
+
+<p>
+<b>Therefore keep all blocks and modules in the <u>same</u> style!</b>
+</p>
+
+<hr>
+
+<h2>This might aid readability &hellip;</h2>
+
+<p>
+(Perhaps) the obvious way to stimulate a design may be something like this:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial clk = 1;<br>
+always #5 clk &lt;= !clk;<br>
+&nbsp;<br>
+initial<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;data = 0;<br>
+&nbsp;&nbsp;#10;<br>
+&nbsp;&nbsp;data = 1;<br>
+&nbsp;&nbsp;#10;<br>
+&nbsp;&nbsp;data = 2;<br>
+&nbsp;&nbsp;#10;<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+always @ (posedge clk) value_1 &lt;= data;<br>
+always @ (posedge clk) value_2 &lt;= value_1;<br>
+</p>
+</blockquote>
+
+<p>
+Unfortunately &ndash; because the blocking assignment
+(<font style="font-family: 'Courier New', monospace;">data</font>)
+completes <i>before</i> the non-blocking assignments &ndash; this will
+lead to the following timing relationship:
+</p>
+
+<center>
+<img src="figures/timing_1.png" alt="Unfortunate timing" width=50%>
+</center>
+
+<p>
+Offsetting input changes slightly from the clock may help.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+parameter period = 10;    // Makes changes easier<br>
+&nbsp;<br>
+initial clk = 1;<br>
+always #(period/2) clk &lt;= !clk;<br>
+&nbsp;<br>
+initial<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;<b>#1;   // Inputs delayed</b><br>
+&nbsp;&nbsp;data = 0;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data = 1;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data = 2;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+always @ (posedge clk) value_1 &lt;= data;<br>
+always @ (posedge clk) value_2 &lt;= value_1;<br>
+</p>
+</blockquote>
+
+<center>
+<img src="figures/timing_2.png" alt="Unfortunate timing" width=50%>
+</center>
+
+<p>
+There are a couple of disadvantages of the form above.
+</p>
+
+<ul>
+<li>It's easy to <i>compound</i> execution delays accidentally.</li>
+<li>The &lsquo;<b>right hand side</b>&rsquo;of the assignment is
+  evaluated <b>after</b> the clock edge.
+<ul>
+<li>This doesn't matter for constants &hellip;</li>
+<li>&hellip; but can cause problems with variables which may already
+  have changed.</li>
+</ul>
+</li>
+</ul>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+parameter period = 10;    // Makes changes easier<br>
+&nbsp;<br>
+initial clk = 1;<br>
+always #(period/2) clk &lt;= !clk;<br>
+&nbsp;<br>
+initial<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;data <= <b>#1</b> 0;     <b>// Inertial delay</b><br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data <= #1 1;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data <= #1 2;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+always @ (posedge clk) value_1 &lt;= #1 data;<br>
+always @ (posedge clk) value_2 &lt;= #1 value_1;<br>
+</p>
+</blockquote>
+
+<center>
+<img src="figures/timing_3.png" alt="Nicer timing" width=50%>
+</center>
+
+<p>
+The evaluation here takes place at the clock edge: it is just the
+result assignment which is delayed.<br>
+Suggest that this is clearer!
+<ul>
+<li>The &lsquo;pipeline&rsquo; behaves as one might expect.
+<li>The input traces are easier to spot.
+</ul>
+</p>
+
+<p>
+Rather than inserting explicit delay times it may be more robust to
+count the clock edges.  The
+&lsquo;<font style="font-family: 'Courier New', monospace;">@</font>&rsquo;
+symbol means &lsquo;<b>at</b> the next event from the following list&rsquo;
+so:
+&lsquo;<b><font style="font-family: 'Courier New', monospace;">@ (posedge clk)</font></b>&rsquo;
+means &lsquo;wait until the next active clock edge&rsquo; &mdash; this
+will always keep execution in synchronisation with the clock.
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">repeat
+    (10) @ (posedge clk)</font>&rsquo; will, of course wait for the
+    tenth successive clock edge etc.
+</p>
+
+<hr id="delays">
+
+<h2>Delays</h2>
+
+<ul>
+<li>Delays use a syntax &lsquo;<font style="font-family: 'Courier New', monospace;">#<i>&lt;value&gt;</i></font>&rsquo;
+<li>Delays can be added to a <i>model</i> in various ways.
+  <ul>
+  <li><font  style="color:red"><b>They will not be synthesized and
+  cannot be relied upon for functionality.</b></font>
+  </ul>
+</ul>
+<p>
+Here are some convenient methods:
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+#20 a = l; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Delay in execution of sequential block<br>
+&nbsp;<br>
+wire #4 q; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Declare a &lsquo;net delay&rsquo;
+...<br>
+assign q = a & b; &nbsp;&nbsp; // q changes 4 timesteps after an input change<br>
+&nbsp;<br>
+register <= #10 input_value;    // Propagation delay on signal<br>
+</p>
+</blockquote>
+
+<h4>Uses include</h4>
+
+<p>
+<ul>
+<li>Sequencing I/O in a test run
+<li>Modelling &lsquo;real&rsquo; components
+  <ul>
+  <li>e.g.  external memory read delay in lab.  system (&gt; clock period)
+  </ul>
+<li>&lsquo;Cosmetic&rsquo; delays to make waveform traces more readable
+</ul>
+</p>
+
+<hr>
+
+<h3>Delays</h3>
+
+<p>
+Time is modelled in two ways:
+<ul>
+<li>advancing to the next timestep
+<li>iterating over things which happen at the same time
+</ul>
+</p>
+
+<p>Examples:</p>
+
+<div class="row">
+<!--  <div column-width: 200px; class="column" style="background-color:#aaa;"> -->
+
+  <div class="column">
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial<br>
+begin<br>
+a = 0;<br>
+#10;<br>
+a = 1;<br>
+end<br>
+&nbsp;<br>
+assign b = !a;
+assign c = !b;
+</p>
+</blockquote>
+  </div>
+
+  <div class="column">
+
+<table>
+<tr>
+<th>Time</th>
+<th>action</th>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;a = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;b = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;c = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;a = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;b = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;c = 1&nbsp;</td>
+</tr>
+</table>
+  </div>
+
+</div>
+
+<p>
+At any point there is only one thing which is scheduled to happen, but
+a change schedules a(n immediate) change on
+<font style="font-family: 'Courier New', monospace;">b</font>, etc.
+</p>
+
+
+<div class="row">
+
+  <div class="column">
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial<br>
+begin<br>
+a = 0;<br>
+#10;<br>
+a = 1;<br>
+end<br>
+&nbsp;<br>
+assign #5 b = !a;<br>
+assign #6 c = !b;<br>
+</p>
+</blockquote>
+
+  </div>
+  <div class="column">
+
+<table>
+<tr>
+<th>Time</th>
+<th>action</th>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;a = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;5&nbsp;</td> <td>&nbsp;b = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;a = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;11&nbsp;</td> <td>&nbsp;c = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;15&nbsp;</td> <td>&nbsp;b = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;21&nbsp;</td> <td>&nbsp;c = 1&nbsp;</td>
+</tr>
+</table>
+
+  </div>
+
+</div>
+
+<p>
+Delays can alter <i>when</i> switching occurs.
+</p>
+
+<p>
+Delays can also be inserted within assignments to delay the assignment
+without retarding the flow of execution, e.g.:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+a &lt;= #10 b;
+</p>
+</blockquote>
+
+<center><div class="inset">
+<h4>Same unit: different delays</h4>
+
+<p>
+For added veracity it is possible to specify different rising, falling
+and turn-off delays for a signal by listing these in brackets.  E.g.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+#(3,2)
+</p>
+</blockquote>
+
+<p>
+means a rising delay of 3, a falling delay of 2.  The turn-off delay
+has not been specified so defaults to the minimum of these (if
+appropriate).
+</p>
+</div></center>
+
+<hr>
+
+<h3>Glitches</h3>
+
+<p>
+&lsquo;Glitches&rsquo; are brief signal changes which result from
+signal <b>races</b> through combinatorial logic; they will only be
+visible in simulation if gates (or other logic blocks) include delay
+models.  Thus they will not (typically) appear in an abstracted
+simulation.
+</p>
+
+<p>
+Glitches may appear in more detailed models, including a netlist
+<b>extracted</b> from a synthesized design: i.e. one which includes
+details of the actual circuits and delays.  This could cause problems
+running the same simulation successfully as previously, depending on
+how the testbench is constructed.  There is a little
+<a href="02c_trouble_with_glitches.html">bonus page</a> about this here.
+</p>
+
+
+<hr>
+
+<div class="row">
+
+  <div class="column">
+  <p><a href="02x_simulation.html#index">Up</a> to simulation</p>
+  <p><a href="02e_parallel_sim.html">Back</a> to parallelism in simulation</p>
+  <p><a href="02h_simulation_events.html">Forward</a> simulation events</p>
+  </div>
+  <div class="column">
+  <p><b>Bonus pages</b></p>
+
+  <p><a href="02a_event_driven_simulation.html">Event Driven Simulation</a></p>
+  <p><a href="02c_trouble_with_glitches.html">Trouble with glitches</a></p>
+
+  </div>
+</div>
+
+<hr><hr>
+
+</body>

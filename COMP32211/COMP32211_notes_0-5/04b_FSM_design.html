@@ -1,0 +1,202 @@
+<title>FSM style</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column_a {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.column_b {
+  float: right;
+  width: 70%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>FSM design</h2>
+
+<h3>Finite State Machines</h3>
+
+<div class="row">
+  <div class="column">
+
+  <img src="figures/FSM_Mealy.png" alt="Mealy FSM" width=50% align="right">
+
+  <h4><a href="https://en.wikipedia.org/wiki/Mealy_machine">Mealy
+       machine</a></h4>
+
+  <ul>
+  <li> Outputs may depend on inputs
+  <li> Smaller
+  <li> Simpler?
+  <li> Slower
+  </ul>
+  </div>
+
+  <div class="column">
+  <p style="font-family: 'Courier New', monospace;">
+
+  <img src="figures/FSM_Moore.png" alt="Moore FSM" width=50% align="right">
+
+  <h4><a href="https://en.wikipedia.org/wiki/Moore_machine">Moore
+       machine</a></h4>
+
+  </ul>
+  <li> Outputs part of state
+  <li> Larger
+  <li> Faster
+  </ul>
+  </div>
+
+</div clear="both">
+
+<p>These two named styles appear in many text books &mdash; but don't
+  get too &lsquo;hung up&rsquo; on memorising names.  <i>Do</i> note
+  the potential effect of delays from the logic &lsquo;cloud&rsquo;
+  though.</p>
+
+
+
+<h3>Recommendation</h3>
+
+<p>
+The latter style in most cases.  By registering the outputs you have a
+good timing reference to work from &ndash; useful when considering the
+design freedom of subsequent blocks.  The immunity from output glitches
+may be a bonus.
+</p>
+
+<p>
+But &hellip;
+</p>
+
+<ul>
+<li> There is an added cost in logic
+<li> When specifying the output states you need to think ahead!
+</ul>
+
+<p>
+&ldquo;From <i>here</i> [current state] I want to go <i>there</i>
+  [next state] and <i>when</i> I'm there I'll <i>also</i>
+  want <i>these outputs</i>.&rdquo;
+</p>
+
+<p>
+Thus to indicate &lsquo;I am in state&nbsp;9&rsquo; <i>via a flip-flop
+delay</i> this has to be detected in state&nbsp;<b>8</b>.
+</p>
+
+<p>
+This must also be subject to any other controls (such as an enable).
+</p>
+
+<h3>FSM coding style</h3>
+
+<p>
+<b>Some people prefer to <i>separate</i> logic and register blocks.</b>
+</p>
+
+<img src="figures/FSM_counter.png" alt="Counter" width=40% align="right">
+
+<p>
+Instead of:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace; color:blue">
+always @ (posedge clk)<br>
+&nbsp; if (count < 9) count <= count + 1;<br>
+&nbsp; else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; count <= 0;<br>
+&nbsp; always @ (posedge clk) rc <= (count == 8);<br>
+</blockquote>
+
+<p>this:</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+always @ (count) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // The &lsquo;cloud&rsquo;<br>
+&nbsp; begin<br>
+&nbsp; if (count < 9) next_count = count + 1;<br>
+&nbsp; else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; next_count = 0;<br>
+&nbsp; next_rc = (next_count == 9)<br>
+&nbsp; end<br>
+&nbsp;<br>
+always @ (posedge clk) &nbsp; &nbsp;// The &lsquo;rectangle&rsquo;<br>
+&nbsp; begin &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // in the figure.<br>
+&nbsp; count <= next_count;<br>
+&nbsp; rc &nbsp; &nbsp;<= next_rc;<br>
+&nbsp; end
+</blockquote>
+
+<p>
+&lsquo;carry&rsquo;
+(<font style="font-family: 'Courier New', monospace;">rc</font>)
+derived from register <b>input</b>.  
+</p>
+
+<ul>
+<li> More verbose
+<li> Clearer?
+</ul>
+
+<p align="right"><b>You decide</b> what suits you better.</p>
+
+<hr>
+
+<p><a href="04a_tradeoff_style.html">Back</a> to code style.</p>
+
+<p><a href="04c_sync_async.html">Forwards</a> synchronous
+  vs. asynchronous design.</p>
+
+<p><a href="04_tradeoffs.html">Up</a> to Tradeoffs.</p>
+
+<hr><hr>
+
+</body>

@@ -1,0 +1,192 @@
+<title>Testing: tasks</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+
+<h2>Using tasks</h2>
+
+<ul>
+<li> Reminder: a &lsquo;task&rsquo; is a method/procedure/subroutine
+  <ul>
+  <li> designed for repeated invocation
+  <li> ideal for (e.g.) sending test data
+  </ul>
+</ul>
+
+<p>Here is an example task which executes a communication handshake:</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+task strobe;<br>
+&nbsp; begin<br>
+&nbsp; req = 1;<br>
+&nbsp; while (ack == 0) #`PERIOD; &nbsp; &nbsp;&nbsp; // Wait for acknowledgement<br>
+&nbsp; req = 0;<br>
+&nbsp; while (busy == 1) #`PERIOD; &nbsp; &nbsp;
+// Wait for operation to complete<br>
+&nbsp; #(10 * `PERIOD); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+// Pause before subsequent command<br>
+&nbsp; end<br>
+endtask<br>
+</p>
+</blockquote>
+
+<p>
+This can be invoked with a single keyword which saves a lot of typing/clutter.
+</p>
+
+<p>
+The example above has no arguments.  It is probably easier to include
+these in the task too.  Here is an example which could be used to
+initiate an operation with a line drawing module.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+task strobe(input [15:0] p0, p1, p2, p3, p4);<br>
+&nbsp; begin<br>
+&nbsp; r0 <= p0; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Parameters to registers<br>
+&nbsp; r1 <= p1;<br>
+&nbsp; r2 <= p2;<br>
+&nbsp; r3 <= p3;<br>
+&nbsp; r6 <= p4;<br>
+&nbsp; @ (posedge clk); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;// Wait for clock edge<br>
+&nbsp;<br>
+&nbsp; req <= 1; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Request<br>
+&nbsp; while (ack == 0) @ (posedge clk); &nbsp; // Wait for ack<br>
+&nbsp; req <= 0;<br>
+&nbsp; while (busy == 1)  @ (posedge clk); &nbsp;// Wait for complete<br>
+&nbsp; repeat (10)  @ (posedge clk); &nbsp; &nbsp; &nbsp; &nbsp;// Pause<br>
+&nbsp; end<br>
+endtask<br>
+</blockquote>
+
+<p>
+[Note: like much Verilog 2001 there is other possible syntax.]
+</p>
+<p>
+To use this task then merely requires statements such as:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+strobe(100, 200, 300, 400, 'h34);<br>
+strobe(333, 222, 111, 420, `RED);<br>
+...
+</blockquote>
+
+<p>
+This helps to keep the important values obvious (uncluttered) and they
+can, of course be variables within loops etc.
+</p>
+
+<p>
+Another possibility is to have an off-line test programme generate the
+appropriate code.
+</p>
+
+<h4>More about tasks</h4>
+
+<ul>
+<li> When a task is invoked (&ldquo;enabled&rdquo; in Verilog jargon)
+  control is passed to it until it completes; then it returns.  
+<li> Tasks may contain delays so enabling a task may cause a delay to
+  the enabling process.
+<li> Arguments may be of type input, output or inout.
+  <ul>
+  <li> inputs may be expressions.
+  <li> outputs and inouts must be assignable
+  </ul>
+(i.e.  like the LHS of an assignment).
+<li> Any number of arguments may be passed.
+<li> Tasks can be nested.
+  <ul>
+  <li> Tasks can call functions
+  <li> Functions can call functions
+  <li> Functions cannot call tasks
+  </ul>
+<li> Tasks are static by default
+  <ul>
+  <li> If a task is to be recursive it must be made dynamic by
+       declaring it as &ldquo;automatic&rdquo;:<br>
+       <font style="font-family: 'Courier New', monospace;">task
+       automatic my_task;</font>
+  </ul>
+</ul>
+
+<h4>System tasks</h4>
+
+<p>
+Commands starting with
+&lsquo;<font style="font-family: 'Courier New', monospace;">$</font>&rsquo;
+(such as <font style="font-family: 'Courier New', monospace;">$display</font>)
+are system tasks.  These are built in to allow access to facilities
+such as files.  A selection of these has been introduced already.
+</p>
+
+<p>
+It is possible to add user-defined system tasks for interaction with
+other parts of the external environment.  We will return to this later,
+including using some in the lab.
+</p>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03f_test_delays.html">Back</a> to test coverage.</p>
+
+<p><a href="03h_test_reviews.html">Forward</a> to reviewing.</p>
+
+<hr><hr>
+
+</body>

@@ -1,0 +1,56 @@
+<title>Verilog</title>
+
+<html>
+<head>
+
+</head>
+
+<body>
+
+<hr>
+
+<h1>Synthesis errors</h1>
+
+<p>
+There are different classes of &lsquo;errors&rsquo; which can occur
+when synthesizing circuits.  These will typically have names like:
+
+<h2>Error</h2>
+
+<p>
+An error is something which is definitely wrong and will cause the
+synthesis to fail.  Things like syntax errors fall into this category,
+as may some other problems.
+</p>
+
+<h2>Warning</h2>
+
+<p>
+Warnings are <i>probable</i> indicators of faults, or at least
+infelicities!  They do not prevent synthesis but ought to be checked
+and taken ito account.  A typical example is a statement which looks
+as if it was intended to be combinatorial but has some unspecified
+condition(s), thus needing a (typically unclocked) state-holding
+element.  This may be deliberate &ndash; but usually isn't.
+</p>
+
+<p>
+Toolflows will allow warnings to be suppressed (by category) which can
+sometimes be appropriate but <i>they should be checked</i>.<br>
+Another class of warning is generated when the circuit (apparently)
+has no I/O connections.  You may see this in the later labs; it has
+been suppressed there.
+</p>
+
+<h2>Info(rmation)</h2>
+
+<p>
+These are the least critical synthesis &lsquo;issues&rsquo;.
+Typically they are more like <i>advice</i> on how a design might be
+respecified, perhaps to be more efficient.  They <i>can</i> safely be
+ignored although a good designer might be even better if they aren't.
+</p>
+
+<hr><hr>
+
+</body>

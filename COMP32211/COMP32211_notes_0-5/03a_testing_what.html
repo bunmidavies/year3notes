@@ -1,0 +1,373 @@
+<title>Testing: what to look for</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>What to look for: Control</h2>
+
+<ul>
+<li> Start by stimulating simple sequences.
+<li> Do the interfaces go through the appropriate phases?
+<li> Are the FSMs behaving as expected? (Observe internal state)
+<li> Have all the transitions in the state diagram been observed &hellip;
+<li> &hellip; for all the reasons that might trigger them?
+<li> Termination &mdash; does it?
+<li> (test coverage &ndash; have you got it covered?
+</ul>
+<p> e.g.  a new processor processor fed with &lsquo;NOP&rsquo;s
+  <ul>
+  <li> resets and starts
+  <li> performs fetch/decode/execute sequence
+  <li> can stall if memory is slow
+  <li> &hellip;
+  </ul>
+
+
+<h3>&lsquo;Families&rsquo; of tests</h3>
+
+It is often convenient to divide tests into control and data tests.  The former
+checks the sequencing and timing of operations so that the correct things happen
+in the desired order.  In such tests data values may not be important.
+
+The latter checks the data values are as expected.
+
+These are not &lsquo;hard and fast&rsquo; divisions.  Examples:
+
+<ul>
+<li> Control may include a test for data stability even though the
+     value is not checked
+<li> Is the number of cycles performed &lsquo;control&rsquo; or
+     &lsquo;data&rsquo;?
+</ul>
+
+<h4>Thinking up test cases</h4>
+
+<p>
+Consider an ALU in a pipelined processor design.  This performs a given set of
+operations, typically one per clock cycle although pipeline stalls and flushes
+may interfere with this.  May want to check:
+</p>
+<ul>
+<li> Normal data flow through unit
+<li> That the output retains data when stalled
+<li> If the output is stalled, does the input stall?
+  <ul>
+  <li> This may be under local or remote (external) control.
+  </ul>
+<li> Is data validity passed through correctly?
+<li> Is an attempt to stall the output ignored if the stage contains
+     invalid data?
+  <ul>
+  <li> this would be an optimization for performance
+  </ul>
+<li> Does the unit ADD, SUB, AND, etc.?
+  <ul>
+  <li> signed, unsigned values, shifts &hellip;
+  </ul>
+<li> If an input is unused (e.g.  MOV &lsquo;second operand&rsquo;) is
+     it genuinely ignored?
+  <ul>
+  <li> A use for &lsquo;don't care&rsquo; test values, perhaps?
+  </ul>
+<li> &hellip;
+</ul>
+
+<p>
+Each test is simple in itself but they can be numerous, even in a
+&lsquo;simple&rsquo; unit! It is likely that this list is not exhaustive.
+</p>
+
+<h3>Example: An interface between blocks</h3>
+
+<p>
+In the laboratory system the pixel output interface from the drawing
+engine has the following timing rules.
+</p>
+
+<p>
+There are two control signals
+{<font style="font-family: 'Courier New', monospace;">req</font>,
+<font style="font-family: 'Courier New', monospace;">ack</font>}
+with an associated bundle of data.  Following an active clock edge:
+</p>
+
+<ul>
+<li> if <font style="font-family: 'Courier New', monospace;">req</font>
+ is not asserted,
+ <font style="font-family: 'Courier New', monospace;">ack</font>
+ should not be asserted.
+<li> if <font style="font-family: 'Courier New', monospace;">req</font>
+ is asserted,
+ <font style="font-family: 'Courier New', monospace;">ack</font>
+ <i>may</i> be asserted to indicate the acceptance of data.
+<li> <font style="font-family: 'Courier New', monospace;">ack</font>
+ will be asserted for a single clock cycle for each data item accepted.
+</ul>
+
+<center>
+<img src="figures/interface_timing.png" alt="Interface timing" width=80%>
+</center>
+
+<p>
+In the figure:
+</p>
+
+<ul>
+<li> The first transfer goes through immediately.
+<li> The second transfer has to wait for one cycle.
+<li> The third and fourth transfers do not wait and follow each other
+     as closely as possible &mdash; this takes two clock cycles
+     because <font style="font-family: 'Courier New',
+     monospace;">ack</font> must <u>pulse</u>.
+</ul>
+
+<p>
+Notes:
+</p>
+
+<ul>
+<li> This interface has been specified to be quite simple to use.
+<li> Small delays have been incorporated into the figure for clarity.
+<li> This is not a full &lsquo;handshake&rsquo; interface as data
+  bursts can go through without separate request transitions.
+</ul>
+
+<p>
+Do the tests cover all these cases?
+</p>
+
+<p>
+Is (for example) the data held stable when the second transfer waits?
+</p>
+
+<hr>
+
+<h2>What to look for: Data</h2>
+
+<p>
+Just because a design runs through appropriate control sequences this
+doesn't mean that the output data is correct.
+</p>
+
+<p>
+In an RTL abstraction the details of the &lsquo;data&rsquo; are not
+really considered.  However it is important to check that the data are also correct.
+</p>
+
+<ul>
+<li> Data values can be compared with independently generated test results
+<li> Some data faults become readily apparent
+  <ul>
+  <li> out of range values
+  <li> the wrong number of operations (cycles) are performed
+  <li> &lsquo;silly&rsquo; graphics drawing &hellip; assuming the
+       values can be viewed
+  </ul>
+<li> Self-testing may be possible
+  <ul>
+  <li> a processor can be tested by running some software
+  <li> it will probably crash if there is an error in (e.g.)
+       instruction decode
+  </ul>
+</ul>
+
+<p>
+If control signals are interacting correctly the data can be
+checked.  Probably the first thing to establish is that the data is
+stable when it is expected to be.  It is not much use if a pipeline's
+control signals stall correctly but the data tries to keep flowing.
+</p>
+
+<p>
+The data can be sampled for correctness at the time an interacting
+unit would do so.  This requires some expected results for comparison,
+which could be generated in a HDL test harness or imported from
+another model.  Note that the expected results should have been
+verified in some way.
+</p>
+
+<p>
+Data crossing interfaces should be deducible (if not directly available) in a
+higher level model.  Such a model can be used in various ways to aid testing.
+</p>
+
+<ul>
+<li> to generate stimuli for a HDL model
+<li> to generate a file of expected test results
+<li> as part of a cosimulation where it interacts with the HDL simulation
+</ul>
+
+<p>
+A high-level model may also be able to generate internal variable sequences
+with little extra effort.
+</p>
+
+<h4>Exhaustive tests</h4>
+
+<p>
+It is possible to test some units <i>exhaustively</i>, i.e.  try every
+possible case.  These are usually combinatorial units as each bit of
+buried state doubles the number of tests required.
+</p>
+
+</p>
+Example: 8&nbsp;&times;&nbsp;8 multiplier block
+
+<p>
+There are 2<sup>(8+8)</sup>&nbsp;=&nbsp;65536 possible input
+combinations.  It is quite feasible to test this and it is possibly
+the simplest thing to do.
+</p>
+
+<p>
+Counterexample: 32&nbsp;&times;&nbsp;32 multiplier block
+</p>
+
+<p>
+There are
+2<sup>(32&nbsp;+&nbsp;32)</sup>&nbsp;=&nbsp;18446744073709551616
+possible input combinations.
+</p>
+
+<p>
+Checking at one per nanosecond would still require over 500 years to
+complete.
+</p>
+
+<p>
+Exhaustive tests are feasible for control circuits, not for (most) data.
+</p>
+
+<h4>Representative samples</h4>
+
+<p>
+If exhaustive testing is impossible some sample data are needed.  There
+are various ways of generating these:
+</p>
+
+</p>
+<ul>
+<li> hand generated
+<li> algorithmically generated
+<li> random
+<li> biased random
+<li> &hellip;
+</ul>
+
+<p>
+Each method has merits and drawbacks.  Example: a set of random inputs
+to a divider may be unlikely to test the &lsquo;divide by zero&rsquo;
+case.  Random inputs could be biased so that (for example) small
+numbers are more likely if a block which counts leading zeros is under
+test.
+</p>
+
+
+<h3>Data timing</h3>
+
+<p>
+Timing checks require some more detail in the model.  Logic timings are
+difficult to estimate at an early simulation stage; however there are
+some timing checks which it may be worth modelling early.
+</p>
+
+<p>
+A good example is reading a memory.  On the laboratory board there is
+external SRAM to provide capacity for the frame buffer.  This SRAM has
+an access time of 55&nbsp;ns &ndash; which is more than one clock period
+(40&nbsp;ns).  A simple HDL RAM model might supply data as soon as the
+address was valid.  In this case the data could be latched
+(accidentally) after one cycle and appear to work.
+</p>
+
+<p>
+Even more worryingly, the 55&nbsp;ns is a worst-case time; a real SRAM
+device may meet the 40&nbsp;ns deadline &hellip; <i>under some
+conditions</i>.  This could lead to many field failures, e.g.  when the
+weather warms up or the battery is below half charge.
+</p>
+
+<p>
+A more sophisticated model, which forces data &lsquo;unknown&rsquo; until the
+relevant time has elapsed, would expose this fault because the
+&lsquo;unknown&rsquo;s would be latched and propagated.
+</p>
+
+
+<h2>What to look for: Timing</h2>
+
+<p>
+Although it may not be <s>possible</s> practical to predict units'
+timing relationships, even on a cycle-by-cycle basis, it may be useful
+to monitor some sequence properties for verification.
+</p>
+
+<p>Examples:</p>
+
+<ul>
+<li> Is the correct number of operations performed?
+  <ul>
+  <li> e.g.  when drawing is the number of pixels plotted correct?
+  </ul>
+<li> Is something happening?
+  <ul>
+  <li> Is a timeout detector appropriate?
+  </ul>
+<li> &hellip;
+</ul>
+
+<hr>
+
+<p><a href="03_testing.html#index">Back (up)</a> to testing.</p>
+
+<p><a href="03b_test_coverage.html">Forward</a> to test coverage.</p>
+
+<hr><hr>
+</body>

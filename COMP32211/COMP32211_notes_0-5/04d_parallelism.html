@@ -1,0 +1,548 @@
+<title>Tradeoff: parallelism</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column_a {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+.column_b {
+  float: right;
+  width: 75%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Think parallel!</h2>
+
+<ul>
+<li> (Imperative) software programming is essentially serial
+<li> Hardware programming is implicitly parallel
+<li> Increasing parallelism typically:
+  <ul>
+  <li> Increases speed
+  <li> Increases resources required
+  <li> Can <i>decrease</i> complexity
+  <li> May decrease power
+  </ul>
+</ul>
+
+<p>Techniques may include:</p>
+
+<ul>
+<li> Subdividing the logic by pipelining
+  <ul>
+  <li> pipelines need to be reasonably balanced
+  </ul>
+<li> Pre-evaluating some of the logic in an earlier stage if possible
+  <ul>
+  <li> may make the structure messy
+  </ul>
+<li> Finding a more parallel logic expression
+  <ul>
+  <li> a classic example is the adder, where carries can be evaluated
+  in parallel
+  </ul>
+</ul>
+
+
+<h3>Benefits and drawbacks of parallelism</h3>
+
+<p>
+Most software programming is, essentially, serial. Although functional
+languages express algorithms without state, most software programming
+is, essentially, serial. Imperative languages such as Java or C code
+algorithms as a series of successive statements. Of course these map
+well onto the underlying processor which executes them as a series of
+successive machine instructions.
+</p>
+
+<p>
+&lsquo;Parallel programming&rsquo; largely refers to writing a set of
+largely independent threads or processes which are each made up of
+sequences of instructions.
+</p>
+
+<p>
+It is therefore not surprising that many people begin writing HDL code
+in a similar way. This typically results in over-complicated code and
+inefficient hardware.
+</p>
+
+<p>
+&nbsp;
+</p>
+
+<p>
+Parallelism is easy to express in a HDL although the
+&lsquo;linear&rsquo; nature of the code in a file may make it harder
+to see. A block diagram or schematic gives a two-dimensional
+representation of the problem and can often help clarify where
+parallelism may be available.
+</p>
+
+<div class="row">
+
+  <div class="column">
+
+<h4>Speed</h4>
+
+<p>
+If two or more units are able to process at the same time then the
+elapsed time for the whole task will be reduced. This assumes that
+there are no serial dependencies between the individual jobs.
+</p>
+
+<p>
+An example can be seen in a superscalar processor. It is often
+possible to execute several instructions simultaneously; it is not
+possible to execute hundreds of instructions simultaneously because of
+dependencies.
+</p>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h4>Power</h4>
+
+<p>
+In some cases parallelism can be used to reduce power
+consumption. This is usually attributable to the ability to remove
+expensive speed optimization within a unit but provide an adequate
+overall performance using several units.
+</p>
+
+<p>
+A (contrived) example could be addition: several slow but simple ripple carry
+adders may provide the same throughput as one larger, fast adder, and may
+switch less leading to a lower power dissipation.
+</p>
+
+<p>
+Another power-saving technique is to employ several units running from
+a reduced supply voltage; the speed is roughly proportional to V
+whereas power roughly proportional to V<sup>2</sup> . Thus two units
+at half the voltage may give the same throughput at half the power
+cost.
+</p>
+  </div>
+
+  <div class="column">
+
+<h4>Resources</h4>
+
+<p>
+Parallelism implies increasing the resources used. There is therefore
+a cost/benefit trade-off. It is not usually sensible to have many
+functional units which are underemployed; it is better to have a more
+flexible unit which is kept busy. This is the rationale for having
+programmable devices such as microprocessors in the first place!
+</p>
+
+
+<h4>Complexity</h4>
+
+<p>
+In some ways parallelism can increase the complexity of a system
+because there are more things happening at once.
+</p>
+
+<p>
+In other way complexity can be decreased. It is easier to design and
+verify small, simple units so dividing a system in a sensible way can
+actually make the blocks easier.
+</p>
+
+<p>
+The simplification or removal of sequencing logic can help here; if a
+unit does only one job there its control logic is trivial and there
+will be no need for many of the buses and multiplexers otherwise
+required.
+</p>
+
+<p>
+As an example, consider the ARM instruction set. Additions are used in
+several places:
+</p>
+
+<div class="row">
+  <div class="column">
+  <p style="font-family: 'Courier New', monospace;">
+  <ul>
+  <li> ADD instruction
+  <li> Address calculation
+  <li> Branch offset determination
+  </ul>
+  </p>
+  </div>
+
+  <div class="column">
+  <p style="font-family: 'Courier New', monospace;">
+  ADD&nbsp;R1,&nbsp;R2,&nbsp;R2<br>
+  LDR&nbsp;R4,&nbsp;[R5,#&67]<br>
+  B &nbsp; label<br>
+  </p>
+  </div>
+</div clear="both">
+
+<p>
+Originally these all shared the same adder (for cost reasons).
+Nowadays they may have &lsquo;private&rsquo; adders which don't need
+to accommodate other operations.
+</p>
+
+<p>
+This also means that less bus multiplexing is needed, simplifying
+control.
+</p>
+  </div>
+
+</div>
+
+<hr>
+
+<h2>Pipelining</h2>
+
+<p>
+The concept of pipelining should be familiar by now!
+</p>
+
+<center>
+<img src="figures/pipe_0.png" alt="Pipeline example">
+</center>
+
+<p>
+Pipelines typically:
+</p>
+
+<ul>
+<li> allow an increase in clock <font style="color:red">speed</font>
+  <ul>
+  <li> consequently increase throughput (providing there are not excessive dependencies)
+  <li> increase latency
+  </ul>
+<li> have a <i>small</i> <font style="color:red">area</font> overhead
+<li> <i>may</i> save <font style="color:red">power</font>
+  <ul>
+  <li> clock loading is increased &hellip;
+  <li> &hellip; but logic switching may be reduced (by preventing glitch
+  propagation)
+  </ul>
+<li> can <font style="color:red">simplify</font> the design process
+  <ul>
+  <li> if used judiciously, by decomposing into &lsquo;sensible&rsquo;
+  blocks
+  </ul>
+</ul>
+
+<p align="right">They are therefore, generally, a Good Thing.</p>
+
+<p>
+Pipelining can be a &lsquo;cheap&rsquo; way to increase
+performance. It is cheap(ish) because it introduces parallelism
+without adding (much) extra logic. Clearly additional latches are
+required but the processing logic can often be the same as in an
+unpipelined version.
+</p>
+
+<img src="figures/pipe_1.png" alt="Pipeline example">
+
+<p>
+Pipelined logic typically has <b>higher throughput</b> than
+unpipelined logic but will always have <b>higher latency</b> too. It
+is therefore only useful for processing streams of data. The above
+example illustrates an imperfectly balanced pipeline where the clock
+cycle is dictated by the slowest stage and some time is wasted in the
+faster stages. This is typically because the logic will divide
+&lsquo;naturally&rsquo; in certain ways which may be worth retaining
+for design simplicity and readability.  Dividing the logic into a
+three-stage pipeline &ndash; and assuming this can be kept full
+&ndash; has yielded a better than 2&times; increase in throughput.
+</p>
+
+<p>
+A classic pipeline example is the instruction stream in a
+processor. Data streams, such as are used in graphics, are another
+good example.
+</p>
+
+<img src="figures/Bresenham_pipe.png" alt="Bresenham pipeline"
+     align="right" width=40%>
+
+<p>
+In the laboratory example it is easy to form a pipeline of about three stages
+(whether the first stage is part of the pipeline could be debated).
+</p>
+
+<p>
+The first stage is the pending command and its parameters which can be
+buffered whilst a previous command is executing. Although this is not
+operating at the speed of the rest of the pipeline it does provide
+some &lsquo;elasticity&rsquo; in the process and can help to keep the
+drawing engine busy by providing the next command as soon as the
+current one finishes.
+</p>
+
+<p>
+The other two stages, as shown above, are the iterative drawing stage
+and the memory write operation. An obvious parallelism exists by
+calculating the next pixel concurrently with writing the current one.
+</p>
+
+<p>
+This pipeline is not free flowing; it can stall, for example whilst waiting for
+memory access. However this is still faster than performing the operations
+sequentially.
+</p>
+
+<p>
+The division into stages also makes the individual components simpler
+to design (and test) which is a further benefit. Unlike a processor,
+there is no forwarding/feedback in this pipeline which also helps keep
+it simple.
+</p>
+
+<p>
+Commercial Graphics Processing Units (GPUs) now typically contain much
+more logic than this example, transforming, texturing and projecting
+objects rather than just drawing. The data flow is still simple
+though, so pipelining is an excellent way of increasing the
+throughput.
+</p>
+
+
+<h3>Possible pipeline penalties</h3>
+
+<p>
+As observed above, pipelining will usually increase <b>latency</b>.
+Typically this is not an issue in <i>streaming</i> data applications
+but may be a problem where there are <i>dependencies</i> forming data
+loops, such as the registers in a processor.
+</p>
+
+<p>
+Pipeline stages can be largely independent but there can be
+circumstances where a stage <b>stalls</b>. In this case it may be
+necessary to stall the whole pipeline, resulting in a control
+overhead. Introducing a global control circuit can impact performance
+as it has to gather all possible stall signals, OR them and
+rebroadcast the result within the cycle time. This may impact the
+cycle time, especially if pipelining communications circuits.
+</p>
+
+<p>
+[An alternative strategy is discussed in the interconnection lecture.]
+</p>
+
+<p>
+Often, the required throughput of a pipeline may be less than its
+maximum. In such circumstances a validity indicator can be used to
+ensure only &lsquo;real&rsquo; data is processed.
+</p>
+
+<hr>
+
+<h2>Data parallelism</h2>
+
+<p>
+<b>SIMD</b> architecture can process more, smaller data elements
+simultaneously.
+</p>
+
+<center>
+<img src="figures/SIMD.png" alt="SIMD datapath breakdown">
+</center>
+
+<p>
+<b>Interleaving</b> can allow more time for individual access.
+</p>
+
+<center>
+<img src="figures/interleaving_1.png" alt="Interleaving timing" width=35%>
+&nbsp;
+<img src="figures/interleaving_2.png" alt="Interleaving schematic" width=35%>
+</center>
+
+<p align="right">It is possible to interleave more than two units, of
+  course.</p> 
+
+<hr>
+
+<h3>Explicit parallelism</h3>
+
+<p>
+An &lsquo;obvious&rsquo; method of increasing throughput is to do
+several things at once.  For example, memory bandwidth can be
+increased by increasing the width of the memory (e.g. fetching 64
+bits/cycle instead of 32). This method assumes that data flows are
+predictable.
+</p>
+
+<p>
+For many years, high performance processors have attempted to execute more
+than one instruction at once. Approaches include:
+</p>
+
+<ul>
+<li> <a href="https://en.wikipedia.org/wiki/Very_long_instruction_word">VLIW</a>
+  (Very Long Instruction Word) where several operations are specified
+  together explicitly.
+<li> <a href="https://en.wikipedia.org/wiki/Superscalar_processor">Superscalar</a>
+  where a conventional &lsquo;sequence&rsquo; of instructions is
+  examined after being fetched and more than one operation is issued
+  in a clock cycle.
+</ul>
+
+<p>
+An approach which is now quite common is to use
+<a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_data"><b>SIMD</b></a>
+(<b>S</b>ingle <b>I</b>nstruction, <b>M</b>ultiple <b>D</b>ata)
+processing.  At its simplest, think of a 32-bit processor needing to
+add a set of 8-bit quantities.  Rather than doing these individually,
+four bytes can be packed into the datapath and added simultaneously.
+This requires some slight changes to the adder to prevent a carry from
+one byte affecting an adjacent sum &mdash; but this is cheap to do.
+Many processors have been extended to incorporate such support
+including the Intel &lsquo;x86&rsquo; architecture
+{<a href="https://en.wikipedia.org/wiki/MMX_%28instruction_set%29">MMX</a>,
+<a href="https://en.wikipedia.org/wiki/SSE4">SSE</a>,
+&hellip;} 64- and 128-bit units and ARM's 64-bit
+&lsquo;<a href="https://www.arm.com/technologies/neon">NEON</a>&rsquo;
+extensions.  These extensions are intended to accelerate stream
+processing, such as video.  Graphics Processing Units
+(<a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPUs</a>)
+typically contain wide, SIMD datapaths for this reason.
+</p>
+
+<h3>Interleaving</h3>
+
+<p>
+Interleaving is an old technique often associated with memory accesses
+which cannot easily be pipelined.  If a memory is too slow to be read
+in a single cycle it may be possible to have two memories, reading
+from each alternately and shuffling together the results.  This can
+work for write operations and predictable reads such as code fetches.
+</p>
+
+<p>
+However, let's look at a logic example instead.  Take some sequential
+logic &ndash; here represented by a counter &ndash; which is too
+slow<sup>&dagger;</sup> for the clock period to allow.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Unlikely for this logic &ndash; but pretend.
+</blockquote>
+
+<p>
+Instead of counting in ones at the clock frequency, count in twos at
+half the clock frequency.  This may necessitate using two interleaved
+counters which only change value on alternate cycles.  This allows
+twice as much time for the logic to operate.  (Actually slightly more
+than that because the register delay is not a factor in the
+&lsquo;middle&rsquo; of the period.) The desired value can then be
+selected with a multiplexer.  Assuming circumstances permit, a
+following latch is often a good idea to ensure a &lsquo;clean&rsquo;
+output which changes as early as possible in the clock cycle.  This
+will introduce another cycle of latency which may need accounting for
+in the design.
+</p>
+
+<p>
+Here is some example Verilog code to illustrate the operation.
+</p>
+
+<img src="figures/interleaving_0.png" alt="Interleaving figure"
+     width=25% align="left">
+
+<p style="font-family: 'Courier New', monospace;">
+&nbsp; &nbsp;<br>
+&nbsp; &nbsp;<br>
+&nbsp; always @ (posedge clk) &nbsp; &nbsp;// Modulo 13 counter<br>
+&nbsp; &nbsp; begin<br>
+&nbsp; &nbsp; en <= !en;<br>
+&nbsp; &nbsp; if (en)<br>
+&nbsp; &nbsp; &nbsp; if (count_1 > 10)<br>
+&nbsp; &nbsp; &nbsp; &nbsp; count_1 <= count_1 - 11;<br>
+&nbsp; &nbsp; &nbsp; else<br>
+&nbsp; &nbsp; &nbsp; &nbsp; count_1 <= count_1 + 2;<br>
+&nbsp; &nbsp; else<br>
+&nbsp; &nbsp; &nbsp; if (count_2 > 10)<br>
+&nbsp; &nbsp; &nbsp; &nbsp; count_2 <= count_2 - 11;<br>
+&nbsp; &nbsp; &nbsp; else<br>
+&nbsp; &nbsp; &nbsp; &nbsp; count_2 <= count_2 + 2;<br>
+&nbsp; &nbsp; if (en) count <= count_2;<br>
+&nbsp; &nbsp; else &nbsp; &nbsp;count <= count_1;<br>
+&nbsp; &nbsp; end<br clear="left">
+</p>
+
+<p>
+If there is genuinely a need for a <b>multicycle delay</b> in this
+form the synthesis tools will probably need to be
+&lsquo;informed&rsquo; otherwise they will try &ndash; and probably
+fail &ndash; to fit the logic in a single period.  It is not a
+technique to use regularly but it is sometimes a solution to an
+awkward problem.
+</p>
+
+<hr>
+
+<p><a href="04c_sync_async.html">Back</a> to Synchronous &amp; asynchronous design.</p>
+
+<p><a href="04e_example.html">Forward</a> to multiplication example.</p>
+
+<p><a href="04_tradeoffs.html">Up</a> to Tradeoffs.</p>
+
+<hr><hr>
+
+</body>

@@ -1,0 +1,235 @@
+<title>Transparent latches</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column_40 {
+  float: left;
+  width: 40%;
+  padding: 10px;
+}
+
+.column_60 {
+  float: left;
+  width: 60%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<p align="center">
+<span style="color:green;">Some background topics.<br>
+This is not now (currently?) &lsquo;mainstream&rsquo; design and the
+page can be omitted.<br>
+However transparent latches, at least, still appear in parts libraries
+and <i>do</i> have occasional uses.</span>
+</p>
+
+<p>
+
+<h2>Transparent latches</h2>
+
+<p>Two <b>state-holding elements</b> (at least) should be familiar by
+  now:</p>
+
+<ul>
+<li>Edge-triggered D-type flip-flop</li>
+<li>Random Access Memory</li>
+</ul>
+
+<p>
+The former is clearly a <u>synchronous</u> component.  Historically,
+RAM was typically asynchronous (acting as a combinatorial component)
+but most modern RAM blocks have a synchronous interface.  Thus writing
+to a RAM requires an active clock edge (like a DFF) whilst read data
+appears as the result of &lsquo;clocking in&rsquo; the
+address<sup>&dagger;</sup>.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Note that this means a RAM has a one cycle read delay.
+</blockquote>
+
+<p>
+The transparent latch (or just &ldquo;latch&rdquo;) is an asynchronous
+storage element.  Like a D-type flip-flop it has a data input and
+output but instead of an edge-triggered clock it has a combinatorial
+enable input.  Its characteristics are:
+</p>
+
+<ul>
+<li>If enabled the output reflects the input (i.e. it is
+  &lsquo;transparent&rsquo;).</li>
+<li>If not enabled the output remains stable</li>
+</ul>
+
+<div class="row">
+  <div class="column">
+
+  <table align="center" style="text-align:center">
+  <tr>
+  <th>Enable</th>
+  <th>D<br>(data in)</th>
+  <th>Q<br>(data out)</th>
+  </tr>
+  <tr>
+  <td>1</td> <td>0</td> <td>0</td>
+  </tr>
+  <tr>
+  <td>1</td> <td>1</td> <td>1</td>
+  </tr>
+  <tr>
+  <td>0</td> <td>X</td> <td>Q</td>
+  </tr>
+  </table>
+  </div>
+
+  <div class="column">
+    <center>
+    <img src="figures/latch.png" alt="Transparent latch symbol" width=35%;>
+    </center>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column_40">
+
+<h4>Advantages</h4>
+
+  <ul>
+  <li>The silicon <b>area</b> on an ASIC is about half that of a
+  DFF.  Thus for extensive stores they can be <b>cheaper</b>.</li>
+  <li>You can have a storage element without imposing a clock cycle
+    of <b>latency</b>: sometimes useful, for example, in data transfer
+    between modules.</li>
+  </ul>
+
+  </div>
+
+  <div class="column_60">
+
+  <h4>Disadvantages</h4>
+
+  <ul>
+  <li>Controlling the enable from combinatorial logic must be
+    assured <b>glitch free</b>.  This can be difficult to guarantee.</li>
+  <li><b>CAD tools</b> are no longer optimised for such devices.  For
+    example Static Timing Analysis relies on analysing paths between
+    synchronously clocked DFFs.
+  <li>FPGAs are built with numerous DFFs on the silicon.  Synthesizing a
+    transparent latch can therefore be slower and <b><i>more</i>
+    expensive</b>!</li>
+  </ul>
+  </div>
+</div>
+
+<img src="figures/latch_2.png" alt="Transparent from DFF" width=35% align="right">
+
+<h4>Made from DFF</h4>
+
+<p>
+It is possible to make something with quite a <i>similar</i> function
+to a latch from a D-type, as shown.  (It is not quite identical.)
+This can be useful when a data element might be
+&lsquo;forwarded&rsquo; to a subsequent stage within (timing
+permitting) the cycle in which it arrives.  However if it cannot be
+accepted immediately the register will capture it for future and be
+held until consumed (where the controller removes
+&lsquo;<span style="font-family: 'Courier New',
+monospace;">Enable</span>&rsquo;).
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+ &nbsp; always @ (posedge clk)<br>
+ &nbsp; &nbsp; if (Enable) register <= data_in;<br>
+&nbsp;<br>
+ &nbsp; assign data_out = Enable ? data_in : register;<br clear="right">
+</p>
+
+<center>
+<div class="inset">
+
+<h3>Two-phase clocks</h3>
+
+<p>
+Rather than use master/slave flip-flops we can use smaller, transparent
+latches.  These are enabled by alternating, <i>non-overlapping</i> clocks.
+</p>
+
+<center>
+<img src="figures/pipe_2_phase.png" alt="Two-phase pipeline clocking" width=80%>
+</center>
+
+&nbsp;<br>
+
+<p>
+This is mostly of historic interest.  If you're interested in early
+microprocessors you may come across this.<br>
+E.g. <a href="https://en.wikipedia.org/wiki/Intel_8080">Intel
+    8080</a>: see pins&nbsp;22&nbsp;&&nbsp;15.  Area mattered: note
+the technology node where modern devices have more than a million
+(1000&times1000) times the transistor density.
+</p>
+
+</div>
+</center>
+
+<!--
+<center><font style="color:blue;font-size:30px">** Could animate **</font></center>
+-->
+
+<hr>
+
+<p><a href="05_timing.html#distribution">Return</a> (or forward!) to
+  clock distribution.</p>
+
+<p><a href="05_timing.html#index">Up to Clocking.</a></p>
+
+<hr><hr>
+
+</body>

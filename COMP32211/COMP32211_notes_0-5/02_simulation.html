@@ -1,0 +1,2390 @@
+<title>Simulation</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<h1>Simulation</h1>
+
+<p>
+Simulation is part of modelling; the accuracy of the model is refined
+as the design process progresses.
+</p>
+
+<ul>
+  <li>Assume that high-level modelling has been done
+  <ul>
+    <li>Already know the architecture and the algorithms: models exist
+    <li>Have block relationships but not exact (cycle accurate)
+        implementation/timing
+  </ul>
+  <li>In this module simulation is refined to verify:
+  <ul>
+    <li>The functionality of an RTL description
+    <li>The correctness of a completed chip
+    <li>The timing and electrical properties of the proposed product
+    <ul>
+      <li>Thermal too?
+    </ul>
+  </ul>
+</ul>
+
+<p style="color:blue">
+Caveat: The intention of this material is to give enough information
+to facilitate design.  It is not intended to be a complete description
+of all the available facilities.
+</p>
+
+<p align="right">
+&ldquo;A little inaccuracy sometimes saves tons of explanation.&rdquo;<br>
+Saki, <i>The Square Egg</i> (1924)
+</p>
+
+
+<p>
+The purpose of simulation is to verify that, when you build something,
+it will work.  First time and every time.  It is widely practised in
+engineering when something expensive or potentially dangerous is being
+built.  Examples include:
+</p>
+
+<ul>
+<li>Aerospace
+<li>Architecture
+<li>Bridges
+<li>Nuclear engineering
+<li>Silicon chips
+<li>&hellip;
+</ul>
+
+<p>
+Simulation is used at a number of levels from the design concept to
+the electrical (and, often, thermal) properties of the final
+product.  In practice this may not stop at the chip level as these
+properties are also important in larger structures, up to complete
+systems.
+</p>
+
+<p>
+Simulation gives the ability to determine the properties of a proposed
+system under a set of potential operating conditions.  Remember
+&ndash; it only gives an approximation to &lsquo;reality&rsquo; within
+the limits of the model used; this can still be very useful.
+</p>
+
+<p>
+There is a tradeoff between the accuracy of the model and the effort
+required to produce it.  In our case this usually means that more
+accurate simulation takes longer and requires more expensive computers
+with more memory, filestore, etc.  Therefore there is usually a
+pragmatic compromise on accuracy at various stages of development.
+</p>
+
+<center>
+<div class="inset">
+   <h3>&ldquo;Accuracy&rdquo; vs.  &ldquo;Precision&rdquo;</h3
+
+   <p>
+   Scientifically, &lsquo;accuracy&rsquo; is usually used to indicate how
+   representative a value is to physical reality. &ldquo;Precision&rdquo;
+   is how repeatable a measurement is.  If you measure something twice
+   you may get different values; the question is how different?
+   Repeated similar readings give a precise answer; however if the end
+   was cut off the ruler they may not be very accurate!
+   </p>
+</div>
+</center>
+
+<h3>Observability</h3>
+
+<p>
+One big advantage of simulation is that the model gives
+<i>observability</i>.  Consider building a chip, ignoring the time and
+cost of manufacture for the moment.  If something is wrong then is it
+possible to diagnose the fault from the outside?  This may be feasible
+in a simple, combinatorial device this becomes difficult once there is
+hidden state.  At the System-on-Chip (SoC) scale then this is
+effectively impossible.
+</p>
+
+<p>
+Simulated models allow otherwise hidden nodes to be examined so that
+problems can be found much more easily.  Particular areas which are
+suspect can be examined in fine detail.
+</p>
+
+
+<center>
+<div class="inset">
+<h3>Tips to make your life easier</h3>
+
+<ul>
+<li>Take the trouble to give <b>meaningful names</b> to units in a hierarchy;
+    it makes identification <i>much</i> easier later.
+<li>As far as possible, keep signal names the same as they traverse
+    levels of a design; it avoids confusion.<br>
+    These may be &lsquo;variations on a theme&rsquo; (such
+    as <span style="font-family: 'Courier New',
+    monospace;">xyzzy</span> becoming <span style="font-family: 'Courier New',
+    monospace;">xyzzy_out</span> at a module boundary, for example)
+    &ndash; it's just a means of improving legibility.
+<li>Prefixes on related signal names can aid readability.  A bonus is
+    that they will be grouped together in an (alphabetical) browser menu.
+</ul>
+
+</div>
+</center>
+
+<hr>
+
+<h2>Simulation detail</h2>
+
+<p>
+To finalise an ASIC design a number of different &lsquo;levels&rsquo; of
+simulation must be performed.
+</p>
+
+<ul>
+<li>Functional
+<li>Timing
+<li>Electrical
+<li>Physical (maybe?)
+</ul>
+
+<p>
+Each looks at different aspects of the design.
+</p>
+
+<ul>
+<li>Require increasingly detailed models to perform
+<ul>
+<li>Simulations take longer to run
+<li>Consequences of &lsquo;respin&rsquo; increasingly expensive
+</ul>
+</ul>
+
+<p>
+This section concentrates on functional verification.
+</p>
+
+<ul>
+<li>Does the code (or schematics) perform the correct <b>logical</b>
+  operations?
+</ul>
+
+<p>
+The other aspects will be revisited later.
+</p>
+
+<h3>Functional tests</h3>
+
+<p>
+A high-level model (e.g. a TLM &ndash; <b>T</b>ransaction <b>L</b>evel
+<b>M</b>odel) can demonstrate the feasibility of an architecture.  It
+may be refined down to a <b>cycle-accurate</b> model &ndash; i.e.  one
+in which each operation can be timed by counting clock cycles &ndash;
+but not (sensibly) much further.
+</p>
+
+<p>
+There is then a need for translation into a <b>behavioural model</b> which is
+the function of a Hardware Description Language (HDL).  A behavioural
+model may be just that &ndash; a model &ndash; or it may be a synthesizeable
+Register Transfer Level (<b>RTL</b>) description which will eventually be
+converted into hardware.
+</p>
+
+<p>
+The translation process from TLM to RTL may be error-prone; there is
+also the possibility of discovering previously untested cases as the
+model is prepared in more detail.  There is therefore a need for
+simulation tests at the behavioural level.  These tests perform
+<b>functional verification</b>, i.e.  they check that the logic does what it
+is intended to.
+</p>
+
+<p>
+Functional tests do not guarantee that a resultant circuit will fulfil
+its requirements: for example the design may be too slow to be clocked
+sufficiently fast to meet real time requirements.  Neither do they
+guarantee that the result will be constructable.
+</p>
+
+<h3>Timing verification</h3>
+
+<p>
+Functional tests typically use assumptions of synchronous behaviour
+and do not give any absolute timing information; elapsed time is
+measured in clock cycles.  The designer may have a target clock speed
+in mind at this point; whether the design will achieve that is still
+unknown.  Thus a design may do what it is intended to do but may not
+meet real-time requirements.
+</p>
+
+<p>
+It is possible to annotate the HDL description with timing estimates
+to gain some idea of timing behaviour but these are necessarily
+imprecise.  Circuit speed is greatly influenced by its physical
+properties which are not yet known.
+</p>
+
+<p>
+Timing verification involves estimating and summing the various delays
+in an implementation to identify and isolate the <b>critical path</b>.
+This can only be achieved once a design has been synthesized into the
+target technology so that a netlist of gates, flip-flops etc.  is
+available.
+</p>
+
+<p>
+There are typically two phases to timing verification: pre- and
+post-layout.  Having obtained a netlist, CAD tools can produce an
+estimate of the critical path delay.  Modern tools are smart enough to
+try to factor in wiring loads as well as gate delays; however the true
+wiring delays are not yet known.  This will give a moderately accurate
+guide to the maximum clock frequency.  If the circuit is apparently
+too slow at this point it's &lsquo;back to the drawing board&rsquo;.
+</p>
+
+<p>
+Post-layout synthesis depends on a netlist following the
+Place-And-Route (<b>PAR</b>) stage and has a better estimate of
+timing.  As well as wiring delays, other factors such as the need to
+add buffers (electrical amplification) may have been introduced.  The
+simulation model used may be more precise, too.  All this means is
+that it takes longer and, if a problem is found here, it is more
+expensive to iterate the design again.
+</p>
+
+<p>
+Another concern here are the &lsquo;edge speeds&rsquo; &ndash; the
+time it takes to switch wires between digital states.  An edge which
+is too slow harms circuit performance but is also more vulnerable to
+electrical noise inducing extra switching.  Not all gates will have
+the same input threshold so a slow edge may apparently switch at
+different times when interpreted at different destinations.
+</p>
+
+<h3>Electrical characteristics</h3>
+
+<p>
+A real circuit needs power, something neglected up to this point.
+When a gate switches its output there is a surge of charge onto or off
+a power supply.  All these cause a (varying) current in the power
+supplies.  There are (at least!) two serious concerns:
+</p>
+
+<p>
+Are the wires big enough to handle the current? A too-small wire is a
+fuse and will blow! More likely, there may be a wire that's a bit
+thinner than is desirable which will &lsquo;age&rsquo; due to
+<a href="https://en.wikipedia.org/wiki/Electromigration"><b>electromigration</b></a>
+and shorten the lifetime of the device. 
+</p>
+
+<p>
+The gate models assume a supply of a certain voltage.  The power
+supplies carry current and have resistance, therefore will impose a
+voltage drop (Ohm's law).  Thus the supply voltage at the centre of a
+chip (furthest from the connections) will be lower than that at the
+edges.  The power supply wiring must be adequate to keep this drop
+within bounds for previous assumptions to remain valid.  In case of
+difficulty, the usual solution is to force an increase in the
+number/width of the supply wires.
+</p>
+
+<p>
+Of course the power that goes in comes out as heat.  Thus there may be
+<b>thermal modelling</b> ...  and so on ...
+</p>
+
+<hr>
+
+<h2>Functional simulation</h2>
+
+<p>
+This depicts a typical RTL development flow.  Source code is developed
+(possibly also as <i>schematic</i> diagrams although this is currently
+decreasing in popularity), then processed and simulated with some form
+of testbench/stimulus.  The output can typically be viewed as traces
+with (selected) signals vs. time and potential problems can (perhaps)
+be spotted.  Additionally the simulator may produce output which can
+be compared with expected <i>independently generated</i> results,
+either by the testbench or using some external application.<br>
+Feedback is used to correct the design, sometimes also the testbench
+and even (occasionally) the expectation if an earlier mistake has
+escaped notice<sup>&dagger;</sup>.
+</p>
+
+<center>
+<img src="figures/design_flow_1.png" alt="Development design flow"
+     width=70%>
+</center>
+
+<h3>Objective</h3>
+
+<p>
+To verify that the RTL description fulfils all the logical operations
+required of the system.
+</p>
+
+<p>
+You develop (a piece of) a system.  It has to perform a certain set of
+functions and fit the appropriate set of interfaces.  To do this a set
+of tests are required.
+</p>
+
+<div class="row">
+
+  <div class="column">
+
+<p>
+Some tests may already exist:
+</p>
+
+<ul>
+  <li>Example: checks that a bus interface obeys the prescribed
+      protocol.  When a module is complete and tested it can be used
+      in higher level functional tests.
+</ul>
+
+<p>
+You provide:
+</p>
+
+<ul>
+  <li>a design, comprising HDL modules, schematics etc.
+  <li>a stimulus sequence to stress the design
+  <li>(possibly) a set of expected results
+  <ul>
+    <li>maybe generated from a higher level model
+  </ul>
+</ul>
+
+<p>
+You can collect:
+</p>
+
+<ul>
+  <li>waveform traces of a set of signals
+  <li>internal states at various times/conditions
+</ul>
+
+  </div>
+
+  <div class="column">
+
+<h4>What you <i>don't</i> get (yet)</h4>
+
+<ul>
+<li>Proof that your logic is synthesizeable
+  <ul>
+  <li>on the target technology &mdash; or, indeed, at all!
+  </ul>
+<li>Estimates of size
+  <ul>
+  <li>feasibility
+  <li>economic viability
+  </ul>
+<li>Estimates of speed
+  <ul>
+  <li>cycle accuracy is provided for synchronous units
+  <li>no estimates of critical path &Rightarrow; cycle time
+  </ul>
+<li>Estimates of power requirements
+</ul>
+
+  </div>
+</div>
+
+<p>
+If any of the above criteria fail later then the RTL will need
+redesigning.
+</p>
+
+<p>
+Any editing may change (break) the functionality, so retesting is
+important.
+</p>
+
+<p>
+Intention: reduce the number of redesign cycles to a minimum.
+Experience helps with this &ndash; but is not a sure guide.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Shouldn't happen but we're all human.
+</blockquote>
+
+<hr>
+
+<h2>Functional Simulation</h2>
+
+<p>
+Objective is to verify the <b>logic</b> behaviour of the design.<br>
+Try to exercise every function.
+</p>
+
+Can be assisted by <b>test-coverage tools</b>:
+<ul>
+<li>Which HDL statements have (not) been executed
+<li>Which branches have (not) been taken
+<li>Which nodes have (not) adopted both binary states at least once
+  <ul>
+  <li>at behavioural HDL there are no &lsquo;nodes&rsquo; so this is tricky!
+  </ul>
+</ul>
+
+Achieving &lsquo;complete&rsquo; coverage can be quite challenging!
+
+It is not possible to gain accurate <b>timing</b> models ...  yet.
+
+<ul>
+<li><b>Cycle accuracy</b> is inherent &ndash; can count clock pulses
+  <ul>
+  <li>may previously have been estimated
+  </ul>
+<li>Some <b>annotation</b> is possible with estimated delays
+</ul>
+
+<div class="row">
+
+  <div class="column">
+
+<h4>What it does</h4>
+
+<p>
+Functional simulation &ndash; which you should be familiar with
+&ndash; is a test of the logic operation of a design.  Higher level
+models should have shown that the algorithm can work; now the
+implementation must be verified.
+<p>
+
+<p>
+Functional simulation is (primarily) a digital, event-driven
+simulation.  This allows the simulators to run quite quickly which, in
+turn, allows a lot of test patterns to be exercised in a sensible
+elapsed time.
+<p>
+
+<p>
+Simulation (of a synchronous design) at this level will be cycle
+accurate so the number of clock pulses taken can be counted.  This
+gives a better &lsquo;feel&rsquo; for the timing of a function.  This may allow
+some redundant cycles to be identified and eliminated.  If the design
+has a constrained clock speed then accurate performance estimates are
+possible, assuming the target clock speed can be achieved.
+<p>
+
+  </div>
+
+  <div class="column">
+
+<h4>What it doesn't do</h4>
+
+<p>
+What this form of simulation doesn't give directly is any assurance
+that a particular clock frequency can be achieved by the synthesized
+logic.  Delays can be included in the simulation but, in the first
+instance, these are simple estimates.  Later, when the design has been
+developed further, more realistic delays can be <b>extracted</b> from
+the synthesized circuit and <b>back-annotated</b> to improve the
+realism of the simulation.
+<p>
+
+<p>
+However, typically, a few test patterns are able to show timing
+problems.  The main value of functional simulation is to provide good
+test coverage of the logical design.
+<p>
+
+  </div>
+</div>
+
+<center>
+<div class="inset">
+   <h3>Hint</h3>
+<p>
+To avoid the simulation &lsquo;running away&rsquo;, a statement like:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+ &nbsp; &nbsp; &nbsp; initial #10000 $stop;</p>
+
+<p>can halt a simulation after a time limit.</p>
+
+</div>
+</center>
+
+<hr>
+
+<h3>Functional Simulation in Verilog</h3>
+
+Verilog is a Hardware Description Language.
+
+<ul>
+<li>It can do things that are not (easily) made into actual hardware.
+<li>This is useful for test purposes.
+<li>The test environment can respond to state evolution of the Device
+  Under Test
+<ul>
+<li>...  without writing an explicit machine
+</ul>
+</ul>
+
+<p>Example: a handshake signal:</p>
+
+<center>
+<img src="figures/functional_simulation.png" alt="Unit test environment">
+</center>
+
+<ul>
+<li>The <font style="font-family: 'Courier New', monospace;">req</font>
+signal may be timed by reacting to the state of <font style="font-family: 'Courier New', monospace;">ack</font>.<br>
+</ul>
+
+<center>
+<p style="color:red;">
+(Note: the protocol shown here is not quite the same as in the lab.)
+</p>
+</center>
+
+
+<h3>Test strategy</h3>
+
+<p>
+The test block needs to provide
+&lsquo;<font style="font-family: 'Courier New', monospace;">req</font>&rsquo;
+which interacts with
+&lsquo;<font style="font-family: 'Courier New', monospace;">ack</font>&rsquo;.
+</p>
+
+<p>
+One way: work out in advance (by hand?) the expected response times of the
+&lsquo;<font style="font-family: 'Courier New', monospace;">ack</font>&rsquo;
+signal and drive &lsquo;req&rsquo; accordingly.
+</p>
+
+<ul>
+<li>Should expose the first error
+<li>May be unreliable thereafter
+</ul>
+
+<p>
+Another way &mdash; use the language to respond to the test block.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+&hellip;<br>
+while (ack == 1) @ (posedge clk);   // AAA<br>
+req <= 1;<br>
+while (ack == 0) @ (posedge clk);   // BBB<br>
+req <= 0;<br>
+&hellip;<br>
+</blockquote>
+
+<p>
+This:
+<ul>
+<li>tests to see if any previous handshake is complete (AAA)<br>
+if not, wait for a clock cycle and test again
+<li>asserts the request
+<li>inserts clock cycles until the acknowledge rises (BBB)
+<li>removes the request
+<li>continues &ndash; the test for handshake completion would occur before
+req is raised next time.
+</ul>
+
+This form of test would typically be a single &lsquo;thread&rsquo;
+which would run in parallel with other statements.
+</p>
+
+<p>
+The details of such a handshake can be &lsquo;hidden&rsquo; in
+a <b>task</b>.
+</p>
+
+<h4>Example: FIFO test</h4>
+
+<img src="figures/FIFO.png" alt="FIFO" align="right" width=40%>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+initial &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Input handshake<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;req_in <= 0;<br>
+&nbsp;&nbsp;@ (posedge clk);<br>
+&nbsp;&nbsp;req_in <= 1;<br>
+&nbsp;&nbsp;while (ack_in == 0) @ (posedge clk);<br>
+&nbsp;&nbsp;req_in <= 0;<br>
+&nbsp;&nbsp;while (ack_in == 1) @ (posedge clk);<br>
+&nbsp;&nbsp;repeat (10) @ (posedge clk); &nbsp; // Pause before continuing<br>
+&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+initial &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Output handshake<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;ack_out <= 0;<br>
+&nbsp;&nbsp;while (req_out == 0) @ (posedge clk);<br>
+&nbsp;&nbsp;repeat (2) @ (posedge clk); &nbsp; &nbsp;// Choose to
+		   insert extra delay<br>
+&nbsp;&nbsp;ack_out <= 1;<br>
+&nbsp;&nbsp;while (req_out == 1) @ (posedge clk);<br>
+&nbsp;&nbsp;ack_out <= 0;<br>
+&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;end<br>
+</blockquote>
+
+<p>
+This is an illustrative example.  A real test would continue, for
+example stalling in different phases, trying to overfill the FIFO etc.
+There would probably be some data carried through (and tested for
+correctness) too!<br>
+A good verification test will subject the Device Under Test to
+examples of any situation it might legitimately experience in
+operation.
+<span style="color:red"><b>Be vicious!  Try and break it!</b></span>
+</p>
+
+<p>
+Note: it is convenient (but not compulsory) to use independent
+blocks (threads) at the input and output.  This allows freedom of
+timing so that (for example) if the <i>latency</i> of the FIFO is
+changed the test will still work.<br>
+In the example above the output acknowledgement has been arbitrarily
+delayed; a thorough test might use a range of delays (including none)
+&ndash; for example using a random value.
+</p>
+
+<hr>
+
+<h3>Handy constructs</h3>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>if (Boolean_expression) statement_1 {else statement_2}</b>
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">if</font>&rsquo;
+has several uses:
+</p>
+
+<ul>
+<li>Synthesized into a multiplexer
+<li>Making a run-time decision in simulation
+<li>Control in generate of circuits [See later]
+<li>Conditional compilation (as <font style="font-family: 'Courier New', monospace;">`ifdef</font>, etc.)
+</ul>
+
+<p>
+It may take an
+<font style="font-family: 'Courier New', monospace;">else</font> clause.<br>
+
+<i>Note: In synthesizable, combinatorial logic the
+<font style="font-family: 'Courier New', monospace;">else</font> may
+be wanted to avoid creating a latch, inadvertently.</i>
+<p>
+
+<h4>Example</h4>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+repeat (100)<br>
+ &nbsp;begin<br>
+ &nbsp;@ (posedge clk)<br>
+ &nbsp; &nbsp;if (req) ack <= 1;<br>
+ &nbsp; &nbsp;else  &nbsp; &nbsp; ack <= 0;<br>
+ &nbsp;end<br>
+</blockquote>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>while (Boolean_expression) statement</b>
+</p>
+
+<ul>
+<li>Used for simulation control: e.g.  handshaking
+</ul>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>for (addr = 0; addr &lt; 1024; addr = addr + 1) statement</b>
+</p>
+
+<ul>
+<li>Iterate over a number of items: e.g.  memory test
+</ul>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>forever statement</b>
+</p>
+
+<ul>
+<li>Loop indefinitely
+<ul>
+<li>must include some delay!
+</ul>
+</ul>
+
+<center><div class="inset"> <!-- make narrower -->
+   <center><h4>Another strategy</h4></center>
+   <div class="left">
+   <p>To stop a simulation due to an error, try:</p>
+   <blockquote>
+   <p style="font-family: 'Courier New', monospace;">
+   event failed;<br>
+   ...<br>
+   always @ (failed) #100 $stop;<br>
+   ...<br>
+   ...<br>
+   if (&lt;error condition&gt;) -> failed;<br>
+   </p>
+   </blockquote>
+   <ul>   
+   <li>The delay allows time to be able to see the final signal states.
+   <li>The error is easy to find &ndash; at the end (in time) of the trace.
+   </ul>
+
+<p>If you haven't met Verilog <u>events</u> yet, keep reading.</p>
+
+  </div>
+</div>
+</center>
+
+<hr>
+
+<h2>Loop statements</h2>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New',
+		    monospace;"><b>while</b></font>&rsquo; functions
+		    much as you would expect.  It is not synthesizeable.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+...<br>
+@ (posedge clk) req <= #1 1;<br>
+@ (posedge clk); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		       &nbsp; &nbsp; // Wait at least one cycle<sup><font style="color:red;">&dagger;</font></sup>
+<br>
+while (ack != 1) @ (posedge clk); &nbsp;// Wait for response<br>
+req <= #1 0;<br>
+... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; // May not care about<br>
+... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// completing handshake immediately<br>
+while (ack != 0)  @ (posedge clk); &nbsp;// Wait for response<br>
+...<br>
+</p>
+</blockquote>
+
+<img src="figures/req_ack.png" alt="Handshake timing"  align="right" width=30%>
+
+<blockquote><blockquote>
+<font style="color:red;">&dagger;</font> Only needed
+if <font style="font-family: 'Courier New', monospace;">ack</font> is/may
+be driven combinatorially and could rise immediately.  <i>Good practice</i>
+would have a flip-flop between, so this cycle would take place inside the
+<font style="font-family: 'Courier New', monospace;">while</font>.
+</blockquote></blockquote>
+
+<p>
+Request is asserted and given time to be seen.
+</p>
+
+<p>
+If there is no acknowledgement, insert another clock cycle (and try again).
+</p>
+
+<p>
+Continue waiting until the acknowledgement appears.
+</p>
+
+<p>
+Probably go and do something else for a while.
+</p>
+
+<p>
+(Before next handshake) test if acknowledgement removed and wait until
+it is.
+</p>
+
+<p>&nbsp;</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New',
+		    monospace;"><b>repeat ()</b></font>&rsquo; is a
+		    simple loop which iterates the following statement
+		    a number of times.
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New',
+		    monospace;"><b>for</b></font>&rsquo; has C-like function and syntax although the &ldquo;<font style="font-family: 'Courier New',
+		    monospace;">i++</font>&rdquo; syntax is not
+		    implemented in basic Verilog.<br>
+(The latter <i>is</i> present im SystemVerilog.)
+</p>
+
+<hr><hr>
+
+<h1>Parallelism</h1>
+
+<p>
+Hardware, and therefore a HDL, is highly parallel too.
+</p>
+
+<ul>
+<li>Each <font style="font-family: 'Courier New', monospace;">initial</font>
+and <font style="font-family: 'Courier New', monospace;">always</font>
+block is an independent, parallel thread.
+  <ul>
+  <li>Think of these as &lsquo;threads&rsquo;.<br>
+      The independence of their scheduling is important both in
+      synthesized hardware and &ndash; perhaps less obviously? &ndash;
+      testbenches.
+  </ul>
+<li> Within each there can be:
+
+  <ul>
+  <li>Sequential block &nbsp;&nbsp;&nbsp;&nbsp;
+     <font style="font-family: 'Courier New', monospace;">begin ...  end</font>
+  <li>Parallel block &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <font style="font-family: 'Courier New', monospace;">fork ...  join</font>
+  </ul>
+
+</ul>
+
+<p>
+In a parallel block, all statements are executed
+&lsquo;simultaneously&rsquo;, as if they were in separate blocks.
+</p>
+
+<p>
+Sometimes this make no difference.  It is important when inserting
+delays, however.
+</p>
+
+<div class="row">
+<!--  <div column-width: 200px; class="column" style="background-color:#aaa;"> -->
+  <div class="column_space">
+  </div>
+
+  <div class="column2">
+
+<font style="font-family: 'Courier New',
+		    monospace;">
+begin<br>
+#10 a = 1;<br>
+#20 b = 0;<br>
+end<br>
+Elapsed time 30 units<br>
+</font>
+</div>
+
+  <div class="column2">
+<font style="font-family: 'Courier New',
+		    monospace;">
+fork<br>
+#10 a = 1;<br>
+#20 b = 0;<br>
+join<br>
+Elapsed time 20 units<br>
+</font>
+  </div>
+</div>
+
+<p>
+These blocks can be nested.
+</p>
+
+<ul>
+<li>Non-blocking assignments scheduled at a particular time all assign
+simultaneously.
+</ul>
+
+<hr>
+
+<h2>Blocks</h2>
+
+<p>
+Blocks compose much as you might expect.  In terms of timing a sequential
+block will take the sum of its internal delays whereas a parallel
+block will take the maximum of its individual delays.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial<br>
+ &nbsp;begin<br>
+ &nbsp;a = 0; b = 0; c = 0; d = 0; e = 0;<br>
+&nbsp;<br>
+<img src="figures/fork_times.png" alt="Fork/join timing"  align="right" width=40%>
+ &nbsp;fork<br>
+ &nbsp; &nbsp;begin<br>
+ &nbsp; &nbsp;#10 a = 1;<br>
+ &nbsp; &nbsp;#10 b = 2;<br>
+ &nbsp; &nbsp;end<br>
+&nbsp;<br>
+ &nbsp; &nbsp;fork<br>
+ &nbsp; &nbsp;#10 c = 3;<br>
+ &nbsp; &nbsp;#30 d = 4;<br>
+ &nbsp; &nbsp;join<br>
+ &nbsp;join<br>
+ &nbsp;e = 5;<br>
+ &nbsp;#10 $stop;<br>
+ &nbsp;end<br>
+</p>
+</blockquote>
+
+<h4>Named blocks</h4>
+
+<p>
+Individual blocks can be given unique names after
+the <font style="font-family: 'Courier New', monospace;">begin</font>
+or <font style="font-family: 'Courier New', monospace;">fork</font>.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+begin: my_block
+</p>
+</blockquote>
+
+<p>
+This can sometimes aid in identification in traces.
+</p>
+
+<hr><hr>
+
+<h1>Simulation time</h1>
+
+<p>
+As far as physics currently understands time is a single continuous dimension.
+</p>
+
+<p>
+Simulation time is discrete but multidimensional!
+</p>
+
+<ul>
+<li>There is a simulation time which represents real delays
+  <ul>
+  <li>This is available as <font style="font-family: 'Courier New',
+		    monospace;">$time</font>
+  <li>Resolution is controllable; may be a fraction of
+      &lsquo;<font style="font-family: 'Courier New',
+		    monospace;">#1</font>&rsquo;
+  </ul>
+<li>There is a list of things which happen simultaneously (in a given simulation) timestep
+  <ul>
+  <li>Some of these are ordered
+  <li>e.g.  blocking assignments within the same block
+  <li>Some are unpredictable
+  <li>e.g.  blocking assignments different blocks
+  <li>There are different phases
+  <li>first: <i>all</i> blocking assignments
+  <li>second: non-blocking assignments
+  </ul>
+</ul>
+
+<p>
+Naturally, none of this relates to the actual time taken to run the
+simulation, which depends on how much switching activity takes place
+in the design.
+</p>
+
+<hr>
+
+<h3>Assignment timing</h3>
+
+Assuming they are scheduled to happen at the same time:
+<ul>
+<li>Blocking assignments occur in some order.
+  <ul>
+  <li>the order is only defined within a single statement
+  </ul>
+<li>Non-blocking assignments happen simultaneously
+  <ul>
+  <li>first all the results are calculated from the RHS expressions
+  <li>then all the LHS variables are altered
+  </ul>
+<li>Non blocking assignments happen after blocking assignments
+</ul>
+
+<h4>Example</h4>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) a = b; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Blocking<br>
+always @ (posedge clk) b = a; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Blocking<br>
+always @ (posedge clk) x &lt;= y; &nbsp;&nbsp;&nbsp;&nbsp;   // Non-blocking<br>
+always @ (posedge clk) y &lt;= x; &nbsp;&nbsp;&nbsp;&nbsp;   // Non-blocking<br>
+</p>
+</blockquote>
+
+<p>
+After a clock edge:
+</p>
+<ul>
+<li>x and y will have been swapped
+<li>a and b will be the same
+  <ul>
+  <li>but which value depends on the implementation<br>
+  i.e.  which of the blocking statements is scheduled first
+  </ul>
+</ul>
+
+<p>
+However:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk)<br>
+begin<br>
+a = b;<br>
+b = a;<br>
+end<br>
+</p>
+</blockquote>
+is entirely predictable &ndash; if rather pointless.
+</p>
+
+<h3>Potential pitfall</h3>
+
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) x <= a;      &nbsp; // Non-blocking<br>
+always @ (posedge clk) a = b; &nbsp;&nbsp; // Blocking<br>
+</p>
+
+<p>
+In simulation <font style="font-family: 'Courier New', monospace;">x</font>
+will always take the value from 
+<font style="font-family: 'Courier New', monospace;">b</font>.
+</p>
+
+</p>
+However a synthesizer will probably see this as two sequential flip-flops.
+</p>
+<p>
+<b>A synthesized circuit will behave differently from the simulation!</b>
+</p>
+<p>
+<i>Okay, that's the wrong thing to happen but complaining won't change it.</i>
+</p>
+
+<h3>Guidelines</h3>
+
+<ul>
+<li>Use blocking assignments for combinatorial logic
+  <ul>
+  <li>this should evaluate every time its inputs change
+  </ul>
+<li>Use non-blocking assignments for D-type (edge triggered) registers
+  <ul>
+  <li>typically &lsquo;posedge clk&rsquo;
+  </ul>
+<li>Don't mix blocking (=) and non-blocking (<=) assignments ...
+  <ul>
+  <li>...  to a particular variable
+  <li>...  within the same always block
+  </ul>
+<li>Keep all assignments to a particular variable in the same block
+<li>Try to avoid transparent latches<br>
+<font style="font-family: 'Courier New', monospace;">always
+                                      @ (D, En) if (En) Q = D;</font>
+  <ul>
+  <li>only do this if you must
+  <li>easily created accidentally: remember
+      &lsquo;<font style="font-family: 'Courier New', monospace;">else</font>&rsquo;s
+      and &lsquo;<font style="font-family: 'Courier New',
+		    monospace;">default</font>&rsquo;s
+  <li>may be functionally harmless but introduce redundant logic
+  <li>some tools may produce warnings if you do
+  </ul>
+</ul>
+
+<hr><hr>
+
+<h1>Stylistic pitfall (?)</h1>
+
+<p>
+When simulating synchronous circuit models the most convenient thing
+to write is:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk)<br>
+if (count &lt; 9) count &lt;= count + 1; else count &lt;= 0;<br>
+</p>
+</blockquote>
+
+<p>&lsquo;count&rsquo; then changes:
+<ul>
+<li>as a result of the clock edge
+<li>after the clock edge
+<li>at the same time as the clock edge
+</ul>
+</p>
+
+<p>
+The resulting trace may be slightly misleading although it is safe.
+</p>
+
+<p>
+But what if the inputs (RHS) are generated with a blocking assignment ...
+<ul>
+<li>as combinatorial logic? Okay &ndash; inputs settled in time
+<li><font style="font-family: 'Courier New', monospace;">@ (posedge clk)</font> ?
+    Bad news &ndash; inputs change before non-blocking statement<br>
+    (In simulation, maybe not in synthesized logic.)
+</ul>
+</p>
+
+<p>
+<b>Therefore keep all blocks and modules in the <u>same</u> style!</b>
+</p>
+
+<hr>
+
+<h2>This might aid readability ...</h2>
+
+<p>
+(Perhaps) the obvious way to stimulate a design may be something like this:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial clk = 1;<br>
+always #5 clk &lt;= !clk;<br>
+&nbsp;<br>
+initial<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;data = 0;<br>
+&nbsp;&nbsp;#10;<br>
+&nbsp;&nbsp;data = 1;<br>
+&nbsp;&nbsp;#10;<br>
+&nbsp;&nbsp;data = 2;<br>
+&nbsp;&nbsp;#10;<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+always @ (posedge clk) value_1 &lt;= data;<br>
+always @ (posedge clk) value_2 &lt;= value_1;<br>
+</p>
+</blockquote>
+
+<p>
+Unfortunately &ndash; because the blocking assignment
+(<font style="font-family: 'Courier New', monospace;">data</font>)
+completes <i>before</i> the non-blocking assignments &ndash; this will
+lead to the following timing relationship:
+</p>
+
+<center>
+<img src="figures/timing_1.png" alt="Unfortunate timing" width=50%>
+</center>
+
+<p>
+Offsetting input changes slightly from the clock may help.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+parameter period = 10;    // Makes changes easier<br>
+&nbsp;<br>
+initial clk = 1;<br>
+always #(period/2) clk &lt;= !clk;<br>
+&nbsp;<br>
+initial<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;<b>#1;   // Inputs delayed</b><br>
+&nbsp;&nbsp;data = 0;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data = 1;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data = 2;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+always @ (posedge clk) value_1 &lt;= data;<br>
+always @ (posedge clk) value_2 &lt;= value_1;<br>
+</p>
+</blockquote>
+
+<center>
+<img src="figures/timing_2.png" alt="Unfortunate timing" width=50%>
+</center>
+
+<p>
+There are a couple of disadvantages of the form above.
+</p>
+
+<ul>
+<li>It's easy to <i>compound</i> execution delays accidentally.</li>
+<li>The &lsquo;<b>right hand side</b>&rsquo;of the assignment is
+  evaluated <b>after</b> the clock edge.
+<ul>
+<li>This doesn't matter for constants %hellip;</li>
+<li>%hellip; but can cause problems with variables which may already
+  have changed.</li>
+</ul>
+</li>
+</ul>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+parameter period = 10;    // Makes changes easier<br>
+&nbsp;<br>
+initial clk = 1;<br>
+always #(period/2) clk &lt;= !clk;<br>
+&nbsp;<br>
+initial<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;data <= <b>#1</b> 0;     <b>// Inertial delay</b><br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data <= #1 1;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;data <= #1 2;<br>
+&nbsp;&nbsp;#period;<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+always @ (posedge clk) value_1 &lt;= #1 data;<br>
+always @ (posedge clk) value_2 &lt;= #1 value_1;<br>
+</p>
+</blockquote>
+
+<center>
+<img src="figures/timing_3.png" alt="Nicer timing" width=50%>
+</center>
+
+<p>
+The evaluation here takes place at the clock edge: it is just the
+result assignment which is delayed.<br>
+Suggest that this is clearer!
+<ul>
+<li>The &lsquo;pipeline&rsquo; behaves as one might expect.
+<li>The input traces are easier to spot.
+</ul>
+</p>
+
+<p>
+Rather than inserting explicit delay times it may be more robust to
+count the clock edges.  The
+&lsquo;<font style="font-family: 'Courier New', monospace;">@</font>&rsquo;
+symbol means &lsquo;<b>at</b> the next event from the following list&rsquo;
+so:
+&lsquo;<b><font style="font-family: 'Courier New', monospace;">@ (posedge clk)</font></b>&rsquo;
+means &lsquo;wait until the next active clock edge&rsquo; &mdash; this
+will always keep execution in synchronisation with the clock.
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">repeat
+    (10) @ (posedge clk)</font>&rsquo; will, of course wait for the
+    tenth successive clock edge etc.
+</p>
+
+<hr><hr>
+
+<h2>Delays</h2>
+
+<ul>
+<li>Delays use a syntax &lsquo;<font style="font-family: 'Courier New', monospace;">#<i>&lt;value&gt;</i></font>&rsquo;
+<li>Delays can be added to a <i>model</i> in various ways.
+  <ul>
+  <li><font  style="color:red"><b>They will not be synthesized and cannot be relied upon for functionality.</b></font>
+  </ul>
+</ul>
+<p>
+Here are some convenient methods:
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+#20 a = 1l; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Delay in execution of sequential block<br>
+&nbsp;<br>
+wire #4 q; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Declare a &lsquo;net delay&rsquo;
+...<br>
+assign q = a & b; &nbsp;&nbsp; // q changes 4 timesteps after an input change<br>
+&nbsp;<br>
+register <= #10 input_value;    // Propagation delay on signal<br>
+</p>
+</blockquote>
+
+<h4>Uses include</h4>
+
+<p>
+<ul>
+<li>Sequencing I/O in a test run
+<li>Modelling &lsquo;real&rsquo; components
+  <ul>
+  <li>e.g.  external memory read delay in lab.  system (&gt; clock period)
+  </ul>
+<li>&lsquo;Cosmetic&rsquo; delays to make waveform traces more readable
+</ul>
+</p>
+
+<hr>
+
+<h3>Delays</h3>
+
+<p>
+Time is modelled in two ways:
+<ul>
+<li>advancing to the next timestep
+<li>iterating over things which happen at the same time
+</ul>
+</p>
+
+<p>Examples:</p>
+
+<div class="row">
+<!--  <div column-width: 200px; class="column" style="background-color:#aaa;"> -->
+
+  <div class="column">
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial<br>
+begin<br>
+a = 0;<br>
+#10;<br>
+a = 1;<br>
+end<br>
+&nbsp;<br>
+assign b = !a;
+assign c = !b;
+</p>
+</blockquote>
+  </div>
+
+  <div class="column">
+
+<table>
+<tr>
+<th>Time</th>
+<th>action</th>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;a = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;b = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;c = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;a = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;b = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;c = 1&nbsp;</td>
+</tr>
+</table>
+  </div>
+
+</div>
+
+<p>
+At any point there is only one thing which is scheduled to happen, but
+a change schedules a(n immediate) change on
+<font style="font-family: 'Courier New', monospace;">b</font>, etc.
+</p>
+
+
+<div class="row">
+
+  <div class="column">
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial<br>
+begin<br>
+a = 0;<br>
+#10;<br>
+a = 1;<br>
+end<br>
+&nbsp;<br>
+assign #5 b = !a;<br>
+assign #6 c = !b;<br>
+</p>
+</blockquote>
+
+  </div>
+  <div class="column">
+
+<table>
+<tr>
+<th>Time</th>
+<th>action</th>
+</tr>
+<tr>
+<td>&nbsp;0&nbsp;</td> <td>&nbsp;a = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;5&nbsp;</td> <td>&nbsp;b = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;10&nbsp;</td> <td>&nbsp;a = 1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;11&nbsp;</td> <td>&nbsp;c = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;15&nbsp;</td> <td>&nbsp;b = 0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;21&nbsp;</td> <td>&nbsp;c = 1&nbsp;</td>
+</tr>
+</table>
+
+  </div>
+
+</div>
+
+<p>
+Delays can alter <i>when</i> switching occurs.
+</p>
+
+<p>
+Delays can also be inserted within assignments to delay the assignment
+without retarding the flow of execution, e.g.:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+a &lt;= #10 b;
+</p>
+</blockquote>
+
+<center><div class="inset">
+<h4>Same unit: different delays</h4>
+
+<p>
+For added veracity it is possible to specify different rising, falling
+and turn-off delays for a signal by listing these in brackets.  E.g.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+#(3,2)
+</p>
+</blockquote>
+
+<p>
+means a rising delay of 3, a falling delay of 2.  The turn-off delay
+has not been specified so defaults to the minimum of these (if
+appropriate).
+</p>
+</div></center>
+
+<hr><hr>
+
+<h2>Events</h2>
+
+<p>
+<font style="color:red">*** Expand on/link out to event-driven
+  systems ***</font>
+</p>
+
+<p>
+Digital simulation is usually &lsquo;event-driven&rsquo;.
+</p>
+
+<p>
+Events are awaited using the &lsquo;<font style="font-family: 'Courier New', monospace;">#<i>&lt;value&gt;</i></font>
+@</font>&rsquo; keyword.
+<ul>
+<li>e.g.  as part of a loop <font style="font-family: 'Courier New', monospace;">#<i>&lt;value&gt;</i></font>
+always @ (...)</font>
+<li>May be used anywhere in code
+</ul>
+</p>
+
+An &lsquo;event-driven&rsquo; simulator keeps track of when
+(instantaneous) stage changes will occur.
+
+<ul>
+<li>A signal changing is an event <font style="font-family: 'Courier New', monospace;">@ (enable)</font>
+<li>These can be further refined <font style="font-family: 'Courier New', monospace;">@ (posedge clk)</font>
+<li>Other events can be created to aid simulation<br>
+<font style="font-family: 'Courier New', monospace;">event my_event;<br>
+-&gt; my_event; // signal something<br>
+...<br>
+always @ (my_event)<br>
+...<br>
+</font>
+</ul>
+
+<p>
+Waits for the next time the event is detected in the future.
+</p>
+<p>
+Not a strict thread rendezvous.
+</p>
+
+<hr>
+
+<h3>Events</h3>
+
+<p>
+Events are things that happen during execution; they can be used to
+control the progression of a test sequence.  An event can be something
+like:
+</p>
+
+<p><font style="font-family: 'Courier New', monospace;">(posedge clk)</font></p>
+
+<p>
+It is possible to wait for events within a test harness.  The &lsquo;@&rsquo;
+&lsquo;keyword&rsquo; really means &lsquo;wait until the following condition is
+satisfied&rsquo;.  This could be as simple as synchronising with the next
+clock cycle:
+</p>
+
+<font style="font-family: 'Courier New', monospace;">
+ &nbsp; &nbsp; &nbsp; initial<br>
+ &nbsp; &nbsp; &nbsp; begin<br>
+ &nbsp; &nbsp; &nbsp; ...<br>
+ &nbsp; &nbsp; &nbsp; @ (posedge clk) &nbsp;  &nbsp;// Sync.  with clock transition<br>
+ &nbsp; &nbsp; &nbsp; #2; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Delay changes for clarity<br>
+ &nbsp; &nbsp; &nbsp; a = a + 1; &nbsp; &nbsp; &nbsp; &nbsp; // Change input variables<br>
+ &nbsp; &nbsp; &nbsp; b = 17;<br>
+ &nbsp; &nbsp; &nbsp; ...<br>
+ &nbsp; &nbsp; &nbsp; end<br>
+</font>
+  
+<p>
+Which will wait until the specified event occurs.  These can be used
+in combination with other operators.  For example:
+</p>
+
+<font style="font-family: 'Courier New', monospace;">repeat ($random & &lsquo;h3) @ (posedge clk);</font>
+
+<p>
+Will wait for between zero and three (inclusive) rising edges of the clock.
+</p>
+
+<hr>
+
+<h3>User events</h3>
+
+<p>
+Events can also be declared and generated in a behavioural model.  For example,
+here is a mechanism for generating reports when errors are detected:
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+event error;        // Declare event
+</font>
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+always @ (error) $display(&ldquo;Error at time %t&rdquo;, $time);
+</font>
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+initial<br>
+   begin<br>
+   ...                 // Simulation proceeds<br>
+   if (&lt;error condition&gt;) -&gt; error;  // Generate event<br>
+   ...<br>
+   end<br>
+</font>
+</p>
+
+<p>
+Such signalling can be used to allow different blocks to interact in a
+test file.  For example:
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+initial<br>
+begin<br>
+[Do reset sequencing]<br>
+-&gt; reset_done;<br>
+end<br>
+initial<br>
+begin<br>
+@(reset_done)<br>
+[Start test sequence]<br>
+...<br>
+end<br>
+</font>
+</p>
+
+<p>
+For more complete examples, try:
+<a href="http://www.asic-world.com/verilog/art_testbench_writing3.html">http://www.asic-world.com/verilog/art_testbench_writing3.html</a>
+</p>
+
+<hr><hr>
+
+<h2>Comparing results</h2>
+
+<p>
+Three options:
+</p>
+
+<ul>
+<li>Stare at waveforms by hand
+  <ul>
+  <li>useful in initial debugging
+  <li>error prone and tedious for regression tests
+  </ul>
+</ul>
+
+<ul>
+<li>Use Verilog to compare results against an expected set
+  <ul>
+  <li>with a predictable progression can regenerate results in test harness
+  <li>can import expected results from a preprepared file
+  </ul>
+</ul>
+
+<ul>
+<li>Dump a trace from the simulator and compare off-line
+  <ul>
+  <li>simple tests can alert user to anomalous conditions
+  <li>data traces can be exported into files for analysis
+  </ul>
+</ul>
+
+<h3>Importing test results</h3>
+
+<p>
+Probably the easiest way to do this is to read a file of expected
+results into a memory residing in the test harness.  Initialise a
+pointer to the start of the file and increment it every time a
+comparison is made.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+reg [7:0] results [0:1023];<br>
+reg [10:0] result_pointer;<br>
+reg [7:0] comp_value;<br>
+&nbsp;<br>
+initial $readmemh(&lt;filename&gt;, results);<br>
+&nbsp;<br>
+initial<br>
+ &nbsp;begin<br>
+ &nbsp;result_pointer = 0;<br>
+ &nbsp;...<br>
+ &nbsp;test_next(comp_value); &nbsp; // Fetch value<br>
+ &nbsp;...<br>
+ &nbsp;end
+&nbsp;<br>
+task test_next; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Use a task for convenience<br>
+ &nbsp;output [7:0] value;<br>
+ &nbsp;begin<br>
+ &nbsp;if (result_pointer &gt; 1023)<br>
+ &nbsp; &nbsp;begin<br>
+ &nbsp; &nbsp;$display(&ldquo;Out of data!&rdquo;);<br>
+ &nbsp; &nbsp;$stop; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                     &nbsp; &nbsp; // Oops! Error<br>
+ &nbsp; &nbsp;end<br>
+ &nbsp;else<br>
+ &nbsp; &nbsp;begin<br>
+ &nbsp; &nbsp;value = results[result_pointer];<br>
+ &nbsp; &nbsp;result_pointer = result_pointer + 1;<br>
+ &nbsp; &nbsp;end<br>
+ &nbsp;end<br>
+endtask<br>
+</blockquote>
+
+<h3>Exporting monitoring information</h3>
+
+<p>There are several ways to do this.</p>
+
+<h4>User prints</h4>
+<p>
+<font style="font-family: 'Courier New', monospace;">$display</font><br>
+<font style="font-family: 'Courier New', monospace;">$write</font><br>
+</p>
+
+<p>
+C-like print statements: (nearly) identical except
+<span style="font-family: 'Courier New', monospace;">$display(&hellip;)</span>
+adds a <span style="font-family: 'Courier New', monospace;">LF</span>
+to the string end.<br>
+If you want to stay on the same line
+<span style="font-family: 'Courier New', monospace;">$write(&hellip;)</span>
+will do this.
+</p>
+
+<p>
+Suggestions:
+<ul>
+<li>Use to monitor progress through a stimulus file
+<li>Use to pick up and diagnose errors
+</ul>
+</p>
+
+<p>e.g.</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+$display(&ldquo;Starting test&rdquo;);<br>
+...<br>
+if (q != 32'h0000_0000)<br>
+ &nbsp;$display(&ldquo;Unexpected value: q = %X&rdquo;, q);<br>
+</blockquote>
+
+<p>
+Sometimes it is convenient to watch particular signals rather than all
+signals through time.  This can be done with
+the <font style="font-family: 'Courier New', monospace;">$monitor</font> task.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+initial<br>
+ &nbsp;$monitor(&ldquo;this = %x that = %x at time %t&rdquo;,<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this, that, $time);
+</blockquote>
+
+<p>
+This is similar to:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+always @ (this, that)<br>
+ &nbsp;$display(&ldquo;this = %x that = %x at time %t&rdquo;,<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this, that, $time);<br>
+</blockquote>
+
+<h4>Writing to files</h4>
+
+<font style="font-family: 'Courier New', monospace;">$fopen(),
+  $fclose(), $fdisplay(), $fwrite()</font>
+
+<p>
+allow you to create your own output files. (&ldquo;<font style="font-family: 'Courier New',
+monospace;">$fwrite</font>&rdquo; is the same as
+  &ldquo;<font style="font-family: 'Courier New', monospace;">$fdisplay</font>&rdquo; except for line-feeds.) Their use,
+including file handles, is similar that which should be familiar from
+C programming.
+</p>
+
+<hr><hr>
+
+<h2>Initialisation</h2>
+
+<p>
+When a state-holding element is switched on it will settle into a
+stable state.
+</p>
+
+<p>
+It is not predictable what state this will be, so it is unknown.
+</p>
+
+<p>
+Does this matter? In some cases it does, in others it doesn't.
+</p>
+
+<p>
+Example: ARM registers
+<ul>
+<li>R0-R14 are undefined
+<li>R15 (PC) is 00000000
+</ul>
+</p>
+
+<p>
+I.e.  only the essential values are cleared
+Rule of thumb:
+<ul>
+<li>Control registers should be initialised
+<li>Data registers probably don't need initialisation
+</ul>
+</p>
+
+<p>
+Undefined (&ldquo;unknown&rdquo;) values tend to propagate through logic.
+</p>
+
+<p>
+This is usually a good thing as it acts as a warning that something is
+wrong.  Learn to <u>exploit</u> them!
+</p>
+
+<hr>
+
+<h3>Reset signals</h3>
+
+<p>
+The question of whether to include a reset on a flip-flop has no simple answer.
+</p>
+
+<p>
+The inclusion of reset logic imposes a small power/area penalty on a flip-flop.
+</p>
+
+<p>
+The fan-out of the reset network is typically very large and consumes
+some resources.
+</p>
+
+<p>
+Failing to reset a flip-flop which needs to be defined can be catastrophic.
+</p>
+
+<img src="figures/divide_by_2.png" alt="Divide by two" align="right" width=20%>
+<p>
+Case: consider a clock divider flip-flop:
+</p>
+
+<p>
+As a circuit this will function because it is in some digital state
+and will toggle to the other when clocked.
+</p>
+
+<p>
+In simulation it will start unknown and always remain that way.
+</p>
+
+<p>
+In Verilog you could &lsquo;cure&rsquo; this anomaly with an &lsquo;<font style="font-family: 'Courier New', monospace;">initial</font>&rsquo;; but if that is accidentally done to something where the phase matters then it's Doom again.
+</p>
+
+<p>
+In general:
+<ul>
+<li>data registers can tolerate starting undefined
+<li>control registers should be reset
+  <ul>
+  <li>this would include &lsquo;validity&rsquo; indicators on data etc.
+  </ul>
+</ul>
+</p>
+
+<p>
+Some designers prefer to reset every flip-flop as a matter of routine.<br>
+(There is a small additional cost in size and speed.)
+</p>
+
+<p>
+You have to decide which approach works for you.
+</p>
+
+<h4>Memories</h4>
+
+<p>
+RAM does not have reset.  If you expect a RAM to contain some values
+(typically zeroes) you will have to write these in actively.
+
+<ul>
+<li>This is easy in a RAM model with a
+&lsquo;<font style="font-family: 'Courier New', monospace;">for</font>&rsquo;
+ loop. 
+<li>This is considerable effort in reality requiring an FSM ...  and time.
+</ul>
+</p>
+
+<hr>
+
+<h3>Resetting in FPGAs</h3>
+
+<p>
+The state of an FPGA is downloaded when it is configured.  This means:
+<ul>
+<li>flip-flops will be initialised
+<li>memory contents will be defined
+</ul>
+</p>
+
+<p>
+This means, for example:
+<ul>
+<li>&lsquo;<font style="font-family: 'Courier New', monospace;">initial</font>&rsquo;
+will work and a register can be preset at t&nbsp;=&nbsp;0 
+<li>a memory (on chip) can be initialised with
+  &lsquo;<font style="font-family: 'Courier New', monospace;">$readmemh()</font>&rsquo;
+</ul>
+</p>
+
+<p>
+The second of these allows the creation of on-chip ROMs, useful (for example)
+in bootstrapping a processor or providing look-up tables.
+</p>
+
+<p>
+Note that these facilities are provided because of the particular FPGA
+characteristics.  They would not be available on an ASIC.
+</p>
+
+<h3>The &lsquo;unknown&rsquo; state in simulators</h3>
+
+<p>
+Unknown/undefined states are a characteristic of digital simulation.
+Verilog simulation is digital, with signals adopting states {&lsquo;<font style="font-family: 'Courier New', monospace;">0</font>&rsquo;, &lsquo;<font style="font-family: 'Courier New', monospace;">1</font>&rsquo;,
+&lsquo;<font style="font-family: 'Courier New', monospace;">x</font>&rsquo;, &lsquo;<font style="font-family: 'Courier New', monospace;">z</font>&rsquo;} and these have well-defined operations.  For example:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+0&nbsp;&&&nbsp;x&nbsp;==&nbsp;0<br>
+1&nbsp;&&&nbsp;x&nbsp;==&nbsp;x<br>
+</p>
+
+<p>
+Digital (functional) simulation does not represent intermediate
+states, transition (edge) speeds etc.
+</p>
+
+<p>
+Not all simulators work this way.  <b>Circuit-level simulators</b>
+represent the analogue voltages on the wires to give more accurate
+estimates of the behaviour of the implementation.  These values are
+(in principle) continuous, therefore always &lsquo;known&rsquo;,
+therefore they have to be
+<i>assumed</i> at start-up.
+</p>
+
+<p>
+Unknown values will not appear.  However the assumed values may not be
+those which occur in a real circuit and therefore should not be relied
+on.
+</p>
+
+<p>
+This is another good reason for running a functional simulation as
+part of the design flow.
+</p>
+
+<hr><hr>
+
+<h2>iffy logic?</h2>
+
+<ul>
+<li>In digital logic there are two possible logic states: {0, 1}<br>
+<font style="font-family: 'Courier New', monospace;">if (a == 1)
+  &lt;statement&gt; &nbsp; &nbsp; // Outcome - obvious
+</font>
+
+<li>In digital simulation there are three possible logic states: {0, 1, {x, z}}<br>
+<font style="font-family: 'Courier New', monospace;">if (a == 1) &lt;statement&gt; &nbsp; &nbsp; 
+// Outcome - less obvious
+</font></ul>
+
+<p>
+An if clause is taken if the predicate is &lsquo;true&rsquo; (i.e.  1).
+</p>
+
+<p>
+An else clause is taken if the predicate is not &lsquo;true&rsquo; (i.e.  0 or x or z).
+</p>
+
+<p>
+Verilog defines its operators as:
+<ul>
+<li>&ldquo;logical (in)equality&rdquo;
+  <ul>
+  <li>&lsquo;==&rsquo; and &lsquo;!=&rsquo; may return {0, 1, x}
+  </ul>
+<li>&ldquo;case (in)equality&rdquo;
+  <ul>
+  <li>&lsquo;===&rsquo; and &lsquo;!==&rsquo; only return {0, 1},
+      looking for an exact match
+  <li>useful for verification (e.g.  detecting unknowns) not for synthesis
+  </ul>
+</ul>
+</p>
+
+<hr>
+
+<h3>Equality operators</h3>
+
+<p>
+When executing an &lsquo;if&rsquo; in a Verilog simulation a binary decision is
+made using three possible input values.
+</p>
+
+<p>
+The case equality operators can be used to eliminate one of these.
+</p>
+
+<p>
+These are useful, for example, in &lsquo;<font style="font-family: 'Courier New', monospace;">if</font>&rsquo; tests.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+0 == 0 &nbsp;&nbsp;   // Result is true (1)	 <br>
+0 == x &nbsp;&nbsp;   // Result is unknown (x) <br>
+0 === x &nbsp;  // Result is false (0)	 <br>
+0 != x  &nbsp;&nbsp;  // Result is unknown (x) <br>
+0 !== x &nbsp;  // Result is true (1)	 <br>
+x === x &nbsp;  // Result is true (1)    <br>
+</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<p>
+Imagine you are testing for a particular pattern.
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (data != test_value) $display(&ldquo;Error&rdquo;);
+</p>
+</blockquote>
+</p>
+
+<p>
+Bad idea! If the data and test_value are both defined then it works
+but if either is &lsquo;unknown&rsquo; (x) then the expression will return
+&lsquo;unknown&rsquo;.  This isn't &lsquo;true&rsquo; so
+the <font style="font-family: 'Courier New',
+		 monospace;">$display</font> statement is not reached.
+</p>
+
+This could be cured by:
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (data == test_value); // do nothing<br>
+else $display("Error");
+</p>
+</blockquote>
+but this is better:
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (data !== test_value) $display(&ldquo;Error&rdquo;);
+</p>
+</blockquote>
+
+<hr>
+
+<h4>Example</h4>
+
+<p>
+Here is a &lsquo;broken&rsquo; AND gate:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+module my_and (input wire a, b,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output reg q);<br>
+always @ (a, b)<br>
+&nbsp;&nbsp;if (a)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (b) q = 1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp; q = 0;<br>
+&nbsp;&nbsp;else q = 0;<br>
+endmodule<br>
+</p>
+</blockquote>
+
+<p>
+Synthesized, this should works fine.  However in simulation it will
+always produce a logic value output, even if the inputs are
+undefined.
+</p>
+
+<p>Compare:</p>
+
+
+<div class="row">
+
+  <div class="column">
+
+<center>
+<!--<br clear="both">-->
+<!-- Formatting ought to be improved! -->
+<table>
+<tr>
+<th>my_AND</th>
+<th>&nbsp; 0 &nbsp;</th>
+<th>1</th>
+<th>X</th>
+<th>Z</th>
+</tr>
+<tr>
+
+<th>&nbsp; 0 &nbsp;</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>1</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 1 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>X</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>Z</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+</table>
+
+  </center>
+
+  </div>
+
+  <div class="column">
+
+  <center>
+
+<table>
+<tr>
+<th>&nbsp;&nbsp;AND&nbsp;&nbsp;</th>
+<th>&nbsp; 0 &nbsp;</th>
+<th>1</th>
+<th>X</th>
+<th>Z</th>
+</tr>
+<tr>
+<th>&nbsp; 0 &nbsp;</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>1</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 1 &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td>
+</tr>
+<tr>
+<th>X</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td>
+</tr>
+<tr>
+<th>Z</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td>
+</tr>
+</table>
+  </center>
+
+  </div>
+
+</div>
+
+<p>
+This may be harmless in itself but has the potential to hide other faults.
+</p>
+
+<hr>
+
+<h2>Into the &lsquo;unknown&rsquo; ...</h2>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+case (abc)<br>
+&nbsp;&nbsp;2'b00: &nbsp; result = 1;<br>
+&nbsp;&nbsp;2'b01: &nbsp; result = 2;<br>
+&nbsp;&nbsp;2'b10: &nbsp; result = 3;<br>
+&nbsp;&nbsp;default:      result = 0;<br>
+endcase<br>
+</p>
+</blockquote>
+
+<ul>
+<li>Cases are compared top-to-bottom.
+<li>Only <b>exact</b> matches are considered.
+<li>What happens if the input variable is 2'b0x ?
+</ul>
+
+&lsquo;unknown&rsquo; is not the same as &lsquo;don&rsquo;t care&rsquo;.
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+casex (xyz)<br>
+&nbsp;&nbsp;2'b00: &nbsp; result = 1;<br>
+&nbsp;&nbsp;2'b01: &nbsp; result = 2;<br>
+&nbsp;&nbsp;2'b1x: &nbsp; result = 3; // Taken for cases 2 and 3<br>
+&nbsp;&nbsp;default:      result = 0; // Redundant - but good (cautious) practice<br>
+endcase<br>
+</p>
+</blockquote>
+
+<hr>
+
+<h3>Unknowns and &lsquo;don't cares&rsquo;</h3>
+
+<p>
+A &lsquo;<font style="font-family: 'Courier New', monospace;">case</font>&rsquo;
+statement selects one entry from a list of options; the first one
+which matches the criteria.
+</p>
+
+<p>
+The following example illustrates how all cases of a single wire could
+be monitored.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+case (some_wire)<br>
+&nbsp;&nbsp;1'b0, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Note <i>list</i> of cases<br>
+&nbsp;&nbsp;1'b1: $display(&ldquo;Wire has value %d&rdquo;, some_wire);<br>
+&nbsp;&nbsp;1'bx: $display(&ldquo;Wire is unknown&rdquo;);<br>
+&nbsp;&nbsp;1'bz: $display(&ldquo;Wire is floating&rdquo;);<br>
+endcase<br>
+</p>
+</blockquote>
+
+<p>
+This facility is useful in testing and, perhaps, modelling; it is not
+relevant to synthesis because a physical wire will always have a value
+which is interpreted in some way as a digital signal.
+</p>
+
+<h4>Don't cares</h4>
+
+Two additional keywords allow variations in a <font style="font-family: 'Courier New', monospace;">case</font> construct:
+<ul>
+<li><font style="font-family: 'Courier New', monospace;">casez</font>
+<li><font style="font-family: 'Courier New', monospace;">casex</font>
+</ul>
+
+<p>
+These allow &lsquo;don't care&rsquo; inputs in a
+<font style="font-family: 'Courier New', monospace;">case</font>
+statement.  The difference is that
+&lsquo;<font style="font-family: 'Courier New', monospace;">casez</font>&rsquo;
+treats only &lsquo;<font style="font-family: 'Courier New', monospace;">Z</font>&rsquo; inputs as don't cares whereas
+&lsquo;<font style="font-family: 'Courier New', monospace;">casex</font>&rsquo;
+accommodates both &lsquo;Z&rsquo; and &lsquo;X&rsquo; equally.
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">casex</font>&rsquo;
+is possibly the more useful and serves as an example.
+</p>
+
+<hr>
+
+<h3><p style="font-family: 'Courier New', monospace;">casex</font></h3>
+
+<p>
+Sometimes it is useful to be able to build a circuit where part of an
+input is not compared, i.e.  it is a &lsquo;<b>don't care</b>&rsquo; value.
+Not <i>caring</i> what a value is is not the same as
+not <i>knowing</i> what a value is; however (confusingly?) Verilog uses
+&lsquo;<font style="font-family: 'Courier New', monospace;">x</font>&rsquo;
+for both cases.
+</p>
+
+<p>
+Imagine decoding a microprocessor instruction.  Not all the bits are
+used to determine the instruction type.  If different sets of bits
+need to be examined, &lsquo;<font style="font-family: 'Courier New', monospace;">casex</font>&rsquo; allows these to be specified
+in a single, simple statement.
+</p>
+
+<p>
+In the following (simplified) ARM instruction decoder the
+&lsquo;<font style="font-family: 'Courier New',
+monospace;">x</font>&rsquo;s are bits which are not considered by
+the <font style="font-family: 'Courier New', monospace;">case</font>
+statement.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+casex (instruction[27:24])<br>
+&nbsp;&nbsp;4'b00xx: $display(&ldquo;Data processing&rdquo;);<br>
+&nbsp;&nbsp;4'b01xx: $display(&ldquo;Load/store&rdquo;);<br>
+&nbsp;&nbsp;4'b100x: $display(&ldquo;Load/store multiple&rdquo;);<br>
+&nbsp;&nbsp;4'b101x: $display(&ldquo;Branch&rdquo;);<br>
+&nbsp;&nbsp;4'b110x,<br>
+&nbsp;&nbsp;4'b1110: $display(&ldquo;Coprocessor&rdquo;);<br>
+&nbsp;&nbsp;4'b1111: $display(&ldquo;SVC (aka SWI)&rdquo;);<br>
+endcase<br>
+</p>
+</blockquote>
+
+<p>
+Bases other than binary can be used.  In hexadecimal an
+&lsquo;<font style="font-family: 'Courier New', monospace;">x</font>&rsquo;
+represents four don't care bits, in octal, three.  It is not
+meaningful in decimal.
+</p>
+
+<p>
+Without <font style="font-family: 'Courier New', monospace;">casex</font>
+the decoder would probably look something like:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (instruction[27] == 0)<br>
+&nbsp;&nbsp;if (instruction[26] == 0) &nbsp; &nbsp; $display("Data processing");<br>
+&nbsp;&nbsp;else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$display("Load/store");<br>
+else<br>
+&nbsp;&nbsp;if (instruction[26] == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (instruction[25] == 0)&nbsp;&nbsp; $display("Load/store multiple");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$display("Branch");<br>
+&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if ((instruction[25] == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; || (instruction[24] == 0)) $display("Coprocessor");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$display("SVC (aka SWI)");<br>
+</p>
+</blockquote>
+
+<p>
+Hopefully the first example is easier to follow!
+</p>
+
+<hr>
+
+<p><a href="03_testing">Next notes: Verification &amp; Testing</a></p>
+<p><a href="02a_event_driven_simulation.html">Short aside on Event
+    Driven Simulation</a></p>
+<p><a href="02c_trouble_with_glitches.html">Problems with glitches
+    in simulation</a></p>
+<p><a href="index.html">Up to Index</a></p>
+
+<hr><hr>
+
+</body>

@@ -1,0 +1,240 @@
+<title>Synchronous vs. asynchronous styles</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column_a {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.column_b {
+  float: right;
+  width: 70%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Think sync!</h2>
+
+<p>
+There are very good reasons for keeping to a synchronous style when
+constructing an electronic design:
+</p>
+
+<ul>
+<li> It simplifies the design task
+  <ul>
+  <li> Time is quantised
+  <li> Given a state and inputs the next state can be determined unambiguously
+  <li> Logical hazards (glitches during switching) are irrelevant (in general)
+  </ul>
+<li> Current toolchains are optimised for synchronous circuits
+  <ul>
+  <li> It's easy to specify synchronous circuits in HDLs
+  <li> Timing analysis and optimization is designed to fit into clock
+  periods
+  </ul>
+<li> Implementation technology is designed with synchronous circuits in mind
+  <ul>
+  <li> ASIC libraries primarily support D-type flip-flops
+  <li> FPGAs contain many built-in D-type flip-flops
+  </ul>
+</ul>
+
+<h3>Synchronous design</h3>
+
+<p>
+By this stage you should be used to the concept (and advantages) of
+synchronous design.  The most important aspect is that the logic
+functions can be designed statically; glitches as logic switches don't
+matter as they can't pass the registers.  A clock happens only when
+everything has settled and everything changes &lsquo;at once&rsquo;.
+</p>
+
+<p>
+A HDL (like Verilog) makes this easy; simply ensure that all state
+changes use the same clock (and, preferably, the same edge).
+</p>
+
+<h4>Example: sample a counter every second cycle.</h4>
+
+<img src="figures/div_2_async.png" alt="Async. clocking" width=30% align="right">
+
+<h4>Bad Idea</h4>
+
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) &nbsp;clk2 <= !clk2;<br>
+</p>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) &nbsp;a <= a + 1;<br>
+</p>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk2) b <= a;<br>
+</p>
+
+<p>
+The timing relationship between the clocks is poorly defined.
+</p>
+
+<p>
+Behaviour depends on a <b>race</b> between
+<font style="font-family: 'Courier New', monospace;">a</font> and
+<font style="font-family: 'Courier New', monospace;">clk2</font>.
+<br  clear="right">
+</p>
+
+<img src="figures/div_2_sync.png" alt="Sync. clocking" width=30% align="right">
+
+<h4>Good idea:</h4>
+
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) en <= !en;<br>
+</p>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) a <= a + 1;<br>
+</p>
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk) if (en) b <= a;<br>
+</p>
+
+<p>
+Changes happen simultaneously.  The
+&lsquo;<font style="font-family: 'Courier New', monospace;">en</font>&rsquo;
+signal controls whether a change will happen or not.
+</p>
+
+<p>
+Toolchains are geared towards this style of design so they are capable
+of ensuring that the flip-flops change (near enough to)
+simultaneously.
+</p>
+
+
+<h3>Asynchronous design</h3>
+
+<p>
+It is possible to produce
+<a href="https://en.wikipedia.org/wiki/Asynchronous_circuit">sequential
+circuits without clocks</a>; indeed much work has been done on this in
+this Department! There are some potential advantages to asynchronous
+designs.
+</p>
+
+<ul>
+<li> No &lsquo;timing closure&rsquo; worries &ndash; except real-time
+  applications
+
+<li> Inherent &lsquo;clock gating&rsquo; saving power when there is no
+  work to do
+
+<li> Self-adaptive to conditions, e.g.  for Dynamic Voltage Scaling (DVS)
+
+<li> Spread-spectrum switching reduces emitted electromagnetic noise.
+</ul>
+
+<p>
+However the disadvantages largely outweigh these.
+(If you didn't follow any of those points, don't worry about them.)
+</p>
+
+<p>
+An asynchronous FSM can be constructed from RS flip-flops.  (An RS
+flip-flop is a simple asynchronous FSM!) An input change may then
+cause one or more flip-flops to change state, which may cause others
+to change state, and so on until the system restabilises.  Care must
+be taken to ensure no signal can glitch and cause an erroneous state
+to occur whilst the logic is in transition.
+</p>
+
+<p>
+There are some parts of a system where asynchronous signals are
+unavoidable.  External inputs fall into this category.  However the
+usual strategy is to synchronise these to the internal clock as soon
+as possible.
+</p>
+
+<h3>Globally Asynchronous, Locally Synchronous (GALS)</h3>
+
+<img src="figures/GALS.png" alt="GALS network" width=35% align="right">
+
+<p>
+This is a compromise solution which facilitates the production of SoC
+blocks using conventional CAD tools and processes but bypasses the
+need for global synchronous clock distribution (which is challenging)
+and verification (which is also difficult).  As the scope of chips
+gets larger it becomes convenient to restrict synchronous operation to
+particular assemblies and worry less about the differences in clocks
+between them.  However the each assembly can be synchronous internally
+and this is usually a good plan.  A little more on this topic is
+covered under &lsquo;interconnection&rsquo; where clock-domain
+crossing is considered.
+</p>
+
+<p>
+An advantage of a GALS device is that the clock rate of different
+blocks can be different.  Clocks can be slowed &ndash; or stopped
+&ndash; to save power; inactive blocks may even be
+&lsquo;<a href="https://en.wikipedia.org/wiki/Dark_silicon">turned
+off&rsquo;</a> for this reason.
+</p>
+
+<hr>
+
+<p><a href="04b_FSM_design.html">Back</a> to FSMs.</p>
+
+<p><a href="04d_parallelism.html">Forwards</a> to look at
+  opportunities for parallelism.</p>
+
+<p><a href="04_tradeoffs.html">Up</a> to Tradeoffs.</p>
+
+<hr><hr>
+
+</body>

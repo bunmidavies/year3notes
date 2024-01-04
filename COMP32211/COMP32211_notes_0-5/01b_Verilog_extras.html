@@ -1,0 +1,516 @@
+<title>Verilog extras</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column3 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 5%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2 id="states">Verilog States and truth tables</h2>
+
+<p>
+Verilog represents circuits digitally.
+</p>
+
+<ul>
+<li> There are four basic states which a digital wire can be in: {0, 1, Z, X}
+
+
+<div class="row">
+
+  <div class="column3">
+
+<table>
+<tr>
+<th>AND</th><th>0</th><th>1</th><th>X</th><th>Z</th>
+</tr>
+<tr>
+<th>0</th> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td>
+</tr>
+<tr>
+<th>1</th> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+<tr>
+<th>X</th> <td>&nbsp;0&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+<tr>
+<th>Z</th> <td>&nbsp;0&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+</table>
+
+  </div>
+
+  <div class="column_space">
+  </div>
+
+  <div class="column3">
+
+<table>
+<tr>
+<th>OR</th><th>0</th><th>1</th><th>X</th><th>Z</th>
+</tr>
+<tr>
+<th>0</th> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+<tr>
+<th>1</th> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td>
+</tr>
+<tr>
+<th>X</th> <td>&nbsp;X&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+<tr>
+<th>Z</th> <td>&nbsp;X&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+</table>
+
+  </div>
+
+  <div class="column_space">
+  </div>
+
+  <div class="column3">
+
+<table>
+<tr>
+<th>XOR</th><th>0</th><th>1</th><th>X</th><th>Z</th>
+</tr>
+<tr>
+<th>0</th> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+<tr>
+<th>1</th> <td>&nbsp;1&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+<tr>
+<th>X</th> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+<tr>
+<th>Z</th> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td> <td>&nbsp;X&nbsp;</td>
+</tr>
+</table>
+
+  </div>
+
+</div>
+
+<li> Switching between states is instantaneous
+<li> There is no concept of &lsquo;halfway&rsquo; or of &lsquo;edge speed&rsquo;
+<li> &lsquo;X&rsquo; (unknown) usually means either 0 or 1 but the simulator doesn't know which
+  <ul>
+  <li> This is the default initial state of flip-flops, latches etc.
+  <li> It may occur if two different outputs are connected together (mistake!)
+  </ul>
+<li> &lsquo;Z&rsquo; (high-impedance, &ldquo;Tristate&trade;&rdquo;) means there is no output driving the network
+  <ul>
+  <li> No longer relevant for on-chip signals
+  <li> Default state for input wires
+  </ul>
+</ul>
+
+<hr>
+
+<h2 id="tasks">Tasks/Functions</h2>
+
+<p>
+A <b>task</b> is a procedure/method/subroutine/&hellip; structure in
+Verilog.  They are local to modules (but could be
+&lsquo;included&rsquo;).  Tasks may substitute for repetitive
+operations and may be useful in simplifying and clarifying a test
+bench.  They may contain combinatorial or sequential logic and occupy
+(simulation) time in execution.  [Syntax may vary; an alternative
+example is given in the lab. manual.]
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+task something;<br>
+input &hellip;<br>
+output &hellip;<br>
+begin<br>
+&lt;behavioural code&gt;<br>
+end<br>
+endtask<br>
+</p>
+
+<p>
+<b>Functions</b> are like simple tasks returning a value.  They are
+typically used to represent some combinatorial function.  For example:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+function adder; &nbsp; &nbsp; &nbsp; &nbsp; // Function name is also result<br>
+input x, y;<br>
+begin<br>
+adder = x + y; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Hardly worthwhile!<br>
+end<br>
+endfunction<br>
+&nbsp;<br>
+&hellip;<br>
+&nbsp;<br>
+assign sum = adder(a, b);<br>
+</p>
+
+<hr>
+
+<h2 id="directives">Compiler directives</h2>
+
+<p>
+Verilog complier directives are keywords preceded by the backtick character `
+</p>
+<p>
+Some of the more common ones are:
+</p>
+
+<p style="font-family: 'Courier New', monospace;"><b>`timescale</b></p>
+
+<p>
+Set the timestep in simulation, i.e. how long #1 really represents.
+</p>
+
+<p style="font-family: 'Courier New', monospace;"><b>`include</b></p>
+
+<p>
+Import another file into the source; useful for including common definitions
+amongst several files in a project.
+</p>
+
+<p style="font-family: 'Courier New', monospace;"><b>`define</b></p>
+
+<p>
+Verilog allows test substitution in a similar manner to C's
+&ldquo;<font style="font-family: 'Courier New', monospace;">#define</font>&rdquo;.
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+`define THING 99 &nbsp; &nbsp; &nbsp; &nbsp; // Define text substitution<br>
+...<br>
+x <= `THING; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // In use (note `)<br>
+</p>
+
+<p>
+It is recommended to be used in the same way, and for the same reasons.
+</p>
+
+<p style="font-family: 'Courier New', monospace;"><b>`undef</b></p>
+<p>
+Remove a compile-time definition.
+</p>
+
+<p style="font-family: 'Courier New', monospace;"><b>`ifdef, `else, `elsif, `endif, `ifndef</b></p>
+
+<p>
+Used to control conditional compilation by &lsquo;bracketing&rsquo;
+parts of the code.  The application should be obvious.
+</p>
+
+<hr>
+
+<h2 id="generate">Generate</h2>
+
+<p style="font-family: 'Courier New', monospace;font-size:20px">
+module big_memory (input wire CE, input wire WE, input wire OE,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;input wire A[11:0], input wire [7:0] Din,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;output wire [7:0] Dout);<br>
+reg  &nbsp;[3:0] En;<br>
+wire [7:0] Data [0:3] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Array of four data buses<br>
+&nbsp;<br>
+always @ (CE, A[11:10]) &nbsp; &nbsp; &nbsp; &nbsp; // Address decoder with enable<br>
+&nbsp; begin<br>
+&nbsp; En = 4'b0000;<br>
+&nbsp; if (CE) En[A[11:10]] = 1'b1;<br>
+&nbsp; end<br>
+&nbsp;<br>
+<font style="color:blue">
+generate<br>
+&nbsp; genvar i; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Variable used for compile-time iteration<br>
+&nbsp; for (i=0; i<4; i=i+1)<br>
+&nbsp; &nbsp; begin: block<br>
+&nbsp; &nbsp; memory mem((.CE(En[i]), .WE(WE), .OE(OE),<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.A(A[9:0]), .Din(Din), .Dout(Data[i]));<br>
+&nbsp; &nbsp; end<br>
+endgenerate<br>
+</font>
+&nbsp;<br>
+assign Dout = Data[A[11:10]]; &nbsp; // Output multiplexer<br>
+&nbsp; <br>
+end<br>
+</p>
+
+<p>
+Generate allows multiple instances to be placed iteratively.  The
+example in the slide shows how a 4&nbsp;KB memory could be constructed
+from four, 1&nbsp;KB blocks.
+</p>
+
+<ul>
+<li> The always block provides a 2:4&nbsp;decoder from the upper two
+address lines.
+  <ul>
+  <li> a 2-bit field taken from the address is used to index an En bit,
+  </ul>
+which is set to &lsquo;1&rsquo;; all the (other) bits have been zeroed.
+<li> The iterated instantiation is delimited by {generate, endgenerate}
+<li> genvar declares a control variable; this only exists at &lsquo;compile
+time&rsquo;
+<li> the for loop iterates using the control variable
+<li> instances of memory called &lsquo;mem[0:3]&rsquo; are produced
+<li> wiring is in common except for the different in chip selects
+(En[0:3])
+<li> as an illustration, the output data buses are multiplexed explicitly.
+(OE serves no real purpose here.)
+</ul>
+
+<p>
+This example instantiation iterates a structural Verilog block: it is
+possible to contain a variety of statements within the block.
+</p>
+
+<center>
+<img src="figures/generate.png" alt="Structure built by 'generate'"
+     width =80%>
+</center>
+
+<p>
+The control for the generate needs to be determined when the blocks
+are to be instantiated.  Hardware cannot be created dynamically
+&lsquo;at run time&rsquo;.  Obviously!
+</p>
+
+<p>
+The real value of such constructs is apparent when the number of
+instantiations is parameterised.  For example: 
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+...<br>
+&nbsp;<br>
+always @ (CE, A[9+`BITS:10])<br>
+&nbsp; begin<br>
+&nbsp; En = 0;<br>
+&nbsp; if (CE) En[A[9+`BITS:10]] = 1`b1;<br>
+&nbsp; end<br>
+&nbsp;<br>
+generate<br>
+&nbsp; genvar i;<br>
+&nbsp; for (i = 0; i < (1<<(`BITS-1)); i = i + 1)<br>
+&nbsp; ...<br>
+</p>
+</blockquote>
+
+<p>
+This allows the iterations to be specified with a single input definition.
+</p>
+
+<p>
+Here <font style="font-family: 'Courier New', monospace;">`BITS</font>
+specifies the log<sub>2</sub> of the number of blocks and
+thus <font style="font-family: 'Courier New',
+monospace;">1<<`BITS</font> regenerates this number.  It should be
+constrained to 1 because &ldquo;<font style="font-family: 'Courier
+New', monospace;">A[10:10]</font>&rdquo; is legal but
+&ldquo;<font style="font-family: 'Courier New',
+monospace;">A[9:10]</font>&rdquo; will cause problems.
+</p>
+
+<p>
+The reverse approach is more difficult as taking a log is more
+tedious.  However here is an appropriate function from the Verilog
+Standard document.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+function integer clogb2;<br>
+&nbsp; input [31:0] value;<br>
+&nbsp; for (clogb2 = 0; value > 0; clogb2 = clogb2 + 1;)<br>
+&nbsp; &nbsp; value = value>>1;<br>
+endfunction<br>
+</p>
+</blockquote>
+
+<p>
+If the log<sub>2</sub> is non-integral, this finds the next largest
+integer, which is generally what is wanted.
+</p>
+
+<hr>
+
+<h2 id="parameters">Parameters</h2>
+
+<p style="font-family: 'Courier New', monospace;font-size:20px">
+<font style="color:red">
+module adder (a, b, s);<br>
+parameter n = 16;<br>
+input &nbsp;wire [n-1:0] a, b;<br>
+output wire [n-1:0] s;<br>
+&nbsp;<br>
+assign s = a + b;<br>
+&nbsp;<br>
+endmodule<br>
+</font>
+&nbsp;<br>
+module example;<br>
+wire [15:0] pp, qq, rr;<br>
+wire [31:0] ss, tt, uu;<br>
+wire &nbsp;[7:0] vv, ww, xx;<br>
+&nbsp;<br>
+adder add16(pp, qq, rr);<br>
+adder add32 #(32) (ss, tt, uu); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Verilog 95<br>
+adder add8 #(.n(8)) (.a(vv), .b(ww), .c(xx)); &nbsp; // Verilog 2001<br>
+&nbsp;<br>
+endmodule<br>
+</p>
+
+
+<p>
+There are several ways to define and modify parameters in Verilog.
+Only a selection is elucidated here but there should be enough to
+illustrate the concept.
+</p>
+
+<p>
+The example on the slide specifies a (somewhat redundant) module and
+instantiates it three times.  The module has a single parameter (n)
+which, in this case, specifies its bus widths.  There is a
+&lsquo;default&rsquo; value of 16 assigned to this parameter.
+</p>
+
+<p>
+The first instantiation simply uses this default value.  The other
+instantiations override the default.  For clarity, in the first
+instantiation it is suggested that a &lsquo;16&rsquo; should be passed
+anyway.
+</p>
+
+<p>
+The <font style="font-family: 'Courier New', monospace;">add32</font>
+uses the older Verilog-95 syntax both the parameter list and the
+connections.  This syntax works much like many programming languages
+in that associations are determined by the order of the lists.  This
+syntax is also usable in later versions of Verilog.
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">add8</font> is
+instantiated using Verilog 2001 syntax.  This specifies each
+parameter/connection explicitly.
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+.&lt;name_inside_instance&gt;(&lt;local_name&gt;)
+</p>
+
+<p>
+In this syntax the elements can be specified in any order.
+</p>
+
+<p>
+It is recommended that the Verilog 2001 syntax is used.  It is more
+verbose but less prone to errors, especially if lists are edited after
+creation.  In the case of parameters it also allows an arbitrary set of
+overrides to be used, not just those from the start of the list.
+</p>
+
+<h4>defparam</h4>
+
+<p>
+A parameter can be passed explicitly to a module using
+&lsquo;<font style="font-family: 'Courier New', monospace;">defparam</font>&rsquo;.
+</p>
+
+<p>
+The following could be added to the example above:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+defparam add16.n = 16;
+</p>
+
+<p>
+where a value is assigned using its hierarchical name.
+</p>
+
+<h4>localparam</h4>
+
+<p>
+A &lsquo;local&rsquo; parameter is a parameter which cannot be
+ overridden by a &lsquol<font style="font-family: 'Courier New', monospace;">
+defparam</font>&rsquo;; it can be defined in terms of a passed
+ parameter though, e.g.
+&lsquo;<font style="font-family: 'Courier New', monospace;">localparam
+my_param = 2 * your_param;</font>&rsquo;
+</p>
+
+<p>
+&lsquo;localparam&rsquo;s can sometimes substitute for 
+<font style="font-family: 'Courier New', monospace;">`define</font>
+and may be used more flexibly.
+</p>
+
+<hr>
+
+<p><a href="01_Verilog.html#index">Up</a> to Verilog</p>
+<p><a href="01a_Verilog_revision.html">Back</a> to more Verilog notes</p>
+<p><a href="02x_simulation.html">Forward</a> to next session (Simulation)</p>
+
+<hr><hr>
+
+</body>

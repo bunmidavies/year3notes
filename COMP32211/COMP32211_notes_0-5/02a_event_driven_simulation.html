@@ -1,0 +1,193 @@
+<title>Event-driven Simulation</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+h3 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<center>
+<p style="color:green">This is a little bonus page which outlines the
+basis upon which CAD functional simulators are typically built.
+Hopefully it illustrates why time has an &lsquo;extra dimension&rsquo;
+and explains why sometimes (when there's a particular class of error)
+your tests can get stuck in a &lsquo;combinatorial loop&rsquo; where
+(visible) <span style="font-family: 'Courier New',
+monospace;">$time</span> no longer advances.</p>
+</center>
+
+<h1>Event-driven simulation</h1>
+
+<p>
+Understanding the <i>principle</i> of an event driven simulation can
+illuminate some problems which can occur and be a useful illustration
+of a few general programming mechanisms.  Like many such problems a
+good starting point is the data structure.  A <i>possible</i>
+structure of the <b>event queue</b> is given below: whilst individual
+implementations may vary &ndash; and some details are omitted here
+&ndash; hopefully this will illustrate the principle.<br>
+Any particular tool will have its own way to do this but the order of
+operations is the same.
+</p>
+
+<center>
+<img src="figures/event_queue.png" alt="Event queuing logical structure">
+</center>
+
+<p>
+This structure starts with a <font style="color:red;"><b>linked list</b></font>
+(left, in red) which contains elements for each time at which one or
+more things are scheduled to happen.  Each entry has a list
+(or <i>two</i> in this figure) of things that happen at that time.
+For example, in a Verilog simulation this might begin with
+a <font style="color:red;">single entry at time&nbsp;=&nbsp;0</font>
+with a list of all the <font style="font-family: 'Courier New',
+monospace;">initial</font> statements/blocks.  These are <b>lists</b>
+since the number of events contained will vary.
+</p>
+
+<p>
+The figure shows <i>separate</i> lists for
+<font style="color:green;">blocking</font> and
+<font style="color:blue;">non-blocking</font> assignments; both of
+these will be &lsquo;executed&rsquo; completely at the appropriate
+time, <i>blocking assignments first</i>.
+</p>
+
+<p>
+If the time of the next event(s) in the list are in the future, the
+simulation time is advanced to this point; the lists are then
+processed.  Pragmatically, it is likely that elements from the list
+will be dealt with in the list order but the order of items is
+arbitrary; however statements <i>in a given block</i> will be
+processed in the order in which they are written.
+As a block is processed it is likely that some output changes will
+produce more events, either instantaneously (in simulation time) or at
+some future time; these must be <b>added</b> in the appropriate places,
+appending to a list or creating a new list as required.
+<font style="color:green;">This may include adding entries to the list
+  currently being processed.</font>
+</p>
+
+<p>
+When all the blocking assignments are complete any non-blocking
+assignments are processed in a similar way.
+<font style="color:blue;">Note the sequencing!</font>  However the
+outputs are not committed at this point, just stored temporarily; thus
+any changes here, even at the same simulation time, will not affect
+other, &lsquo;simultaneous&rsquo; statements.
+<font style="color:blue;">The statement <i>order</i> is therefore
+irrelevant.</font>  When this list is completed it can be reprocessed
+to commit the output state changes; these changes might happen at the
+current (simulation) time or later, by scheduling future events.
+</p>
+
+<p>
+At this point all the events at this time have been processed.
+Assuming that the event queue is not empty, simulation <b>time can now
+advance</b> to the point where more actions are scheduled.
+</p>
+
+<h2>A problem case</h2>
+
+<p>
+If there is a logic &lsquo;loop&rsquo; where no time elapses the
+simulator will not be able to progress in time and will (apparently)
+stall.  Here is a simple example:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+always @ (a, b)<br>
+begin<br>
+b = a;<br>
+a = !b;<br>
+end<br>
+</blockquote>
+
+<p>
+Here, after running the block both <font style="font-family: 'Courier New',
+monospace;">a</font> and <font style="font-family: 'Courier New',
+monospace;">b</font> have changed, creating <i>new</i> events which
+will cause the block to run again &hellip; ad infinitum.<br>
+Time can never advance. &#128542;
+</p>
+
+<p>
+Most such examples which occur in development will be more obscure
+&ndash; and can happen quite easily when not using clocked registers
+enough.  They are usually a case of trying to do too much in a single
+clock cycle, often with signals linking different modules.<br>  If
+such a problem appears likely, a <i>bug-finding</i>
+technique<sup>&dagger;</sup> can be inserting a small delay:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+always @ (a, b)<br>
+begin<br>
+b = a;<br>
+<font style="color:red;">#1</font> a = !b;<br>
+end<br>
+</blockquote>
+
+<p>
+This allows time to continue and, if there is a problem, (rather
+frantic) oscillation of the signals will become apparent.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Not a permanent solution.  There needs to be a
+state-holding element somewhere in the loop.
+</blockquote>
+<hr>
+
+<p><a href="02x_simulation.html#index">Back to Simulation</a></p>
+<p><a href="02f_simulation_time.html">Back</a> to simulation time</p>
+<p><a href="02f_simulation_time.html#delays">Forwards</a> to simulation delays</p>
+<p><a href="index.html">Up to Index</a></p>
+<hr>
+<hr>
+
+</body>

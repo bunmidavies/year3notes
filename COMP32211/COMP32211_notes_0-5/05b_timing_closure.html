@@ -1,0 +1,413 @@
+<title>Timing closure</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Clock distribution <span style="color:red;font-size:24px">&star;</span></h2>
+
+<p>
+In practice clock arrival times at <i>all flip-flops</i> in a
+synchronous domain have to be &lsquo;close enough&rsquo;
+that every flip-flop is committed to any changes before any flip-flop
+output changes are perceived.  This implies &lsquo;simultaneity&rsquo;
+of clock arrival.  Any <i>difference</i> in arrival times is referred to as
+  &lsquo;<b>clock skew</b>&rsquo; and there is significant effory
+expended in minimising it.<br>
+<span style="color:blue">Note that the absolute <i>latency</i> of
+  clock distribution is not relevant: the clock is an ever-repeating
+  waveform.  It is any <i>differences</i> in latency (skew) which can
+  cause problems.</span>
+</p>
+
+<h3>Observations on clock distribution</h3>
+
+<ul>
+<li> Clocks have <b>high fan-out</b>
+  <ul>
+  <li> a clock may fan out to thousands of flip-flops
+  </ul>
+
+<li> Clock edges should be &lsquo;fast&rsquo;
+  <ul>
+  <li> Slow edge speeds increase the uncertainty in exactly when the
+       transition &lsquo;happens&rsquo;
+  </ul>
+
+<li> Clock signals are repetitive
+  <ul>
+  <li> The latency of a clock reaching a flip-flop doesn't matter
+  <li> They always arrive at regular intervals
+  </ul>
+</ul>
+
+<img src="figures/clock_tree.png" alt="Clock tree" align="right" width=20%>
+
+<p>
+These properties mean that clock signals require (electrical)
+buffering &hellip; but that's okay providing the skew is still kept
+small.  Because the signal is distributed over an <i>area</i> of a
+chip this usually is in the form of a <b>clock tree</b>.
+</p>
+
+<p>
+The clock tree needs to be well balanced, taking into consideration:
+</p>
+
+<ul>
+<li>Fan-out at each point</li>
+
+<li>Buffer strength (electrical)</li>
+
+<li>Wire lengths</li>
+</ul>
+
+<p>
+This is a big task for &lsquo;Place and Route&rsquo;: fortunately,
+tools will help with this.
+</p>
+
+<center>
+<img src="figures/H_tree.png" alt="Clock H-tree" width=40%>
+</center>
+
+<p>
+The classic &lsquo;<b>H-tree</b>&rsquo; structure is one method of
+trying to distribute a clock across a chip with minimal skew.  Note,
+all paths are (notionally) the same length.
+</p>
+
+<center>
+<div class="inset">
+
+<h3>FPGA clock distribution</h3>
+
+<p>
+Modern FPGAs have a dedicated set of clock distribution networks built
+onto the chip which deliver clock signals to all flip-flops with minimal
+skew.  There are typically a small number (e.g. four) of these networks so
+that a number of different clocks may be used.  These networks can only be
+used for clocking flip-flops.
+</p>
+
+</div>
+</center>
+
+
+<h3>Reset skew</h3>
+
+<p>
+Another signal with potentially very high fan-out is
+<span style="font-family: 'Courier New', monospace;">reset</span>
+Reset <i>activation</i> is not normally a timing problem because reset
+will be present for some time.  The <i>removal</i> of reset can be a
+problem though.  Imagine reset being removed in one part of a state
+machine but not quite making it to another.  This could cause the
+machine to enter an illegal state.  It is sometimes necessary to
+synchronise an otherwise asynchronous reset to prevent this.
+</p>
+
+<hr>
+
+<h2>Timing Closure <span style="color:red;font-size:24px">&star;</span></h2>
+
+<p>
+Timing closure is, basically, making the logic fit within the desired
+clock period.
+</p>
+
+<p>
+A HDL design first concentrates on the logic <i>functionality</i> of
+the system.  Timing closure is the subsquent process of persuading the
+synthesized logic to operate correctly within the desired clock period
+under all circumstances.  (It can be a major phase of a real design!)
+</p>
+
+<h3>Simulation</h3>
+
+<ul>
+<li> Okay for a rough-cut
+
+<li> May be difficult to simulate <b>critical path</b>
+  <ul>
+  <li> the &lsquo;longest&rsquo; (slowest!) path between registers
+  </ul>
+</ul>
+
+<p>
+Functional simulation can give <b>cycle accurate</b> speed
+measurements but not, directly, the critical path.  If the simulation
+is run on a back-annotated<sup>&dagger;</sup> netlist extracted from a
+synthesized design then it can indicate whether a particular sequence
+will fail at a particular clock speed.  This is a reasonable guide but
+is not reliable unless either the critical path is known (and
+exercised) or the simulation is exhaustive since it is probable that
+not every switching path will be exercised.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>The behavioural description has been converted into
+a &lsquo;gate&rsquo; model includeing estimated delays.
+</blockquote>
+
+<p>
+Example: a ripple carry adder.  Simulation with random inputs is
+unlikely to find the slowest case, when a carry propagates across the
+whole width.
+</p>
+
+
+<img src="figures/STA.png" alt="Static timing analysis" width= 40% align="right">
+
+<h3>Static timing analysis (STA)</h3>
+
+<ul>
+<li> Take blocks of logic between synchronously clocked elements
+
+<li> Time all possible switching paths in block
+
+<li> Find the longest
+</ul>
+<br clear="right">
+
+<h3>Advantage</h3>
+<ul><ul>
+<li> Quick to perform
+</ul></ul>
+
+<h3>Disadvantages</h3>
+<ul><ul>
+<li> Should give a <i>conservative</i> upper bound
+<li> Can be too pessimistic
+</ul></ul>
+
+<h4>How fast does it go?</h4>
+
+<p>
+This can be difficult to determine, exactly.  It is set by the critical
+path.  From a HDL source this requires at least technology mapping into
+gates.  Accuracy requires knowledge of gate strengths, wire load and
+layout detail.  However it is cost effective to estimate timing early
+to check that the implementation strategy is feasible.  Even pre-layout
+the tools usually give an estimate of the wire loads to yield a more
+realistic result.
+</p>
+
+<h4>Static Timing Analysis (STA)</h4>
+
+<p>
+In this case &lsquo;static&rsquo; means independent of input state.
+The delays through each combinatorial path can be summed and compared
+with the design objective.  This reveals the critical path or the
+&lsquo;<b>slack</b>&rsquo; in all logic paths.  In the latter case
+&lsquo;<b>negative slack</b>&rsquo; will reveal where the logic is too
+slow.
+</p>
+
+<!--
+<center><font style="color:blue;font-size:30px">** Expand on 'slack';
+    maybe add an inset? **</font></center>
+-->
+
+<p>
+The great advantage of static analysis is its low computational
+complexity.  The disadvantage is that the &lsquo;critical path&rsquo; may be a
+false path, i.e. one whose switching sequence cannot occur in reality.
+</p>
+
+<p>
+In general STA will identify anything which is significantly bad at
+low cost.
+</p>
+
+<h4>Tolerances</h4>
+
+<p>
+Estimating the timing of synthesized logic is not a singluar
+operation.  At this point there is the need to take into consideration
+the triumverate PVT.
+</p>
+
+<ul>
+<li><b>P</b>rocess: manufacturing variations will result in
+  transistors of different &lsquo;speeds&rsquo; from batch to batch.
+  The desing should tolerate any expected differences, which can be
+  aquire significant.  The extreme (tolerable) values are known as
+  &ldquo;<b>process corners</b>&rdquo; and timing simulation should
+  verify operation at all of these.</li>
+<li><b>V</b>oltage: the supply to gates will vary from place to place
+  &ndash; sometimes dynamically as other parts of the system switch.</li>
+<li><b>T</b>emperature: may vary significantly during operation
+  causing changes in gate propagation delay.</li>
+</ul>
+
+<p>
+In addition to these factors an allowance is needed for <b>clock
+jitter</b>: fluctuations in the clock period over a short time.  This
+can be caused by &lsquo;hunting&rsquo; from a PLL clock generator
+(q.v.) for example.  There may be something like a 5%-10% allowance in
+the period for this.
+</p>
+
+<p>
+Finally a bit of extra time is typically allowed for uncertainty and
+factors which might have been overlooked or misjudged.  Designers are
+still fallible and it is as well to acknowledge that too!
+</p>
+
+<h4>Does it go fast enough?</h4>
+
+<p style="color:blue">
+No, of course it doesn't; where would the fun be in that? 
+</p>
+
+<p>
+Seriously, what is &lsquo;fast enough&rsquo;? In many applications
+there will be a real-time constraint to be met but exceeding it brings
+no additional benefit.  In other applications (e.g. microprocessors)
+any performance increase is to be seized.
+</p>
+
+<h4>How can the speed be improved?</h4>
+
+<p>
+How close are you to your target? If you're &lsquo;miles off&rsquo;
+you need to restructure your architecture to increase parallelism.
+This may be done by:
+</p>
+
+<ul>
+<li> deeper pipelining &rArr; faster clock
+
+<li> increase logic parallelism &rArr; do more within clock cycle
+
+<li> evaluating several things at once &rArr; do more with slower clock
+
+<li> multi-cycle operations &rArr; sometimes allow more than one period
+</ul>
+
+<p>
+If close to target you might be able to identify and recode critical
+modules.
+</p>
+
+<p>
+Tools can also be instructed to optimise for certain criteria, such as
+speed, power, area &hellip; Normally gains in one category are paid for in
+others.
+</p>
+
+<h4>Technology</h4>
+
+<p>
+Many cells come in families with various drive strengths.  Increasing the drive
+will speed up an output (and slow the input, and probably cost power).
+</p>
+
+<p>
+It may be possible to use different cell families to improve performance. E.g.
+</p>
+
+<ul>
+<li> High-speed &mdash; low threshold transistors switch faster but leak more
+
+<li> Standard &mdash; a compromise design
+
+<li> Low-leakage &mdash; high threshold transistors save power but switch slowly
+</ul>
+
+<h4>Post-layout &hellip;</h4>
+
+<p>
+The process may need repeating.  After the wiring is factored in things
+(probably) have slowed down.  Buffers may be added which increase the
+latency but speed up edges.
+</p>
+
+<p>
+Hopefully this process converges on something acceptable.
+</p>
+
+<p>
+<b>Optimise early</b> to avoid wasting effort on &lsquo;hopeless&rsquo;
+designs.  Layout and extraction all take time and more accurate
+modelling also takes longer.
+</p>
+
+<hr>
+
+<h3 id="index";>Timing: links</h3>
+
+<h4>In this session</h4>
+<ul>
+<li><a href="05a_clocking.html">Clocking.</a></li>
+<li><a href="05b_timing closure.html">Timing closure.</a></li>
+<li><a href="05c_time_stealing.html">Time stealing.</a></li>
+<li><a href="05d_clock_domains.html">Clock domains.</a></li>
+<li><a href="05e_example.html">Clock generation.</a></li>
+<li><a href="05f_more.html">** TBC **.</a></li>
+</ul>
+
+<h4>Other</h4>
+<ul>
+<li><a href="03_testing.html">Previous session's notes</a>: verification.</li>
+<li><a href="05_timing.html">Next session's notes</a>: timing.</li>
+<li><a href="index.html">Up to Index.</a></li>
+</ul>
+
+
+<p><a href="05c_time_stealing.html">Back</a> to time stealing.</p>
+
+<p><a href="05e_clock_generation.html">Forwards</a> to clock generation.</p>
+
+<p><a href="05_timing.html#index">Up to Clocking.</a></p>
+
+<hr><hr>
+
+</body>

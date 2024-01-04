@@ -1,0 +1,971 @@
+<title>Verilog revision</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column3 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 5%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Verilog: a reminder</h2>
+
+<p>
+These pages are provided as a brief aide memoire.  There are many
+books and web tutorials which give a more complete description.  A
+suggested, on-line tutorial may be found at:
+<a href="http://www.asic-world.com/verilog/">http://www.asic-world.com/verilog/</a>
+</p>
+
+<p>
+The full standard (IEEE Std 1364-2001) is available via
+<a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a>
+(via the Library subscription) &mdash; and, possibly, in 
+<a href="https://inst.eecs.berkeley.edu/~cs150/fa06/Labs/verilog-ieee.pdf">other places</a>.
+
+<p>
+This not meant to be comprehensive &ndash; it should be a reminder of
+some common constructs; you may meet some new material later!
+</p>
+
+<div class="row">
+<!--  <div column-width: 200px; class="column" style="background-color:#aaa;"> -->
+
+  <div class="column">
+
+  <h4>Declarations</h4>
+
+  <table>
+  <tr>
+  <th>Syntax</th>
+  <th>Use</th>
+  </tr>
+  <tr>
+  <td>wire aaa;</td> <td>A simple, combinatorial logic variable.</td>
+  </tr>
+
+  <tr>
+  <td>reg bbb;</td> <td>A variable which may (or may not) be state holding.</td>
+  </tr>
+
+  <tr>
+  <td>reg&nbsp;[7:0]&nbsp;ccc;</td> <td>As above, but an eight bit value.</td>
+  </tr>
+
+  </table>
+
+
+  <h4>Operators</h4>
+
+  <p>
+  Operators are, in general the same as in C or Java.  There are some
+  additional features:
+  </p>
+
+  <table>
+  <tr>
+  <th>Syntax</th>
+  <th>Use</th>
+  </tr>
+
+  <tr>
+  <td>>></td> <td>Right shift (logical)</td>
+  </tr>
+  <tr>
+  <td>>>></td> <td>Right shift (arithmetic, if applicable)</td>
+  </tr>
+
+  <tr>
+  <td>&ccc</td> <td>A (unary) reduction operator; ANDs all the bits in the
+  variable together.  Others include &lsquo;|&rsquo;, &lsquo;^&rsquo;, &lsquo;~&&rsquo; etc.</td>
+  </tr>
+  
+  <tr>
+  <td>{ddd,&nbsp;eee}</td> <td>Concatenate two (or more) variables.</td>
+  </tr>
+
+  <tr>
+  <td>{4{fff}}</td> <td>Concatenate four copies of fff. </td>
+  </tr>
+
+  </table>
+
+
+  <h4>Execution</h4>
+
+  <table>
+  <tr>
+  <th>Syntax</th>
+  <th>Use</th>
+  </tr>
+
+  <tr>
+  <td>initial</td> <td>Execute following statement <i>once</i>, starting
+      at time = 0.</td>
+  </tr>
+
+  <tr>
+  <td>always</td> <td>Run following statement continuously.<br>
+  (Needs some form of delay!)</td>
+  </tr>
+
+  <tr>
+  <td>always&nbsp;@&nbsp;(&hellip;)</td> <td>Run following statement whenever an
+      event in the parenthesized list occurs.
+  </td>
+  </tr>
+
+  </table>
+
+
+
+  <h4>Timing</h4>
+
+  <table>
+  <tr>
+  <th>Syntax</th>
+  <th>Use</th>
+  </tr>
+
+  <tr>
+  <td>#20 </td> <td>Wait for 20 time units.</td>
+  </tr>
+
+  <tr>
+  <td>@&nbsp;(posedge&nbsp;clk)</td> <td>Wait for a (rising edge) event on
+      signal.</td>
+  </tr>
+
+  </table>
+
+  </div>
+
+  <div class="column">
+
+  <h4>Values</h4>
+
+  <table>
+  <tr>
+  <th>Syntax</th>
+  <th>Use</th>
+  </tr>
+  <tr>
+  <td>1234</td> <td>A decimal number.</td>
+  </tr>
+
+  <tr>
+  <td>16'hABCD</td> <td>A 16-bit hexadecimal number.</td>
+  </tr>
+
+  <tr>
+  <td>4'b1010</td> <td>A 4-bit binary number.</td>
+  </tr>
+
+  <tr>
+  <td>x ('hx etc.)</td> <td>The &lsquo;unknown&rsquo; value.</td>
+  </tr>
+
+  <tr>
+  <td>z</td> <td>The high-impedance state.</td>
+  </tr>
+
+  </table>
+
+
+  <h4>Assignment</h4>
+
+  <table>
+  <tr>
+  <th>Syntax</th>
+  <th>Use</th>
+  </tr>
+
+  <tr>
+  <td>assign&nbsp;a&nbsp;=&nbsp;b&nbsp;+&nbsp;c;</td> <td>A continuous assignment; combinatorial logic.<br>
+  Assigns to wire.
+  </td>
+  </tr>
+
+  <tr>
+  <td>d = e & f;</td> <td>Blocking assignment.  d may be reassigned in block,
+  reading top-to-bottom.  Use for combinatorial logic.<br>
+  Assigns to reg.
+  </td>
+  </tr>
+
+  <tr>
+  <td>g <= h;</td> <td>Non-blocking assignment.  g should be assigned at most
+  once at any time.  Use for registers.<br>
+  Assigns to reg.
+  </td>
+  </tr>
+
+  </table>
+
+  <p>For synthesis (at least!) only assign to each variable in <i>one
+  block</i>.  (If you are writing combinatorial code with blocking
+  assignments you can <i>reassign</i> a variable <i>within that
+  block</i> in a similar manner to software programming.)</p>
+
+  <h4>Control</h4>
+
+  <table>
+  <tr>
+  <th>Syntax</th>
+  <th>Use</th>
+  </tr>
+
+  <tr>
+  <td>if (&hellip;) &hellip; {else} &hellip;</td> <td>C/Java like choice.</td>
+  </tr>
+
+  <tr>
+  <td>case</td> <td>Multi-way &lsquo;switch&rsquo; choice.</td>
+  </tr>
+
+  <tr>
+  <td>repeat (10) </td> <td>Perform following statement ten times.</td>
+  </tr>
+
+  <tr>
+  <td>while (&hellip;) &hellip;</td> <td>C-like repetition.</td>
+  </tr>
+
+  <tr>
+  <td>for (&hellip;;&hellip;;&hellip;) </td> <td>C-like repetition.
+  </td>
+  </tr>
+
+  </table>
+
+  </div>
+
+</div>
+
+<p>
+Some of these constructs are useful for testbenches but are not
+synthesizable.
+</p>
+
+<hr>
+
+<h3 id="testbench">Verilog reminder: a testbench</h3>
+
+<p style="font-family: 'Courier New', monospace;">
+initial clk = 1; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Set clock initial value<br>
+always #5 clk = !clk; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Oscillate with 10 unit period<br>
+&nbsp;<br>
+initial #1000 $stop; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Limit simulation run time<br>
+&nbsp;<br>
+initial<br>
+ &nbsp;begin &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Bracket following into one statement<br>
+ &nbsp;reset = 1'b1;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Initialise the Device Under Test<br>
+ &nbsp;en = 1'b1;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Set up an initial input value<br>
+ &nbsp;@ posedge clk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Wait for next rising clock edge<br>
+ &nbsp;reset = 1'b0;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Remove reset<br>
+ &nbsp;while (c == 0) @ posedge clk; // Wait until output 'c' asserted<br>
+ &nbsp;en = 1'bx; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Make input 'en' undefined<br>
+ &nbsp;end &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // End of statement (but time continues)<br>
+<p>
+
+<h3>Verilog for testbenches</h3>
+
+<p>
+This testbench assumes the existence of some design which has defined
+the variables.  It is reminiscent of the stimulus files used in testing
+in Cadence.
+</p>
+
+<p>
+In the example on the slide there are four separate blocks.  The three
+&lsquo;<font style="font-family: 'Courier New',
+monospace;">initial</font>&rsquo; blocks start at time = 0 and run
+once.  Thus the first statement initialises an input and stops.  The
+other &lsquo;<font style="font-family: 'Courier New',
+monospace;">initial</font>&rsquo; statements contain delays which can
+deschedule them for periods of (simulation) time.
+</p>
+
+<p>
+The &lsquo;<font style="font-family: 'Courier New',
+monospace;">always</font>&rsquo; block has no sensitivity list so it
+runs immediately.  A conflict with the preceding
+&lsquo;<font style="font-family: 'Courier New',
+monospace;">initial</font>&rsquo; assignment is avoided by the delay.
+Following the delay the clock is inverted and the always runs again;
+thus the clock oscillates.  The second
+&lsquo;<font style="font-family: 'Courier New',
+monospace;">initial</font>&rsquo; block waits for a (long) time and
+then tells the simulator to halt.  Without this the simulation would
+run forever &ndash; or until it is halted by user intervention.
+</p>
+
+<p>
+Note: it would be a mistake to write something purely like:
+</p>
+<p style="font-family: 'Courier New', monospace;">always clk = !clk;</p>
+
+<ul>
+<li>What would happen?
+<li>Would the simulation terminate?
+</ul>
+
+<p>
+Combinatorial logic loops like this (usually somewhat more subtle
+involving chains of signals) are quite common mistakes.  We've added a page of
+<a href="02a_event_driven_simulation.html">description of the
+    simulation process</a> to help understand what happens.
+</p>
+
+<p>
+The method shown is not the only way to achieve the desired effect.
+For example the clock (and termination) may be produced by:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+initial<br>
+&nbsp; begin<br>
+&nbsp; clk = 0;<br>
+&nbsp; repeat (200) #5 clk = !clk;<br>
+&nbsp; $stop;<br>
+&nbsp; end<br>
+</p>
+
+<p>
+You may prefer this style.
+</p>
+
+
+<center>
+<div class="inset">
+
+The Boolean &lsquo;not&rsquo;
+(<span style="font-family: 'Courier New', monospace;">!</span>) is
+fine for single bit signals (maybe a bit more obvious in source
+code?); for multi-bit variables the inversion operator
+(<span style="font-family: 'Courier New', monospace;">~</span>) is needed.
+
+</div>
+</center>
+
+<!--
+<h4>Notes</h4>
+
+<ul>
+<li> These notes are not intended as a comprehensive guide to Verilog.
+<li> Introductions to Verilog features may be found in a number of books
+and web tutorials.
+<ul>
+  <li> e.g. <a href="http://www.asic-world.com/verilog/">http://www.asic-world.com/verilog/</a>
+</ul>
+<li> For a definitive guide, consult the 
+<a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE standard document.</a>
+
+</ul>
+-->
+
+<hr>
+
+<h3 id="circuit">Verilog reminder: a circuit</h3>
+
+<p style="font-family: 'Courier New', monospace;">
+module counter (input wire clk, input wire en,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output reg [3:0] count, output wire c);<br>
+reg [3:0] next; &nbsp;&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Internal variable (combinatorial)<br>
+&nbsp;<br>
+always @ (count) &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; // Run block when &lsquo;count&rsquo; changes<br>
+&nbsp; begin<br>
+&nbsp; next = count + 1; &nbsp;&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;// Blocking assignment<br>
+&nbsp; if (count == 9) next = 0; &nbsp; &nbsp; // Variable may be reassigned<br>
+&nbsp; end<br>
+&nbsp;<br>
+always @ (posedge clk, posedge reset)<br>
+&nbsp; if (reset) count <= 0; &nbsp; &nbsp; &nbsp; &nbsp;// Asynchronous reset<br>
+&nbsp; else if (en) count <= next; &nbsp; // Maybe adopt new value (non-blocking)<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<font style="color:red">else &nbsp; &nbsp;count <= count;&nbsp; // This clause may safely be omitted</font><br>
+&nbsp;<br>
+assign c = (count == 9);&nbsp; &nbsp; &nbsp; &nbsp; // TRUE is a &lsquo;1&rsquo; value<br>
+endmodule
+<p>
+
+<h3>&hellip; for synthesis</h3>
+
+<img src="figures/Verilog_synth.png" alt="Synthesised Verilog block diagram" align="right" width=40%>
+
+<p>
+The example is contrived to illustrate a number of different Verilog
+features.
+</p>
+
+<h4>Notes</h4>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">next</font>&rsquo;
+is sometimes reassigned in its block but it is <b>always assigned</b>, thus
+the combinatorial block always calculates its result(s) from its
+input(s).  This guarantees it is combinatorial and does not need any
+state holding.  (See note <a href="#oops">below</a>).
+</p>
+
+<p>
+The description of the register, with its asynchronous clear, is one
+which will be recognised by the synthesizer.
+</p>
+
+<p>
+The register
+(&lsquo;<font style="font-family: 'Courier New', monospace;">count</font>&rsquo;)
+does not need the second else; if it is not enabled it will do
+nothing.  There is already a state-holding element here so this doesn't
+affect the circuit.
+</p>
+
+<p>
+The carry output
+(&lsquo;<font style="font-family: 'Courier New', monospace;">c</font>&rsquo;)
+is assigned combinatorially from a comparator.  In practice this may
+&lsquo;glitch&rsquo; as its input bits change.  This doesn't matter as
+long as it's only sampled on a clock edge.
+<i>It should not be used as a clock, itself.</i>
+</p>
+
+<p>
+It is also possible, and sometimes clearer, to incorporate some of the
+logic in the same statement as the register assignment.
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk, posedge reset)<br>
+ &nbsp;if (reset) count <= 0; &nbsp; &nbsp; // Asynchronous reset<br>
+ &nbsp;else if (en)<br>
+ &nbsp; &nbsp;if (count == 9) count <= 0;<br>
+ &nbsp;else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;count <= count + 1;<br>
+</p>
+
+<p>
+The choice of style can depend on the author.  This is shorter than the
+example on the slide although the variable
+&lsquo;<font style="font-family: 'Courier New', monospace;">next</font>&rsquo;
+or equivalent &ndash; the state that is about to be entered &ndash; is
+sometimes a convenient input for other logic &hellip; or for viewing
+for debug purposes.
+</p>
+
+<h4 id="oops">A combinatorial logic &lsquo;trap&rsquo;</h4>
+
+<p>
+Because Verilog is a Hardware Description Language it acts like a
+programming language: if a variable is not being defined (at any time
+the thread is run) then it retains its previous value.  In a hardware
+realisation this implies there must then be a storage element.  In many
+cases this is not what is wanted in a synthesized design.
+</p>
+
+<ul>
+<li>In <b>combinatorial</b> circuits <b>always <u>define</u></b> the output
+  regardless of whether you care about the value or not.<br>
+  This might be:
+  <ul>
+  <li>an <font style="font-family: 'Courier New', monospace;">else</font>
+      to an <font style="font-family: 'Courier New', monospace;">if</font>
+      statement
+  <li>a <font style="font-family: 'Courier New', monospace;">default</font>
+      in a <font style="font-family: 'Courier New', monospace;">case</font>
+      statement
+  <li>a potentially &lsquo;overwritten&rsquo; in a block of statements
+  <li> etc.
+  </ul>
+  It is okay to make this value an
+  &lsquo;<font style="font-family: 'Courier New', monospace;">x</font>&rsquo;
+  if (as is likely) the value doesn't matter; it still tells the
+  synthesizer it doesn't need storing.  (In fact the added freedom
+  probably results in a more efficient circuit!)
+
+  <li>In sequential circuits this doesn't matter since the storage is
+  already present.  Some people like to reassign the existing value
+  anyway: it won't make a difference to the result.
+</ul>
+
+<p>
+A logic synthesizer will usually spot the problem and produce a
+&lsquo;<a href="02b_synth_errors.html">WARNING</a>&rsquo;;
+unfortunately may people tend to ignore warnings.
+</p>
+
+<hr>
+
+<h3>Coding guidelines</h3>
+
+<center><b>*** You should read this page! ***</b></center>
+
+<p>
+Some &lsquo;features&rsquo; of Verilog are open to abuse.  It is
+possible to write Verilog code in numerous ways.  Some ways are
+error-prone; they &lsquo;look&rsquo; right but behave oddly, or are
+unduly expensive to build.  Some models will run on a simulator.  Some
+will run on particular simulators, but not on others.  Some will run
+when synthesised into hardware.  Some will be reliable across all tools
+and implementations.
+</p>
+
+<p>
+Here are some guidelines to help you achieve the last of these cases.
+</p>
+
+<ul>
+<li> Verilog is case sensitive and (single) &lsquo;wire&rsquo; variables do not
+  have to be declared.  Thus:<br>
+<font style="font-family: 'Courier New', monospace;">wire &nbsp; this, that;<br>
+assign This = a && b;<br>
+assign that = this;</font><br>
+will run &mdash; and have an undefined output.  Trap!<br>
+  (You are <u>advised to declare</u> everything you use.)
+
+<li> Use blocking assignments for combinatorial logic.
+<li> Ensure &lsquo;combinatorial&rsquo; outputs are assigned under all
+  conditions.<br>
+  E.g. include &lsquo;<font style="font-family: 'Courier New',
+				 monospace;">default</font>&rsquo; by
+  habit in all &lsquo;<font style="font-family: 'Courier New',
+				   monospace;">case</font>&rsquo;
+  statements. 
+<li> Use non-blocking assignments for latching circuits.
+<li> Make variable sizes match.  Assigning a variable of one size to one
+of another is <i>syntactically</i> legal.<br>
+(You may get warnings.)
+</ul>
+
+<center>
+<p style="color:green">
+If you have more simple, useful recommendations, do share them!
+</p>
+</center>
+
+<hr>
+<!--
+<h1>Structural Verilog</h1>
+-->
+<p>
+Verilog can also be used to specify hierarchical designs.
+</p>
+
+<img src="figures/AND2.png" alt="Instantiated AND gate" align="right" width=20%>
+
+<p>
+Example
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+and2 gate_1 (.a(x), .b(y), .q(z));
+</p>
+
+<p>
+where
+</p>
+
+<blockquote>
+<font style="font-family: 'Courier New', monospace;">and2</font> is
+the part (module) name<br>
+<font style="font-family: 'Courier New', monospace;">gate_1</font> is the instance name<br>
+{<font style="font-family: 'Courier New', monospace;">a</font>, <font style="font-family: 'Courier New', monospace;">b</font>, <font style="font-family: 'Courier New', monospace;">q</font>} are the inputs/output of the module<br>
+{<font style="font-family: 'Courier New', monospace;">x</font>, <font style="font-family: 'Courier New', monospace;">y</font>, <font style="font-family: 'Courier New', monospace;">z</font>} are wires at the higher level<br>
+</blockquote>
+
+<ul>
+<li> Structural Verilog may be written by hand &ndash; but it is sometimes
+  easier to draw schematics
+  <ul>
+  <li> It is sometimes useful for including an existing module in a
+  behavioural description
+  </ul>
+<li> It is often machine-written as a netlist format
+  <ul>
+  <li> e.g. the output from synthesizing behavioural code may be in this form
+  <li> As text it is more portable than schematics.
+  </ul>
+</ul>
+
+<hr>
+
+<h3 id="hierarchy">Structural Verilog</h3>
+
+<p>
+Structural Verilog allows the explicit inclusion of certain cells
+within a design.  The example below shows a simple module with a
+schematic equivalent.
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+module demo (input &nbsp;wire clk,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+input &nbsp;wire [7:0] a,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+input &nbsp;wire b,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+input &nbsp;wire c,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+output wire p,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+output wire [15:0] q);<br>
+wire d, e, f;<br>
+wire [7:0] w;<br>
+&nbsp;<br>
+assign d = b || c;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+// Synthesizable statement<br>
+block_1 I1(.clk(clk), .a(a), .b(d), .i(e), .j(w));<br>
+block_2 I2(.clk(clk), .a(w), .k(f), .l(q));<br>
+and2 I3 (.a(e), .b(f), .q(p));<br>
+endmodule<br>
+</p>
+
+<h4>Schematic</h4>
+
+<center>
+<img src="figures/Verilog_struct.png" alt="Structural Verilog block diagram">
+</center>
+
+<p>
+This example is contrived to show some features:
+</p>
+
+<ul>
+<li> I/O wires and buses connected directly
+<li> Internal wire and bus declarations
+<li> Naming of instances
+<li> Mixture of structural and synthesized code allowed
+  <ul>
+  <li> Not necessarily Good Practice though!
+  </ul>
+</ul>
+
+<hr>
+
+<h3>Syntax</h3>
+
+<p>
+Assume we have a module declaration:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+module and2 (input a, input b, output q);<br?
+&hellip;
+</p>
+
+<p>
+The Verilog 2001 syntax
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+and2 gate_1 (.a(x), .b(y), .q(z));
+</p>
+
+<p>
+explicitly connects wires/buses to ports on the module by associating their
+names.  The order in which these are written is irrelevant.  Ports may be omitted
+(although this is only sensible for outputs; inputs should always be defined).
+Verilog 1995 syntax relies on ordering:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+and2 gate_1 (x, y, z);
+&hellip;
+</p>
+
+<p>
+Backwards compatibility means that Verilog 2001 will accept either.
+</p>
+
+<p>
+It is <i>suggested</i> that the later syntax is preferred because it
+is more robust against later edits, e.g. if another port is added to a
+module.
+</p>
+
+<hr>
+
+<h3 id="synthesis">Synthesis: (possible) examples</h3>
+
+<img src="figures/circuit_1.png" alt="Example logic circuit" align="right" width=40%>
+
+<p style="font-family: 'Courier New', monospace;font-size:20px" align="right">
+&nbsp;<br>&nbsp;<br>
+assign y = a & b | c; &nbsp; &nbsp; &nbsp;<br clear="right">
+</p>
+
+<img src="figures/circuit_2.png" alt="Example logic circuit" align="left" width=40%>
+
+<p style="font-family: 'Courier New', monospace;font-size:20px">
+&nbsp;<br>&nbsp;<br>
+&nbsp; &nbsp; &nbsp; assign q = s ? i1 : i0;<br clear="left">
+</p>
+
+<img src="figures/circuit_3.png" alt="Example logic circuit" align="right" width=30%>
+
+<p style="font-family: 'Courier New', monospace;font-size:20px" align="right">
+&nbsp;<br>&nbsp;<br>
+always @ (posedge clk, posedge rst)<br>
+if (rst) Q <= 0; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br>
+else &nbsp;&nbsp; &nbsp;Q <= D; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br clear="right">
+</p>
+
+<p>
+Verilog is a Hardware Description Language but, if a subset of its
+features are used, the description can be turned into an
+implementation.
+</p>
+
+<table align="right">
+<tr>
+<th>C compiler</th>
+<th>Verilog</th>
+</tr>
+<tr>
+<td>Syntax parsing</td> <td>Syntax parsing</td>
+</tr>
+
+<tr>
+<td>Semantic Analysis</td> <td>&lsquo;Elaboration&rsquo;</td>
+</tr>
+
+<tr>
+<td>Optimisation</td> <td>Optimisation</td>
+</tr>
+
+<tr>
+<td>Code dump</td> <td>Technology mapping</td>
+</tr>
+
+</table>
+
+
+<p>
+Just as a compiler takes a high-level language description of an
+algorithm and turns it into machine instructions for a chosen
+instruction set, a Verilog synthesizer turns a hardware description
+into an underlying technology.
+</p>
+
+<p>
+The technology will vary according to what is on offer on the target
+process.  <b>Cell libraries</b> are usually available from the
+<b>silicon foundry</b>.
+</p>
+
+<p>
+A typical cell library will contain familiar gates such as AND2, AND3,
+OR2, &hellip; [and more - but more on that later].
+</p>
+
+<p>
+During synthesis structures are identified in the source &ndash; and
+sometimes this fails.  The bottom example on the slide shows a D-type
+register with an <i>asynchronous</i> clear.  Reassure yourself that you
+follow the behaviour of this code.
+</p>
+
+<p>
+Here's a genuine example we found with one synthesizer:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+always @ (posedge clk, posedge rst)<br>
+if (rst || clr) Q <= 0; &nbsp; &nbsp;// Failed to synthesize<br>
+else &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;Q <= D;<br>
+&nbsp;<br>
+always @ (posedge clk, posedge rst)<br>
+if (rst) Q <= 0;<br>
+else if (clr) Q <= 0; else Q <= D;<br>
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">rst</font>&rsquo;
+is an <i>asynchronous</i> reset: a change of this signal will
+&lsquo;run&rsquo; the block.<br>
+&lsquo;<font style="font-family: 'Courier New', monospace;">clr</font>&rsquo;
+is an additional, <i>synchronous</i> reset; since it is only to be checked
+at active clock edges it is not in the sensitivity list.
+</p>
+
+<center>
+<div class="inset">
+
+<h3>Note on resets</h3>
+
+<p>
+It is not uncommon to have asynchronous resets to
+flip-flops/registers, as in &ldquo;Stop what you're doing <u>right
+    now</u>!&rdquo;  This is okay as the reset becomes active.
+However, in such circumstances, it is important that the
+reset <i>inactivation</i> is coordinated with the clock, otherwise
+there could be a timing violation (see later notes) and parts of a
+system may be held in reset whilst others start running again.  This
+can lead to unpredictable behaviour: not a Good Thing.
+<p>
+
+<p>
+Behaviourally these blocks are the same.  They should simulate in the
+same way.  However the author needed to separate the asynchronous
+input explicitly for synthesis.
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<h3>FPGA &hellip;</h3>
+
+<p>
+When synthesizing for an FPGA the tool will look for structures it
+can recognise and try to map these into the available resources.
+</p>
+
+<p>
+Examples:
+</p>
+
+<img src="figures/set_dff.png" alt="DFF resetting to '1'" align="right" width=35%>
+
+<ul>
+
+<li> A RAM &ndash; if specified appropriately &ndash; may be use
+dedicated RAM blocks.
+
+<li> A statement such as
+ &ldquo;<font style="font-family: 'Courier New', monospace;">A&nbsp;=&nbsp;B&nbsp;+&nbsp;C;</font>&rdquo; will use adjacent LUTs for its various bits to
+ exploit fast carry logic.
+
+<li> An &ldquo;<font style="font-family: 'Courier New',
+ monospace;">initial</font>&rdquo; statement may be applied to a
+ registered signal.  All flip-flops are zeroed when the FPGA's are
+ configured.  &ldquo;<font style="font-family: 'Courier New',
+ monospace;">initial x = 1;</font>&rdquo; can be implemented by
+ inverting the value around the actual flip-flop.
+
+<li> An FPGA with multiplier blocks may be able to exploit these.
+
+<br clear="right">
+</ul>
+
+<img src="figures/mux_schematic.png" alt="Multiplexer schematic" align="left" width=30%>
+
+<p>
+<table align="right">
+<tr>
+<th>?</th><th>s</th><th>a</th><th>b</th><th>q</th>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;0&nbsp;</td> <td>&nbsp;0&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;x&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td> <td>&nbsp;1&nbsp;</td>
+</tr>
+
+</table>
+<br clear="right">
+</p>
+
+<img src="figures/block_RAM.png" alt="Designing to exploit FPGA BRAM" align="right" width=25%>
+
+<p>
+Logic functions will then be amalgamated to fit into LUTs of the
+appropriate size.
+</p>
+
+<p>
+If a statement cannot be mapped into an available structure then the
+design may not fit the FPGA.
+</p>
+
+<p>
+On the right are two RAM read structures.  The upper one does not map
+to Xilinx block RAMs and therefore the RAM will be expanded into (a
+LOT of) combinatorial logic.
+</p>
+
+<p>
+The lower structure <i>looks</i> bigger but exploits the available
+resources and thus is (much) more efficient.
+<br clear="right")
+</p>
+
+<hr>
+
+<p><a href="01_Verilog.html#index">Back (up)</a> to Verilog</p>
+<p><a href="01b_Verilog_extras.html">Forward</a> to more Verilog notes</p>
+
+<hr><hr>
+
+</body>

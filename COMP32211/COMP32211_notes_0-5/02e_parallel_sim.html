@@ -1,0 +1,200 @@
+<title>Parallel Simulation</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Parallelism in simulation</h2>
+
+<p>
+Hardware, and therefore a HDL, is highly parallel too.
+</p>
+
+<ul>
+<li>Each <font style="font-family: 'Courier New', monospace;">initial</font>
+and <font style="font-family: 'Courier New', monospace;">always</font>
+block is an independent, parallel thread.
+  <ul>
+  <li>Think of these as &lsquo;threads&rsquo;.<br>
+      The independence of their scheduling is important both in
+      synthesized hardware and &ndash; perhaps less obviously? &ndash;
+      testbenches.
+  </ul>
+<li> Within each there can be:
+
+  <ul>
+  <li>Sequential block &nbsp;&nbsp;&nbsp;&nbsp;
+     <font style="font-family: 'Courier New', monospace;">begin ...  end</font>
+  <li>Parallel block &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <font style="font-family: 'Courier New', monospace;">fork ...  join</font>
+  </ul>
+
+</ul>
+
+<p>
+In a parallel block, all statements are executed
+&lsquo;simultaneously&rsquo;, as if they were in separate blocks.
+</p>
+
+<p>
+Sometimes this make no difference.  It is important when inserting
+delays, however.
+</p>
+
+<div class="row">
+<!--  <div column-width: 200px; class="column" style="background-color:#aaa;"> -->
+  <div class="column_space">
+  </div>
+
+  <div class="column2">
+
+<font style="font-family: 'Courier New',
+		    monospace;">
+begin<br>
+#10 a = 1;<br>
+#20 b = 0;<br>
+end<br>
+Elapsed time 30 units<br>
+</font>
+</div>
+
+  <div class="column2">
+<font style="font-family: 'Courier New',
+		    monospace;">
+fork<br>
+#10 a = 1;<br>
+#20 b = 0;<br>
+join<br>
+Elapsed time 20 units<br>
+</font>
+  </div>
+</div>
+
+<p>
+These blocks can be nested.
+</p>
+
+<ul>
+<li>Non-blocking assignments scheduled at a particular time all assign
+simultaneously.
+</ul>
+
+<hr>
+
+<h3>Blocks</h3>
+
+<p>
+Blocks compose much as you might expect.  In terms of timing a sequential
+block will take the sum of its internal delays whereas a parallel
+block will take the maximum of its individual delays.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+initial<br>
+ &nbsp;begin<br>
+ &nbsp;a = 0; b = 0; c = 0; d = 0; e = 0;<br>
+&nbsp;<br>
+<img src="figures/fork_times.png" alt="Fork/join timing"  align="right" width=40%>
+ &nbsp;fork<br>
+ &nbsp; &nbsp;begin<br>
+ &nbsp; &nbsp;#10 a = 1;<br>
+ &nbsp; &nbsp;#10 b = 2;<br>
+ &nbsp; &nbsp;end<br>
+&nbsp;<br>
+ &nbsp; &nbsp;fork<br>
+ &nbsp; &nbsp;#10 c = 3;<br>
+ &nbsp; &nbsp;#30 d = 4;<br>
+ &nbsp; &nbsp;join<br>
+ &nbsp;join<br>
+ &nbsp;e = 5;<br>
+ &nbsp;#10 $stop;<br>
+ &nbsp;end<br>
+</p>
+</blockquote>
+
+<h4>Named blocks</h4>
+
+<p>
+Individual blocks can be given unique names after
+the <font style="font-family: 'Courier New', monospace;">begin</font>
+or <font style="font-family: 'Courier New', monospace;">fork</font>.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+begin: my_block
+</p>
+</blockquote>
+
+<p>
+This can sometimes aid in identification in traces.
+</p>
+
+<hr>
+
+<p><a href="02x_simulation.html#index">Up</a> to simulation</p>
+<p><a href="02d_functional_sim.html">Back</a> to functional simulation</p>
+<p><a href="02f_simulation_time.html">Forward</a> to simulation time</p>
+
+<hr><hr>
+
+</body>

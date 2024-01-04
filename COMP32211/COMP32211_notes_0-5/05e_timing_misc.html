@@ -1,0 +1,311 @@
+<title>Miscellaneous</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h1>Miscellany</h1>
+
+<p align="center">
+A collection of other timing-related issues.
+</p>
+
+<hr>
+
+<h2>Timing checking tools</h2>
+
+<p>
+A number of tools exist to assist with timing closure.  Many of these
+are only appropriate when a physical realisation of the chip is
+available.
+</p>
+
+<ul>
+<li> Static Timing Analysis (STA)
+
+<li> Edge speed analysis
+
+<li> Hold time checking
+
+<li> Clock skew analysis
+
+<li> &hellip;
+</ul>
+
+<h2>Tools</h2>
+
+<p>
+A <a href="https://en.wikipedia.org/wiki/Static_timing_analysis"><b>Static
+Timing Analyser</b></a> (introduced earlier) will give an
+estimate of the critical path in a system by searching all paths
+between clocked registers and finding the slowest.  This then sets the
+&lsquo;standard&rsquo; for other logic speeds; there is (usually) no
+point in optimising any logic paths already faster than the critical
+path.
+</p>
+
+<p>
+The delay of the <b>critical path</b> will depend on the number of serial
+logic gates, their type, the fanout and other factors affecting the
+electrical load (particularly wire lengths) and their output impedance
+or &lsquo;drive strength&rsquo;.  All these factors go into &lsquo;the
+mix&rsquo; when attempting to optimise the circuit.
+</p>
+
+<p>
+Typically, <b>synthesis tools</b> will have <b>options</b> which allow
+the engineer to put more importance on speed, size, power etc.  It may
+be that a circuit can be optimised for speed but this may result in it
+being larger or more power hungry.
+</p>
+
+<p>
+<b>Edge speeds</b> are the time it takes a digital circuit to switch
+between states.  They depend on the outputting gates drive and the
+(capacitive) load it needs to switch.  Edges which are &lsquo;too
+slow&rsquo; may introduce problems such as:
+</p>
+
+<ul>
+<li>induced noise near the threshold may be received and amplified.</li>
+
+<li>different target gates may &lsquo;see&rsquo; the input switch at
+  (significantly) different times.</li>
+
+<li>increased time spent near the &lsquo;half way&rsquo; level may
+  result in an extra power drain.</li>
+</ul>
+
+<p>
+Tools are available to identify any slow<sup>&dagger;</sup> edges,
+possibly for further attention.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>The user can define what &ldquo;slow&rdquo; means.
+</blockquote>
+
+<p>
+The behavioural simulators used for functional verification are not
+the only class of circuit simulators.  At the most detailed level are
+simulators which model the parameters of each transistor and solve
+differential equations: these are typically generically referred to as
+&lsquo;<a href="https://en.wikipedia.org/wiki/SPICE">SPICE</a>
+although this is really only one of the families of
+software<sup>&dagger;</sup>.  Rather than logic levels these model
+analogue voltages.
+<p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Like &lsquo;Hoover&rsquo; for &lsquo;vacuum cleaner&rsquo;.
+</blockquote>
+
+<p>
+The modelling in such precise detail gives very good answers but takes
+a lot of computation.  Therefore such modelling is usually confined to
+small units such as <i>standard cells</i> (q.v.).
+</p>
+
+<p>
+There are also simulators which approximate the analogue behaviour
+more cheaply (but less accurately).  These can be used to produce good
+timing models (especially from post-layout netlists) since they are
+modelling the gates' &lsquo;drive&rsquo; and the wires'
+&lsquo;load&rsquo;, revealing signal edge speeds etc.  They are still
+slower than a simple, digital model for functionality.
+</p>
+
+<blockquote style="color:blue">
+Note that a potential disadvantage of an analogue simulation is that
+the signals are always represented by a voltage: there is no concept
+of &lsquo;unknown&rsquo;
+(<span style="font-family: 'Courier New', monospace;">X</span>) values
+which can sometimes be useful in fault-finding.
+</blockquote>
+
+<p>
+With &lsquo;challenging&rsquo; speed targets a flip-flop may be
+designed with a data <b>hold time</b> longer than its propagation delay.  With
+such it would be dangerous to connect one flip-flop output directly to
+another's input.  Any logic in-between will naturally act as an
+additional delay and help meet the true constraints.  <b>Hold-time
+checking</b> will identify any remaining risks here and allow extra
+buffer insertion.
+</p>
+
+<p>
+Remember that problems with a too-long critical path may be accommodated
+by reducing the clock frequency.  Hold-time problems are a property of
+the circuit and there is no cure if they appear in the chip!
+</p>
+
+<hr>
+
+<h3>Delay lines</h3>
+
+<p>
+It <i>is</i> possible &ndash; and sometimes necessary &ndash; to build
+delays onto ASICs.  An approximate delay can be produced with a
+&lsquo;chain&rsquo; of inverters or buffers; the actual delay on a
+given design and process may vary by a factor of two or more depending
+on the manufacturing and operation conditions of the chip.
+</p>
+
+<p>
+Precise delays need to be calibrated against a reliable reference
+frequency.  These are typically chains of gates (as above) whose
+length can be altered (e.g. by multiplexing output taps) to give the
+nearest available approximation to the required delay.  Periodic
+recalibration may be needed due to thermal drift.
+</p>
+
+<p>
+An example would be a
+<a href="https://en.wikipedia.org/wiki/Delay-locked_loop"><b>Delay-Locked
+Loop</b></a> (DLL).  For instance Xilinx FPGAs contain a small number
+of DLLs which allow the insertion of a known delay.  A typical
+application is to delay a clock signal so that edges at the leaves of
+the distribution tree are in phase (via a <i>total</i> delay of a
+number of clock cycles) with an incoming reference.  This effectively
+&lsquo;removes&rsquo; the clock buffer delays.
+</p>
+
+<p>
+Delays are often needed in <b>communication</b>, such as between chips.
+A common application is in SDRAM interfacing where the RAM's clock is
+sourced by the master interface, delayed across the circuit board,
+through the RAM and back across the board again.  This means returning
+data has a well-defined <b>frequency</b> but an ill-defined <b>phase</b>.
+Delays are used to bring received signals bak into phase with the
+internal clock.  (The delays also need adjusting dynamically as the
+temperature (etc.) varies too.)
+</p>
+
+
+<hr>
+
+<h2>Some random curiousities</h2>
+
+<center>
+<div class="inset">
+<h3>Asynchronous arbitration</h3>
+
+<p>
+It <i>is</i> possible to enter an asynchronous domain (one with some
+form of <i>pausible</i> clocking (<span style="color:green">it is possible!</span>) with 100%
+reliability using an arbiter or <i>mutual exclusion</i> element.  This
+is a cell which determines which of its (usually two) inputs arrived
+&lsquo;first&rsquo;.  It achieves reliability by <i>detecting</i>
+metastability and <i>delaying its decision</i> until this is resolved.
+</p>
+
+<p>
+Unfortunately the time taken to make a decision is unbounded so this
+process could always take more than a clock period &ndash; however
+long that is.
+</p>
+
+</div>
+</center>
+
+<p>&nbsp;</p>
+
+<center>
+<div class="inset">
+
+<h3>Chip variation</h3>
+
+<p>
+Gate speed depends on various manufacturing and operation conditions,
+normally referred to as &lsquo;PVT&rsquo; for Process, Voltage, Temperature.
+</p>
+
+<ul style="text-align:left">
+<li>Process: variation in manufacturing such as transistor doping density.</li>
+
+<li>Voltage: the supply voltage at a gate will be less than that at
+the chip's pins (Ohm's Law); this varies across the chip and may
+fluctuate due to other power demands elsewhere.</li>
+
+<li>Temperature: hotter is slower.</li>
+</ul>
+
+</div>
+</center>
+
+<p>&nbsp;</p>
+
+<center>
+<div class="inset">
+
+<h3>Frequency and power</h3>
+
+<p>
+The majority of the power dissipation in CMOS logic is dynamic; it
+occurs when gates/wires switch.  Thus &ndash; when executing &ndash;
+the power dissipation is roughly proportional to the clock
+frequency.  Reducing the frequency saves power (dissipates less heat).<br>
+</p>
+
+<p>
+More on this later.</p>
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<p><a href="05d_clock_generation.html">Back</a> to clock generation.</p>
+
+<p><a href="05_timing.html#index">Up (or onwards) to Clocking.</a></p>
+
+<hr><hr>
+
+</body>

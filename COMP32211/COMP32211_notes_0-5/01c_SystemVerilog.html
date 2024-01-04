@@ -1,0 +1,151 @@
+<title>System Verilog</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column3 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 5%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<h1>System Verilog</h1>
+
+<center>
+<p style="color:green;">This is not a complete guide!<br>
+This is just here to give some glimpses at some SystemVerilog
+    additional features.</p>
+<p style="color:green;">This is included here more for interest: you
+  don't need to learn this material but you are welcome to use what
+  you can if you wish.</p>
+</center>
+
+<h2>For design-and-build</h2>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/SystemVerilog">SystemVerilog</a>
+expands Verilog in numerous ways.  Some, like &lsquo;<b>Procedural
+Blocks</b>&rsquo; are there to help avoid pitfalls resulting from
+potential ambiguities in its predecessor, thus
+<font style="font-family: 'Courier New', monospace;">always_comb</font>
+can replace
+<font style="font-family: 'Courier New', monospace;">always</font>
+in defining a block of code but is restricted to <b>comb</b>inatorial
+blocks.  Presumably the idea is to ensure only &lsquo;proper&rsquo;
+code is enclosed, so an additional security check.
+Similarly there are also
+<font style="font-family: 'Courier New', monospace;">always_ff</font> and
+<font style="font-family: 'Courier New', monospace;">always_latch</font>
+for registers and latches respectively.
+</p>
+
+<p>
+A similar almost-synonym is the declaration (data type)
+<font style="font-family: 'Courier New', monospace;">logic</font>
+which is almost the same as
+<font style="font-family: 'Courier New', monospace;">reg</font>
+(which, remember, is not always driven by a physical <u>reg</u>ister)
+but can be driven with
+<font style="font-family: 'Courier New', monospace;">assign</font>
+too.  This is one of the extensions you're most likely to encounter
+first if you do this sort of thing in future.<br>
+Another new type is
+<font style="font-family: 'Courier New', monospace;">bit</font>
+(it can still come in arrays to form variables); these bits always
+have binary values and can't adopt 
+<font style="font-family: 'Courier New', monospace;">x</font> or
+<font style="font-family: 'Courier New', monospace;">z</font> states.
+</p>
+
+<p>
+For large hierarchies the inter-block wiring can become very
+complex.  <b>Interfaces</b> provide a means of &lsquo;wrapping&rsquo;
+associated signals into more complex buses which can be connected as
+single units.
+</p>
+
+<p>
+There are explicit <b>enumerated</b> types which save listing
+definitions by hand.  
+</p>
+
+
+<h2>For verification</h2>
+
+<p>
+The improvement is testbench facilities is probably the most
+significant addition.  These include (presumably) familiar concepts
+such as <b>object-oriented programming</b> and <b>string handling</b>.
+</p>
+
+<p>
+Debugging is eased with <b>assertions</b> (also present in some
+earlier Verilog versions).
+</p>
+
+<h2>Miscellaneous</h2>
+
+<p>
+Lots of syntactic features (such as
+<font style="font-family: 'Courier New', monospace;">x++</font>)
+now work the way you might expect; loops can 
+<font style="font-family: 'Courier New', monospace;">break</font> or
+<font style="font-family: 'Courier New', monospace;">continue</font>
+and so on.  There's plenty more detailed stuff if interested and not
+enough time/space here to delve into it all.
+</p>
+
+<hr><hr>
+
+</body>

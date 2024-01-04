@@ -1,0 +1,172 @@
+<title>Testing: reviewing</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+
+<h2>Reviewing</h2>
+
+<ul>
+<li> People &ndash; <i>even engineers!</i> &ndash; are fallible
+<li> Psychologically you tend to see what you expect to see
+</ul>
+
+<p>
+Reviewing is a process by which others try to find faults in your
+work.
+</p>
+
+<p>
+Useful at various stages of development:
+</p>
+
+<ul>
+<li> Design review
+  <ul>
+  <li> have all eventualities been thought of?
+  <li> is it more complicated than it needs to be?
+  </ul>
+<li> Code review
+  <ul>
+  <li> does this code do what it was meant to?
+  </ul>
+<li> Test review
+  <ul>
+  <li> are there cases going untested?
+  </ul>
+</ul>
+
+<p>
+Reviewing can seem like an informal process.  Unlike, for example, a
+compiler's syntax checking it does not guarantee to find every fault
+(of a certain class) that may be present.  Nevertheless it can be a
+very valuable process.  Being a human process the &lsquo;terms of
+reference&rsquo; are not strictly limited and all sorts of things can
+turn up.
+</p>
+
+<p>
+The basic principle is to get other engineers to look at a design
+(code etc.) and for them to try and spot things the designer hadn't
+thought of.
+</p>
+
+<p>
+Suggested review process:
+</p>
+
+<ul>
+<li> The designer(s) invite a small group of colleagues to perform the
+  review.  Ideally reviewers should have <i>some</i> background knowledge of
+  the project but not be &lsquo;too close&rsquo; to the topic of the
+  review.
+<li> Designer(s) prepare copies of any background <b>documentation</b> (such
+  as code listings and diagrams).
+<li> Hold a <b>candid</b> meeting where everyone is prepared to raise issues
+  without embarrassment.  Some mistakes may be revealed; some
+  &lsquo;dumb&rsquo; questions will be asked; that is okay.
+<li> Each designer &lsquo;walks through&rsquo; his/her product <b>in
+  detail</b>.  For example, for code this will usually involve looking at
+  <b>each statement</b> individually.  Each item should be explained so that
+  everyone is clear about its purpose.
+<li> Reviewers try to think of cases that are not covered and may
+  cause a malfunction.  E.g. &ldquo;What if <u>this</u> value is
+  negative?&rdquo;, &ldquo;Did you miss out a &lsquo;default&rsquo;
+  here?&rdquo;, etc.
+<li> Often, simply the act of trying to present a system to others
+  causes the designer to be the first to spot problem cases.
+<li> Take <b>notes</b>, so the problems will be remembered.
+  Annotating code listings is typically convenient.
+<li> Thank the reviewers.
+<li> <b>Revise</b> the design according to the suggestions.
+<li> <b>Re-review</b>, concentrating on the altered areas.
+</ul>
+
+<p style="color:blue">
+<b>Illustration:</b> a classic fault in C: the sort of thing which is
+difficult to spot:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace; color:red;">
+if (x = 1) &hellip;<sup>&dagger;</sup>
+</blockquote>
+
+<ul style="color:blue">
+<li> Legal syntax
+<li> May do what you expected &hellip;
+  <ul>
+  <li> &hellip; by chance &hellip;
+  <li> &hellip; unless you make a point of testing the case when
+       it <i>shouldn't</i> happen
+  </ul>
+</ul>
+
+<blockquote style="font-size:12px; color:blue">
+<span style="color:red;"><sup>&dagger;</sup></span>In case this is
+unfamiliar, in C (at least) this is an assignment which will return a
+&lsquo;TRUE&rsquo; (non-zero) value so will always do the statement
+following.  Some programmers will write &ldquo;<span style="font-family:
+'Courier New', monospace;">if&nbsp;(1&nbsp;==&nbspx)&nbsp;&hellip;</span>&rdquo;
+instead because this will force a syntax error if mistyped as
+&ldquo;<span style="font-family: 'Courier New',
+monospace;">if&nbsp;(1&nbsp;=&nbspx)&nbsp;&hellip;</span>&rdquo;.
+</blockquote>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03g_test_tasks.html">Back</a> to tasks.</p>
+
+<p><a href="03i_test_regression.html">Forward</a> to regression testing.</p>
+
+<hr><hr>
+
+</body>

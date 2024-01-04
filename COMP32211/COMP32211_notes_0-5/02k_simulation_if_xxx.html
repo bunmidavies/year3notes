@@ -1,0 +1,441 @@
+<title>Simulation IF and xxxx</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>iffy logic?</h2>
+
+<ul>
+<li>In digital <b>logic</b> there are two possible logic states: {0, 1}<br>
+<font style="font-family: 'Courier New', monospace;">if (a == 1)
+  &lt;statement&gt; &nbsp; &nbsp; // Outcome - obvious
+</font>
+
+<li>In digital <b>simulation</b> there are three possible logic
+  states: {0, 1, {x, z}}<br>
+<font style="font-family: 'Courier New', monospace;">if (a == 1) &lt;statement&gt; &nbsp; &nbsp; 
+// Outcome - less obvious
+</font></ul>
+
+<p>
+An <font style="font-family: 'Courier New', monospace;">if</font>
+clause is taken if the predicate is &lsquo;true&rsquo; (i.e. 1).
+</p>
+
+<p>
+An else clause is taken if the predicate is not &lsquo;true&rsquo;
+(i.e. <font style="font-family: 'Courier New', monospace;">0</font> or
+<font style="font-family: 'Courier New', monospace;">x</font> or
+<font style="font-family: 'Courier New', monospace;">z</font>).
+</p>
+
+<p>
+Verilog defines its operators as:
+<ul>
+<li>&ldquo;logical (in)equality&rdquo;
+  <ul>
+  <li>&lsquo;<font style="font-family:'Courier New',monospace;">==</font>&rsquo;
+ and &lsquo;<font style="font-family: 'Courier New',monospace;">!=</font>&rsquo;
+ may return {<font style="font-family: 'Courier New', monospace;">0</font>,
+ <font style="font-family: 'Courier New', monospace;">1</font>,
+ <font style="font-family: 'Courier New', monospace;">x</font>}
+  </ul>
+<li>&ldquo;case (in)equality&rdquo;
+  <ul>
+  <li>&lsquo;<font style="font-family:'Courier New',monospace;">===</font>&rsquo;
+ and &lsquo;<font style="font-family: 'Courier New', monospace;">!==</font>&rsquo;
+ only return {<font style="font-family: 'Courier New', monospace;">0</font>,
+ <font style="font-family: 'Courier New', monospace;">1</font>},
+      looking for an <i>exact</i> match
+  <li>useful for verification (e.g. detecting unknowns), not for synthesis
+  </ul>
+</ul>
+</p>
+
+<h3>Equality operators</h3>
+
+<p>
+When executing an &lsquo;if&rsquo; in a Verilog simulation a binary decision is
+made using three possible input values.
+</p>
+
+<p>
+The case equality operators can be used to eliminate one of these.
+</p>
+
+<p>
+These are useful, for example, in &lsquo;<font style="font-family: 'Courier New', monospace;">if</font>&rsquo; tests.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+0 == 0 &nbsp;&nbsp;   // Result is true (1)	 <br>
+0 == x &nbsp;&nbsp;   // Result is unknown (x) <br>
+0 === x &nbsp;  // Result is false (0)	 <br>
+0 != x  &nbsp;&nbsp;  // Result is unknown (x) <br>
+0 !== x &nbsp;  // Result is true (1)	 <br>
+x === x &nbsp;  // Result is true (1)    <br>
+</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<p>
+Imagine you are testing for a particular pattern.
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (data != test_value) $display(&ldquo;Error&rdquo;);
+</p>
+</blockquote>
+</p>
+
+<p>
+Bad idea! If the data and test_value are both defined then it works
+but if either is &lsquo;unknown&rsquo;
+(<font style="font-family: 'Courier New', monospace;">x</font>) then
+the expression will return &lsquo;unknown&rsquo;.  This isn't
+&lsquo;true&rsquo; so the <font style="font-family: 'Courier New',
+		 monospace;">$display</font> statement is not reached.
+</p>
+
+This could be cured by:
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (data == test_value); // do nothing<br>
+else $display("Error");
+</p>
+</blockquote>
+but this is better:
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (data !== test_value) $display(&ldquo;Error&rdquo;);
+</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<p>
+Here is a &lsquo;broken&rsquo; AND gate:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+module my_and (input wire a, b,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output reg q);<br>
+always @ (a, b)<br>
+&nbsp;&nbsp;if (a)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (b) q = 1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp; q = 0;<br>
+&nbsp;&nbsp;else q = 0;<br>
+endmodule<br>
+</p>
+</blockquote>
+
+<p>
+Synthesized, this should works fine.  However in simulation it will
+always produce a logic value output, even if the inputs are
+undefined.
+</p>
+
+<p>Compare:</p>
+
+
+<div class="row">
+
+  <div class="column">
+
+<center>
+<!--<br clear="both">-->
+<!-- Formatting ought to be improved! -->
+<table>
+<tr>
+<th>my_AND</th>
+<th>&nbsp; 0 &nbsp;</th>
+<th>1</th>
+<th>X</th>
+<th>Z</th>
+</tr>
+<tr>
+
+<th>&nbsp; 0 &nbsp;</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>1</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 1 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>X</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>Z</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+</table>
+
+  </center>
+
+  </div>
+
+  <div class="column">
+
+  <center>
+
+<table>
+<tr>
+<th>&nbsp;&nbsp;AND&nbsp;&nbsp;</th>
+<th>&nbsp; 0 &nbsp;</th>
+<th>1</th>
+<th>X</th>
+<th>Z</th>
+</tr>
+<tr>
+<th>&nbsp; 0 &nbsp;</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 0 &nbsp;</td>
+</tr>
+<tr>
+<th>1</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; 1 &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td>
+</tr>
+<tr>
+<th>X</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td>
+</tr>
+<tr>
+<th>Z</th> <td>&nbsp; 0 &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td> <td>&nbsp; X &nbsp;</td>
+</tr>
+</table>
+  </center>
+
+  </div>
+
+</div>
+
+<p>
+This may be harmless in itself but has the potential to hide other faults.
+</p>
+
+<hr>
+
+<h2>Into the &lsquo;unknown&rsquo; ...</h2>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+case (abc)<br>
+&nbsp;&nbsp;2'b00: &nbsp; result = 1;<br>
+&nbsp;&nbsp;2'b01: &nbsp; result = 2;<br>
+&nbsp;&nbsp;2'b10: &nbsp; result = 3;<br>
+&nbsp;&nbsp;default:      result = 0;<br>
+endcase<br>
+</p>
+</blockquote>
+
+<ul>
+<li>Cases are compared top-to-bottom.
+<li>Only <b>exact</b> matches are considered.
+<li>What happens if the input variable is 2'b0x ?
+</ul>
+
+&lsquo;unknown&rsquo; is not the same as &lsquo;don&rsquo;t care&rsquo;.
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+casex (xyz)<br>
+&nbsp;&nbsp;2'b00: &nbsp; result = 1;<br>
+&nbsp;&nbsp;2'b01: &nbsp; result = 2;<br>
+&nbsp;&nbsp;2'b1x: &nbsp; result = 3; // Taken for cases 2 and 3<br>
+&nbsp;&nbsp;default:      result = 0; // Redundant - but good (cautious) practice<br>
+endcase<br>
+</p>
+</blockquote>
+
+<h3>Unknowns and &lsquo;don't cares&rsquo;</h3>
+
+<p>
+A &lsquo;<font style="font-family: 'Courier New', monospace;">case</font>&rsquo;
+statement selects one entry from a list of options; the first one
+which matches the criteria.
+</p>
+
+<p>
+The following example illustrates how all cases of a single wire could
+be monitored.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+case (some_wire)<br>
+&nbsp;&nbsp;1'b0, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Note <i>list</i> of cases<br>
+&nbsp;&nbsp;1'b1: $display(&ldquo;Wire has value %d&rdquo;, some_wire);<br>
+&nbsp;&nbsp;1'bx: $display(&ldquo;Wire is unknown&rdquo;);<br>
+&nbsp;&nbsp;1'bz: $display(&ldquo;Wire is floating&rdquo;);<br>
+endcase<br>
+</p>
+</blockquote>
+
+<p>
+This facility is useful in testing and, perhaps, modelling; it is not
+relevant to synthesis because a physical wire will always have a value
+which is interpreted in some way as a digital signal.
+</p>
+
+<h4>Don't cares</h4>
+
+Two additional keywords allow variations in a <font style="font-family: 'Courier New', monospace;">case</font> construct:
+<ul>
+<li><font style="font-family: 'Courier New', monospace;">casez</font>
+<li><font style="font-family: 'Courier New', monospace;">casex</font>
+</ul>
+
+<p>
+These allow &lsquo;don't care&rsquo; inputs in a
+<font style="font-family: 'Courier New', monospace;">case</font>
+statement.  The difference is that
+&lsquo;<font style="font-family: 'Courier New', monospace;">casez</font>&rsquo;
+treats only &lsquo;<font style="font-family: 'Courier New', monospace;">Z</font>&rsquo; inputs as don't cares whereas
+&lsquo;<font style="font-family: 'Courier New', monospace;">casex</font>&rsquo;
+accommodates both &lsquo;Z&rsquo; and &lsquo;X&rsquo; equally.
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">casex</font>&rsquo;
+is possibly the more useful and serves as an example.
+</p>
+
+<h3><p style="font-family: 'Courier New', monospace;">casex</font></h3>
+
+<p>
+Sometimes it is useful to be able to build a circuit where part of an
+input is not compared, i.e.  it is a &lsquo;<b>don't care</b>&rsquo; value.
+Not <i>caring</i> what a value is is not the same as
+not <i>knowing</i> what a value is; however (confusingly?) Verilog uses
+&lsquo;<font style="font-family: 'Courier New', monospace;">x</font>&rsquo;
+for both cases.
+</p>
+
+<p>
+Imagine decoding a microprocessor instruction.  Not all the bits are
+used to determine the instruction type.  If different sets of bits
+need to be examined, &lsquo;<font style="font-family: 'Courier New', monospace;">casex</font>&rsquo; allows these to be specified
+in a single, simple statement.
+</p>
+
+<p>
+In the following (simplified) ARM instruction decoder the
+&lsquo;<font style="font-family: 'Courier New',
+monospace;">x</font>&rsquo;s are bits which are not considered by
+the <font style="font-family: 'Courier New', monospace;">case</font>
+statement.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+casex (instruction[27:24])<br>
+&nbsp;&nbsp;4'b00xx: $display(&ldquo;Data processing&rdquo;);<br>
+&nbsp;&nbsp;4'b01xx: $display(&ldquo;Load/store&rdquo;);<br>
+&nbsp;&nbsp;4'b100x: $display(&ldquo;Load/store multiple&rdquo;);<br>
+&nbsp;&nbsp;4'b101x: $display(&ldquo;Branch&rdquo;);<br>
+&nbsp;&nbsp;4'b110x,<br>
+&nbsp;&nbsp;4'b1110: $display(&ldquo;Coprocessor&rdquo;);<br>
+&nbsp;&nbsp;4'b1111: $display(&ldquo;SVC (aka SWI)&rdquo;);<br>
+endcase<br>
+</p>
+</blockquote>
+
+<p>
+Bases other than binary can be used.  In hexadecimal an
+&lsquo;<font style="font-family: 'Courier New', monospace;">x</font>&rsquo;
+represents four don't care bits, in octal, three.  It is not
+meaningful in decimal.
+</p>
+
+<p>
+Without <font style="font-family: 'Courier New', monospace;">casex</font>
+the decoder would probably look something like:
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+if (instruction[27] == 0)<br>
+&nbsp;&nbsp;if (instruction[26] == 0) &nbsp; &nbsp; $display("Data processing");<br>
+&nbsp;&nbsp;else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$display("Load/store");<br>
+else<br>
+&nbsp;&nbsp;if (instruction[26] == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (instruction[25] == 0)&nbsp;&nbsp; $display("Load/store multiple");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$display("Branch");<br>
+&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if ((instruction[25] == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; || (instruction[24] == 0)) $display("Coprocessor");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$display("SVC (aka SWI)");<br>
+</p>
+</blockquote>
+
+<p>
+Hopefully the first example is easier to follow!
+</p>
+
+<hr>
+
+<p><a href="02x_simulation.html#index">Up</a> to simulation</p>
+<p><a href="02j_simulation_results.html">Back</a> simulation result treatment</p>
+<p><a href="03_testing.html">Forward</a> to next session</p>
+
+<hr><hr>
+
+</body>

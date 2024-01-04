@@ -1,0 +1,321 @@
+<title>Tradeoff example: multiplication</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column_a {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.column_b {
+  float: right;
+  width: 70%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Example: Multiplication</h2>
+
+
+<h4>Basic multiplication</h4>
+
+<img src="figures/multiplication.png" alt="Example binary multiplication"  align="right" width=25%>
+
+<p>
+Multiplication is repeated addition.  To multiply A and B, simply
+start with 0 and add A to it B times.  This gets the answer but,
+clearly, is slow if B is large.
+</p>
+
+<p>
+&lsquo;Long&rsquo; multiplication multiplies one digit at a time and
+shifts the partial result to the appropriate digit position.  This is
+much quicker because there are only &lt;<i>number of digits</i>&gt;
+additions.
+</p>
+
+<p>
+Binary multiplication is easy because you only multiply by
+0&nbsp;or&nbsp;1 which is an AND function.
+</p>
+
+<p>
+There are many ways to implement a multiplier, some of which are
+sketched out here. The variety of choices is a reason why Verilog
+synthesizers may not simply implement the
+&lsquo;<font style="font-family: 'Courier New', monospace;">*</font>&rsquo;
+operator.
+</p>
+
+<p>
+Here are some different microarchitectures for multipliers.  This is
+not an exclusive set, but serves to illustrate some properties.  These
+are based on 8&times;8 multipliers; multiplication operations scale by
+O(M<sup>2</sup>) of course.
+<p>
+
+<div class="row">
+  <div class="column_a">
+
+  <p>&nbsp;</p>
+  <img src="figures/multiplier_1.png" alt="Iterative multiplier"
+     width=70%  align="left">
+  </div>
+
+  <div class="column_b">
+
+<h4>Iterative multiplier</h4>
+
+<ul>
+<li>Small area</li>
+  <ul>
+  <li>One adder</li>
+  <li>One bank of AND gates</li>
+  <li>Some (shift) registers</li>
+  </ul>
+<li>Medium cycle time</li>
+<li>Long latency</li>
+  <ul>
+  <li>Up to N cycles (assuming early termination)</li>
+  <li>Low throughput</li>
+  </ul>
+<li>One result every N cycles (assuming early termination)</li>
+</ul>
+  </div>
+</div>
+
+<img src="figures/multiplier_2.png" alt="Parallel multiplier"
+     width=50% align="Right">
+
+<h4>Parallel multiplier</h4>
+
+<ul>
+<li>Large area</li>
+  <ul>
+  <li>N-1 adders</li>
+  <li>N banks of AND gates</li>
+  <li>Only holding registers</li>
+  </ul>
+<li>Long cycle time</li>
+<li>Low latency</li>
+  <ul>
+  <li>One (long) N cycle</li>
+  </ul>
+<li>Fairly high throughput</li>
+  <ul>
+  <li>One result every (long) cycle</li>
+  </ul>
+</ul>
+
+
+
+<div class="row">
+  <div class="column_a">
+  <center>
+  <img src="figures/multiplier_3.png" alt="Pipelined multiplier"
+     align="left" width=100%>
+  </center>
+
+  </div>
+
+  <div class="column_b">
+
+
+  <h4>Pipelined multiplier</h4>
+
+  <ul>
+<li>Large area</li>
+  <ul>
+  <li>N-1 adders</li>
+  <li>N banks of AND gates</li>
+  <li>Many (pipeline) registers</li>
+  </ul>
+<li>Medium cycle time</li>
+<li>Long latency</li>
+  <ul>
+  <li>N cycles</li>
+  </ul>
+<li>High throughput</li>
+  <ul>
+  <li>One result every cycle</li>
+  </ul>
+</ul><br clear="right">
+
+<img src="figures/systolic_array.png" alt="Systolic array multiplier"
+     align="right" width=45%>
+
+<p>&nbsp;</p>
+
+<h4>Systolic array multiplier</h4>
+
+<ul>
+<li>Large area</li>
+  <ul>
+  <li>&sim;2&times;N<sup>2</sup> 1-bit adders</li>
+  <li>N banks of AND gates</li>
+  <li>Many (pipeline) registers</li>
+  </ul>
+<li>Very short cycle time</li>
+  <ul>
+  <li>No waiting for carry propagation</li>
+  </ul>
+<li>Very high throughput</li>
+<li>Long latency</li>
+  <ul>
+  <li>2&times;N (fast) cycles</li>
+  </ul>
+<li>Very high throughput</li>
+  <ul>
+  <li>One result every (fast) cycle</li>
+  </ul>
+</ul><br clear="left">
+
+  </div>
+</div>
+
+<!-- <p style="color:red;">Candidates for animations?</p> -->
+
+<h4>Iterative multiplier</h4>
+
+<p>
+With an adder and an accumulator it is possible to multiply two
+numbers in N cycles, processing each bit of &lsquo;B&rsquo; in its own
+cycle. This gives a latency of N cycles and a throughput of&nbsp;1/N. It is
+cheap in hardware and is suitable for &lsquo;occasional&rsquo;
+multiplications, for example as in a general-purpose microprocessor.
+</p>
+
+<p>
+By iterating starting at the least significant bit it is possible to
+improve performance by early termination; when the only bits left to
+multiply by are zero the result will not change further and iteration
+can be stopped. This speeds up multiplication by small numbers.
+</p>
+
+<h4>Pipelined multiplication</h4>
+
+<p>
+A pipelined multiplier could perform each addition in a separate
+stage. This would have a latency of N cycles but give a peak
+throughput of 1. It uses a moderate amount of hardware. It is best
+suited to stream processing tasks such as Digital Signal Processing (DSP).
+</p>
+
+<h4>Systolic array multiplier</h4>
+
+<p>
+The <i>critical path</i> in addition is the carry propagation. It is
+not necessary to propagate the carry in every addition stage, it can
+be latched and input to the next significant bit in the next stage,
+rather than the current one. The advantage of this is that the clock
+rate can be much higher than if propagating the carry. The
+disadvantage is that more stages are required because, eventually, the
+last carry has to be propagated all the way. It thus has a latency of
+2N cycles with a throughput of&nbsp;1, but the cycles can be much
+shorter. Alternatively, if the cycle time is limited by other units,
+the carry can be propagated a few places in each cycle.
+</p>
+
+<p>
+This architecture is similar to the pipelined architecture but
+probably a bit faster but with a bit more area cost. However it is a
+very regular structure.
+</p>
+
+<h4>Parallel multiplier</h4>
+
+<p>
+It is possible to derive all the partial products in a single cycle
+and add them in a tree of adders. This can give a low-latency addition
+with quite a high throughput; in principle latency and throughput
+would both be 1 although the cycle time needs to be long to
+accommodate multiple additions. In practice such an adder would
+probably be pipelined and may employ some &lsquo;carry save&rsquo;
+tricks as well.  Such a unit could yield a latency of ~log(N) with a
+throughput of 1 product/ cycle, the cycle length being comparable to
+the earlier examples. The hardware cost is significant; the
+low-latency could make this appropriate for a high-performance
+processor running &lsquo;general&rsquo; code.
+</p>
+
+<!-- <p style="color:red;">Booth's multiplication (??)</p> -->
+
+<h4>Caveat</h4>
+
+<p>
+The descriptions given here are <i>illustrative</i> and contain
+numerous simplifications. For example, it is common to produce 2-bit
+rather than 1-bit partial products which halves the number of
+subsequent additions. However they do illustrate the sort of options
+open to a designer and that the &lsquo;correct&rsquo; choice depends
+on various circumstances.
+</p>
+
+<h4>Further reading</h4>
+
+<p>
+If interested, you could look up terms such as:
+<a href="https://en.wikipedia.org/wiki/Booth%27s_multiplication_algorithm">Booth's Encoding</a>,
+<a href="https://en.wikipedia.org/wiki/Wallace_tree">Wallace tree</a>,
+<a href="https://en.wikipedia.org/wiki/Dadda_multiplier">Dadda multiplier</a>, &hellip; 
+</p>
+
+<hr>
+
+<p><a href="04d_parallelism.html">Back</a> to parallel design opportunities.</p>
+
+<p><a href="04f_RTL_parallelism.html">Forwards</a> to RTL parallelism.</p>
+
+<p><a href="04_tradeoffs.html">Up</a> to Tradeoffs.</p>
+
+<hr><hr>
+
+</body>

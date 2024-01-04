@@ -1,0 +1,215 @@
+<title>Testing</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h1>Verification and Debugging</h1>
+
+<p>
+There are lots of potential sources of errors in a design.
+</p>
+
+<p>
+This session ignores most of these and concentrates on functional test.
+</p>
+
+<center><p style="color:red;">First: <b>DESIGN</b> YOUR TESTS!!</p></center>
+
+<ul>
+<li> Does your device initialise/reset?
+  <ul>
+  <li> Is the initial state achieved?
+  <li> Are there embarrassing &lsquo;unknown&rsquo;s in the circuit?
+  </ul>
+<li> Does it do the most straightforward operations?
+<li> Have you tested every statement?
+<li> Can you break it?
+</ul>
+<p>There are techniques to help with testing:</p>
+<ul>
+<li> Tools &ndash; but they will not find everything for you
+<li> What didn't you think of?
+<li> Don't throw a working test away &ndash; it will be needed again!
+</ul>
+
+<h2>Verification</h2>
+
+<p>
+The Reasons for Verification:
+</p>
+
+<p>
+To establish that a design or implementation &lsquo;works&rsquo;
+&hellip; in all imaginable cases.
+</p>
+
+<p>
+The &lsquo;first cut&rsquo; of a new design will almost certainly have
+some fairly gross errors.  Because they are so bad they cause
+symptomatic faults very rapidly and so are easy to find.  It is fairly
+normal to start with some crude tests and simply examine a short
+output trace at this stage.  More complex, &lsquo;exceptional&rsquo;
+cases may gradually be added and examined.
+</p>
+
+<p>
+Later the design may be modified to fix esoteric faults or to
+accommodate extra features.  Any changes will invalidate all earlier
+test results so the tests will need to be repeated.  This
+&lsquo;regression testing&rsquo; should be planned so that it is as
+cheap as possible to perform.
+</p>
+
+<p>
+It is difficult to devise &lsquo;high-level&rsquo; tests which can
+exercise every &lsquo;low-level&rsquo; component thoroughly.  [Imagine
+picking a random, 3-input gate in a Pentium and wanting to write a
+programme that used all eight input combinations.]  Therefore
+deliberate testing and qualification of each unit in isolation is
+essential if the whole system is to work under all design
+circumstances.
+</p>
+
+<p>
+As always the process needs to be both as <b>thorough</b> and
+as <b>cheap</b> as possible.
+</p>
+
+<h3>Principle of Verification/Validation</h3>
+
+<p>
+Each &lsquo;layer&rsquo; in the design hierarchy should be tested
+against its expected function.  It is not easy to test the lowest level
+functions thoroughly in a fully integrated system.  Each layer of tests
+should address how its components are put together; those components
+should already have been verified.
+</p>
+
+<img src="figures/V_diagram.png" alt="V diagram" align="right" width=50%>
+
+<h4>&lsquo;V&rsquo; diagrams</h4>
+
+<p>
+V diagrams can be drawn in different levels of detail and with various
+labels; the principle is to show that each level of the hierarchy of
+the design should have an equivalent set of tests.
+</p>
+
+<p>
+Progress moves left to right; time should move in a similar direction
+although there may be iterations if problems are discovered.  The
+(commercial) desire is to keep any backtracking as small as possible
+to keep penalties low.
+</p>
+
+<p>
+Hopefully this is familiar material! It is often quoted in relation to
+software development but it is applicable to any hierarchical
+engineering.
+</p><br clear="right">
+
+
+<center>
+<div class="inset">
+
+<h3>Jargon</h3>
+
+<p>
+Several words are used interchangeably for the test process.  It is not
+possible to give hard-and-fast rules on these, but as a guide:
+</p>
+
+<ul>
+<li> &ldquo;Verification&rdquo; is the process of determining that
+  what is built is what was specified.
+<li> &ldquo;Validation&rdquo; is the process of determining if the
+  final system meets the requirements.
+<li> &ldquo;Testing&rdquo; can cover all the processes but is also
+  used specifically for the post-production process of determining if
+  a particular instance of the design is fault-free.
+</ul>
+
+<p>
+(The first two of these are formalised by the IEEE w.r.t.  software.)
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<h3 id="index";>Testing: links</h3>
+
+<h4>In this session</h4>
+<ul>
+<li>
+<a href="03a_testing_what.html">Things to look for</a> when verifying
+a design (which, of course, can never be a complete list!)
+</li>
+<li><a href="03b_test_coverage.html">Test coverage.</a></li>
+<li><a href="03c_test_design.html">Test design.</a></li>
+<li><a href="03d_test_ordering.html">Test ordering.</a></li>
+<li><a href="03e_test_debug.html">Debugging tests.</a></li>
+<li><a href="03f_test_delays.html">Test delays.</a></li>
+<li><a href="03g_test_tasks.html">Tasks for testing.</a></li>
+<li><a href="03h_test_reviews.html">Reviewing.</a></li>
+<li><a href="03i_test_regression.html">Regression testing.</a></li>
+</ul>
+
+<h4>Other</h4>
+<ul>
+<li><a href="02_simulation.html">Previous session's notes</a>: simulation.</li>
+<li><a href="04_tradeoffs.html">Next session's notes</a>: design trade-offs.</li>
+<li><a href="index.html">Up to Index.</a></li>
+</ul>
+
+<hr><hr>
+
+</body>

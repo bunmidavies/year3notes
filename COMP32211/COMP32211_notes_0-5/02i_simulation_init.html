@@ -1,0 +1,275 @@
+<title>Simulation: initialisation</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Initialisation</h2>
+
+<p>
+When a state-holding element is switched on it will settle into a
+stable state.
+</p>
+
+<p>
+It is not predictable what state this will be, so it is unknown.
+</p>
+
+<p>
+Does this matter? In some cases it does, in others it doesn't.
+</p>
+
+<p>
+Example: ARM registers
+<ul>
+<li>R0-R14 are undefined
+<li>R15 (PC) is 00000000
+</ul>
+</p>
+
+<p>
+I.e.  only the essential values are cleared
+Rule of thumb:
+<ul>
+<li>Control registers should be initialised
+<li>Data registers probably don't need initialisation
+</ul>
+</p>
+
+<p>
+Undefined (&ldquo;unknown&rdquo;) values tend to propagate through logic.
+</p>
+
+<p>
+This is usually a good thing as it acts as a warning that something is
+wrong.  Learn to <u>exploit</u> them!
+</p>
+
+<hr>
+
+<h3>Reset signals</h3>
+
+<p>
+The question of whether to include a reset on a flip-flop has no simple answer.
+</p>
+
+<p>
+The inclusion of reset logic imposes a small power/area penalty on a flip-flop.
+</p>
+
+<p>
+The fan-out of the reset network is typically very large and consumes
+some resources.
+</p>
+
+<p>
+Failing to reset a flip-flop which needs to be defined can be catastrophic.
+</p>
+
+<img src="figures/divide_by_2.png" alt="Divide by two" align="right" width=20%>
+<p>
+Case: consider a clock divider flip-flop:
+</p>
+
+<p>
+As a circuit this will function because it is in some digital state
+and will toggle to the other when clocked.
+</p>
+
+<p>
+In simulation it will start unknown and always remain that way.
+</p>
+
+<p>
+In Verilog you could &lsquo;cure&rsquo; this anomaly with an &lsquo;<font style="font-family: 'Courier New', monospace;">initial</font>&rsquo;; but if that is accidentally done to something where the phase matters then it's Doom again.
+</p>
+
+<p>
+In general:
+<ul>
+<li>data registers can tolerate starting undefined
+<li>control registers should be reset
+  <ul>
+  <li>this would include &lsquo;validity&rsquo; indicators on data etc.
+  </ul>
+</ul>
+</p>
+
+<p>
+Some designers prefer to reset every flip-flop as a matter of routine.<br>
+(There is a small additional cost in size and speed.)
+</p>
+
+<p>
+You have to decide which approach works for you.
+</p>
+
+<h4>Memories</h4>
+
+<p>
+RAM does not have reset.  If you expect a RAM to contain some values
+(typically zeroes) you will have to write these in actively.
+
+<ul>
+<li>This is easy in a RAM model with a
+&lsquo;<font style="font-family: 'Courier New', monospace;">for</font>&rsquo;
+ loop. 
+<li>This is considerable effort in reality requiring an FSM &hellip; and time.
+</ul>
+</p>
+
+<hr>
+
+<h3>Resetting in ASICs</h3>
+
+<p>
+Some form of reset signal is <b>vital</b>, at least for a subset of
+the flip-flops.  These are primarily those concerned with <b>control
+state</b>.  Without a reset flip-flops will power-up in an unknown
+state.
+</p>
+
+<p>
+In a physical circuit it may be that (e.g.) an FSM will
+&lsquo;naturally&rsquo; progress into a stable state (like an
+&lsquo;idle&rsquo; state) and await legitimate input &mdash; and it
+makes sense to design it this way.  However this will not help in
+simulation and you do need to verify your designs!
+</p>
+
+<h3>Resetting in FPGAs</h3>
+
+<p>
+The state of an FPGA is downloaded when it is configured.  This means:
+<ul>
+<li>flip-flops will be initialised
+<li>memory contents will be defined
+</ul>
+</p>
+
+<p>
+This means, for example:
+<ul>
+<li>&lsquo;<font style="font-family: 'Courier New', monospace;">initial</font>&rsquo;
+will work and a register can be preset at t&nbsp;=&nbsp;0 
+<li>a memory (on chip) can be initialised with
+  &lsquo;<font style="font-family: 'Courier New', monospace;">$readmemh()</font>&rsquo;
+</ul>
+</p>
+
+<p>
+The second of these allows the creation of on-chip ROMs, useful (for example)
+in bootstrapping a processor or providing look-up tables.
+</p>
+
+<p>
+Note that these facilities are provided because of the particular FPGA
+characteristics.  They would not be available on an ASIC.
+</p>
+
+<h3>The &lsquo;unknown&rsquo; state in simulators</h3>
+
+<p>
+Unknown/undefined states are a characteristic of digital simulation.
+Verilog simulation is digital, with signals adopting states {&lsquo;<font style="font-family: 'Courier New', monospace;">0</font>&rsquo;, &lsquo;<font style="font-family: 'Courier New', monospace;">1</font>&rsquo;,
+&lsquo;<font style="font-family: 'Courier New', monospace;">x</font>&rsquo;, &lsquo;<font style="font-family: 'Courier New', monospace;">z</font>&rsquo;} and these have well-defined operations.  For example:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+0&nbsp;&&&nbsp;x&nbsp;==&nbsp;0<br>
+1&nbsp;&&&nbsp;x&nbsp;==&nbsp;x<br>
+</p>
+
+<p>
+Digital (functional) simulation does not represent intermediate
+states, transition (edge) speeds etc.
+</p>
+
+<p>
+Not all simulators work this way.  <b>Circuit-level simulators</b>
+represent the analogue voltages on the wires to give more accurate
+estimates of the behaviour of the implementation.  These values are
+(in principle) continuous, therefore always &lsquo;known&rsquo;,
+therefore they have to be
+<i>assumed</i> at start-up.
+</p>
+
+<p>
+Unknown values will not appear.  However the assumed values may not be
+those which occur in a real circuit and therefore should not be relied
+on.
+</p>
+
+<p>
+This is another good reason for running a functional simulation as
+part of the design flow.
+</p>
+
+<hr>
+
+<p><a href="02x_simulation.html#index">Up</a> to simulation</p>
+<p><a href="02h_simulation_events.html">Back</a> to simulation events</p>
+<p><a href="02j_simulation_results.html">Forward</a> to simulation
+  result treatment</p>
+
+<hr><hr>
+
+</body>

@@ -1,0 +1,498 @@
+<title>Synchronous vs. asynchronous styles</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column_a {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.column_b {
+  float: right;
+  width: 70%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>RTL parallelism</h1>
+
+<p>
+The two C language loops below (Bresenham) are functionally identical
+but formatted differently.
+</p>
+
+<div class="row"> 
+ <div class="column">
+  <p style="font-family: 'Courier New', monospace;">
+while (c > 0)<br>
+&nbsp; {<br>
+&nbsp; x = x + 1;<br>
+&nbsp; e = e + 2*dy;<br>
+&nbsp; if (e > 0)<br>
+&nbsp; &nbsp; {<br>
+&nbsp; &nbsp; y = y + 1;<br>
+&nbsp; &nbsp; e = e - 2*dx;<br>
+&nbsp; &nbsp; }<br>
+&nbsp; c--;<br>
+&nbsp; plot(x, y, col);<br>
+&nbsp; }<br>
+  </p>
+  </div>
+
+  <div class="column">
+  <p style="font-family: 'Courier New', monospace;">
+while (c > 0)<br>
+&nbsp; {<br>
+&nbsp; x = x + 1; e = e + 2*dy; c--;<br>
+&nbsp; if (e > 0)<br>
+&nbsp; &nbsp; { y = y + 1; e = e - 2*dx; }<br>
+&nbsp; plot(x, y, col);<br>
+&nbsp; }<br>
+  </p>
+  <center>
+  <p>
+  &nbsp;<br>
+  The intention is to highlight the scope<br>
+  for parallel implementation.
+  </p>
+  </center>
+  </div>
+
+</div clear="both">
+
+<ul>
+<li> The LH example is expressed serially &ndash; appropriate for a
+  microprocessor with one ALU.
+  <ul>
+  <li> Neglecting the comparisons (and &lsquo;branches&rsquo;) this
+  takes 4 or 6 cycles
+  </ul>
+<li> The RH example is formatted to show how it could be executed on a
+  superscalar CPU.
+  <ul>
+  <li> This takes 2 or 3 cycles assuming (at least) three ALUs
+  </ul>
+</ul>
+
+<h3>Code style</h3>
+<p>
+The right-hand column shows a C language implementation of a line
+algorithm.  This can be divided into quite a long preamble and an
+iterative loop which moves the address and plots each point.
+<br>
+Note:
+</p>
+
+<ul>
+<li> For a line of significant size, most of the activity will be in the loop
+  <ul>
+  <li> This is the place where optimizations pay off
+  </ul>
+<li> The code has been structured so that the output is the address
+  <ul>
+  <li> This saves plotting points with the implicit multiplication
+       each cycle
+  </ul>
+<li> The loop body has been written in a slightly obscure fashion
+  <ul>
+  <li> This is to &lsquo;remove&rsquo; asymmetry in the control
+  structure
+  </ul>
+</ul>
+
+<div class="row">
+  <div class="column">
+
+  <p>
+  Let's look at some &lsquo;simpler code&rsquo;.  (This example is
+  restricted to a particular octant but that is not relevant for the
+  moment.)
+  </p>
+
+  <p>
+  Executing one line/clock a loop would take 6 or 8 cycles.
+  </p>
+
+<ul>
+  <li> Some parallelism is apparent
+    <ul>
+    <li> e.g.  the counter operation
+       (<span style="font-family: 'Courier New',
+       monospace;">c--</span>) is independent of other functions.
+    </ul>
+  <li> There are dependencies.
+    <ul>
+    <li> e.g. the <span style="font-family: 'Courier New',
+       monospace;">if</span> depends on a previous operation
+       and a test.
+    </ul>
+  </ul>
+  </div>
+
+  <div class="column">
+  <p style="font-family: 'Courier New', monospace;">
+  while (c > 0)<br>
+  &nbsp; {<br>
+  &nbsp; x = x + 1;<br>
+  &nbsp; e = e + 2*dy;<br>
+  &nbsp; if (e > 0)<br>
+  &nbsp; &nbsp; {<br>
+  &nbsp; &nbsp; y = y + 1;<br>
+  &nbsp; &nbsp; e = e - 2*dx;<br>
+  &nbsp; &nbsp; }<br>
+  &nbsp; c--;<br>
+  &nbsp; plot(x, y, col);<br>
+  &nbsp; }<br>
+  </p>
+  </div>
+</div clear="both">
+
+
+<p>
+You may spot that the tests (<span style="font-family: 'Courier New',
+monospace;">while</span>/<span style="font-family: 'Courier New',
+monospace;">if</span>) are tests for positive which is already
+represented by a single bit; thus they cost &lsquo;nothing&rsquo;.
+</p>
+
+<hr>
+
+<h3>Bresenham's Line Algorithm &mdash; Implemented in C</h3>
+
+<p style="color:green">Best viewed in (at least) 80 column format.</p>
+
+<p style="font-family: 'Courier New', monospace;">
+/*----------------------------------------------------------------------------*/<br>
+&nbsp;<br>
+void line(unsigned int x0,&nbsp; unsigned int y0, unsigned int x1, unsigned int y1,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unsigned int col, unsigned char *screen)<br>
+{<br>
+unsigned int address;<br>
+int dx, dy, adx, ady;<br>
+int a1, a2, sx, sy;<br>
+int e, c, m, n, p;<br>
+&nbsp;<br>
+/* Set up - written 'single assignment' for combinatorial implementation.  &nbsp; &nbsp; */<br>
+&nbsp;<br>
+address = x0 + y0 * WIDTH; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
+/* Two adders, assuming fixed width = 640 */<br>
+&nbsp;<br>
+dx = x1 - x0;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp;
+/* Adder */<br>
+dy = y1 - y0;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp;
+/* Adder */<br>
+if (dx < 0) sx = -1;<br>
+else sx = 1;<br>
+if (dy < 0) sy = -WIDTH; else sy = WIDTH;<br>
+adx = abs(dx);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+/* Adder */<br>
+ady = abs(dy);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+/* Adder */<br>
+&nbsp;<br>
+if (adx > ady) { a1 = sx; c = adx; m = adx; n = ady; }
+&nbsp; &nbsp;
+/* Comparator plus */<br>
+else
+{ a1 = sy; c = ady; m = ady; n = adx; }
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+/* four multiplexers */<br>
+&nbsp;<br>
+e = -m;<br>
+p = n - m;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+/* Adder */<br>
+a2 = sx + sy;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+/* Adder */<br>
+&nbsp;<br>
+screen[address] = col;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+/* Plot first point (really jump into loop) */<br>
+&nbsp;<br>
+/* Iterative loop */<br>
+&nbsp;<br>
+while (c > 0)<br>
+&nbsp; { &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+/* Four adders + two multiplexers + counter */<br>
+&nbsp; if ((e + 2*n) <= 0) { address = address + a1; e = e + 2*n; }<br>
+&nbsp; else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+{ address = address + a2; e = e + 2*p; }<br>
+&nbsp; c--;<br>
+&nbsp; screen[address] = col; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Plot */<br>
+&nbsp; }<br>
+&nbsp;<br>
+return;<br>
+}<br>
+&nbsp;<br>
+/*----------------------------------------------------------------------------*/<br>
+</p>
+
+<h3>Parallel RTL example implementation &hellip; as a schematic</h3>
+
+<img src="figures/Bresenham_parallel.png" alt="Parallel Bresenham
+					       datapath" width=100%>
+
+<ul>
+<li> Single cycle operation: control is simple
+<li> Precalculated increment/decrement values: some setup required
+<li> Rapid cycle: critical path is an adder plus a multiplexer
+<li> Requires several parallel adders
+<li> Some calculations are <b>speculative</b>: wastes power
+<li> Plot is <b>pipelined</b>
+</ul>
+
+<p>
+The figure shows a block diagram of the Bresenham's line algorithm loop
+implemented in a highly parallel way.  This is designed for single
+cycle operation.
+</p>
+
+<ul>
+<li> On the left two possible next addresses are calculated: one accounts
+for a horizontal or vertical step (as appropriate) the other for a
+  diagonal step.
+<li> At the same time the central section calculates the
+  &lsquo;error&rsquo; both if the &lsquo;if&rsquo; should/should not
+  be taken.  The increment registers holds appropriately precalculated
+  values.
+<li> The result of one of these operations is tested to see if the
+  &lsquo;if&rsquo; should be taken.  This is simple because the
+  comparison is &lsquo;> 0&rsquo; which is the sign bit in a two's
+  complement notation.
+<li> The appropriate bit switches the two multiplexers to route the
+desired new values to the accumulator registers.
+<li> The output address is sent to a subsequent pipeline stage, together
+with the pixel data (not shown).
+<li> On the right a counter controls the iteration of the whole unit.
+</ul>
+
+<p>
+This unit is <span style="color:green"><i>fast</i></span>.  There are
+two series logic blocks in the cycle but one is a multiplexer (expect
+to be two-gates deep) so the critical path is little more than the
+adder time.  It is also capable of producing an address on every clock
+cycle.  (This may be &lsquo;overkill&rsquo; if the plotting mechanism
+cannot keep up!)
+</p>
+
+<p>
+It is quite <span style="color:red">expensive</span> in hardware
+terms: there are four adders and the counter.
+</p>
+
+<p>
+It is probably not the most power-efficient design because it
+employs <i>speculation</i>; it does work that may never be needed,
+just in case it is.
+</p>
+
+<p>
+Single cycle operation means the sequencing control logic is simple:
+stop/go.
+</p>
+
+<h4>Initialisation</h4>
+
+<p>
+The setup is quite complicated.  In this design it was assumed that
+this was performed in software by a processor.  This could be done in
+parallel, with the next line parameters being calculated and buffered
+whilst the current plot is iterating.
+</p>
+
+<p>
+This is valid reasoning if:
+</p>
+
+<ul>
+<li> lines are expected to be &lsquo;reasonably&rsquo; long
+  <ul>
+  <li> a quick estimate suggests 30-40 cycles for the setup;
+  </ul>
+if lines are very short then this would be the limiting factor
+<li> the processor cannot be doing something more useful
+<li> the area cost of a hardware preprocessor is &hellip; unpalatable
+</ul>
+
+<p>
+Another possibility would be to pass simpler parameters (there will
+always be some cost in writing to the I/O registers) and perform the
+setup locally.
+</p>
+
+<ul>
+<li> building all the setup logic combinatorially would be quick
+(although the critical path would be much longer than our plot loop
+so several clock cycles may be needed) but expensive in hardware
+  <ul>
+  <li> this logic would be idle most of the time
+  <li> it may be worth it if you have a big silicon budget
+  <li> it's simple to design
+  </ul>
+<li> devising a small &lsquo;processor&rsquo; to perform the parameter
+  transformations
+  <ul>
+  <li> area efficient
+  <li> allows CPU to do other things
+  <li> probably fast enough to keep up with parameter loading speed
+  <li> needs sequencing/decision control logic
+  </ul>
+</ul>
+
+
+<h4>Afterthought</h4>
+
+<p>
+Lines come in different lengths.  If these are a mixture of long and
+short lengths there may be some benefit in preparing and <b>buffering</b>
+more than one set of parameters in advance to try and keep all stages
+busy as much as possible.<br>
+This forms a <i>pipeline</i> &ndash; at a higher level than just clock
+cycles &ndash; and introduces some <b>elasticity</b> into the flow.
+</p>
+
+<p>
+This <i>may</i> improve overall speed (but by how much?) but would
+cost some area and (design, verification) complexity for the
+FIFO<sup>&dagger;</sup>.  It is worthwhile in <i>your</i> particular
+design?
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Which is what this is effectively creating.
+</blockquote>
+
+
+<center>
+<div class="inset">
+
+<h2>Evaluation</h2>
+
+<p>
+With a synthesizable RTL design it is possible to begin to get some
+idea of its feasibility by synthesizing the block and checking the
+output statistics.
+</p>
+
+<h3>Example: line algorithm</h3>
+
+<p>
+Two implementations of the line drawing algorithm are compared
+below.  These both use the same iterative machine for plotting pixels,
+the difference being that the first includes combinatorial logic to
+translate pixel coordinates into the appropriate parameters whereas
+the second relies on this being provided by software.
+</p>
+
+<p>
+Synthesis was for a Xilinx <b>FPGA</b> as used in the lab.  In both
+cases no particular optimization has been attempted.
+</p>
+
+<table align="right">
+<tr>
+<th>Design</th><th>Slices</th><th>F/F</th><th>LUT</th><th>LUT</th>
+</tr>
+<tr>
+<td>With init.  logic</td><td>194</td><td>78</td><td>332</td><td>80&nbsp;MHz</td>
+</tr>
+<tr>
+<td>Without init.  logic</td><td>100</td><td>93</td><td>117</td><td>91&nbsp;MHz</td>
+</tr>
+</table>
+
+<p style="text-align:left">
+i.e. moving the preparation to software gives a design about half the
+size and 14% faster.
+</p>
+
+<ul style="text-align:left">
+<li> It is easy to generate a lot of logic using a HDL and a synthesizer.
+<li> Is it worth it for your application?
+</ul>
+
+<h4>Key</h4>
+
+<p>
+&lsquo;<b>Slices</b>&rsquo; are the basic logic units on these FPGAs.<br>
+Slices contain both D-type <b>flip-flops</b> (F/F) and
+logic <b>Look-Up Tables</b> (LUT).<br>
+(Combinatorial logic is evaluated using pre-programmed memory tables.)
+</p>
+
+<p>
+There are other &lsquo;macrocell&rsquo; elements, such as <b>RAM</b>s
+and <b>multipliers</b> which may be used by the synthesizer &hellip;
+but not here.
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<p><a href="04e_example.html">Back</a> to the multiplier example.</p>
+
+<p><a href="04_tradeoffs.html#conclusions">Forwards (&amp; back up)</a> to 
+session conclusions.</p>
+
+<hr><hr>
+
+</body>

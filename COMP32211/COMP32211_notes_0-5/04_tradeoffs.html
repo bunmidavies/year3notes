@@ -1,0 +1,441 @@
+<title>Tradeoffs</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column_a {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+.column_b {
+  float: right;
+  width: 75%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h1>Implementation and Design trade-offs</h1>
+<p>
+Q. Given a specification how do you find the perfect implementation?
+</p>
+<p>
+A. There is no such thing!
+</p>
+
+<ul>
+<li> There are numerous ways of making something which works.
+<li> (There are <i>many more</i> ways of making something
+  which <i>doesn't</i> work!)
+</ul>
+<p>
+Consider the implementation (largely) in a top-down fashion
+</p>
+<ul>
+<li> Algorithms
+<li> Architecture
+<li> RTL
+<li> Practicalities
+  <ul>
+  <li> power supply
+  <li> cooling
+  <li> pad limitations
+  <li> &hellip;
+  </ul>
+</ul>
+
+
+<h2>The &lsquo;right&rsquo; algorithm</h2>
+
+<p>
+In this module we are assuming that the algorithm and the higher
+levels of the architectural design are fixed and we concentrate on the
+implementation.  This section covers the microarchitecture and the RTL;
+circuit details are left for later.
+</p>
+
+<p>
+It is very important to choose an efficient algorithm.  For example, to
+choose what is likely to be a software exemplum, searching 1000
+records in a linear table may require an average of 500 comparisons
+whereas in a binary tree they may only average 9 (slightly more
+complex) tests.
+</p>
+
+<p>
+However clever the later implementation it is unlikely to compensate
+for such a crushing disadvantage.
+</p>
+
+<h3>Top-down design?</h3>
+
+<p>
+So the principle is that top-down design is usually the best way to
+go.
+</p>
+
+<p>
+However, it is important that when it comes to implement the algorithm
+this is possible at reasonable cost.  Plotting a circle may look simple
+using sines and cosines but calculating these &lsquo;on the fly&rsquo;
+may be prohibitive.  Therefore it is a good plan to look ahead and
+consider the likely implications before finally committing to an
+implementation plan!
+</p>
+
+<h3>Example: Bresenham's line algorithm</h3>
+
+<p>
+Perhaps the &lsquo;obvious&rsquo; way to draw a line is to use an
+equation such as:
+</p>
+
+<center><p>y = mx + c</p></center>
+
+<p>
+and then, by iterating over x work out each y position then round it
+onto the nearest pixel.  This requires the determination of the
+(fractional) m and c (by division) and a multiplication for each pixel
+plot.  Because &lsquo;real&rsquo; numbers are only approximated the
+result is subject to (rounding) errors.
+</p>
+
+<p>
+Bresenham's algorithm plots the closest possible pixels to a specified
+line without using (expensive) multiplication or division.  It does not
+require floating point representation and it does not suffer from
+rounding errors.
+</p>
+
+
+<center>
+<div class="inset">
+
+<h3>Example: The Fast Fourier Transform</h3>
+
+<p>
+First, if you don't follow the technical details on this page, don't
+worry.  It is simply an <i>example</i> of how algorithmic level can be the
+most important place to perform optimization.
+</p>
+
+<p>
+The <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast
+Fourier Transform</a> (FFT) &ndash; in computer terms usually
+attributed to Cooley and Tukey (1965) but the principle stretches back
+much further &ndash; is a means of optimizing a Discrete Fourier Transform
+(DFT) by combining redundant operations.  The Fourier transform is a
+means of determining the spectral components of a signal &ndash; akin to
+finding the volumes of the notes which make up a chord.
+</p>
+
+<img src="figures/FFT_matrix.png" alt="DFT as a matrix" width=30% align="right">
+
+<p>
+A <i>discrete</i> Fourier transform represents an input by a set of
+samples and produces an equal number of results.  Better resolution is
+achieved by processing more samples.  In its simple form a DFT can be
+represented by a matrix multiplication.
+</p>
+
+<p>
+Clearly this can involve a lot of multiplication.  The complexity is
+N<sup>2</sup> , where N is the number of samples.
+</p>
+
+<p>
+The FFT exploits redundancy in the coefficient matrix to reduce the
+number of calculations.  The complexity of a comparable FFT is
+N.log<sub>2</sub>(N).
+</p>
+
+<table align="left">
+<tr>
+<th>N</th><th>N<sup>2</sup></th><th>N.log<sub>2</sub>(N)</th><th>Saving</th>
+</tr>
+<tr>
+<td>8</td><td>64</td><td>24</td><td>62%</td>
+</tr>
+<tr>
+<td>32</td><td>1024</td><td>160</td><td>84%</td>
+</tr>
+<tr>
+<td>256</td><td>65536</td><td>2048</td><td>97%</td>
+</tr>
+<tr>
+<td>1024</td><td>1048576</td><td>10240</td><td>99%</td>
+</tr>
+</table>
+
+<p>
+This table shows the sort of savings which can be made.  Where such
+things are possible they can vastly outweigh any optimizations in
+later implementation.
+</p>
+
+<p>
+The <b>point is that the <u>algorithm</u></b> is the first, and often
+the best, place to optimize.<br clear="left">
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<h2>Design trade-offs</h2>
+
+<ul>
+<li> There are many ways of producing a correct design.<br>
+     (There are even more ways of producing an incorrect one.)
+<li> The &lsquo;best&rsquo; design for your application will be
+     influenced by numerous different factors:
+  <ul>
+  <li> Speed
+  <li> Power
+  <li> Size
+  <li> Simplicity
+  </ul>
+&nbsp;<br>
+<li> Most of these rely on skill and judgement in the first instance.
+  <ul>
+  <li> Later it is possible to get better estimates from tools.
+  </ul>
+<li> RTL allows immediate feedback on cycle counts.
+  <ul>
+  <li> Experience (or experiment) <i>suggests</i> what <i>may</i> be
+    feasible in a cycle.
+  </ul>
+</ul>
+
+<p align="right">
+&ldquo;On time, on budget, working; choose any two.&rdquo;
+</p>
+
+<h3>Speed</h3>
+
+<p>
+In one respect, &lsquo;the faster, the better&rsquo; is a reasonable
+design philosophy; after all it is easy to reduce the clock rate to
+slow an implementation down, but the maximum frequency cannot be
+exceeded.
+</p>
+
+<p>
+However there are often &lsquo;real time&rsquo; constraints which need
+to be met, but not exceeded.  A real-time circuit needs to guarantee a
+minimum worst-case performance.  For example, there is unlikely to be a
+benefit in an MP3 decoder being able to go faster than is needed to
+play a particular track.
+</p>
+
+<p>
+Increasing speed beyond a certain level is likely to require a larger,
+more complex, power-hungry circuit.
+</p>
+
+<h3>Power</h3>
+
+<p>
+Reducing power consumption is important, particularly in
+battery-powered equipment.  Power consumption is (loosely) related both
+to the size of the device and its speed.  Generally, more logic means
+higher power consumption as does going faster.  Note, however, the
+difference between power and energy.
+</p>
+
+<ul>
+<li> Energy is the limited resource stored in the battery.
+<li> Power is how fast energy is &lsquo;used&rsquo; over time.
+</ul>
+
+<p>
+Thus, a circuit which computes at double speed but halts for half the
+time will use (roughly) the same energy as one which consumes half its
+power all the time.  (There can be some more subtle trade-offs made in
+this area.)
+</p>
+
+<p>
+Remember that the power which is dissipated emerges as heat and this
+has got to be extracted.  Low power therefore can mean better even for
+&lsquo;tethered&rsquo; equipment, by alleviating the need for fans,
+allowing boxes to be sealed, running cooler (extending product
+lifetime) and, of course, reducing the electricity bill.
+</p>
+
+<h3>Size</h3>
+
+Depending on the application, it may be better to produce a small
+chip.  Chips are manufactured on silicon wafers and the cost/wafer is
+roughly fixed.  A naive approach would suggest that a chip of half the
+area would therefore cost half as much.
+</p>
+
+<p>
+However, because there is only a certain <b>yield</b> of functional
+chips which is governed by the density of defects on the wafer, a
+functional chip of 10&nbsp;mm<sup>2</sup> will cost less than half one
+of 20&nbsp;mm<sup>2</sup> .  For a device that is to be mass marketed,
+size can be critical.
+</p>
+
+<p>
+When implementing on an FPGA what matters primarily is that the design
+will fit.  However FPGAs come in different sizes (and prices) so a
+small size usually means a cheaper product.
+</p>
+
+<p>
+Even then an FPGA will come with certain resources (such as RAM or
+multipliers) on board.  If these can be exploited there may be savings
+on flip-flops or logic.
+</p>
+
+<h3>Simplicity</h3>
+
+</p>
+
+<p>
+A simple design is likely to be small, which is a benefit in
+itself.  However design simplicity brings other benefits.  Primarily, a
+simple design is easier to build &ndash; and <i>much</i> easier to
+test and debug &ndash; which reduced development time and cost.
+Reduced development time means the product is marketed sooner which
+brings disproportionate gains in sales.  Product reliability helps gain
+future sales &ndash; or, rather, unreliability loses them.
+</p>
+
+<p>
+The enemy of simplicity is the need for more (or better) features.  For
+example HDTV processes more pixels per second than older standards so
+the decoder has to work harder, perhaps demanding a faster or more
+parallel architecture.
+</p>
+
+<hr>
+
+<h3 id="index";>Trade-offs: links</h3>
+
+<h4>In this session</h4>
+<ul>
+<li><a href="04a_tradeoff_style.html">Code style.</a></li>
+<li><a href="04b_FSM_design.html">FSM design.</a></li>
+<li><a href="04c_sync_async.html">Synchronous &amp; asynchronous design.</a></li>
+<li><a href="04d_parallelism.html">Parallel design opportunities.</a></li>
+<li><a href="04e_example.html">Example: multiplication.</a></li>
+<li><a href="04f_RTL_parallelism.html">RTL parallelism.</a></li>
+</ul>
+
+<h4>Other</h4>
+<ul>
+<li><a href="03_testing.html">Previous session's notes</a>: verification.</li>
+<li><a href="05_timing.html">Next session's notes</a>: timing.</li>
+<li><a href="index.html">Up to Index.</a></li>
+</ul>
+
+<hr>
+
+<h2 id="conclusions";>Conclusions</h2>
+<ul>
+<li> There are many factors to consider when setting out to build a system
+<li> You probably won't find &lsquo;the optimum&rsquo; solution &hellip;
+  <ul>
+  <li> is it worth trying?
+  <li> will the &lsquo;goalposts&rsquo; move?
+  <li> there are probably things you don't know
+  </ul>
+<li> &hellip; but you should aim to get close
+<li> Your design constraints may differ from project to project
+  <ul>
+  <li> speed is tempting but fast enough is fast enough
+  <li> power (energy) increasingly important &ndash; more later
+  <li> area smaller is probably better
+  <li> simplicity improves time to market (or
+  &lsquo;reliability&rsquo;)
+  </ul>
+</ul>
+
+<p><a href="05_timing.html">Next session's notes</a>: timing.</p>
+
+<hr>
+
+<div style="background-color:bisque;">
+<center>
+<p style="color:green">A little bonus postscript.</p>
+</center>
+
+<img src="figures/time_to_market.png" alt="tine to market" width=35%
+     align="right">
+
+<h3>Time to market</h3>
+
+<p>
+Microelectronics is a fast moving milieu.  The release date of a
+product is as important as its functionality.  A particular device is
+going to be obsolete in the near future; sales have to take place
+before then.
+</p>
+
+<p>
+On the right is a sketch suggesting how development time affects overall
+sales, represented by the green shaded areas.
+</p>
+
+<p>
+The point being, a small difference in development time can make a big
+difference in profit so designer productivity is a key factor in the
+industry.<br clear="right">
+</p>
+</div>
+
+<hr><hr>
+
+</body>

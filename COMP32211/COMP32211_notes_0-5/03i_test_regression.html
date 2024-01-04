@@ -1,0 +1,209 @@
+<title>Regression tests</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+
+<h2>Regression tests</h2>
+
+<p>
+Test process
+</p>
+
+<ul>
+<li> identify something which needs testing
+<li> devise a test
+<li> test
+<li> iterate until the design passes
+</ul>
+
+<p>
+Then
+</p>
+
+<ul>
+<li> <b>keep the test</b>
+<li> continue with development
+<li> rerun the test
+<li> iterate until the design is complete
+</ul>
+
+
+<div class="row">
+  <div class="column">
+
+  <p>
+  That way the <i>final</i> design still meets <i>all</i> the test criteria.
+  </p>
+
+  </div>
+
+  <div class="column">
+
+  <center>
+
+  <p align="right">
+  &ldquo;Primum non nocere&rdquo;<br>
+  [&ldquo;First do no harm.&rdquo;]<br>
+  Attr.  <a href="https://en.wikipedia.org/wiki/Worthington_Hooker">Worthington
+  Hooker</a>
+</p>
+
+  </center>
+
+  </div>
+</div clear="both">
+
+<p>
+Regression tests are tests which ensure something hasn't been broken
+by later changes.  These changes can occur for various reasons, such
+as:
+</p>
+
+<ul>
+<li> a &lsquo;new&rsquo; fault was found later in development
+<li> an upgraded version of the system is being produced
+</ul>
+
+<p>
+An example of the latter case: imagine you are the Intel
+Corporation.  Most of your business is founded on processors which are
+backwards compatible with earlier generations so it's vital that new
+devices can still run old code.  You (presumably!) therefore keep a
+suite of old software &ndash; contrived to test every aspect you have
+thought of &ndash; to test compatibility of your latest device.
+</p>
+
+<p>
+Testing can be boring, especially if you expect everything to
+pass.  This should normally be the case following a minor edit to a(n
+apparently) unrelated block.  If such retesting relies on human
+attention then it probably isn't going to be very reliable.
+</p>
+
+<p>
+Regression tests should be automated, as much as possible.  It is easy
+to see how this can be done in many cases.  For example a processor can
+be given code which is self-checking; run it and it says
+&lsquo;okay&rsquo; (or not).  It's a bit harder in some systems, but an
+appropriate test harness can do a similar job.  As machines do not get
+bored then this is a good solution and all you have to do is run it.
+</p>
+
+<p>
+Of course these tests must be thorough and, occasionally, may
+highlight a problem.  It it therefore useful if they contain some
+diagnostic information as well.  It would be intimidating to know that
+there was a fault somewhere in your design but not know where!
+</p>
+
+<p>
+The best time to put these tests in place is when the appropriate
+system is first developed.  That is the time when you're concentrating
+on what could go wrong and, probably, discovering bizarre
+behaviour.  Having thought of a test, do it tidily and add it to the
+regression test suite before moving on.  It will save time later.
+</p>
+
+
+<div class="row">
+  <div class="column">
+
+  <p>
+   Are your tests actually working? Sometimes you may get a
+  &lsquo;<b>false positive</b>&rsquo; result where they flag up a
+  fault that does not really exist.  This may be a genuine mistake; it
+  may be over-zealous checking of values which don't really matter.
+  Whatever the cause it should draw attention and be fixed.
+  </p>
+
+  </div>
+
+  <div class="column">
+
+  <center>
+
+  <p align="right">
+  &ldquo;Quis custodiet ipsos custodes?&rdquo;<br>
+  ["Who will guard the guards themselves?"]<br>
+  <a href="https://en.wikipedia.org/wiki/Juvenal">Juvenal</a>
+  </p>
+
+  </center>
+
+  </div>
+</div clear="both">
+
+<p>
+More worrying is the &lsquo;<b>false negative</b>&rsquo; where a test
+misses a genuine problem.  This could be something you didn't think of
+&ndash; you can't do much about that, you need independent reviewers
+to help &ndash; but it may be something you thought you tested for but
+there is a bug in the test suite.
+</p>
+
+<p>
+Tests are normally <b>augmented but not changed</b>.  Thus the tests should
+also be debugged when they are produced.  To exercise tests there is a
+need to introduce deliberate faults into (copies of) the system and
+demonstrate that the tests pick these up satisfactorily.
+</p>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03h_test_reviews.html">Back</a> to reviewing.</p>
+
+<p><a href="04_tradeoffs.html">Forward</a> to next session.</p>
+
+<hr><hr>
+
+</body>

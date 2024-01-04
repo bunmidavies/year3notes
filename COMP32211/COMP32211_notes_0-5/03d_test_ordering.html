@@ -1,0 +1,191 @@
+<title>Test ordering/sequencing</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Ordering and Scheduling</h2>
+
+<p>
+Consider your two friends you go out with, Alice and Bob
+Alice is always early, Bob is usually late.
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+&nbsp; &nbsp; if (bob is here) then set off
+</p>
+
+<p>
+Seems to work &hellip;
+</p>
+
+<p>
+Is likely to be executed by routine tests.
+</p>
+
+<p>
+One day, Bob turns up early.  Later you think &ldquo;Where's Alice?&rdquo;
+</p>
+
+<ul>
+<li> Test coverage can't help because it can only do what you asked it to.
+<li> Here a test strategy should strive to test every case in every order.
+</ul>
+
+<h3>Ordering</h3>
+
+<p>
+It is likely that a hardware system has a number of subsystems
+operating in parallel.
+</p>
+
+<ul>
+<li> Some cases these will be strictly synchronised
+  <ul>
+  <li> example: processing pipeline
+  <li> this is quite easy to test
+  </ul>
+<li> Some cases have simple timing relationships
+  <ul>
+  <li> example: simple router
+  <li> needs a couple of test cases
+  </ul>
+<li> Some have complex behaviours
+  <ul>
+  <li> example: FIFO buffer
+  <li> requires numerous tests
+  </ul>
+</ul>
+
+<h4>Example: FIFO Test Set</h4>
+
+<center>
+  <img src="figures/FIFO_2.png" alt="ambiguous output trace"
+     width=70%>
+</center>
+
+<p>
+To take the last example, let's look at the possible different
+operating conditions of the FIFO.  On any particular cycle the
+following may happen:
+</p>
+
+<table align="center">
+<tr>
+<th>Input</th><th>Output</th><th>State</th><th></th><th>Input action</th><th>Output action</th><th>Occupancy</th>
+</tr>
+<tr>
+<td><center>0</center></td><td><center>0</center></td><td>&nbsp;Don't care&nbsp;</td><td></td><td>&nbsp;None&nbsp;</td><td>&nbsp;None&nbsp;</td><td><center>&mdash;</center></td>
+</tr>
+<tr>
+<td><center>1</center></td><td><center>0</center></td><td>&nbsp;Empty&nbsp;</td><td></td><td>&nbsp;Input&nbsp;</td><td>&nbsp;None&nbsp;</td><td><center>+1</center></td>
+</tr>
+<tr>
+<td><center>1</center></td><td><center>0</center></td><td>&nbsp;Part full&nbsp;</td><td></td><td>&nbsp;Input&nbsp;</td><td>&nbsp;None&nbsp;</td><td><center>+1</center></td>
+</tr>
+<tr>
+<td><center>1</center></td><td><center>0</center></td><td>&nbsp;Full&nbsp;</td><td></td><td>&nbsp;Wait&nbsp;</td><td>&nbsp;None&nbsp;</td><td><center>&mdash;</center></td>
+</tr>
+<tr>
+<td><center>0</center></td><td><center>1</center></td><td>&nbsp;Empty&nbsp;</td><td></td><td>&nbsp;None&nbsp;</td><td>&nbsp;Wait&nbsp;</td><td><center>&mdash;</center></td>
+</tr>
+<tr>
+<td><center>0</center></td><td><center>1</center></td><td>&nbsp;Part full&nbsp;</td><td></td><td>&nbsp;None&nbsp;</td><td>&nbsp;Output&nbsp;</td><td><center>-1</center></td>
+</tr>
+<tr>
+<td><center>0</center></td><td><center>1</center></td><td>&nbsp;Full&nbsp;</td><td></td><td>&nbsp;None&nbsp;</td><td>&nbsp;Output&nbsp;</td><td><center>-1</center></td>
+</tr>
+<tr>
+<td><center>1</center></td><td><center>1</center></td><td>&nbsp;Empty&nbsp;</td><td></td><td>&nbsp;Input&nbsp;</td><td>&nbsp;<font style="color:blue"><i>Output</i></font>&nbsp;</td><td><center>0</center></td>
+</tr>
+<tr>
+<td><center>1</center></td><td><center>1</center></td><td>&nbsp;Part full&nbsp;</td><td></td><td>&nbsp;Input&nbsp;</td><td>&nbsp;Output&nbsp;</td><td><center>0</center></td>
+</tr>
+<tr>
+<td><center>1</center></td><td><center>1</center></td><td>&nbsp;Full&nbsp;</td><td></td><td>&nbsp;<font style="color:blue"><i>Input</i></font>&nbsp;</td><td>&nbsp;Output&nbsp;</td><td><center>0</center></td>
+</tr>
+</table>
+
+<p>
+A complete test should exercise all these cases.
+</p>
+
+<p>
+This specification includes the ability to &lsquo;forward&rsquo;
+incoming data in the same cycle if the FIFO is empty and to accept an
+input to a full FIFO on the same cycle as data is removed.  These
+features (<font style="color:blue"><i>highlighted</i></font> in the
+table) minimise latency at the cost of increased complexity in the
+FIFO design.  They may or may not be allowed, accoding to the
+designer's choice.
+</p>
+
+<p>
+This is not the only possible behaviour of a FIFO.  A simpler FIFO
+would have a slightly different behaviour.  It may be the case that
+different behaviours would be acceptable within the system and so the
+FIFO tests could be relaxed accordingly.
+</p>
+
+<p>
+Note that even quite a simple functional block can have quite complex
+behaviour &ndash; and &lsquo;many&rsquo; reachable states!
+</p>
+
+<hr>
+
+<p><a href="03_testing.html#index">Up</a> to testing.</p>
+
+<p><a href="03c_test_design.html">Back</a> to test design.</p>
+
+<p><a href="03e_test_debug.html">Forward</a> to debugging tests.</p>
+
+<hr><hr>
+
+</body>

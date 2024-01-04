@@ -1,0 +1,634 @@
+<title>Clock domains</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+.column_40 {
+  float: left;
+  width: 40%;
+  padding: 10px;
+}
+.column_60 {
+  float: left;
+  width: 60%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Clock Domains <span style="color:red;font-size:24px">&star;</span></h2>
+
+<img src="figures/clock_domains.png" alt="Clock domains on a chip" width= 30% align="right">
+
+<p>
+Synchronous design is a Good Thing
+</p>
+
+<ul>
+<li> Simplifies RTL design
+  <ul>
+  <li> May be easier to think about state diagrams
+  </ul>
+
+<li> Simplifies debugging &ndash; can take a &lsquo;global&rsquo; view
+  of <b>state</b>
+
+<li> Tool chains optimised for such
+</ul>
+
+<p>
+However it is not always possible to have one clock across an SoC.
+</p>
+
+<ul>
+<li> Synchronous clock distribution increasingly difficult.
+
+<li> Blocks may work optimally at different frequencies:
+  <ul>
+  <li> May be IP from different vendors
+  </ul>
+
+<li> Some I/O may require specific frequencies.
+</ul>
+<br clear="right">
+
+
+<center>
+<div class="inset">
+
+<h3>Metastability</h3>
+
+<p>
+A model flip-flop: ball rolling between wells.
+</p>
+
+<center>
+<img src="figures/metastability.png" alt="Metastability" width=70%>
+</center>
+
+<ul style="text-align:left">
+<li> The flip-flop has <i>three</i> stable positions: &lsquo;0&rsquo;,
+  &lsquo;1&rsquo; and a <b>metastable</b> position
+  &lsquo;half-way&rsquo;
+  between. <span style="color:blue">(There <i>must</i> be a flat
+  &lsquo;summit&rsquo; somewhere.)</span></li>
+
+<li> Violating set-up/hold conditions can result in the flip-flip entering
+the metastable state.</li>
+
+<li> In principle the flip-flop can stay metastable indefinitely</li>
+  <ul>
+  <li> but if it starts to resolve one way, positive feedback pushes
+    it further in that direction.</li>
+  </ul>
+
+<li> The probability of <i>remaining</i> metastable decreases
+  exponentially with time.</li>
+</ul>
+
+<p>
+The dangers in a metastable state lie in that it can be interpreted as
+different values by different inputs, or at different times.  A
+possible metastable flip-flop should only go to one place.
+</p>
+
+</div>
+</center>
+
+<hr>
+
+<h2>Synchronisers</h2>
+
+<img src="figures/synchroniser.png" alt="Synchroniser" width= 40% align="right">
+
+<p>
+Let's assume we have an incoming signal with no timing relationship to
+our local clock.  We want so fix that: we need a <b>synchroniser</b>.
+A typical synchroniser looks like this:
+</p>
+
+<p>
+Operation is simple.
+</p>
+
+<p>
+If the first flip-flop latches a valid level the second one copies
+this one clock period later.
+</p>
+
+<p>
+Else the first flip-flop may go metastable but has a whole clock
+period to resolve to a digital state.  As the violation is caused by an
+input data transition the chosen state will determine whether the data
+changed before or after the clock.
+</p>
+
+<p>
+If determined that the data changed &lsquo;after&rsquo; the clock then
+it will be picked up on the next clock edge.
+</p>
+
+<p>&nbsp;</p>
+
+<p>
+The first flip-flop <i>probably</i> doesn't remain metastable for a
+whole clock period.  The probability depends on the properties of the
+flip-flop and the length of the clock period.
+</p>
+
+<p>
+If the flip-flop doesn't resolve in time it will be forced to a
+digital state on the next clock edge since the input has now
+<u>definitely</u> had enough set-up time &ndash; but the second
+flip-flop may go metastable if it was just resolving at the
+inopportune moment. <span style="color:green">(The chance of this is
+  unlikely<sup>2</sup>.)</span>
+</p>
+
+<p>
+Paranoid designers may add more flip-flops.  Each multiplies the
+probability of remaining metastable by the same small number, thus if
+(say) 1 in 10<sup>6</sup> is too high, go for 1 in 10<sup>12</sup> , 1
+in 10<sup>18</sup> , etc.  Each flip-flop (delay) also <b>increases the
+latency</b>, of course.
+</p>
+
+<p>
+There is <b>no certain guarantee</b> that this will always work.
+However the probability of failure can be made <i>very</i> small.
+</p>
+
+<p>
+[Remember that 3&nbsp;GHz translates to 3&times;10<sup>9</sup>
+clocks/second or about 10<sup>19</sup>/century.]
+</p>
+
+
+<center>
+<div class="inset">
+
+<h3>Synchroniser flip-flops</h3>
+
+<div class="row"> 
+ <div class="column">
+
+  <p>
+  Some cell libraries provide flip-flops specifically to address this
+  problem.  They can still go metastable but they have a
+  &lsquo;steeper hill&rsquo; so they tend to resolve more quickly.
+  This is done by strengthening the gain internally, which makes them
+  slower (longer propagation delay) and probably raises power
+  consumption.  Use them in the synchroniser role, if available,
+  otherwise stick to the &lsquo;standard&rsquo; flip-flop.
+  </p><br clear="right">
+  </div>
+
+ <div class="column">
+
+  <p>&nbsp;</p>
+  <img src="figures/sync_ff.png" alt="'Normal' and synchroniser
+				    flip-flops" width= 90%>
+  </div>
+
+</div>
+
+</div>
+</center>
+
+<hr>
+
+
+<h2>Crossing clock domains</h2>
+
+<p>
+There are various possibilities for relationships between clocks.
+</p>
+
+<p>
+<ul>
+<li> Synchronous circuits avoid this difficulty
+
+<li> <b>Isochronous</b> circuits have a known, constant, phase relationship.
+  <ul>
+  <li> Maybe with blocks with <b>harmonic</b> frequencies.
+  <li> This may be exploited (with care!) in inter-block communication.
+  </ul>
+
+<li> Asynchronous clock sources cause problems!
+  <ul>
+  <li> Sending signals between asynchronous domains.
+       is <b><u>impossible</u> with 100% reliability</b>.
+  <li> At some stage a flip-flop set-up/hold constraint <b>will</b> be
+       violated.
+  <li> We can make the probability of failure <b>very
+  small</b><sup>&dagger;</sup>.
+  </ul>
+</ul>
+</p>
+
+<p>
+There is also the need for <b>arbitration</b>: <i>which</i> receiver
+cycle did the data arrive in?
+</p>
+
+<img src="figures/clock_domain_crossing.png" alt="Clock domain
+  crossing" width= 60% align="right">
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Like very, very <b>very</b> small.
+</blockquote>
+
+<img src="figures/clock_domain_timing.png" alt="Clock domain
+  crossing timing diagram" width= 63% align="right">
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+<p>
+Synchronisation introduces latency.  The probability of error decreases
+(exponentially) with the time allowed to resolve any
+metastability.  This also slows down the communications.
+</p>
+
+<p>&nbsp;</p>
+
+<p>
+The details may vary and there may be the possibility to optimise a
+bit but the point to note is that the complete <i>handshake</i> needs
+to synchronise <i>twice</i> &ndash; once on its way into each clock
+domain &ndash; so the overall cycle time is slow.  The exact latency
+may vary depending on the clock's frequencies and phase difference.
+</p>
+
+<!--
+<font style="color:blue;">** This could animate, too. **</font>
+-->
+
+<p>&nbsp;</p>
+
+<h4>Optimisation?</h4>
+
+<p>
+Removing the flip-flops delaying
+<span style="font-family: 'Courier New', monospace;">a&rArr;b</span>
+and
+<span style="font-family: 'Courier New', monospace;">w&rArr;x</span>
+would reduce the cycle
+time. &nbsp; <span style="color:red"><b>**&nbsp;DANGER&nbsp;**</b></span>
+ &nbsp;If, as is likely,
+<span style="font-family: 'Courier New', monospace;">w</span> (for
+example) is generated from combinatorial logic it could glitch to the
+wrong value during evaluation.  If such a glitch is captured by the
+other clock, all sorts of problems may occur! The flip-flops filter
+out any glitches.
+</p>
+<br clear="right">
+
+<img src="figures/clock_domain_data.png" alt="Data bus crossing to new
+					      clock domain" align="right">
+
+<h3>Pragmatically</h3>
+
+<p>
+There is no need to synchronise <i>every</i> signal crossing a
+boundary explicitly.  If the timing is controlled only data validity
+needs to be synchronised and any dubiously-timed data recaptured
+during the synchronisation.
+</p>
+
+<p>
+If the request is synchronised, accompanying data will have had plenty
+of time to arrive.
+</p>
+
+<p>
+When crossing a clock boundary, there is always:
+</p>
+
+<p>
+<ul>
+<li> some <b>latency</b>
+
+<li> a <b>chance of failure</b> due to persistent metastability
+  <ul>
+<li> small: may be reduced by adding extra flip-flops
+<li> special flip-flops which resolve faster may be available<br>
+(though not from logic synthesis!)
+  </ul><br clear="right">
+</ul>
+
+<div style="background-color:floralwhite">
+<h3>Crossing timing domains in the lab.</h3>
+
+<p>
+The system we are constructing has been kept as synchronous as
+possible.  Thus the master frequency is set by the pixel clock and the
+drawing engine is run at the same rate.  There is, however, an
+asynchronous input in terms of the processor bus, which is governed by
+a completely separate clock.
+</p>
+
+<img src="figures/memory_timing_async.png" alt="Asynchronous memory
+			write timing" width= 50% align="right">
+
+<p>
+The bus arriving from the ARM is an &lsquo;asynchronous&rsquo; bus.  In this
+context this means there is no clock signal within the bus.  Timing is
+provided by pulses on control signals, the length of which is governed
+by the bus master (i.e. the processor).  This type of bus is a typical
+&ndash; arguably &lsquo;old fashioned&rsquo; &ndash; interface used by many memory and I/O
+devices.  The various parameter registers are therefore built as
+transparent latches, enabled by the strobe pulses.
+</p>
+
+<p>
+Most of the time, writing to the interface has no effect on the
+clocked part of the circuit.  Parameters are set up but not yet
+read.  This happens on &lsquo;software&rsquo; timescales where it is easy to be
+confident the values will be stable long before they are
+used.  Synchronization is therefore unnecessary.
+</p>
+
+<p>
+When a command is issued a signal must cross into the clocked
+domain.  In this case the synchroniser shown here is used.
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+&nbsp; always @ (posedge uP_nwr, posedge cmd_ack)<br>
+&nbsp; if (cmd_ack) go <= 0;<br>
+&nbsp; else<br>
+&nbsp; &nbsp; if (!uP_ncs && (uP_address == 6`h08)) go <= 1;<br>
+&nbsp;<br>
+&nbsp; always @ (posedge clk, posedge cmd_ack)<br>
+&nbsp; &nbsp; if (cmd_ack) begin go_1 <= 0; &nbsp;cmd_req <= 0; &nbsp; &nbsp;end<br>
+&nbsp; &nbsp; else &nbsp; &nbsp; &nbsp; &nbsp; begin go_1 <= go; cmd_req <= go_1; end<br>
+</p>
+
+<img src="figures/clock_sync.png" alt="Lab. clock synchroniser" width= 40% align="left">
+
+<p>
+The operation is triggered by the end of the write pulse which allows
+time for data to be propagated through transparent latches in the same
+cycle.  <span style="font-family: 'Courier New', monospace;">cmd_ack</span>
+is a one clock long pulse in response to an accepted cmp_req from the
+synchronous side.
+</p>
+
+<p>
+There is an assumption that a second write will not occur &lsquo;too
+soon&rsquo;.  This can be prevented by, for example, checking the
+&lsquo;go&rsquo; signal in software as a status bit.
+</p>
+
+<p>
+A status bit could be cleared at an arbitrary time unless it is
+resynchronised for the processor.  This is difficult without access to
+the processor's clock.  However if read into a processor register the
+bit is likely to pass through several flip-flops and thus have settled
+into some digital state by the time it is read and tested.  If sampled
+in a polling loop it can be deduced that, if a bit is read just as it
+changes, it doesn't matter how it's interpreted.
+</p>
+
+<p>
+The other possible output for such a bit is as an interrupt
+signal.  Interrupts are routinely regarded as asynchronous and fed
+through synchronisers on entry to a processor.  Any additional latency
+is small compared with the software run time.
+</p></div>
+<br clear="left">
+
+<h3>Some techniques for data domain clock-crossing</h3>
+
+<p>
+Synchronisers introduce <b>latency</b> and may &lsquo;cripple&rsquo;
+performance:
+</p>
+
+<p align="right">
+Various solutions are possible, depending on requirements & complexity.
+</p>
+
+
+<div class="row"> 
+ <div class="column">
+ <center>
+<img src="figures/cross_domain_1.png" alt="Clock domain crossing
+					   mechanism #1" width= 90%>
+
+<p>Synchronising every item: low bandwidth.</p>
+<p>&nbsp;</p>
+
+<img src="figures/cross_domain_3.png" alt="Clock domain crossing
+					   mechanism #3" width= 90%>
+<p>Buffer &lsquo;packets&rsquo; of items: longer latency, higher bandwidth.</p>
+
+ </center>
+
+ </div>
+
+ <div class="column">
+
+ <center>
+
+<img src="figures/cross_domain_2.png" alt="Clock domain crossing
+					   mechanism #2" width= 90%>
+<p>Read/write FIFO: low(ish) latency,
+high bandwidth &mdash; more complex.</p>
+
+<p>&nbsp;</p>
+<img src="figures/cross_domain_4.png" alt="Clock domain crossing
+					   mechanism #4" width= 90%>
+<p>
+More buffers plus FIFO reduce waiting time: more complex still!
+</p>
+
+ </center>
+ </div>
+</div>
+
+<!--
+<center><font style="color:blue;font-size:30px">** Ideal for some animation **</font></center>
+-->
+
+<ul>
+<li>Synchronising individual items independently is slow if there is
+  much to transfer: the latency is reflected in the bandwidth.</li>
+
+<li>Items may be &lsquo;batched up&rsquo; into a buffer (takes some
+  time) and the whole lot synchronised together.  This can be useful
+  in block transfers.</li>
+
+<li>With a stream of items the synchronisation latency of all but the
+  first item can be (partially?) hidden under the latency of the
+  first.  The FIFO accepts items into a store synchronised with the
+  transmitter clock; these are verified separately internally and read
+  out using the receiver clock.  When the buffer is partially full the
+  bandwidth is limited by the slower of the two clocks.</li>
+
+<li>Mechanisms may be combined, or others imagined &hellip;</li>
+
+</ul>
+
+<!--
+<center>
+<div class="inset">
+<h3>Asynchronous arbitration</h3>
+
+<p>
+It <i>is</i> possible to enter an asynchronous domain with 100%
+reliability using an arbiter or <i>mutual exclusion</i> element.  This
+is a cell which determines which of its (usually two) inputs arrived
+&lsquo;first&rsquo;.  It achieves reliability by <i>detecting</i>
+metastability and <i>delaying its decision</i> until this is resolved.
+</p>
+
+<p>
+Unfortunately the time taken to make a decision is unbounded so this
+process could always take more than a clock period &ndash; however
+long that is.
+</p>
+</div>
+</center>
+-->
+<center>
+<div class="inset">
+<h3>Two modules at the &lsquo;same&rsquo; frequency &ndash; with
+  independent clocks</h3>
+
+<p>
+Sometimes it is expedient to have communications between units with
+notionally the &lsquo;same&rsquo; clock frequency although they have
+different clock sources.  Examples may include synchronous serial
+communication such as
+<a href="https://en.wikipedia.org/wiki/PCI_Express">PCIe</a>
+or <a href="https://en.wikipedia.org/wiki/S-ATA">S-ATA</a>.
+However, <i>no two clocks will </i>exactly<i> match</i> so one end of
+the link will be faster than the other.
+</p>
+
+<p>
+A mechanism to allow for this disparity is for the transmitter to
+insert &lsquo;comma&rsquo; symbols into the communications stream.
+These carry no data, hence imposing a small overhead.  The receiver
+maintains a FIFO of incoming symbols which it is synchronising to its
+own clock.  If its clock is a little slower the FIFO will gradually
+fill; if its clock is a little faster the FIFO will gradually
+empty.  When a comma symbol is seen, if the FIFO is getting close to
+full the comma is discarded, saving some time and catching up;
+conversely, if the FIFO is close to empty the comma allows the
+receiver a slight pause.  In this way the FIFO can be kept close to
+half-full at all times and the communication maintained seamlessly.
+</p>
+</div>
+</center>
+
+<p>
+<h2>Buffering</h2>
+</p>
+
+<p>
+A circuit can pass one &lsquo;thing&rsquo; per clock cycle to another
+circuit in the same clock domain.
+</p>
+
+<p>
+Synchronising latency will apply to every &lsquo;thing&rsquo; passed
+across an interface between clock domains.  This reduces the
+communication bandwidth considerably (in things/cycle).
+</p>
+
+<p>
+Here are a couple of (related) techniques to achieve higher bandwidth
+across the interface.
+</p>
+
+<p>
+<b>Pack many bytes into a &lsquo;thing&rsquo;.</b>  Fill up a
+&lsquo;bucket&rsquo; (RAM) of data then signal its transfer at the
+end.  There is one synchronisation penalty for the bucket-load which is
+shared by all the data.  The disadvantage of this is that the latency
+is increased because the bucket must be filled then the transfer
+requested, so the first datum takes longer to be received (although
+they come close together after that.
+</p>
+
+<p>
+As above but <b>double buffer</b>.  Fill up a bucket and notify the receiver
+that it's ready.  Whilst that is synchronising and being emptied, fill
+up the next one.  The disadvantage is that more (independent) RAMs are
+needed; the advantage is increased bandwidth, closer to the maximum
+rate (which is the slower of the corresponding processes).
+</p>
+
+<p>
+A <b>decoupling FIFO</b> can extend the concept further.  Conceptually
+this is a bit harder to conceive.  Think of a dual-port RAM (you could
+build it out of flip-flops) where the transmitter writes to successive
+locations and the receiver subsequently reads them at its own rate.
+Every time a write completes a &lsquo;counter&rsquo; is incremented
+(Tx&nbsp;clock) and when a read completes it is decremented (Rx&nbsp;clock).
+The control logic does need a synchroniser but synchronisation is not
+necessary every cycle: for example if the FIFO contains four data,
+following a read it contains at least three (more if writes are
+ongoing) so no need to check before reading the next one.  This can be
+complicated to build but can offer close to maximum throughput with
+close to minimum latency.
+</p>
+
+<hr>
+
+<p><a href="05a_timing_closure.html">Back</a> to timing closure.</p>
+
+<p><a href="05c_time_stealing.html">Forwards</a> to time stealing.</p>
+
+<p><a href="05_timing.html#index">Up to Timing &amp; Clocking.</a></p>
+
+<hr><hr>
+
+</body>

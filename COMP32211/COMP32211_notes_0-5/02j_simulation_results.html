@@ -1,0 +1,220 @@
+<title>Simulation & results</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Comparing results</h2>
+
+<p>
+Three options:
+</p>
+
+<ul>
+<li>Stare at waveforms by hand
+  <ul>
+  <li>useful in initial debugging
+  <li>error prone and tedious for regression tests
+  </ul>
+</ul>
+
+<ul>
+<li>Use Verilog to compare results against an expected set
+  <ul>
+  <li>with a predictable progression can regenerate results in test harness
+  <li>can import expected results from a preprepared file
+  </ul>
+</ul>
+
+<ul>
+<li>Dump a trace from the simulator and compare off-line
+  <ul>
+  <li>simple tests can alert user to anomalous conditions
+  <li>data traces can be exported into files for analysis
+  </ul>
+</ul>
+
+<h3>Importing test results</h3>
+
+<p>
+Probably the easiest way to do this is to read a file of expected
+results into a memory residing in the test harness.  Initialise a
+pointer to the start of the file and increment it every time a
+comparison is made.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+reg &nbsp;[7:0] results [0:1023];<br>
+reg [10:0] result_pointer;<br>
+reg &nbsp;[7:0] comp_value;<br>
+&nbsp;<br>
+initial $readmemh(&lt;filename&gt;, results);<br>
+&nbsp;<br>
+initial<br>
+ &nbsp;begin<br>
+ &nbsp;result_pointer = 0;<br>
+ &nbsp;...<br>
+ &nbsp;test_next(comp_value); &nbsp; // Fetch value<br>
+ &nbsp;...<br>
+ &nbsp;end
+&nbsp;<br>
+task test_next; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Use a task for convenience<br>
+ &nbsp;output [7:0] value;<br>
+ &nbsp;begin<br>
+ &nbsp;if (result_pointer &gt; 1023)<br>
+ &nbsp; &nbsp;begin<br>
+ &nbsp; &nbsp;$display(&ldquo;Out of data!&rdquo;);<br>
+ &nbsp; &nbsp;$stop; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                     &nbsp; &nbsp; // Oops! Error<br>
+ &nbsp; &nbsp;end<br>
+ &nbsp;else<br>
+ &nbsp; &nbsp;begin<br>
+ &nbsp; &nbsp;value = results[result_pointer];<br>
+ &nbsp; &nbsp;result_pointer = result_pointer + 1;<br>
+ &nbsp; &nbsp;end<br>
+ &nbsp;end<br>
+endtask<br>
+</blockquote>
+
+<h3>Exporting monitoring information</h3>
+
+<p>There are several ways to do this.</p>
+
+<h4>User prints</h4>
+<p>
+<font style="font-family: 'Courier New', monospace;">$display</font><br>
+<font style="font-family: 'Courier New', monospace;">$write</font><br>
+</p>
+
+<p>
+C-like print statements: (nearly) identical except
+<span style="font-family: 'Courier New', monospace;">$display(&hellip;)</span>
+adds a <span style="font-family: 'Courier New', monospace;">LF</span>
+to the string end.<br>
+If you want to stay on the same line
+<span style="font-family: 'Courier New', monospace;">$write(&hellip;)</span>
+will do this.
+</p>
+
+<p>
+Suggestions:
+<ul>
+<li>Use to monitor progress through a stimulus file
+<li>Use to pick up and diagnose errors
+</ul>
+</p>
+
+<p>e.g.</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+$display(&ldquo;Starting test&rdquo;);<br>
+...<br>
+if (q != 32'h0000_0000)<br>
+ &nbsp;$display(&ldquo;Unexpected value: q = %X&rdquo;, q);<br>
+</blockquote>
+
+<p>
+Sometimes it is convenient to watch particular signals rather than all
+signals through time.  This can be done with
+the <font style="font-family: 'Courier New', monospace;">$monitor</font> task.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+initial<br>
+ &nbsp;$monitor(&ldquo;this = %x that = %x at time %t&rdquo;,<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this, that, $time);
+</blockquote>
+
+<p>
+This is similar to:
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+always @ (this, that)<br>
+ &nbsp;$display(&ldquo;this = %x that = %x at time %t&rdquo;,<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this, that, $time);<br>
+</blockquote>
+
+<h4>Writing to files</h4>
+
+<font style="font-family: 'Courier New', monospace;">$fopen(),
+  $fclose(), $fdisplay(), $fwrite()</font>
+
+<p>
+allow you to create your own output files. (&ldquo;<font style="font-family: 'Courier New',
+monospace;">$fwrite</font>&rdquo; is the same as
+  &ldquo;<font style="font-family: 'Courier New', monospace;">$fdisplay</font>&rdquo; except for line-feeds.) Their use,
+including file handles, is similar that which should be familiar from
+C programming.
+</p>
+
+<hr>
+
+<p><a href="02x_simulation.html#index">Up</a> to simulation</p>
+<p><a href="02i_simulation_init.html">Back</a> to initialising simulations</p>
+<p><a href="02k_simulation_if_xxx.html">Forward</a> to next session
+  &lsquo;<font style="font-family: 'Courier New', monospace;">if&rsquo;</font>s
+  and &lsquo;<font style="font-family: 'Courier New',
+  monospace;">xxxx</font>&rsquo;s in simulation</p>
+
+<hr><hr>
+
+</body>

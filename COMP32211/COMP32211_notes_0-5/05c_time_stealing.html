@@ -1,0 +1,216 @@
+<title>Time stealing</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Time Stealing</h2>
+
+<p align="center">(<b>Not</b> something obtained with a simple design flow.)</p>
+
+<center>
+<img src="figures/time_stealing.png" alt="Time stealing in a pipeline" width=70%>
+</center>
+
+<p>
+This is a technique to get a bit more performance out of a pipeline
+which is not perfectly balanced.
+</p>
+
+
+<center>
+<div class="inset">
+
+<p>
+Reminder: a <b>balanced pipeline</b> is one where the the critical
+paths of all pipeline stages are (more or less) the same.
+</p>
+
+</div>
+</center>
+
+
+<p>
+In the first example the critical path is constraining the clock
+period; the second stage will evaluate before the result is needed and
+the result is delayed by 200&nbsp;ps at the register input.  This is
+the &lsquo;normal&rsquo; type of circuit.
+</p>
+
+<p>
+The second example deliberately introduces some skew into the clock to
+one stage.  If clocked at 1&nbsp;GHz this would mean that there was a
+100&nbsp;ps wait for this register but, because it was clocked
+&lsquo;late&rsquo; the delay to the next register would be smaller
+(only 100&nbsp;ps, not 200&nbsp;ps in the example).  The
+clock <b>period</b> can now be reduced to 900&nbsp;ps and all the
+constraints can still be met; the pipeline goes 11% faster.
+</p>
+
+<p>
+This is not a trivial process however; there are difficulties:
+</p>
+
+<p>
+<ul>
+<li> Standard design flows will not do this.
+
+<li> There needs to be a well-controlled delay in the clock
+distribution tree, which is difficult to make reliable.
+
+<li> There is a stricter hold-time bound on the &lsquo;lengthened&rsquo;
+     stage; it must be guaranteed that no logic path will take less
+     than 100&nbsp;ps or that data may be captured by the same (but
+     delayed) clock edge which initiated it.
+</ul>
+
+<h4>Why?</h4>
+
+<p>
+<span style="color:blue">Why not &lsquo;simply&rsquo; repartition the logic stages to reduce
+the worst critical path?</span><br>
+Usually this approach would be a better solution &ndash; and less
+stressful when persuading the logic to synthesize at the desired
+speed.  However this is not always possible.  Usually this will be due
+to the inclusion of some <b>macrocell</b> which cannot sensibly be
+subdivided: a typical example of this would be a <b>memory</b> (SRAM)
+block which has been synthesized by the ASIC foundry.
+</p>
+
+<h3>&ldquo;Time borrowing&rdquo;</h3>
+
+<p>
+Basically the same principle as time stealing but exploiting
+transparent latches rather than edge-triggered flip-flops (see
+&ldquo;Two-phase clocks&rdquo;).
+</p>
+
+<p>
+Because a latch is transparent for some time it allows an
+early-arriving result into the next stage before an edge-triggered
+device would.  Thus any time spare in one stage will be exploited &ndash;
+automatically &ndash; by the next stage.
+</p>
+
+<p>
+[Don't get too concerned about the <i>names</i> of these techniques;
+concentrate on the <i>principle</i>!]
+</p>
+
+
+<center>
+<div class="inset">
+
+<h3><a href="https://ieeexplore.ieee.org/abstract/document/711317">Wave pipelining</a></h3>
+
+<p>
+A &ldquo;wave pipeline&rdquo; is a pipeline <i>without latches</i> to
+re-synchronise data elements; inputs change periodically and
+&ldquo;waves&rdquo; of evaluation activity chase each other through
+the logic separated <i>purely by the delays</i> in the logic paths.
+</p>
+
+<ul style="text-align:left">
+<li> In principle a wave pipeline could be the fastest means of
+implementing logic.</li>
+
+<li> In practice it is very hard<sup>&dagger;</sup> to ensure that all
+  parallel logic operations take &lsquo;exactly&rsquo; the same time;
+  failure means that part of one data element may catch up with its
+  predecessor, causing a failure.</li>
+  <ul>
+  <li> As the manufacturing variation of IC devices increases this
+gets ever harder.</li>
+  </ul>
+</ul>
+
+<p>
+Wave pipelining is mentioned here to for completeness rather than as a
+suggested technique.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Read as &ldquo;nearly impossible&rdquo;.
+</blockquote>
+
+</div>
+</center>
+
+<hr>
+
+<h2>Multi-cycle paths</h2>
+
+<p>
+It is sometimes expedient (and convenient) to allow logic more than
+one clock period to settle.  This does not involve any
+&lsquo;clever&rsquo; timing tricks; the clock runs as normal but the
+imputs to the subsequent register may not stabilise in a single clock
+period.
+</p>
+
+<p>
+This may (occasionally) be sensible design but you need to <i>tell the
+CAD tools</i>.  If the tools see a clocked register they will
+endeavour to make the timing &lsquo;fit&rsquo; whereas you don't care
+some of the time since there are two (or more!) clock periods allowed.
+Complaints about &ldquo;negative slack&rdquo; need to be suppressed.
+</p>
+
+<hr>
+
+<p><a href="05b_clock_domains.html">Back</a> to clock domains.</p>
+
+<p><a href="05d_clock_generation.html">Forwards</a> to clock generation.</p>
+
+<p><a href="05_timing.html#index">Up to Clocking.</a></p>
+</ul>
+
+<hr><hr>
+
+</body>

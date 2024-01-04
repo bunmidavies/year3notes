@@ -1,0 +1,214 @@
+<title>Simulation events</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Events</h2>
+
+<p>
+Digital simulation is usually &lsquo;event-driven&rsquo;.  The basic
+operation is described
+in <a href="02a_event_driven_simulation.html">this aside</a>.
+</p>
+
+<p>
+Events are awaited using the &lsquo;<font style="font-family: 'Courier New', monospace;">#<i>&lt;value&gt;</i></font>
+@</font>&rsquo; keyword.
+<ul>
+<li>e.g.  as part of a loop <font style="font-family: 'Courier New', monospace;">#<i>&lt;value&gt;</i></font>
+always @ (...)</font>
+<li>May be used anywhere in code
+</ul>
+</p>
+
+An &lsquo;event-driven&rsquo; simulator keeps track of when
+(instantaneous) stage changes will occur.
+
+<ul>
+<li>A signal changing is an event <font style="font-family: 'Courier New', monospace;">@ (enable)</font>
+<li>These can be further refined <font style="font-family: 'Courier New', monospace;">@ (posedge clk)</font>
+<li>Other events can be created to aid simulation<br>
+<font style="font-family: 'Courier New', monospace;">event my_event;<br>
+-&gt; my_event; // signal something<br>
+...<br>
+always @ (my_event)<br>
+...<br>
+</font>
+</ul>
+
+<p>
+Waits for the next time the event is detected in the future.
+</p>
+<p>
+Not a strict thread rendezvous.
+</p>
+
+<hr>
+
+<h3>Events</h3>
+
+<p>
+Events are things that happen during execution; they can be used to
+control the progression of a test sequence.  An event can be something
+like:
+</p>
+
+<p><font style="font-family: 'Courier New', monospace;">(posedge clk)</font></p>
+
+<p>
+It is possible to wait for events within a test harness.  The &lsquo;@&rsquo;
+&lsquo;keyword&rsquo; really means &lsquo;wait until the following condition is
+satisfied&rsquo;.  This could be as simple as synchronising with the next
+clock cycle:
+</p>
+
+<font style="font-family: 'Courier New', monospace;">
+ &nbsp; &nbsp; &nbsp; initial<br>
+ &nbsp; &nbsp; &nbsp; begin<br>
+ &nbsp; &nbsp; &nbsp; ...<br>
+ &nbsp; &nbsp; &nbsp; @ (posedge clk) &nbsp;  &nbsp;// Sync.  with clock transition<br>
+ &nbsp; &nbsp; &nbsp; #2; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Delay changes for clarity<br>
+ &nbsp; &nbsp; &nbsp; a = a + 1; &nbsp; &nbsp; &nbsp; &nbsp; // Change input variables<br>
+ &nbsp; &nbsp; &nbsp; b = 17;<br>
+ &nbsp; &nbsp; &nbsp; ...<br>
+ &nbsp; &nbsp; &nbsp; end<br>
+</font>
+  
+<p>
+which will wait until the specified event occurs.  These can be used
+in combination with other operators.  For example:
+</p>
+
+<font style="font-family: 'Courier New', monospace;">repeat ($random & &lsquo;h3) @ (posedge clk);</font>
+
+<p>
+Will wait for between zero and three (inclusive) rising edges of the clock.
+</p>
+
+<hr>
+
+<h3>User events</h3>
+
+<p>
+Events can also be declared and generated in a behavioural model.  For example,
+here is a mechanism for generating reports when errors are detected:
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+event error;        // Declare event
+</font>
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+always @ (error) $display(&ldquo;Error at time %t&rdquo;, $time);
+</font>
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+initial<br>
+   begin<br>
+   ...                 // Simulation proceeds<br>
+   if (&lt;error condition&gt;) -&gt; error;  // Generate event<br>
+   ...<br>
+   end<br>
+</font>
+</p>
+
+<p>
+Such signalling can be used to allow different blocks to interact in a
+test file.  For example:
+</p>
+
+<p>
+<font style="font-family: 'Courier New', monospace;">
+initial<br>
+begin<br>
+[Do reset sequencing]<br>
+-&gt; reset_done;<br>
+end<br>
+initial<br>
+begin<br>
+@(reset_done)<br>
+[Start test sequence]<br>
+...<br>
+end<br>
+</font>
+</p>
+
+<p>
+For more complete examples, try:
+<a href="http://www.asic-world.com/verilog/art_testbench_writing3.html">http://www.asic-world.com/verilog/art_testbench_writing3.html</a>
+</p>
+
+<hr>
+
+<p><a href="02x_simulation.html#index">Up</a> to simulation</p>
+<p><a href="02f_simulation_time.html">Back</a> to simulation time</a> &
+<a href="02f_simulation_time.html#delays">delays</a></p>
+<p><a href="02i_simulation_init.html">Forward</a> initialising simulations</p>
+
+<hr><hr>
+
+</body>

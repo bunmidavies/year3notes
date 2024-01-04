@@ -1,0 +1,249 @@
+<title>Introduction</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+h3 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+
+<hr>
+
+<h1>Introduction</h1>
+
+<h2>What is this course about?</h2>
+
+<ul>
+<li> The process of building a System on Chip (SoC)
+<li> Focus on <font style="color:red;"><b>implementation</b></font> process
+  <ul>
+  <li> Lectures move towards ASIC process
+  <li> Laboratories use FPGA
+  </ul>
+</ul>
+
+<h2>What does it involve?</h2>
+
+<ul>
+<li> 11 lectures + exam. (50% of marks)
+  <ul>
+  <li> Hopefully including a &lsquo;guest spot&rsquo;
+  <li> Higher level coverage of processes and technology
+  </ul>
+<li> 11 laboratories (50% of marks)
+  <ul>
+  <li> Detailed work in most important parts of flow
+  </ul>
+</ul>
+
+<h2>What should you get from it?</h2>
+
+<ul>
+<li> A <font style="color:blue;">flavour</font> of the processes
+  involved in translating a design model to a product
+<li> A <font style="color:blue;">first hearing</font> of some of the
+  associated jargon
+<li> If all goes well, <font style="color:blue;">a working system on chip</font>
+</ul>
+
+<hr>
+
+
+<h1>Systems on Chip</h1>
+
+<ul>
+<li> A modern (2023) chip may have ~10<sup>11</sup> or more transistors
+  <ul>
+  <li> Slightly misleading in that &ndash; in many applications
+       &ndash; many of these form RAM
+  <li> Apple M2 Ultra has 134&times;10<sup>9</sup> transistors
+  on <i>two</i> dice
+  </ul>
+<li> A <i>rough estimate</i> of the largest FPGA capacity
+  (contemporary) is ~10<sup>9</sup> &lsquo;ASIC transistors&rsquo;
+  <ul>
+  <li> &hellip;plus blocks of RAM
+  <li> Most designs won't be able to exploit all of them
+  <li> Actual transistor count &gt; 20 billion (2015)
+  </ul>
+<li> Hand-waving, very approximate estimates:
+  <ul>
+  <li> ASIC &mdash; maybe 1&nbsp;billion?
+  <li> FPGA &mdash; hundreds of millions?
+  </ul>
+<li> Design/manufacturing costs
+  <ul>
+  <li> Design is done in (big) teams whose outputs must integrate.
+cost hundreds of engineers @ &gt;k$100/year &Rightarrow; tens of M$10/year
+  <li> CAD tools probably something similar to manpower costs
+  <li> Mask making a few M$ for a state-of-the-art process
+  </ul>
+</ul>
+
+<p align="Right">Gate cost is negligible. Design cost is not!</p>
+
+<hr>
+
+
+<h1>Module objectives</h1>
+
+<ul>
+<li> A little more practice in digital design, especially in Verilog.
+<li> A closer look at design flows
+  <ul>
+  <li> Including some more tools
+  </ul>
+<li> Instil/reinforce some general engineering design skills:
+  <ul>
+  <li> Modelling
+  <li> Test/debug
+  <li> Version control/regression
+  </ul>
+<li> Conform with pre-existing interfaces.
+  <ul>
+  <li> Be one designer in a SoC building &lsquo;team&rsquo;
+  </ul>
+<li> A look at the underlying silicon technology.
+  <ul>
+  <li> ASICs
+  <li> FPGAs
+  </ul>
+<li> To give a taste of some of the issues involved in silicon production.
+<li> Gain an appreciation of the chip production process (&amp;
+  jargon!) and future trends.
+</ul>
+
+<hr>
+
+<h1>Course Contents</h1>
+
+<ul>
+<li> Lectures
+  <ul>
+  <li> Step through the implementation process
+  <li> Where possible precede the corresponding lab. operation
+  <li> Largely (but not exclusively) looking at ASIC production
+  </ul>
+<li> Practicals
+  <ul>
+  <li> Verilog implementation
+  <li> Simulation
+  <li> Debugging
+  <li> Simulation
+  <li> Timing
+  <li> More simulation
+  <li> Testing
+  <li> Even more simulation
+  <li> Compilation
+  </ul>
+</ul>
+
+<p align="center">The <a href="index.html">on-line contents</a> is better!</p>
+<hr>
+
+
+<h1>Laboratory</h1>
+
+<p>The &lsquo;team&rsquo; objective:</p>
+
+<ul>
+<li> Produce a <b>GPU</b> (Graphics Processing Unit) capable of
+  drawing/plotting a range of functions on a display.
+  <ul>
+  <li> Functions are built as programmable <b>hardware</b> for speed
+  </ul>
+<li> Will be implemented on FPGA
+</ul>
+
+<p>Your objective:</p>
+
+<ul>
+<li> Produce one functional block
+<li> Test & verify the interfaces
+<li> Verify its function
+<li> Integrate into an SoC
+<li> Demonstrate
+</ul>
+
+<hr>
+
+<h1>Practicals</h1>
+
+<p>The practical work is divided into four phases:</p>
+
+<ul>
+<li> Understand the interfaces and develop a test strategy
+  <ul>
+  <li> We supply some faulty units for diagnosis
+  </ul>
+<li> Develop a functional block and verify it in isolation
+  <ul>
+  <li> Leverage the interface tests to ensure system compatibility
+  </ul>
+<li> Integrate your block with the system, testing in an SoC environment
+  <ul>
+  <li> We supply the other parts of the SoC: system-level simulation
+  </ul>
+<li> Synthesize the logic: demonstrate the system operating under
+  software control
+  <ul>
+  <li> Real pictures!
+  </ul>
+
+</ul>
+
+<p align="Right">This is all described in the <a href="https://online.manchester.ac.uk/bbcswebdav/xid-178152431_1">laboratory manual</a>.</p>
+
+<hr>
+<ul>
+<li> <a href="00b_display_systems.html">Next set of notes.</a>
+<li> <a href="index.html">Back to index.</a>
+</ul>
+
+<hr><hr>
+
+</body>
+

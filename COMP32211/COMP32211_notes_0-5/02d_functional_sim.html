@@ -1,0 +1,607 @@
+<title>Functional Simulation</title>
+
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that float next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 10px;
+}
+
+.column_space {
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<style>
+.inset {
+  float: none;
+  width: 80%;
+  border: 2px outset red;
+  background-color: lightgray;
+  text-align: center;
+}
+div.left {text-align:left;}
+</style>
+
+<style>
+h1 {text-align: center;}
+</style>
+
+</head>
+
+<body>
+
+<hr>
+
+<h2>Functional simulation</h2>
+
+<p>
+This depicts a typical RTL development flow.  Source code is developed
+(possibly also as <i>schematic</i> diagrams although this is currently
+decreasing in popularity), then processed and simulated with some form
+of testbench/stimulus.  The output can typically be viewed as traces
+with (selected) signals vs. time and potential problems can (perhaps)
+be spotted.  Additionally the simulator may produce output which can
+be compared with expected <i>independently generated</i> results,
+either by the testbench or using some external application.<br>
+Feedback is used to correct the design, sometimes also the testbench
+and even (occasionally) the expectation if an earlier mistake has
+escaped notice<sup>&dagger;</sup>.
+</p>
+
+<center>
+<img src="figures/design_flow_1.png" alt="Development design flow"
+     width=70%>
+</center>
+
+<h3>Objective</h3>
+
+<p>
+To verify that the RTL description fulfils all the logical operations
+required of the system.
+</p>
+
+<p>
+You develop (a piece of) a system.  It has to perform a certain set of
+functions and fit the appropriate set of interfaces.  To do this a set
+of tests are required.
+</p>
+
+<div class="row">
+
+  <div class="column">
+
+<p>
+Some tests may already exist:
+</p>
+
+<ul>
+  <li>Example: checks that a bus interface obeys the prescribed
+      protocol.  When a module is complete and tested it can be used
+      in higher level functional tests.
+</ul>
+
+<p>
+You provide:
+</p>
+
+<ul>
+  <li>a design, comprising HDL modules, schematics etc.
+  <li>a stimulus sequence to stress the design
+  <li>(possibly) a set of expected results
+  <ul>
+    <li>maybe generated from a higher level model
+  </ul>
+</ul>
+
+<p>
+You can collect:
+</p>
+
+<ul>
+  <li>waveform traces of a set of signals
+  <li>internal states at various times/conditions
+</ul>
+
+  </div>
+
+  <div class="column">
+
+<h4>What you <i>don't</i> get (yet)</h4>
+
+<ul>
+<li>Proof that your logic is synthesizeable
+  <ul>
+  <li>on the target technology &mdash; or, indeed, at all!
+  </ul>
+<li>Estimates of size
+  <ul>
+  <li>feasibility
+  <li>economic viability
+  </ul>
+<li>Estimates of speed
+  <ul>
+  <li>cycle accuracy is provided for synchronous units
+  <li>no estimates of critical path &Rightarrow; cycle time
+  </ul>
+<li>Estimates of power requirements
+</ul>
+
+  </div>
+</div>
+
+<p>
+If any of the above criteria fail later then the RTL will need
+redesigning.
+</p>
+
+<p>
+Any editing may change (break) the functionality, so retesting
+(&lsquo;regression&rsquo;) is important.
+</p>
+
+<p>
+Intention: reduce the number of redesign cycles to a minimum.
+Experience helps with this &ndash; but is not a sure guide.
+</p>
+
+<blockquote style="font-size:12px;">
+<sup>&dagger;</sup>Shouldn't happen but we're all human.
+</blockquote>
+
+<h3>Practice</h3>
+
+<p>
+Objective is to verify the <b>logic</b> behaviour of the design.<br>
+Try to exercise every function.
+</p>
+
+Can be assisted by <b>test-coverage tools</b>:
+<ul>
+<li>Which HDL statements have (not) been executed
+<li>Which branches have (not) been taken
+<li>Which nodes have (not) adopted both binary states at least once
+  <ul>
+  <li>at behavioural HDL there are no &lsquo;nodes&rsquo; so this is tricky!
+  </ul>
+</ul>
+
+Achieving &lsquo;complete&rsquo; coverage can be quite challenging!
+
+It is not possible to gain accurate <b>timing</b> models ...  yet.
+
+<ul>
+<li><b>Cycle accuracy</b> is inherent &ndash; can count clock pulses
+  <ul>
+  <li>may previously have been estimated
+  </ul>
+<li>Some <b>annotation</b> is possible with estimated delays
+</ul>
+
+<div class="row">
+
+  <div class="column">
+
+<h4>What it does</h4>
+
+<p>
+Functional simulation &ndash; which you should be familiar with
+&ndash; is a test of the logic operation of a design.  Higher level
+models should have shown that the algorithm can work; now the
+implementation must be verified.
+<p>
+
+<p>
+Functional simulation is (primarily) a digital, event-driven
+simulation.  This allows the simulators to run quite quickly which, in
+turn, allows a lot of test patterns to be exercised in a sensible
+elapsed time.
+<p>
+
+<p>
+Simulation (of a synchronous design) at this level will be cycle
+accurate so the number of clock pulses taken can be counted.  This
+gives a better &lsquo;feel&rsquo; for the timing of a function.  This may allow
+some redundant cycles to be identified and eliminated.  If the design
+has a constrained clock speed then accurate performance estimates are
+possible, assuming the target clock speed can be achieved.
+<p>
+
+  </div>
+
+  <div class="column">
+
+<h4>What it doesn't do</h4>
+
+<p>
+What this form of simulation doesn't give directly is any assurance
+that a particular clock frequency can be achieved by the synthesized
+logic.  Delays can be included in the simulation but, in the first
+instance, these are simple estimates.  Later, when the design has been
+developed further, more realistic delays can be <b>extracted</b> from
+the synthesized circuit and <b>back-annotated</b> to improve the
+realism of the simulation.
+<p>
+
+<p>
+However, typically, a few test patterns are able to show timing
+problems.  The main value of functional simulation is to provide good
+test coverage of the logical design.
+<p>
+
+  </div>
+</div>
+
+<center>
+<div class="inset">
+   <h3>Hint</h3>
+<p>
+To avoid the simulation &lsquo;running away&rsquo;, a statement like:
+</p>
+
+<p style="font-family: 'Courier New', monospace;">
+ &nbsp; &nbsp; &nbsp; initial #10000 $stop;</p>
+
+<p>can halt a simulation after a time limit.</p>
+
+</div>
+</center>
+
+<hr>
+
+<h3>Functional Simulation in Verilog</h3>
+
+Verilog is a Hardware Description Language.
+
+<ul>
+<li>It can do things that are not (easily) made into actual hardware.
+<li>This is useful for test purposes.
+<li>The test environment can respond to state evolution of the Device
+  Under Test
+<ul>
+<li>...  without writing an explicit machine
+</ul>
+</ul>
+
+<p>Example: a handshake signal:</p>
+
+<center>
+<img src="figures/functional_simulation.png" alt="Unit test environment">
+</center>
+
+<ul>
+<li>The <font style="font-family: 'Courier New', monospace;">req</font>
+signal may be timed by reacting to the state of <font style="font-family: 'Courier New', monospace;">ack</font>.<br>
+</ul>
+
+<center>
+<p style="color:red;">
+(Note: the protocol shown here is not quite the same as used in the lab.)
+</p>
+</center>
+
+
+<h3>Test strategy</h3>
+
+<p>
+The test block needs to provide
+&lsquo;<font style="font-family: 'Courier New', monospace;">req</font>&rsquo;
+which interacts with
+&lsquo;<font style="font-family: 'Courier New', monospace;">ack</font>&rsquo;.
+</p>
+
+<p>
+One way: work out in advance (by hand?) the expected response times of the
+&lsquo;<font style="font-family: 'Courier New', monospace;">ack</font>&rsquo;
+signal and drive
+&lsquo;<font style="font-family:'Courier New',monospace;">req</font>&rsquo;
+accordingly.
+</p>
+
+<ul>
+<li>Should expose the first error
+<li>May be unreliable thereafter
+</ul>
+
+<p>
+Another way &mdash; use the language to respond to the test block.
+</p>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+&hellip;<br>
+while (ack == 1) @ (posedge clk);   // AAA<br>
+req <= 1;<br>
+while (ack == 0) @ (posedge clk);   // BBB<br>
+req <= 0;<br>
+&hellip;<br>
+</blockquote>
+
+<p>
+This:
+<ul>
+<li>tests to see if any previous handshake is complete (AAA)<br>
+if not, wait for a clock cycle and test again
+<li>asserts the request
+<li>inserts clock cycles until the acknowledge rises (BBB)
+<li>removes the request
+<li>continues &ndash; the test for handshake completion would occur before
+req is raised next time.
+</ul>
+
+This form of test would typically be a single &lsquo;thread&rsquo;
+which would run in parallel with other statements.
+</p>
+
+<p>
+The details of such a handshake can be &lsquo;hidden&rsquo; in
+a <b>task</b>.
+</p>
+
+<h4>Example: FIFO test</h4>
+
+<img src="figures/FIFO.png" alt="FIFO" align="right" width=40%>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+initial &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Input handshake<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;req_in <= 0;<br>
+&nbsp;&nbsp;@ (posedge clk);<br>
+&nbsp;&nbsp;req_in <= 1;<br>
+&nbsp;&nbsp;while (ack_in == 0) @ (posedge clk);<br>
+&nbsp;&nbsp;req_in <= 0;<br>
+&nbsp;&nbsp;while (ack_in == 1) @ (posedge clk);<br>
+&nbsp;&nbsp;repeat (10) @ (posedge clk); &nbsp; // Pause before continuing<br>
+&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;end<br>
+&nbsp;<br>
+initial &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Output handshake<br>
+&nbsp;&nbsp;begin<br>
+&nbsp;&nbsp;ack_out <= 0;<br>
+&nbsp;&nbsp;while (req_out == 0) @ (posedge clk);<br>
+&nbsp;&nbsp;repeat (2) @ (posedge clk); &nbsp; &nbsp;// Choose to
+		   insert extra delay<br>
+&nbsp;&nbsp;ack_out <= 1;<br>
+&nbsp;&nbsp;while (req_out == 1) @ (posedge clk);<br>
+&nbsp;&nbsp;ack_out <= 0;<br>
+&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;end<br>
+</blockquote>
+
+<p>
+This is an illustrative example.  A real test would continue, for
+example stalling in different phases, trying to overfill the FIFO etc.
+There would probably be some data carried through (and tested for
+correctness) too!<br>
+A good verification test will subject the Device Under Test to
+examples of any situation it might legitimately experience in
+operation.
+<span style="color:red"><b>Be vicious!  Try and break it!</b></span>
+</p>
+
+<p>
+Note: it is convenient (but not compulsory) to use independent
+blocks (threads) at the input and output.  This allows freedom of
+timing so that (for example) if the <i>latency</i> of the FIFO is
+changed the test will still work.<br>
+In the example above the output acknowledgement has been arbitrarily
+delayed; a thorough test might use a range of delays (including none)
+&ndash; for example using a random value.
+</p>
+
+<hr>
+
+<h3>Handy constructs</h3>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>if (Boolean_expression) statement_1 {else statement_2}</b>
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New', monospace;">if</font>&rsquo;
+has several uses:
+</p>
+
+<ul>
+<li>Synthesized into a multiplexer
+<li>Making a run-time decision in simulation
+<li>Control in generate of circuits [See later]
+<li>Conditional compilation (as <font style="font-family: 'Courier New', monospace;">`ifdef</font>, etc.)
+</ul>
+
+<p>
+It may take an
+<font style="font-family: 'Courier New', monospace;">else</font> clause.<br>
+
+<i>Note: In synthesizable, combinatorial logic the
+<font style="font-family: 'Courier New', monospace;">else</font> may
+be wanted to avoid creating a latch, inadvertently.</i>
+<p>
+
+<h4>Example</h4>
+
+<blockquote style="font-family: 'Courier New', monospace;">
+repeat (100)<br>
+ &nbsp;begin<br>
+ &nbsp;@ (posedge clk)<br>
+ &nbsp; &nbsp;if (req) ack <= 1;<br>
+ &nbsp; &nbsp;else  &nbsp; &nbsp; ack <= 0;<br>
+ &nbsp;end<br>
+</blockquote>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>while (Boolean_expression) statement</b>
+</p>
+
+<ul>
+<li>Used for simulation control: e.g.  handshaking
+</ul>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>for (addr = 0; addr &lt; 1024; addr = addr + 1) statement</b>
+</p>
+
+<ul>
+<li>Iterate over a number of items: e.g.  memory test
+</ul>
+
+<p style="font-family: 'Courier New', monospace; color:blue;">
+<b>forever statement</b>
+</p>
+
+<ul>
+<li>Loop indefinitely
+<ul>
+<li><b>must</b> include some <b>delay</b>! &nbsp;
+(<span style="font-family: 'Courier New', monospace;">#</span> or 
+<span style="font-family: 'Courier New', monospace;">@</span>)
+</ul>
+</ul>
+
+<center><div class="inset"> <!-- make narrower -->
+   <center><h4>Another strategy</h4></center>
+   <div class="left">
+   <p>To stop a simulation due to an error, try:</p>
+   <blockquote>
+   <p style="font-family: 'Courier New', monospace;">
+   event failed;<br>
+   ...<br>
+   always @ (failed) #100 $stop;<br>
+   ...<br>
+   ...<br>
+   if (&lt;error condition&gt;) -> failed;<br>
+   </p>
+   </blockquote>
+   <ul>   
+   <li>The delay allows time to be able to see the final signal states.
+   <li>The error is easy to find &ndash; at the end (in time) of the trace.
+   </ul>
+
+<p>
+If you haven't met Verilog
+<u><a href="02h_simulation_events.html">events</a></u> yet, keep reading.
+</p>
+
+  </div>
+</div>
+</center>
+
+<hr>
+
+<h3>Loop statements</h3>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New',
+		    monospace;"><b>while</b></font>&rsquo; functions
+		    much as you would expect.  It is not synthesizeable.
+</p>
+
+<blockquote>
+<p style="font-family: 'Courier New', monospace;">
+...<br>
+@ (posedge clk) req <= #1 1;<br>
+@ (posedge clk); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		       &nbsp; &nbsp; // Wait at least one cycle<sup><font style="color:red;">&dagger;</font></sup>
+<br>
+while (ack != 1) @ (posedge clk); &nbsp;// Wait for response<br>
+req <= #1 0;<br>
+... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; // May not care about<br>
+... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// completing handshake immediately<br>
+while (ack != 0)  @ (posedge clk); &nbsp;// Wait for response<br>
+...<br>
+</p>
+</blockquote>
+
+<img src="figures/req_ack.png" alt="Handshake timing"  align="right" width=30%>
+
+<blockquote><blockquote>
+<font style="color:red;">&dagger;</font> Only needed
+if <font style="font-family: 'Courier New', monospace;">ack</font> is/may
+be driven combinatorially and could rise immediately.  <i>Good practice</i>
+would have a flip-flop between, so this cycle would take place inside the
+<font style="font-family: 'Courier New', monospace;">while</font>.
+</blockquote></blockquote>
+
+<p>
+Request is asserted and given time to be seen.
+</p>
+
+<p>
+If there is no acknowledgement, insert another clock cycle (and try again).
+</p>
+
+<p>
+Continue waiting until the acknowledgement appears.
+</p>
+
+<p>
+Probably go and do something else for a while.
+</p>
+
+<p>
+(Before next handshake) test if acknowledgement removed and wait until
+it is.
+</p>
+
+<p>&nbsp;</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New',
+		    monospace;"><b>repeat ()</b></font>&rsquo; is a
+		    simple loop which iterates the following statement
+		    a number of times.
+</p>
+
+<p>
+&lsquo;<font style="font-family: 'Courier New',
+		    monospace;"><b>for</b></font>&rsquo; has C-like function and syntax although the &ldquo;<font style="font-family: 'Courier New',
+		    monospace;">i++</font>&rdquo; syntax is not
+		    implemented in basic Verilog.<br>
+(The latter <i>is</i> present in SystemVerilog.)
+</p>
+
+<hr>
+
+<p><a href="02x_simulation.html#index">Back (up)</a> to simulation</p>
+<p><a href="02e_parallel_sim.html">Forward</a> to parallelism in simulation</p>
+
+<!--
+<p><a href="02a_event_driven_simulation.html">Short aside on Event
+    Driven Simulation</a></p>
+<p><a href="02c_trouble_with_glitches.html">Problems with glitches
+    in simulation</a></p>
+<p><a href="index.html">Up to Index</a></p>
+-->
+<hr><hr>
+
+</body>
