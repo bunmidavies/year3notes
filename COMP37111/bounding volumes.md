@@ -6,6 +6,6 @@
 	- ==axis aligned bounding boxes (aabb)== - axis aligned essentially just means the boxes aren't rotated, and are parallel to the x,y,z axes
 	- ==oriented bounding boxes== - essentially aabb, except without the axis alignment since the boxes can be oriented as needed
 	- ==bounding spheres== - slightly harder to calculate collision, but invariant to rotation of the actual object the sphere is representing
-	- ==k-DOP== - DOP = discrete oriented polytype, 
+	- ==k-DOP== - DOP = discrete oriented polytype (facet/face), k-sided bounding volume, essentially (the higher k is, the more accurate the volume is, but more computation is required)
 
 - volumes can also be arranged in a hierarchical manner, which is useful for determining whether two objects are in close proximity to each other, which is useful for both rendering and collision
