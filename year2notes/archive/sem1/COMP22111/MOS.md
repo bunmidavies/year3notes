@@ -1,14 +1,12 @@
 [[COMP22111]]
+[[COMP32211]]
 
 - there are two main types of MOS transistor:
 	- ==nMOS== - uses impurities such that is has negative charge carriers
 	- ==pMOS== - uses impurities+holes such that it has positive charge carriers
 
 
-![](https://i.imgur.com/RhtikN3.png)
-
-![](https://i.imgur.com/DFcb8Bp.png)
-
+![300](https://i.imgur.com/RhtikN3.png)
 
 they are different in the way that they are fabricated, and what they do when a voltage is applied to their ==gate input== (below)
 
