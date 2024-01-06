@@ -30,6 +30,7 @@
 	- single group, pre-test + post-test - evaluation occurs before and after the artefact has been produced (so before would be when you have some sort of low fidelity design to present?), so in some sense you can determine whether there has been an improvement in interaction
 	- natural control group, pre-test + post-test - natural control group = a naturally occurring group perhaps sampled through convenience methods - variance between sample groups in this case can be detected
 	- randomised control group, pre-test + post-test - like above, but wih the added validity of a randomised sample, perhaps strengthening external validity
+- pretest, [[UX.pdf#page=285]] - "In reality, an experienced UX specialist will understand the real–world limitations of evaluating software in the wild, and in this case, build in a pre–test component as part of the formative evaluation such that hybrid methods are used; maybe an interview or survey followed by a small UX experiment within a laboratory setting: this last: would serve as the pre– test component of the summative experiment"
 - additionally, there's also the concept of ==within-subjects== design - all participants are exposed to different conditions of the independent variable (i.e. your interface)
 - realistically, what you end up selecting here probably ends up being more of a pragmatic choice than anything
 
