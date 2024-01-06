@@ -4,7 +4,9 @@
 - this voltage is measured from the gate to the channel (source or drain), and can be determined when the transistor is manufactured
 - different dopant concentrations (i.e. amount of impurities?) allows the construction of various thresholds
 
-- ==transistor threshold is different to gate threshold== - gate threshold is used to differentiate where a logic gate differentiates a '0' from a '1'
+- ==transistor threshold is different to gate threshold== - gate threshold is used to differentiate where a transistor is conducting and non-conducting
+- meanwhile, transistor threshold is just the minimum voltage threshold for the transistor to be able to operate whatsoever
+- ==these terms are not exact, but the notion of there being two voltage thresholds associated with MOSFETs is what is important==
 
 ![](https://i.imgur.com/XAuJMXI.png)
 
