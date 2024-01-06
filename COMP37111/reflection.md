@@ -1,4 +1,4 @@
-[[COMP37111]]
+[[COMP37111]], taken from [[COMP27112]]
 
 ### diffuse reflection
 - diffuse reflection is absorption and uniform reradiation - some wavelengths are absorbed, and some will be reflected
