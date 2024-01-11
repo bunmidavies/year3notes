@@ -3,16 +3,22 @@
 - 10 main principles were collated from a number of usability principles that have been proposed across many different works - the majority of these are more or less intertwined with each other, since by implementing one principle, you may be implicitly improving another principle simultaneously 
 
 #### Consistency
+- utilising standardised components, following guidelines and standards to ensure that you develop systems which apply the same command, control and interface structures universally across the development
 
 #### Familiarity
 - familiarity enhances usability typically through mapping real world concepts to the virtual world / system in question (this is also known as a familiarity via metaphor) - facilitating familiarity allows users to have a sense of intuition around a user interface
+- e.g. xerox star's analogy of the computer representing a real desktop in an office environment
+
 #### Interaction Stability
-- 
+- ensure actions can be resumed if they break, that they're repeatable, that data won't be lost, and the place someone is at, in the event of a failure, can be returned to
+
 #### Learnability
 - users typically prefer to investigate and intuit a system out for themselves, rather than read a user manual - therefore, interface development should have an emphasis on creating a system which aids users in self-learning
 - through making system behaviour predictable and facilitating self-learning, ideally users should be able to transit from novice to expert easily
+
 #### Robustness
 - robustness is a critical aspect since user trust lies significantly within how often a system crashes as much as how fast a system is - the typical user might prefer a system that is slow but doesn't crash often, in comparison to a system that is fast but crashes frequently
+
 #### Progressive Disclosure
 - operations should be arranged in a sort of hierarchy, where you start with simpler options, mitigating certain complexities if you were to provide every single possible option to the user 
 
