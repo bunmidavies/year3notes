@@ -2,30 +2,95 @@
 
 # 0 - Overview and Logistics
 
-# 1 + Preamble
+# Preamble + 1
 
 # 2 + 3
 
-# 4
+# 4 - People are Complicated
+- UX is everywhere
 
-# 5
+# 5 - Practical Ethics
+- ==everything you do with users should be done with an ethical framework in mind==
+- ethics are also good for science, in terms of discussing with others how you're going to collect specific data and what you'll do with it
+- the need for ethics became very obvious after WW2 (after the nazi regime) - protection was needed for subjects
+- veranda anthropology essentially insensitive ?
+- we should refer to them as 'participants' rather than subjects
+- [[key ethics principles]]:
+	- competency: know your limitations
+	- integrity: the outcome shouldn't bother you (i.e. you should have no bias)
+	- science: follow the scientific method (double/blind trials)
+	- respect: treating participants fairly and respecting their autonomy
+	- benefits: maximise benefits and minimise harm
+	- justice: undertake research with participants who benefit from the results
+	- trust: maintain trust, anonymity, confidentiality
+	- responsibility: you have a duty of care for your participants
+- in short ==ethics allow you to stop screwing up== - being part of a community allows you to build better software for them
 
-# 6
+# 6 - Gathering User Requirements
+- also known as requirements elicitation/analysis - we want to get requirements from knowledgeable users, rather than just from the head of some department or people already involved in the process
+- ==collecting requirements is key for ensuring you build the right thing for users==
+- [[digital phenotyping]] vaguely related
+- [[user centred design]] - the whole point of these processes are to be ==iterative== in nature
+- post it notes are primary
+- levels of time available:
+	- 6 months: [[task analysis]]
+	- 6 weeks: group interviews, social events
+	- shorter // other constraints e.g. lack of users - archival methods, old systems
 
-# 7
+# 7 - Modelling Requirements
+- at this point we've 'gathered' requirements, but need an appropriate way to represent them such that they can be presented to software engineers and other specialists
+- ==we are trying to make gathered information consistent to know what exactly people want==
+- [[informal modelling methods]] + [[formal modelling methods]]
+- use cases are super important for providing specific requirements / expectations
+- personas + scenarios (good for describing flow) - post it storyboards (low fidelity but semi-formalish, easy to be modified by users)
+- beware of issues such as groupthink
+# 8 - Developing for UX
+- agile is common touchpoint in UX - we are building agile systems, though in some cases perhaps waterfall may be applicable (critical systems, for instance)
+- [[development methodologies]] - agile vs cowboy coding
+- cowboy coding more for experimental works where you don't know exactly what you're doing
+- [[developing for UX]]
+- [[separation of concerns]] and different methodologies to go about doing such
+- continue to conform to [[design languages]] // [[design systems]], to create holistic interfaces
+- ==in short, for typical projects use agile, for more research oriented use cowboy coding==
 
-# 8
+# 9 - Prototyping + Rapid Application Development (RAD)
+- at this point, we've elicited requirements and have modelled them into a more structured format, in order to be presented to SWEs and users ([[user centred design]])
+- we're now trying to translate these requirements into low->high fidelity prototypes and mockups ([[prototyping and fidelity]])
+- at high fidelity, you've had a lot of input from the user, and are expecting not as much change request from the user
+- at low fidelity, you can expect users to be able to easily contribute and suggest changes
+- commissioners, developers and users may all have different requirements
+- [[rapid application development (RAD)]] - conceived and perhaps most important around the 90s - essentially go from high fidelity prototype -> working model
+- wizard of oz system: no real implementation, just present expected outcomes as the user interacts - think mechanical turk
 
-# 9
 
-# 10
+# 10 - Effective Experience (Accessibility)
+- accessibility aka a11y - we don't only look at people with accessibility issues, but consider the wider population
+- [[barriers of effectual use]]:
+	- visual impairment
+	- cognitive impairment
+	- hearing impairment
+	- physical impairment
+	- situational impairment - non disabled users in situations which affect how they can use an app
+	- combinatorial impairment - i.e. ageing users who suffer from 1+ impairments above
+	- illiteracy
+	- developing regions
+	- exclusion
+- [[MSAA + UIA]] + interface bridges, which 'translate' accessibility requirements from one interface to another
+- [[potted principles of effective experience (POUR + foot-stool)]]:
+	- perceive ==P==erceivability
+	- perceive ==O==penness
+	- perceive ==U==nderstandability
+	- perceive ope==R==atability
+	- perceive flexibility (skins, adjustable hotkeys)
+- in short, accessibility is not just limited to those with 'traditional' accessible needs - it extends as far as to making software usable by those in developing regions, and those who within certain situations in which the software may be used are experiencing some sort of impairment
+- 'nothing about us, without us' - be sure to include those with accessibility issues within the UX process, for full understanding
 
 # 11 - Efficient Experience (Usability)
 - this differs from 'traditional' usability which purely focuses on task completion time, and aims to include aspects such as ==accessibility and learnability==
 - created in the early days of HCI with the star user interface - the computer becomes more familiar to people through adopting real world analogies (the desktop, files, folders, trash bin)
 - 'dogfooding' - testing and using products by their own developers (xerox star)
 - [[usability model]]s - modelling how long tasks should take
-- [[potted principles of efficient user experience (SSSADD FLCR)]]
+- [[potted principles of efficient user experience (SSSADD FLCR)]]:
 
 # 12 - Affective Experience (Emotion)
 - affective experience and engagement are the 2 of 4 development principles which lean much more to the UX side of HCI, where principles are much more intangible, and 'cutting edge'
