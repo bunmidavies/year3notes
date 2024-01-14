@@ -2,12 +2,43 @@
 
 # 0 - Overview and Logistics
 
-# Preamble + 1
+# Preamble
+- ==toms diner was important because it could initially **break** mp3 encoding==
+- [[UX.pdf]] as a whole describes UX as an empirical science, which allows products to be built with the user in mind, in a range of manners (some of which may be tangential)
 
-# 2 + 3
+# 1 - Be Curious, Be Critical
+- ==UX is about making very few assumptions, and always trying to break any propositions==
+- UXers are a bridge, but also help users themselves to define what they want/need, and ultimately evaluate whether this is the case
+- jacob nielsen 5 people quote - misinterpreted and 'carried away' with
+- 'time to task' becomes more or less irrelevant outside of a work context - as computers became more recreational, mere quantitative measures became less effective hence the shift from traditional HCI to UX
+
+# 2 - What is UX?
+- we can't really talk about UX without talking about HCI, since UX's roots exist within HCI
+- HCI, conceived around the 60s but really gaining traction around the 70s, sort of existed as a way to emphasise the importance of computers being made for people, rather than just the other way round
+- HCI as it developed, became much more quantity based rather than quality based (as a means to be comparable to perhaps mathematics or more 'traditional' sciences), taking leads from psychology and social sciences, anthropology, etc.
+- UX is essentially bordering both fields, trying to take aspects from the quantitative HCI while introducing many more qualitative aspects
+- quantitative measures are typically more generalised but provide more accurate views as to a population, while qualitative views provide a much more 'deeper' view, but with smaller population sizes resulting in less representative outcomes
+- HCI typically concerned with the tangible, chose to ignore intangible aspects for the most part - meanwhile, UX says yes to both the tangible and intangible
+- ==there is no definite definition for UX even to today==
+- UX can exist across multiple timespans i.e. anticipated UX, momentary UX, episodic UX (a single experience), cumulative UX
+- UX in short, can be seen as an umbrella term which includes some traditional HCI, but extends upon what could be considered as its intangible shortcomings
+
+# 3 - UXD and Visual Design
+- [[UXD vs UX]] - UXD is more focused on graphic design, and what things visually look like - ==UX engineering can be considered a separate field to such==
+- we are not designing/creating so much of the physical interface, but more acting as a ==bridge between [users, user requirements and user evaluation] and [software developers, development processes, other specialists]==
+- [[design systems]] + [[design languages]] - these are also created by UXD'ers typically, its just your job to abide by them the majority of the time
+- [[interaction design]] concerns UX engineers more as less of a visual aspect is involved with the general concept of the 'flow' of some application
+- [[zero ui and conversational interfaces]] involve less interaction design (think of alexa)
+- ==don't confuse your ability to build user experiences with the ability to build GUIs== - you don't create the design systems/languages, but it can very much be your place to encourage such practices to those with the capability to do so
 
 # 4 - People are Complicated
-- UX is everywhere
+- UX is everywhere, and the situations people may find themselves in could be almost anything, which you may have to consider
+- we shouldnt create systems which are any more complicated than they need to be
+- Jef Raskin, author of 'The Humane Interface' quote on p35 of [[UX.pdf]]
+- [[auditory channel + visual channel]] + somatic, olfactory
+- thinking and learning - whether things are learnable/familiar. ==we still do not have definitive models of human cognitive systems==, we can just make best guesses as to what works best for humans
+- [[explicit vs implicit communication]]
+- [[types of input]]
 
 # 5 - Practical Ethics
 - ==everything you do with users should be done with an ethical framework in mind==
