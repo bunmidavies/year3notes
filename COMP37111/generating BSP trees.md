@@ -11,6 +11,8 @@ the recursive algorithm to generate a BSP tree from a list of polygons is:
 4. apply this algorithm to the list of polygons in front of $P$
 5. apply this algorithm to the list of polygons behind $P$
 
+essentially, you are calling `BSP(node,p,behind,infront)`
+
 note that the notion of 'front'/'behind' is basically decided by the algorithm and probably only makes more sense when visualising
 
 ![](https://i.imgur.com/mvhGqSm.png)
