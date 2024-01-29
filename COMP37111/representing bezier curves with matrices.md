@@ -1,4 +1,4 @@
-[[COMP37111]]
+[COMP37111]]
 
 - bezier curves can be represented as a combination of 3 matrices:
 $$GBT(t) = \textrm{Geometry} \times \textrm{Spline Basis} \times \textrm{Power Basis}$$

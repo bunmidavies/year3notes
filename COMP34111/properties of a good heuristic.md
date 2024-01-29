@@ -8,7 +8,7 @@ There are 3 main properties which make up a good heuristic
 
 ### Monotonic
 - Monotonicity can also be known as consistency - a triangle inequality is satisfied
-- it implies that the heuristic to any node $x$ will be less than or equal to the heuristic of node $y$ + the cost from $x$ to $y$
+- it implies that the heuristic to any node $x$ will be less than or equal to the heuristic of node $y$ + the cost from $y$ to $x$
 
 ### Informative
 - the closer the heuristic function is to the true distance, the more informative a heuristic is

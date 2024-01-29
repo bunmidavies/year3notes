@@ -4,120 +4,52 @@
     "type": "split",
     "children": [
       {
-        "id": "89bcbd49770b8ef1",
+        "id": "1a54a9c41e68bd8d",
         "type": "tabs",
         "children": [
           {
-            "id": "6bd6fe59b6f68ef6",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34111/AndreasNotesWithPrefaceNLinks.pdf"
-              }
-            }
-          },
-          {
-            "id": "a9ffee44711c9c68",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP33511/UX.pdf"
-              }
-            }
-          },
-          {
-            "id": "9e97d6f65be80f12",
+            "id": "cbb521c7dd915847",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP32211/All jim page progress.md",
+                "file": "COMP33511/COMP33511.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "06ce089f96c6cae8",
+            "id": "5af901a25b66650c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP32211/clock tree.md",
+                "file": "COMP33511/COMP33511 Podcast Notes.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "5616362893c8f876",
+            "id": "1bca2b5022cbfb9f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "year2notes/archive/sem1/COMP22111/clock distribution.md",
+                "file": "COMP33511/various.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "4cedf7297767f40a",
+            "id": "5e4211e87bf5e254",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP32211/clock tree.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "41947800fb4b9165",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "year2notes/archive/sem1/COMP22111/timing closure.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8d18e8b84e27f46a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "year2notes/archive/sem1/COMP22111/clock domain + metastability.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "394221b1d1eb4596",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "year2notes/archive/sem1/COMP22111/clock distribution.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b8fa181cc556f9b8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP32211/process 'corners'.md",
+                "file": "COMP33511/various.md",
                 "mode": "source",
                 "source": false
               }
@@ -153,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "PVT",
+                "query": "spatial field",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -198,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMP32211/All jim page progress.md",
+                "file": "COMP33511/various.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -215,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMP32211/All jim page progress.md",
+                "file": "COMP33511/various.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -238,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMP32211/All jim page progress.md"
+                "file": "COMP33511/various.md"
               }
             }
           },
@@ -273,41 +205,41 @@
   },
   "active": "228c244357d64d6c",
   "lastOpenFiles": [
-    "COMP32211/COMP32211.md",
-    "COMP32211/clock tree.md",
-    "year2notes/archive/sem1/COMP22111/clock distribution.md",
-    "year2notes/archive/sem1/COMP22111/timing closure.md",
-    "year2notes/archive/sem1/COMP22111/clock domain + metastability.md",
-    "COMP32211/All jim page progress.md",
-    "COMP32211/process 'corners'.md",
-    "clock ske.md",
-    "COMP33511/UX.pdf",
-    "COMP33511/COMP33511.md",
-    "COMP33511/3 properties of a good questionnaire.md",
-    "COMP34111/AndreasNotesWithPrefaceNLinks.pdf",
-    "COMP33511/cons of laboratory-based evaluation.md",
-    "COMP33511/common evaluation tools.md",
-    "COMP33511/quantitative + hybrid methods.md",
-    "COMP33511/qualitative evaluation methods.md",
-    "COMP33511/expert evaluation (walk-throughs + heuristic evaluation).md",
-    "COMP33511/digital phenotyping.md",
-    "COMP33511/digital phenotypes.md",
-    "COMP33511/human in the loop systems (HITL).md",
-    "COMP37111/COMP37111.md",
-    "README.md",
-    "COMP34111/GamesL3_2023.pdf",
-    "COMP34111/COMP34111.md",
-    "COMP34111/nash equilibrium point.md",
-    "COMP34111/strategy pair equilibrium point.md",
+    "Untitled 1.md",
+    "COMP33511/various.md",
+    "Untitled.md",
     "RevOverview.md",
-    "COMP34111/intuition of games.md",
-    "COMP34111/sub-game equilibrium point.md",
+    "q.md",
+    "effectiveness i.e. accessibility.md",
+    "COMP33511/COMP33511.md",
+    "COMP33511/ux things i might want to reference.md",
+    "COMP33511/UX.pdf",
+    "COMP33511/COMP33511 Podcast Notes.md",
+    "ux pod.md",
+    "COMP34111/COMP34111.md",
+    "COMP34111/learningingames.pdf",
+    "COMP34111/AndreasNotesWithPrefaceNLinks.pdf",
+    "COMP34111/UCT selection method.md",
     "COMP34111/learningtoplay.pdf",
+    "COMP34111/best response.md",
+    "COMP34111/formal strategy definitions.md",
+    "COMP34111/function approximation.md",
+    "COMP34111/levels of game solutions.md",
+    "COMP34111/tabular Q-learning.md",
+    "COMP33511/principles of affective design.md",
+    "COMP34111/properties of a good heuristic.md",
+    "year2notes/COMP24112/what is machine learning + history of machine learning.md",
+    "COMP33511/potted principles of effective experience (POUR + foot-stool).md",
+    "COMP37111/bounding volumes.md",
+    "COMP37111/particle, lagrangian & eulerian fluid simulation.md",
+    "COMP37111/COMP37111.md",
+    "COMP37111/simulation.md",
+    "year2notes/coverage.md",
+    "COMP34111/RLbook2020.pdf",
+    "COMP34111/GamesL3_2023.pdf",
     "COMP37111/spatial-enumeration-and-culling-notes.pdf",
     "32211SUBMISSION/extractpoints.py.txt",
     "32211SUBMISSION/generate_golden_data.py.txt",
-    "32211SUBMISSION/COMP32211_Deliverables.pdf",
-    "32211SUBMISSION/generate_golden_data.py.txt.txt",
-    "32211SUBMISSION/New Text Document.txt"
+    "32211SUBMISSION/COMP32211_Deliverables.pdf"
   ]
 }
