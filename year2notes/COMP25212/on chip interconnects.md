@@ -1,4 +1,5 @@
 [[COMP25212]]
+[[COMP35112]]
 
 ### definition
 - any multicore system must contain a way for all cores to ==communicate effectively== both with:
@@ -7,7 +8,6 @@
 - there are many different ways to enable this, with different tradeoffs (performance, energy, area, fault tolerance etc.)
 - a ==Network on Chip== is a network based system which essentially connects different parts of a computer chip together
 - the network allows for all different components to communicate efficiently and reliably, ==without bottlenecks==
-
 ### evaluating networks
 - the three main factors, as with any traditional network are:
 	1. ==bandwidth==
@@ -15,13 +15,21 @@
 	3. ==congestion== - the effect on bandwidth/latency when a network is close to its peak usage
 - three other important factors which are more specific to chip networks are:
 	1. ==fault tolerance==
-	2. ==area==
-	3. ==power dissipation==
-
+	2. ==area in terms of silicon available for use==
+	3. ==power dissipation and power available to the network==
 ### key features of a NoC
 - ==topology== - how the cores and other elements are connected together
 - ==routing== - how traffic moves through the topology
 - ==switching== - how traffic moves from one component to the next
+
+### interconnect options (35112)
+
+| Type | Worst Case | Notes |
+| ---- | ---- | ---- |
+| Grid | $2(N-1)$ steps for $N\times N$ grid | direct link to neighbours, private on-chip memory for each core, edge cores will have 2 neighbours only - simplest implementation |
+| Torus | $N$ steps for $N\times N$ grid | similar to grid (private memory per core too), but more symmetrical paths which wrap around the grid at edges - all cores have 4 neighbours - more wires/complex routing required |
+| Torus (higher dimensions) |  | 3D torus = 6 neighbours, 4D torus = 8 neighbours, typically chip multiprocessors typically only have 2D toroids  |
+| Bus | Constant latency | Simple to build, but contention problems occur + complexity/routing |
 
 ### topologies
 - ==bus== - all components are connected to a single wire (==broadcast medium==), and this single wire can only be used by a single componenet at any given time - this can lead to ==scalability issues==
