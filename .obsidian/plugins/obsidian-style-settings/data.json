@@ -1,0 +1,10 @@
+{
+  "mado-miniflow@@theme-color": "theme-red-sky",
+  "wikipedia-theme@@no-vault-img": true,
+  "wikipedia-theme@@hide-frontmatter": false,
+  "wikipedia-theme@@file-line-width": "60%",
+  "wikipedia-theme@@hide-callout-icons": true,
+  "wikipedia-theme@@info-normal": false,
+  "wikipedia-theme@@image-placement": "float-center",
+  "wikipedia-theme@@ribbon-style": "ribbon-hide"
+}

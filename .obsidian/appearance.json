@@ -1,6 +1,10 @@
 {
-  "accentColor": "#000000",
-  "cssTheme": "Minimal",
-  "theme": "moonstone",
-  "interfaceFontFamily": "Avenir"
+  "accentColor": "#b6e042",
+  "cssTheme": "Wikipedia",
+  "theme": "obsidian",
+  "interfaceFontFamily": "Avenir",
+  "enabledCssSnippets": [
+    "centre",
+    "align"
+  ]
 }
