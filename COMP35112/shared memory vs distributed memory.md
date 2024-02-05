@@ -1,12 +1,18 @@
 [[COMP35112]]
 
+# shared memory
+
 - ==shared memory== - accessible from every part of the computation
 - in this case, memory is connected to all cores - for this reason, all memory is accessible from all threads, for both reads/writes
 - chip multiprocessors almost always end up with shared memory
 
+# distributed memory
+
 - ==distributed memory== - accessible from only one part of the computation
 - in this case, memory is connected to only one core - for this reason, in software, memory is only accessible through the thread that owns it, giving way for ==message passing==
 - supercomputers typically use distributed memory implementations more
+
+# hardware vs software
 
 - from a hardware perspective, distributed memory is preferable due to:
 	- easier to implement
