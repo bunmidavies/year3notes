@@ -1,5 +1,6 @@
 [[UCIL20882]]
 
+- our ==genome== consists of all DNA molecules in each human cell - therefore, 46 molecules for each chromosome in the typical human cell
 - our ==genome== contains genes which provide code for proteins - genes are essentially portions of the DNA strand, not necessarily continuously stored (i.e. there can be large gaps between one gene and another)
 
 - DNA gets transcribed into RNA - Uracil replaces Thymine such that any Ts are replaced with U
