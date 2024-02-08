@@ -12,12 +12,13 @@
 
 - polymorphism is the idea that several alleles can exist for one gene locus
 - at each gene locus, an individual has one of two polymorphisms, depending on the chromosomes and alleles inherited from parents - this leads to hereditary variation
-	- heterozygous = paternal allele is different to maternal allele
+	- heterozygous = paternal allele is different to maternal allele -
 	- homozygous = paternal allele is the same as maternal allele
 
 # dominant, recessive and co-dominant alleles
 
 - ==dominant== alleles mask the presence of other alleles - an organism only needs one copy out of the two in order to show characteristics of any traits associated with the allele
+- dominant alleles are essentially making a more effective protein than its counterpart, or a protein that prevents the other protein from working
 
 - ==recessive== alleles code for a non functioning or less effective protein, and two copies of a recessive allele are required to show characteristics of the trait associated with that allele
 
