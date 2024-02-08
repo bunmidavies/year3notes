@@ -1,6 +1,6 @@
 [[COMP24011]] / #comp24011 / #comp24011
 
-## slam
+# slam
 - keeps track of the map of the environment
 - the goal is to obtain a globally consistent estimate of the trajectory and map
 - slam also detects when it returns to a location its already been at (**loop closure**), and does no further calculation - reducing drift
