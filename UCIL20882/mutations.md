@@ -5,7 +5,7 @@
 	- entire segments of chromosomes i.e. multiple genes
 
 - mutations are typically acquired in 2 ways:
-	- ==hereditary== = inherited from parent gamete
+	- ==hereditary (germ line)== = inherited from parent gamete
 	- ==somatic/acquired== = occurs at some point of a persons life, which could be via:
 		- mutagens/environmental factors
 		- biological factors, integrated into the genome
@@ -16,5 +16,8 @@
 # types of mutation
 
 - mutations can be split into two categories - micro and macro
+
+## micro mutations (SNPs)
+- [[single nucleotide polymorphisms (SNP)|SNPs]] i.e. Single Nucleotide Polymorphisms result in small deletions/insertions of bases
 ## macro mutations
-- macro mutations affect chromosomes, and occur during [[meiosis]]
+- macro mutations affect chromosomes i.e. may affect multiple genes, and occur during [[meiosis]]
