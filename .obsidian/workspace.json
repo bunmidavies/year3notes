@@ -37,7 +37,77 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/karyotype.md",
+                "file": "UCIL20882/DNA molecules.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ffb78e603a3d81be",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "aabd0f82bb29a578",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1e2c73da45f36eff",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/mutations.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "73c44c8006a3f9af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "60c23ab931c1d195",
+            "type": "leaf",
+            "state": {
+              "type": "surfing-view",
+              "state": {
+                "url": "https://learn.genetics.utah.edu/content/basics/dna"
+              }
+            }
+          },
+          {
+            "id": "8c8be2444c3ed410",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/chromosome.md",
                 "mode": "source",
                 "source": false
               }
@@ -67,7 +137,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -141,7 +212,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMP35112/COMP35112.md",
+                "file": "UCIL20882/karyotype.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -158,7 +229,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMP35112/COMP35112.md",
+                "file": "UCIL20882/karyotype.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -193,7 +264,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMP35112/COMP35112.md"
+                "file": "UCIL20882/karyotype.md"
               }
             }
           }
@@ -215,44 +286,44 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0da65b5ac98a3804",
+  "active": "2a548a320f82d9ca",
   "lastOpenFiles": [
+    "karytyy.md",
     "UCIL20882/UCIL20882.md",
-    "COMP35112/COMP35112.md",
-    "UCIL20882/karyotype.md",
-    "UCIL20882/chromosome.md",
-    "UCIL20882/nucleotides.md",
-    "UCIL20882/gametes.md",
-    "UCIL20882/DNA molecules.md",
-    "README.md",
+    "UCIL20882/mutations.md",
+    "UCIL20882/allele.md",
+    "COMP34212/sonars.md",
+    "COMP34212/lidar.md",
+    "COMP34212/actuators.md",
+    "COMP34212/active vision.md",
+    "COMP34212/COMP34212_Lecture04_SensorsActuators_2022.pdf",
     "UCIL20882/LT1- Genetics basics.pdf",
+    "gene.md",
+    "UCIL20882/karyotype.md",
+    "year2notes/COMP25212/cache coherence.md",
+    "UCIL20882/natural selection.md",
+    "UCIL20882/multifactorial traits.md",
+    "UCIL20882/mitosis.md",
+    "UCIL20882/genotype vs phenotype.md",
+    "UCIL20882/genes.md",
+    "COMP35112/threads.md",
+    "COMP35112/threads in java.md",
+    "COMP35112/multiprocessor structure.md",
+    "COMP35112/explicit vs implicit parallelism.md",
+    "COMP35112/code/pthread.c",
+    "COMP35112/code/pthread",
+    "COMP35112/code",
+    "COMP35112/POSIX threads (Pthread).md",
+    "COMP34312/population risk.md",
+    "COMP34312/model family.md",
+    "COMP34312/excess risk.md",
+    "COMP34312/empirical risk minimization.md",
+    "COMP34312/bayes model.md",
     "UCIL20882/mso8430.tmp",
-    "COMP34212/COMP34212.md",
-    "year2notes/COMP24112/stochastic gradient descent + mini-batch gradient descent.md",
-    "year2notes/COMP24112/cross entropy loss.md",
-    "COMP35112/instruction-level parallelism (ILP).md",
-    "COMP35112/thread-level parallelism (TLP).md",
-    "COMP35112/flynn's taxonomy.md",
-    "_dailynotes/2024-02-01.md",
     "_dailynotes",
-    "COMP35112/shared memory vs distributed memory.md",
-    "COMP34212/flashcards/definitions.md",
     "COMP34212/flashcards",
     "COMP34212/COMP34212_Lecture01b_CognitiveRobotics(1).pdf",
-    "COMP35112/dennard scaling.md",
-    "COMP35112/chip multiprocessor considerations.md",
-    "COMP35112/data-level parallelism (DLP).md",
     "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf",
-    "COMP34312/COMP34312.md",
-    "year2notes/COMP24112/COMP24112Maths.pdf",
-    "year2notes/COMP24112/COMP24112.md",
-    "COMP34312.md",
-    "COMP34312/Weeks1-6.pdf",
-    "COMP34312/NotesPack.pdf",
-    "COMP34312",
-    "COMP33511/design languages.md",
-    "COMP33511/evaluation design + evaluation analysis.md",
-    "COMP33511/COMP33511.md",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",
     "COMP32211/COMP32211_notes_0-5/figures/video_timing.png",
