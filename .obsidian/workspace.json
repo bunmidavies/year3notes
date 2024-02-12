@@ -32,19 +32,101 @@
             }
           },
           {
-            "id": "206d8bdf70d28020",
+            "id": "3e662e58cca79c82",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP34212/Cognitive-Robotics-Cangesoli.pdf"
+              }
+            }
+          },
+          {
+            "id": "c7d46e7da0361491",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/DNA molecules.md",
+                "file": "COMP34212/COMP34212.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "ffb78e603a3d81be",
+            "id": "7b599172ea172ffb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP34212/COMP34212.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a678e8cf002756fa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9bb3db222ab6f012",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f1411640890558b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "75caaf8e1c13bf19",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/MSI cache states.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a784201ae6053080",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f5ce7a0d46b7821e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -56,7 +138,7 @@
             }
           },
           {
-            "id": "aabd0f82bb29a578",
+            "id": "022e27d3cae807e7",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -68,19 +150,7 @@
             }
           },
           {
-            "id": "1e2c73da45f36eff",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/mutations.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "73c44c8006a3f9af",
+            "id": "9fec3264a0686635",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -92,53 +162,131 @@
             }
           },
           {
-            "id": "60c23ab931c1d195",
-            "type": "leaf",
-            "state": {
-              "type": "surfing-view",
-              "state": {
-                "url": "https://learn.genetics.utah.edu/content/basics/dna"
-              }
-            }
-          },
-          {
-            "id": "8c8be2444c3ed410",
+            "id": "5d4817b32c50e5ae",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/chromosome.md",
+                "file": "UCIL20882/somites.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "51e37bea2f7af2b2",
+            "id": "ff9089176df22e4d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/chromosome.md",
+                "file": "UCIL20882/UCIL20882.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "4b84557780cbd289",
+            "id": "51769d842fdf14b9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/karyotype.md",
+                "file": "UCIL20882/neurogenesis.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "66dddbc030b35aa0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7eee5b67d0030c6d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "04b7d18b9e84b1c3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "994ce8ae0deea85d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c755c8656639d091",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c7fbb0d42bae8f18",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP34212/embodied intelligence.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 20
+      },
+      {
+        "id": "0cb5f3b4ea9cb202",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c08ad704e05e35af",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "UCIL20882/LT3- Human development 2.pdf"
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -212,7 +360,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "UCIL20882/karyotype.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -229,7 +377,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "UCIL20882/karyotype.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -264,7 +412,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "UCIL20882/karyotype.md"
+                "file": "README.md"
               }
             }
           }
@@ -286,44 +434,44 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "2a548a320f82d9ca",
+  "active": "c755c8656639d091",
   "lastOpenFiles": [
-    "karytyy.md",
+    "UCIL20882/cell difference factors.md",
+    "UCIL20882/cloning dolly.md",
     "UCIL20882/UCIL20882.md",
+    "UCIL20882/LT3- Human development 2.pdf",
+    "UCIL20882/developmental genes.md",
+    "UCIL20882/the gurdon cloning experiemt.md",
+    "UCIL20882/organogenesis.md",
+    "UCIL20882/neurogenesis.md",
+    "UCIL20882/somites.md",
+    "UCIL20882/gastrulation.md",
+    "UCIL20882/zygote.md",
+    "COMP35112/bus snooping.md",
+    "year2notes/COMP25212/cache coherence.md",
+    "COMP35112/COMP35112.md",
+    "COMP35112/write-invalidate vs write-update.md",
+    "COMP35112/MSI cache states.md",
+    "COMP34212/developmental robotics.md",
+    "COMP34212/embodied intelligence.md",
+    "COMP34212/COMP34212.md",
+    "COMP34212/piaget's stages of cognitive development.md",
+    "COMP34212/COMP34212_Lecture_DevelopmentalRobotics.pdf",
+    "README.md",
+    "UCIL20882/DNA molecules.md",
     "UCIL20882/mutations.md",
-    "UCIL20882/allele.md",
-    "COMP34212/sonars.md",
-    "COMP34212/lidar.md",
-    "COMP34212/actuators.md",
-    "COMP34212/active vision.md",
+    "UCIL20882/chromosome.md",
+    "UCIL20882/genes.md",
+    "COMP34312/COMP34312.md",
+    "COMP34312/excess risk.md",
+    "COMP34312/NotesPack.pdf",
+    "COMP34212/Cognitive-Robotics-Cangesoli.pdf",
+    "UCIL20882/LT2- Mutations and human genome project(1) (1).pdf",
     "COMP34212/COMP34212_Lecture04_SensorsActuators_2022.pdf",
     "UCIL20882/LT1- Genetics basics.pdf",
-    "gene.md",
-    "UCIL20882/karyotype.md",
-    "year2notes/COMP25212/cache coherence.md",
-    "UCIL20882/natural selection.md",
-    "UCIL20882/multifactorial traits.md",
-    "UCIL20882/mitosis.md",
-    "UCIL20882/genotype vs phenotype.md",
-    "UCIL20882/genes.md",
-    "COMP35112/threads.md",
-    "COMP35112/threads in java.md",
-    "COMP35112/multiprocessor structure.md",
-    "COMP35112/explicit vs implicit parallelism.md",
     "COMP35112/code/pthread.c",
     "COMP35112/code/pthread",
     "COMP35112/code",
-    "COMP35112/POSIX threads (Pthread).md",
-    "COMP34312/population risk.md",
-    "COMP34312/model family.md",
-    "COMP34312/excess risk.md",
-    "COMP34312/empirical risk minimization.md",
-    "COMP34312/bayes model.md",
-    "UCIL20882/mso8430.tmp",
-    "_dailynotes",
-    "COMP34212/flashcards",
-    "COMP34212/COMP34212_Lecture01b_CognitiveRobotics(1).pdf",
-    "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",
     "COMP32211/COMP32211_notes_0-5/figures/video_timing.png",
