@@ -43,4 +43,4 @@
 - motion estimation *(mostly out of scope for computer vision)*
 - local optimization (bundle adjustment) - refinement over the last $m$ frames in order to reduce drift
 
-- drift is important in understanding [[SLAM vs VO]]
+- drift is important in understanding [[SLAM vs vSLAM vs VO]]
