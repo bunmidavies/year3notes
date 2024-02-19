@@ -24,5 +24,9 @@
 - repair:
 	- SCs transplanted and secrete modules that promote repair (usually MSCs)
 	- for monogenetic disease: SCs modified genetically outside the body and re-implanted
-- reuse:
+- protect:
+	- MSCs transplanted -> prevent inflammation or prevent immune system attacking the local/transplanted cells
+
+- typically, for repairing and replacing ==autologous transplants== are ideal - this is where the patients own stem cells are used in order to avoid [[immunocompatibility|rejection]]
+- donor stem cells with low immunogenicity can be used, for instance: [[neonatal stem cells]]
 
