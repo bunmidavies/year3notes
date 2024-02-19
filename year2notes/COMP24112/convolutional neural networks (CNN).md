@@ -1,10 +1,16 @@
 [[COMP24112]]
-
-### definition
+[[COMP34212]]
+# definition
 - a convolutional neural network is a type of ==artificial neural network==
 - the main difference between a CNN and a traditional neural network is that CNNs use ==2D and 3D neurons== - the layers in the CNN have neurons which are arranged in 2 or 3 dimensions (the 3 dimensions being width, height and depth)
 - as well as this, CNNs contain both ==convolutional layers== and ==pooling layers==
 - the training of a CNN is based on [[backpropagation]] and ==stochastic gradient descent== ([[stochastic gradient descent + mini-batch gradient descent]])
+- CNNs take human-defined features, and converted them to learned features i.e. it 'invents' features to help it output the right thing - this is similar to how humans operate
+
+# history
+
+- the first convolution network was LeNet, created in 1998
+- LeNet existed in order to recognise numbers and letters, using the [[popular AI datasets|MNIST dataset]]
 
 ### convolutional layers
 - within convolutional layers, the idea of ==local connectivity== is introduced
