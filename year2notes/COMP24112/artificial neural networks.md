@@ -1,11 +1,21 @@
 [[COMP24112]]
+[[COMP34212]]
 
-### intro + background
+
 - an artificial neural network is a computing system that is ==inspired by==, but not identical to, biological neural networks that constitute animal brains
 - artificial neural networks were initially proposed in the hope that they could solve problems in the same way a human does - however, over time the attention has shifted to performing ==specific tasks==, thus deviating them from biology
 - the first computational model for a neural network was created in ==1943== by Warren McCulloch and Walter Pitts - in ==1957==, the perceptron algorithm was invented, and around the 60s-80s concepts like convolutional neural networks and recurrent neural networks became popularised
 
-### neuron structure
+- an artificial network consists of a set of interconnected nodes (connected by weights) - it is able to receive input stimuli from the environment and learn new behaviours/responses
+
+# history
+
+- in the 1940s, the functionality of a singular neuron was programmed
+- the 1960s-1970s were known as the ==golden age== of neural nets - then the 1970s-1990s were known as the ==dark age (AI winter)==
+- by 1986, [[backpropagation]] was invented
+- by 2006, the deep neural network with pretraining began to emerge
+# neuron structure
+
 - artificial neural network = collection of ==artifical neurons==, connected together
 - each artificial neuron simulates a real neuron - ==multiple inputs -> 1 output==
 - the multiple inputs are received from other neurons - connection strengths determine how the signals are accumulated, and the neuron fires a signal if enough signals accumulate
@@ -13,7 +23,7 @@
 ![](https://i.imgur.com/SDztApk.png)
 - the linear model weights $w$ control the strength of the incoming signals, and the resultant sum is used as an input for the ==activation function==
 
-### activation functions
+# activation functions
 - the activation function is applied to the weighted sum returned by the ==adder== in the neuron
 - there are a number of standard activation functions which can be used - for instance, the identity function simply returns the resultant sum from the neuron's adder
 ![](https://i.imgur.com/JZRl8wT.png)
