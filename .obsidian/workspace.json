@@ -32,7 +32,137 @@
             }
           },
           {
-            "id": "3e662e58cca79c82",
+            "id": "206d8bdf70d28020",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/DNA molecules.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ffb78e603a3d81be",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "aabd0f82bb29a578",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f5eb830d6f8fb282",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/pathology.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6e89c5ae15da1902",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/induced pluripotent stem cells (IPSCs).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ba191b59037de1e1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/somatic cells.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1e2c73da45f36eff",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/mutations.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "73c44c8006a3f9af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "60c23ab931c1d195",
+            "type": "leaf",
+            "state": {
+              "type": "surfing-view",
+              "state": {
+                "url": "https://learn.genetics.utah.edu/content/basics/dna"
+              }
+            }
+          },
+          {
+            "id": "8c8be2444c3ed410",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "51e37bea2f7af2b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/chromosome.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4b84557780cbd289",
             "type": "leaf",
             "state": {
               "type": "pdf",
@@ -42,7 +172,7 @@
             }
           },
           {
-            "id": "c7d46e7da0361491",
+            "id": "0bb61267e502f6d0",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -54,19 +184,7 @@
             }
           },
           {
-            "id": "7b599172ea172ffb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP34212/COMP34212.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a678e8cf002756fa",
+            "id": "cb1fc6bd43f6f5b9",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -78,215 +196,27 @@
             }
           },
           {
-            "id": "9bb3db222ab6f012",
+            "id": "93aa1c392824e4ad",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "surfing-view",
               "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
+                "url": "https://olivierpierre.github.io/comp35112/lectures/03-shared-memory-programming/#16"
               }
             }
           },
           {
-            "id": "f1411640890558b2",
+            "id": "577db759f76cc1c6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "vscode-editor",
               "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "75caaf8e1c13bf19",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/MSI cache states.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a784201ae6053080",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f5ce7a0d46b7821e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "022e27d3cae807e7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9fec3264a0686635",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5d4817b32c50e5ae",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/somites.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ff9089176df22e4d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "51769d842fdf14b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/neurogenesis.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "66dddbc030b35aa0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "7eee5b67d0030c6d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "04b7d18b9e84b1c3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "994ce8ae0deea85d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c755c8656639d091",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c7fbb0d42bae8f18",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP34212/embodied intelligence.md",
-                "mode": "source",
-                "source": false
+                "file": "COMP35112/code/pthread.c"
               }
             }
           }
         ],
-        "currentTab": 20
-      },
-      {
-        "id": "0cb5f3b4ea9cb202",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "c08ad704e05e35af",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "UCIL20882/LT3- Human development 2.pdf"
-              }
-            }
-          }
-        ]
+        "currentTab": 11
       }
     ],
     "direction": "vertical"
@@ -315,7 +245,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "narrative",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -340,11 +270,13 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0086ba04a754e5cb",
@@ -360,7 +292,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "UCIL20882/UCIL20882.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -377,7 +309,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "UCIL20882/UCIL20882.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -412,7 +344,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "UCIL20882/UCIL20882.md"
               }
             }
           }
@@ -431,47 +363,48 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "vscode-editor:Create Code File": false
     }
   },
-  "active": "c755c8656639d091",
+  "active": "8c8be2444c3ed410",
   "lastOpenFiles": [
-    "UCIL20882/cell difference factors.md",
-    "UCIL20882/cloning dolly.md",
+    "UCIL20882/MSCs.md",
     "UCIL20882/UCIL20882.md",
-    "UCIL20882/LT3- Human development 2.pdf",
-    "UCIL20882/developmental genes.md",
-    "UCIL20882/the gurdon cloning experiemt.md",
-    "UCIL20882/organogenesis.md",
-    "UCIL20882/neurogenesis.md",
-    "UCIL20882/somites.md",
-    "UCIL20882/gastrulation.md",
-    "UCIL20882/zygote.md",
-    "COMP35112/bus snooping.md",
-    "year2notes/COMP25212/cache coherence.md",
-    "COMP35112/COMP35112.md",
-    "COMP35112/write-invalidate vs write-update.md",
-    "COMP35112/MSI cache states.md",
-    "COMP34212/developmental robotics.md",
-    "COMP34212/embodied intelligence.md",
-    "COMP34212/COMP34212.md",
-    "COMP34212/piaget's stages of cognitive development.md",
-    "COMP34212/COMP34212_Lecture_DevelopmentalRobotics.pdf",
-    "README.md",
-    "UCIL20882/DNA molecules.md",
-    "UCIL20882/mutations.md",
+    "UCIL20882/immun-capta.md",
+    "UCIL20882/cell differentiation.md",
+    "UCIL20882/cell differences.md",
+    "UCIL20882/cartilage engineering.md",
+    "UCIL20882/bone marrow transplant.md",
+    "UCIL20882/adult stem cells (ASCs).md",
+    "UCIL20882/PotentialUseOfStemCellsInMoodD-2018_annotated.pdf",
+    "UCIL20882/MD paper Qs.pdf",
+    "COMP35112/the need for synchronisation mechanisms.md",
+    "COMP35112/pthread mutex.md",
+    "COMP35112/locks.md",
+    "COMP35112/barriers.md",
+    "COMP34212/transformers.md",
+    "COMP34212/shallow vs deep neural networks.md",
+    "COMP34212/pooling (sub-sampling).md",
+    "COMP34212/perceptrons.md",
+    "COMP34212/dropout in neural networks.md",
+    "COMP34212/data augmentation.md",
+    "COMP34212/NN training datasets.md",
+    "COMP34212/COMP34212_Lecture7_DeepLearning.pdf",
+    "UCIL20882/somatic cells.md",
     "UCIL20882/chromosome.md",
-    "UCIL20882/genes.md",
-    "COMP34312/COMP34312.md",
-    "COMP34312/excess risk.md",
-    "COMP34312/NotesPack.pdf",
-    "COMP34212/Cognitive-Robotics-Cangesoli.pdf",
-    "UCIL20882/LT2- Mutations and human genome project(1) (1).pdf",
-    "COMP34212/COMP34212_Lecture04_SensorsActuators_2022.pdf",
-    "UCIL20882/LT1- Genetics basics.pdf",
+    "COMP35112/COMP35112.md",
+    "UCIL20882/induced pluripotent stem cells (IPSCs).md",
+    "UCIL20882/pathophysiology.md",
+    "UCIL20882/pathology.md",
+    "UCIL20882/physiology.md",
+    "UCIL20882/LT4 - Stem cells applications.pdf",
+    "COMP34212/COMP34212_Lecture_Navigation.pdf",
     "COMP35112/code/pthread.c",
-    "COMP35112/code/pthread",
-    "COMP35112/code",
+    "COMP34212/COMP34212_Lecture01b_CognitiveRobotics(1).pdf",
+    "UCIL20882/LT3- Human development 2.pdf",
+    "UCIL20882/LT2- Mutations and human genome project(1) (1).pdf",
+    "COMP35112/flashcards",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",
     "COMP32211/COMP32211_notes_0-5/figures/video_timing.png",
