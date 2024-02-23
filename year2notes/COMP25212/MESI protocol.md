@@ -1,9 +1,17 @@
 [[COMP25212]]
+[[COMP35112]]
 
-### definition
-- with [[memory coherence]] protocols (e.g. snooping and directory based), a common implementation issue is that messages may often be sent out for values which are ==not shared==
-- this basically results in unneccessary work, where caches are sending out messages across a bus to other caches who don't even have the same address cached
-- by ==avoiding sending messages==, systems can benefit from:
+- with the [[MSI cache states|MSI protocol]], there are two cases a core in the $S$ state which gets modified can be in:
+	- there are multiple cores in the $S$ state, so the invalidate message must be broadcasted
+	- theres only a single core with the shared copy, so theres no need to broadcast an invalidate message
+- however, in MSI, both cases are broadcasted, resulting in unnecessary communication which has significant negative impacts in a bus
+
+- the MESI protocol solves this issue by splitting the $S$ state into two states:
+	- $E$: exclusive - switch to $E$ after a read causing a fetch from memory. This is the ==only== core with an in-date cached copy
+	- $S$: truly shared - there are ==multiple== cores with in-date cached copies
+![](https://i.imgur.com/TDsnA49.png)
+
+- by ==avoiding sending unnecessary messages==, systems can benefit from:
 	- improved latency
 	- lower bandwidth consumption
 	- less contention for use of the bus (which is carrying messages)
