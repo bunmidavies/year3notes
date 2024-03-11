@@ -8,7 +8,19 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5579e563ff6f96a7",
+            "id": "0da65b5ac98a3804",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "42ce00e27eea5562",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,7 +32,19 @@
             }
           },
           {
-            "id": "da2275bad3b84b43",
+            "id": "206d8bdf70d28020",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/DNA molecules.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ffb78e603a3d81be",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -32,7 +56,7 @@
             }
           },
           {
-            "id": "8e0dd55c27f7f324",
+            "id": "aabd0f82bb29a578",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -44,7 +68,55 @@
             }
           },
           {
-            "id": "2641eb98a5949d2a",
+            "id": "f5eb830d6f8fb282",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/pathology.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6e89c5ae15da1902",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/induced pluripotent stem cells (IPSCs).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ba191b59037de1e1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/somatic cells.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1e2c73da45f36eff",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/mutations.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "73c44c8006a3f9af",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -56,79 +128,97 @@
             }
           },
           {
-            "id": "193fbdd7e3506e82",
+            "id": "60c23ab931c1d195",
+            "type": "leaf",
+            "state": {
+              "type": "surfing-view",
+              "state": {
+                "url": "https://learn.genetics.utah.edu/content/basics/dna"
+              }
+            }
+          },
+          {
+            "id": "8c8be2444c3ed410",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "COMP34212/COMP34212.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "dd91efc59a58e266",
+            "id": "39920041fe6dc067",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/amplichip.md",
+                "file": "COMP34212/COMP34212.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "7f5ac555290ef809",
+            "id": "51e37bea2f7af2b2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "UCIL20882/chromosome.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "1636afdad6545482",
+            "id": "4b84557780cbd289",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP34212/Cognitive-Robotics-Cangesoli.pdf"
+              }
+            }
+          },
+          {
+            "id": "0bb61267e502f6d0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/PGX predict clozapine.md",
+                "file": "COMP34212/COMP34212.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "9097a1b1adb2c9d4",
+            "id": "cb1fc6bd43f6f5b9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/agranulocytosis.md",
+                "file": "COMP35112/COMP35112.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "808e071f4e8d8325",
+            "id": "93aa1c392824e4ad",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "surfing-view",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
-                "mode": "source",
-                "source": false
+                "url": "https://olivierpierre.github.io/comp35112/lectures/03-shared-memory-programming/#16"
               }
             }
           },
           {
-            "id": "f623134e1226dbf8",
+            "id": "577db759f76cc1c6",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -140,91 +230,91 @@
             }
           },
           {
-            "id": "2ba178bd267125e5",
+            "id": "e3a7cada0ba34b8a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/COMP34312.md",
+                "file": "year2notes/COMP24112/convolutional neural networks (CNN).md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "58e242a0e2b93e06",
+            "id": "74d1f5af9ee5b32f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/COMP34312.md",
+                "file": "COMP34212/COMP34212.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "54f6998384aac9a7",
+            "id": "84ddc2bd5669977a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/COMP34312.md",
+                "file": "COMP35112/COMP35112.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "fed2814d24d40038",
+            "id": "eeb6d912f3c35887",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/COMP34312.md",
+                "file": "COMP35112/COMP35112.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "e15bbec98755e1e5",
+            "id": "9a06a544be26fcb2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/random forests algorithm.md",
+                "file": "COMP35112/COMP35112.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "55867012e420cfd7",
+            "id": "a4973f53a201d0d7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/COMP34312.md",
+                "file": "COMP34212/sequential keras model.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "5852d6357fca15d7",
+            "id": "45bcc4d76ea7ec30",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/ambiguity decomposition.md",
+                "file": "year2notes/COMP24112/artificial neural networks.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 17
+        "currentTab": 24
       }
     ],
     "direction": "vertical"
@@ -298,7 +388,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMP34312/ambiguity decomposition.md",
+                "file": "COMP34212/sequential keras model.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -315,7 +405,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMP34312/ambiguity decomposition.md",
+                "file": "COMP34212/sequential keras model.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -350,7 +440,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMP34312/ambiguity decomposition.md"
+                "file": "COMP34212/sequential keras model.md"
               }
             }
           }
@@ -374,42 +464,42 @@
   },
   "active": "2a548a320f82d9ca",
   "lastOpenFiles": [
-    "COMP34312/COMP34312.md",
-    "COMP34312/sequential ensemble construction.md",
-    "COMP34312/random forests algorithm.md",
-    "COMP34312/bootstrapping.md",
-    "COMP34312/Lec5-Ensembles.pdf",
-    "COMP34312/majority voting.md",
-    "COMP34312/KL divergence.md",
-    "COMP34312/ambiguity decomposition.md",
-    "UCIL20882/phyziotype (genomas).md",
-    "UCIL20882/UCIL20882.md",
-    "UCIL20882/genesight psychotopic test.md",
-    "UCIL20882/telemedicine & biosensors.md",
-    "UCIL20882/3D printing.md",
-    "UCIL20882/technology associated with parkinson's disease.md",
-    "UCIL20882/agranulocytosis.md",
-    "UCIL20882/PGX predict clozapine.md",
-    "UCIL20882/amplichip.md",
-    "UCIL20882/onco type DX.md",
-    "UCIL20882/companion diagnostics.md",
-    "UCIL20882/biomarker technologies.md",
-    "UCIL20882/biomarkers.md",
-    "UCIL20882/direct to consumer tests.md",
+    "COMP35112/load-linked.md",
+    "COMP35112/semaphore with LL+SC + other uses.md",
     "COMP35112/COMP35112.md",
-    "README.md",
+    "COMP35112/store-conditional.md",
+    "COMP35112/futex.md",
+    "year2notes/COMP24112/convolutional neural networks (CNN).md",
+    "UCIL20882/quorum sensing.md",
+    "UCIL20882/new approaches to killing bacteria.md",
+    "UCIL20882/microorganisms.md",
+    "UCIL20882/microbiology.md",
+    "UCIL20882/microbes.md",
+    "UCIL20882/antibiotics.md",
+    "UCIL20882/antibiotic resistance.md",
+    "UCIL20882/AICTIB 2024 Micro lectures 1-2 prelecture release.pdf",
+    "COMP34312/unified-theory-diversity.pdf",
+    "COMP34312/diversity.md",
+    "COMP34312/Lec6-Diversity.pdf",
+    "year2notes/COMP24112/artificial neural networks.md",
     "COMP34212/COMP34212.md",
-    "COMP35112/condition variables.md",
-    "COMP35112/NUMA systems.md",
-    "COMP34212/COMP34212_Lecture07_SoftwarePepper2022(1).pdf",
+    "README.md",
     "COMP34312/NotesPack.pdf",
+    "COMP34312/COMP34312.md",
+    "UCIL20882/telemedicine & biosensors.md",
+    "UCIL20882/technology associated with parkinson's disease.md",
+    "UCIL20882/prognosis.md",
+    "UCIL20882/precision medicine.md",
+    "UCIL20882/phyziotype (genomas).md",
+    "UCIL20882/onco type DX.md",
+    "UCIL20882/genesight psychotopic test.md",
+    "UCIL20882/direct to consumer tests.md",
+    "COMP34312/Lec5-Ensembles.pdf",
     "COMP34312/Lec4-BV.pdf",
-    "COMP33511/UX.pdf",
-    "COMP34312/Lec1-Recap.pdf",
     "COMP34312/Lec2-ERM.pdf",
-    "COMP34212/Cognitive-Robotics-Cangesoli.pdf",
-    "UCIL20882/PotentialUseOfStemCellsInMoodD-2018_annotated.pdf",
-    "UCIL20882/MD paper Qs.pdf",
+    "COMP34312/Lec1-Recap.pdf",
+    "COMP34212/COMP34212_Lecture07_SoftwarePepper2022(1).pdf",
+    "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023.ipynb",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",
     "COMP32211/COMP32211_notes_0-5/figures/video_timing.png",
