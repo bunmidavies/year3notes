@@ -3,6 +3,17 @@
 - Pthread stands for the ==POSIX thread library== - it exposes a C/C++ API to create and manage multiple threads within a process (a single program)
 - threads exist as `pthread_t` data structures
 
+# pthread drawbacks
+- Pthreads are effectively a ==C-style library== - its verbose, and has a lack of expressiveness, which leads to tedious programming often
+- the library allows you to harness of low-level form of parallelism, in which you indicate what the hardware/OS should do, rather than ==what your intentions are==
+- this affects:
+	- writing
+	- reading
+	- debugging
+	- profiling
+	- optimising
+
+# methods
 ### `pthread_create()`
 - creates and launches a thread with the following parameters:
 	- which function the thread should run
