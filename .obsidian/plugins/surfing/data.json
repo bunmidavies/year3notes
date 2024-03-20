@@ -43,5 +43,28 @@
     ],
     "defaultFilterType": "tree"
   },
-  "treeData": []
+  "treeData": [
+    {
+      "id": "b65fdd48d7b39fa9",
+      "parent": 0,
+      "droppable": true,
+      "text": "Using Spin Locks - Multithreaded Programming Guide",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "30d4c2509f29c1a2",
+      "parent": 0,
+      "droppable": true,
+      "text": "COMP35112 - Synchronisation in Parallel Programming - Locks and Barriers",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    }
+  ]
 }
