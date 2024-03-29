@@ -141,9 +141,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "COMP35112/COMP35112.md",
                 "mode": "source",
                 "source": false
+              }
+            }
+          },
+          {
+            "id": "3b050edd8bff977c",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf"
               }
             }
           },
@@ -160,19 +170,17 @@
             }
           },
           {
-            "id": "033202bbba2a9089",
+            "id": "8d1509557e0599ab",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "OpenMP.md",
-                "mode": "source",
-                "source": false
+                "file": "UCIL20882/Human Brain I.pdf"
               }
             }
           }
         ],
-        "currentTab": 12
+        "currentTab": 15
       }
     ],
     "direction": "vertical"
@@ -226,8 +234,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -248,7 +255,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "UCIL20882/Human Brain I.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -265,7 +272,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "UCIL20882/Human Brain I.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -300,7 +307,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "UCIL20882/UCIL20882.md"
+                "file": "UCIL20882/Human Brain I.pdf"
               }
             }
           }
@@ -322,11 +329,27 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "131fdc2d16955295",
+  "active": "8d1509557e0599ab",
   "lastOpenFiles": [
-    "how can the true distribution have noise.md",
+    "UCIL20882/UCIL20882.md",
+    "COMP34212/embeddings in ML.md",
+    "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf",
     "COMP35112/COMP35112.md",
+    "COMP35112/std future.md",
+    "COMP35112/std atomic.md",
+    "COMP35112/sending+receiving with MPI.md",
+    "COMP35112/scoped locks.md",
+    "COMP35112/read-copy-update.md",
+    "COMP35112/parallel stl policies.md",
+    "COMP35112/one-sided communication in MPI.md",
+    "COMP35112/message passing interface (MPI).md",
+    "COMP35112/lock guards.md",
+    "COMP35112/levels of parallelism abstraction.md",
+    "COMP35112/collective operations with MPI.md",
+    "COMP35112/OpenMP.md",
+    "COMP35112/MPI modes of communication.md",
     "OpenMP.md",
+    "how can the true distribution have noise.md",
     "COMP35112/store-conditional.md",
     "COMP35112/semaphore with LL+SC + other uses.md",
     "COMP35112/load-linked.md",
@@ -335,30 +358,14 @@
     "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023.ipynb",
     "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1).ipynb",
     "COMP34212/labs",
-    "UCIL20882/UCIL20882.md",
     "COMP35112/spinlocks.md",
-    "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf",
     "COMP35112/pthread mutex.md",
     "COMP35112/locks.md",
-    "COMP34312/COMP34312.md",
     "COMP34312/NotesPack.pdf",
     "COMP34312/Lec6-Diversity.pdf",
     "COMP34312/unified-theory-diversity.pdf",
-    "COMP34312/diversity.md",
-    "README.md",
-    "COMP35112/thread-level parallelism (TLP).md",
     "COMP34312/Lec4-BV.pdf",
-    "COMP34212/COMP34212.md",
-    "Untitled.md",
     "UCIL20882/AICTIB 2024 Micro lectures 1-2 prelecture release.pdf",
-    "UCIL20882/microbes.md",
-    "year2notes/COMP27112/point processing.md",
-    "COMP34312/random forests algorithm.md",
-    "UCIL20882/agranulocytosis.md",
-    "UCIL20882/PGX predict clozapine.md",
-    "UCIL20882/amplichip.md",
-    "UCIL20882/antibiotic resistance.md",
-    "UCIL20882/quorum sensing.md",
     "COMP33511/UX.pdf",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",
