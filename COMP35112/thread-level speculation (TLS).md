@@ -4,6 +4,23 @@
 	1. program is split into equal parts, which each core handles as separate thread
 	2. all cores sequentially execute their part of the program, in parallel
 	3. if the program was able to be parallelised, these threads can all 'commit' - otherwise, any problems are detected, whichever speculative state was incorrect is rolled back, and execution continues without speculation
+- three main types of TLS are covered
+	- [[thread-level speculation (TLS)#loop-based TLS|loop-based TLS]] (below) - can range from slowdown $\rightarrow$ decent speedup
+	- [[method-level TLS]] - speedup occasionally occurs
+	- [[arbitrary point TLS]] 
+
+# overheads of TLS
+
+- shared data is often duplicated
+- reads and writes often need to be tracked in order to avoid dependency violations and illegal actions - on top of this, checking the status of the location of lower threads when reading + checking the status of the location of higher threads when writing is also required
+- as mentioned, TLS is also not beneficial if the computation time is less than the time required for threads to commit their final state
+- if speculation is unsuccessful, the non-speculative thread has run much slower for no reason, and the speculative threads have effectively contributed nothing - with respect to energy/power constraints, energy wasted is another downside TLS may involve
+
+- attempts to reducing rollbacks and mentioned overhead include:
+	- value forwarding (stalling reads from higher threads)
+	- value prediction for the return value of methods
+	- partial commits
+	- using caches as speculative data buffers
 
 # loop-based TLS
 
