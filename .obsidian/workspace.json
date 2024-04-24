@@ -4,139 +4,81 @@
     "type": "split",
     "children": [
       {
-        "id": "c5fad48b1a5431e8",
+        "id": "2ac8c172002c879f",
         "type": "tabs",
         "children": [
           {
-            "id": "4400990eeee5be73",
+            "id": "66f61d4cf4230b49",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "UCIL20882/UCIL20882_Conservation_2.pdf"
+              }
+            }
+          },
+          {
+            "id": "50928cceec78a1b7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/diversity.md",
+                "file": "UCIL20882/UCIL20882.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "2896ee30eea3317b",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34312/NotesPack.pdf"
-              }
-            }
-          },
-          {
-            "id": "9589675426bdf66d",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34312/NotesPack.pdf"
-              }
-            }
-          },
-          {
-            "id": "47ff00ce1870792c",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34312/Lec6-Diversity.pdf"
-              }
-            }
-          },
-          {
-            "id": "97f3778ea42a5f44",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34312/unified-theory-diversity.pdf"
-              }
-            }
-          },
-          {
-            "id": "79f6f508e4ce4837",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34312/Lec6-Diversity.pdf"
-              }
-            }
-          },
-          {
-            "id": "ef187c69b2ddfc72",
+            "id": "b24afbe27de46021",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP35112/spinlocks.md",
+                "file": "UCIL20882/UCIL20882.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "b65fdd48d7b39fa9",
-            "type": "leaf",
-            "state": {
-              "type": "surfing-view",
-              "state": {
-                "url": "https://docs.oracle.com/cd/E26502_01/html/E35303/ggecq.html#:~:text=Spin locks are a low,the lock has become available."
-              }
-            }
-          },
-          {
-            "id": "30d4c2509f29c1a2",
-            "type": "leaf",
-            "state": {
-              "type": "surfing-view",
-              "state": {
-                "url": "https://olivierpierre.github.io/comp35112/lectures/08a-locks-barriers/#50"
-              }
-            }
-          },
-          {
-            "id": "417a509664e48d8f",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf"
-              }
-            }
-          },
-          {
-            "id": "a7e77c331c517ff0",
+            "id": "79e3f9bacf915ed5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP35112/spinlocks.md",
+                "file": "UCIL20882/invasive species.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "ac59d8057b87dc91",
+            "id": "cbd853f410e2d302",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP35112/pthread mutex.md",
+                "file": "UCIL20882/UCIL20882.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "131fdc2d16955295",
+            "id": "b50f524edd7a55d9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP34312/COMP34312.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ae17fef9640078b7",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -148,17 +90,7 @@
             }
           },
           {
-            "id": "3b050edd8bff977c",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf"
-              }
-            }
-          },
-          {
-            "id": "87f09462a84f612f",
+            "id": "b3291daab69c65ff",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -170,7 +102,7 @@
             }
           },
           {
-            "id": "8d1509557e0599ab",
+            "id": "2eb9325f56d55353",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -182,19 +114,79 @@
             }
           },
           {
-            "id": "3c65f94be25ee0b2",
+            "id": "4fd5b8533f5a626a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP35112/CUDA programming language.md",
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f3ffc9605b91e38e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0be719fc5fac94ce",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/COMP35112.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "265df445bfa515bc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP35112/OpenMP.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "756b30eca5e8dbdc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "year2notes/COMP25212/memory consistency.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4739e26954ee36a0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/invasive species.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 16
+        "currentTab": 12
       }
     ],
     "direction": "vertical"
@@ -223,7 +215,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "SIMD",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -268,7 +260,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMP35112/CUDA programming language.md",
+                "file": "COMP35112/OpenMP.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -285,7 +277,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMP35112/CUDA programming language.md",
+                "file": "COMP35112/OpenMP.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -320,7 +312,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMP35112/CUDA programming language.md"
+                "file": "COMP35112/OpenMP.md"
               }
             }
           }
@@ -342,44 +334,44 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "2a548a320f82d9ca",
+  "active": "265df445bfa515bc",
   "lastOpenFiles": [
+    "COMP35112/church-rosser property.md",
+    "Untitled.md",
     "COMP35112/COMP35112.md",
-    "COMP35112/CUDA programming language.md",
-    "UCIL20882/Human Brain I.pdf",
-    "UCIL20882/UCIL20882.md",
-    "COMP34212/embeddings in ML.md",
-    "COMP35112/Computer-Architecture-A-Quantitative-Approach.pdf",
-    "COMP35112/std future.md",
-    "COMP35112/std atomic.md",
-    "COMP35112/sending+receiving with MPI.md",
-    "COMP35112/scoped locks.md",
-    "COMP35112/read-copy-update.md",
-    "COMP35112/parallel stl policies.md",
-    "COMP35112/one-sided communication in MPI.md",
-    "COMP35112/message passing interface (MPI).md",
-    "COMP35112/lock guards.md",
-    "COMP35112/levels of parallelism abstraction.md",
-    "COMP35112/collective operations with MPI.md",
+    "COMP35112/dataflow architectures.md",
+    "COMP35112/functional programming for parallel programming.md",
+    "COMP35112/referential transparency.md",
+    "COMP35112/coherence is not consistency.md",
+    "COMP35112/memory consistency models.md",
+    "year2notes/COMP25212/memory consistency.md",
+    "COMP35112/memory inconsistency.md",
     "COMP35112/OpenMP.md",
-    "COMP35112/MPI modes of communication.md",
-    "OpenMP.md",
-    "how can the true distribution have noise.md",
-    "COMP35112/store-conditional.md",
-    "COMP35112/semaphore with LL+SC + other uses.md",
-    "COMP35112/load-linked.md",
-    "COMP34212/softmax function.md",
-    "COMP34212/sequential keras model.md",
-    "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023.ipynb",
-    "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1).ipynb",
-    "COMP34212/labs",
-    "COMP35112/spinlocks.md",
-    "COMP35112/pthread mutex.md",
-    "COMP34312/NotesPack.pdf",
-    "COMP34312/Lec6-Diversity.pdf",
-    "COMP34312/unified-theory-diversity.pdf",
-    "COMP34312/Lec4-BV.pdf",
-    "UCIL20882/AICTIB 2024 Micro lectures 1-2 prelecture release.pdf",
+    "COMP35112/polyhedral transformations.md",
+    "COMP35112/non-loop code.md",
+    "COMP35112/method-level TLS.md",
+    "COMP35112/hybrid transactional memory.md",
+    "COMP35112/hardware transactional memory.md",
+    "COMP35112/arbitrary point TLS.md",
+    "COMP34312/rademacher complexity.md",
+    "COMP35112/processor speculation.md",
+    "COMP34312/how can the true distribution have noise.md",
+    "COMP34312/COMP34312.md",
+    "UCIL20882/UCIL20882.md",
+    "UCIL20882/new approaches to killing bacteria.md",
+    "UCIL20882/microbes.md",
+    "UCIL20882/invasive species.md",
+    "UCIL20882/UCIL20882_Conservation_2.pdf",
+    "UCIL20882/native and non-native species.md",
+    "UCIL20882/UCIL20882_Conservation_1(1).pdf",
+    "UCIL20882/Human Brain II.pdf",
+    "UCIL20882/Exam preparation 2024(2).pdf",
+    "COMP34212/labs/COMP34212-LAB.ipynb",
+    "COMP34212/labs/Untitled.ipynb",
+    "COMP34212/labs/COMP34212_Lab3_RNN-2024 (1).ipynb",
+    "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024.ipynb",
+    "COMP34212/labs/COMP34212_Lab2b_Keras_CNN_CIFAR_2023.ipynb",
+    "COMP34312/Mathematics of Machine Learning - for Undergrads-Lecture7-8.pdf",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",
     "COMP32211/COMP32211_notes_0-5/figures/video_timing.png",
