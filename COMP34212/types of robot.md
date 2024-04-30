@@ -15,4 +15,9 @@
 
 # biomimetic robots
 
-- biomimetic robots 
+- biomimetic robots have animal-like (including humans) body plans and actuators, with the aim of exploiting biological structures and mechanisms
+- examples may include soft robots e.g. robotic fish, octopi, soft arms and grippers
+
+# industrial robots
+
+- robots used in factories for manufacturing tasks, or navigation (e.g. drones/autonomous cars)

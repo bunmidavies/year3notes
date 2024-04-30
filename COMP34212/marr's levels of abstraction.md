@@ -5,3 +5,7 @@
 1. computational / theory - what is the ==phenomena== we're trying to represent?
 2. algorithmic - how can such phenomena be represented as a ==process== with inputs and outputs?
 3. implementation - how is the phenomena actually ==implemented==?
+
+![](https://i.imgur.com/1R5Ni5b.png)
+
+![](https://i.imgur.com/E39QsKe.png)
