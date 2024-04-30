@@ -3,11 +3,13 @@
 - neurons can be classed by their ==structure== and ==classification==
 
 # structural classifications
+
 - unipolar
 - bipolar
 - multipolar
 
 # functional classifications
+
 - afferent
 typically unipolar neurons, taking information from the PNS into the CNS - ==sensory==
 - efferent
