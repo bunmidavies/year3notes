@@ -6,11 +6,11 @@
 
 1. development as a dynamical system
    - dynamical systems are decentralised systems with self-organisation and emergence
-   - *child development as the emergent product of the intricate and dynamic interaction of many decentralised and local interactions related to the child's growing body, brain and her environment*
+   - *child development is the emergent product of the intricate and dynamic interaction of many decentralised and local interactions related to the child's growing body, brain and her environment*
    - your behaviour is determined by a combination of your cognitive state and environment, but isn't simply a linear sum (?)
 
 2. phylogenetic (evolutionary) and ontogenetic (development) interaction
-- ontogenesis = learning over the lifetime of an individual; maturation, learning and critical periods are all ontogenetic
+- ==ontogenesis== = learning over the lifetime of an individual; maturation, learning and critical periods are all ontogenetic
 - phylogenetic = learning over generations of individuals
 
 3. embodied and situated development
