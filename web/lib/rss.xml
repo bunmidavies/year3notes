@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[year3notes]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib\media\favicon.png</url><title>year3notes</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 05 May 2024 17:43:23 GMT</lastBuildDate><atom:link href="lib\rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 05 May 2024 17:43:12 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[definitions]]></title><description><![CDATA[ 
+ <br>target: COMP34212<br>START<br>
+Basic<br>
+What is the definition of cognitive robotics?<br>
+Back: Cognitive robotics is the field that combines insights and methods from AI, as well as cognitive and biological sciences, to robotics - sensorimotor and cognitive abilities are designed for intelligent robots<br><br>END<br>START<br>
+Basic<br>
+What is the main difference between artificial cognitive systems and intelligent robotics?<br>
+Back: artificial cognitive systems takes inspiration from cognitive/biological systems and studies - meanwhile, intelligent robotics simply uses any AI methods, not taking any biology/cognitive systems into account<br><br>END<br>START<br>
+Basic<br>
+What are the main 4 principles/theories influencing cognitive robotics?<br>
+Back:<br>
+<br>embodied cognition theories
+<br>ai and knowledge based systems
+<br>behaviour based robotics
+<br>synthetic methodologies
+
+END
+]]></description><link>COMP34212\flashcards\definitions.html</link><guid isPermaLink="false">COMP34212/flashcards/definitions.md</guid><pubDate>Sun, 05 May 2024 17:43:12 GMT</pubDate></item><item><title><![CDATA[active vision]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>active vision is the process of using knowledge in order to 'look' for specific stimuli within an environment - "the eye-movement has the frenetic appearance of a movie that has been greatly speeded up"
+<br>within robotics, navigation/mapping and object recognition/manipulation frequently relies on active vision
+]]></description><link>COMP34212\active vision.html</link><guid isPermaLink="false">COMP34212/active vision.md</guid><pubDate>Sat, 04 May 2024 00:38:23 GMT</pubDate></item><item><title><![CDATA[closed-loop control / feedback control]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>for any actuator, it is impossible to know the exact outcome of some action - uncertainty is always involved
+<br><br>
+<br>feedback control is the process of achieving and maintaining some desired state by continuously comparing the current state with the desired state
+<br>information is continually fed back using sensors, and the error is defined as the difference between the current state and the desired state
+<br><a data-href="types of feedback control" href="\COMP34212\types of feedback control.html" class="internal-link" target="_self" rel="noopener">types of feedback control</a>
+<br><img alt="400" src="https://i.imgur.com/vbIw70X.png" referrerpolicy="no-referrer"><br><br>
+<br>contrasting to feedback control, with feedforward control force is applied to joints with the aim of reaching a desired state, without receiving feedback relating to the difference between the current state and the desired state
+<br>therefore, no error is involved, and no sensory feedback is involved
+<br><img alt="400" src="https://i.imgur.com/Kr2oxOt.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\actuator control.html</link><guid isPermaLink="false">COMP34212/actuator control.md</guid><pubDate>Sun, 05 May 2024 17:43:13 GMT</pubDate><enclosure url="https://i.imgur.com/vbIw70X.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/vbIw70X.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[actuators]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>actuators are mechanisms which enable effectors to execute movement - for humans/animals, these are muscles and tendons
+<br>for robots, the 4 main types of actuators include:
+
+<br><a data-href="motors" href="\COMP34212\motors.html" class="internal-link" target="_self" rel="noopener">motors</a>
+<br><a data-href="hydraulics" href="\COMP34212\hydraulics.html" class="internal-link" target="_self" rel="noopener">hydraulics</a>
+<br><a data-href="pneumatics" href="\COMP34212\pneumatics.html" class="internal-link" target="_self" rel="noopener">pneumatics</a>
+<br><a data-href="reactive materials" href="\COMP34212\reactive materials.html" class="internal-link" target="_self" rel="noopener">reactive materials</a>
+
+
+<br>any <a data-tooltip-position="top" aria-label="year2notes/archive/sem1/COMP24011/effectors" data-href="year2notes/archive/sem1/COMP24011/effectors" href="\year2notes\archive\sem1\COMP24011\effectors.html" class="internal-link" target="_self" rel="noopener">effector</a> needs at least one actuator
+<br>compliant actuators: are software/hardware mechanisdms which respond to external force, by stopping its motor - these are safe for human-robot interaction
+]]></description><link>COMP34212\actuators.html</link><guid isPermaLink="false">COMP34212/actuators.md</guid><pubDate>Sun, 05 May 2024 11:48:04 GMT</pubDate></item><item><title><![CDATA[autonomous robot workflow]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><img src="https://i.imgur.com/eb24uNG.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\autonomous robot workflow.html</link><guid isPermaLink="false">COMP34212/autonomous robot workflow.md</guid><pubDate>Sun, 05 May 2024 17:43:13 GMT</pubDate><enclosure url="https://i.imgur.com/eb24uNG.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/eb24uNG.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[MNIST]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><br>
+<br>60000 training and 10000 testing 28x28 grayscale images, containing handwritten numbers suited to classification tasks
+<br><br>
+<br>two versions: CIFAR-10 and CIFAR-100, with CIFAR-10 containing 10 classes of images and 100 containing 100 classes of images
+<br>all images are 32x32 in colour
+<br><br>
+<br>200 possible classes x 450000 images, with the general goal being to push the state of the art in computer vision
+<br>the main challenges include:
+
+<br>object localisation for 1000 categories
+<br>object detection for 200 labelled categories in images
+<br>object detection for 30 labelled categories in videos
+
+
+]]></description><link>COMP34212\benchmark datasets.html</link><guid isPermaLink="false">COMP34212/benchmark datasets.md</guid><pubDate>Sun, 05 May 2024 13:25:03 GMT</pubDate></item><item><title><![CDATA[braitenberg vehicles]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Braitenberg_vehicle" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Braitenberg_vehicle" target="_blank">wiki</a><br>
+<br>conceived through a thought experiment by Valentino Braitenberg, braitenberg vehicles will exhibit complex and dynamic behaviour in a complex environment with several sources of stimulus
+]]></description><link>COMP34212\braitenberg vehicles.html</link><guid isPermaLink="false">COMP34212/braitenberg vehicles.md</guid><pubDate>Sun, 05 May 2024 17:43:13 GMT</pubDate></item><item><title><![CDATA[1943 - Neuron modelling]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><br>
+<br>in the 1940s, McCulloch and Pitt developed the mathematical model of the functioning of a single neuron in the brain, with the belief that "The average neuron has several thousand inputs"
+<br><br>
+<br>the perceptron was the direct hardware implementation of McCulloch and Pitts neuron, built at the Cornell Aeronautical Laboratory by Frank Rosenblatt
+<br><br>
+<br>ADALINE = Adaptive Linear Neuron initially, then Adaptive Linear Element, was a physical device that implemented a single-layer neural network
+<br>ADALINE differed to the single-layered perceptron due to ADALINE involving a teacher signal, such that the weights are adjusted to match this teacher signal - the single-layer perceptron simply adjusts unit weights to match the correct output
+<br><br>
+<br>it became apparent that a single-layer perceptron cannot solve any linearly nonseparable vectors - i.e. classification could not be performed if a straight line couldn't be used to separate the two classes
+<br>what followed past this point was the "AI winter" or dark age, since simple boolean functions such as XOR were unable to be correctly learned by current technology
+<br><br>
+<br>in 1982, the first paper detailing backpropagation was published, and backpropagation had been applied to MLPs, but not with a huge amount of research to document such applications 
+<br>by 1986, Ravid E. Rumelhart et al. published an analysis of backpropagation, helping with the popularisation of backpropagation, and the research into multilayer perceptrons
+<br><br>
+<br>Support Vector Machines i.e. SVMs were developed at AT&amp;T bell labs, and introduced the ability to efficiently perform non-linear classification using the kernel trick (i.e. implicitly mapping inputs to higher-dimensional feature spaces)
+<br><br>
+<br>LeNet-5 is a simple convolutional neural network (and often referred to as the first convolutional network, often referred to as LeNet, proposed by Yann LeCun et al. in 1998
+<br>as the original promoter of deep learning, the original form of LeNet was proposed in 1989 when LeCun applied the backpropagation algorithm to practical applications at Bell Labs
+]]></description><link>COMP34212\brief history of neural networks.html</link><guid isPermaLink="false">COMP34212/brief history of neural networks.md</guid><pubDate>Sun, 05 May 2024 13:29:50 GMT</pubDate></item><item><title><![CDATA[choregraphe]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br><a data-tooltip-position="top" aria-label="http://doc.aldebaran.com/2-5/software/choregraphe/tutos/index.html" rel="noopener" class="external-link" href="http://doc.aldebaran.com/2-5/software/choregraphe/tutos/index.html" target="_blank">choregraphe</a> is one of the easiest ways of programming the <a data-href="softbank PEPPER robot" href="\COMP34212\softbank PEPPER robot.html" class="internal-link" target="_self" rel="noopener">softbank PEPPER robot</a> - no code is involved, only graphical blocks are combined in order to form behaviours
+<br>this makes the platform useful for:
+
+<br>learning robot programming
+<br>developing simple behaviours
+<br>simulation
+<br>monitoring the robot
+<br>designing animations
+
+
+]]></description><link>COMP34212\choregraphe.html</link><guid isPermaLink="false">COMP34212/choregraphe.md</guid><pubDate>Sun, 05 May 2024 14:03:06 GMT</pubDate></item><item><title><![CDATA[cognition]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>the field of cognitive systems provides a clearer definition of cognition itself
+<br>
+cognition is the process by which an autonomous (self-governing) system perceives its environment, learns from experience, anticipates the outcome of events, acts to pursue goals, and adapts to changing circumstances
+<br>
+<br>cognition puts together all capabilities of a robot/agent with 6 key attributes
+
+<br>autonomy
+<br>perception
+<br>learning
+<br>anticipation
+<br>action
+<br>adaptation
+
+
+<br><img src="https://i.imgur.com/TkStS8i.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\cognition.html</link><guid isPermaLink="false">COMP34212/cognition.md</guid><pubDate>Sat, 27 Apr 2024 13:03:07 GMT</pubDate><enclosure url="https://i.imgur.com/TkStS8i.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/TkStS8i.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[cognitive robotics]]></title><description><![CDATA[ 
+ <br><br>
+<br>Weeks 1-4 = Live Lectures
+<br>Weeks 5-9 = Weekly 2hr Labs
+<br>Weeks 10-12 = Live Lectures
+<br><br>
+<br><a data-tooltip-position="top" aria-label="COMP34212-Handbook-2024.pdf" data-href="COMP34212-Handbook-2024.pdf" href="\COMP34212\COMP34212-Handbook-2024.pdf" class="internal-link" target="_self" rel="noopener">Handbook/Course Outline</a>
+<br><a data-tooltip-position="top" aria-label="Cognitive-Robotics-Cangesoli.pdf" data-href="Cognitive-Robotics-Cangesoli.pdf" href="\COMP34212\Cognitive-Robotics-Cangesoli.pdf" class="internal-link" target="_self" rel="noopener">Cangesoli - Cognitive Robotics</a>
+<br>Week 1
+
+<br>Live Lecture 1: Background on lecturer, Chinese Room Experiment
+<br>Live Lecture 2 ~ <a data-tooltip-position="top" aria-label="COMP34212_Lecture01b_CognitiveRobotics(1).pdf" data-href="COMP34212_Lecture01b_CognitiveRobotics(1).pdf" href="\COMP34212\COMP34212_Lecture01b_CognitiveRobotics(1).pdf" class="internal-link" target="_self" rel="noopener">Slides</a>: Recap of 1A - cognitive systems can take computational or biological approaches (a sort of spectrum), with abstraction levels (high = words, lower = phonetics)
+
+<br><a data-href="cognition" href="\COMP34212\cognition.html" class="internal-link" target="_self" rel="noopener">cognition</a>
+<br><a data-href="marr's levels of abstraction" href="\COMP34212\marr's levels of abstraction.html" class="internal-link" target="_self" rel="noopener">marr's levels of abstraction</a>
+<br><a data-href="the definition of cognitive robotics" href="\COMP34212\the definition of cognitive robotics.html" class="internal-link" target="_self" rel="noopener">the definition of cognitive robotics</a>
+<br><a data-href="modelling artificial cognitive systems" href="\COMP34212\modelling artificial cognitive systems.html" class="internal-link" target="_self" rel="noopener">modelling artificial cognitive systems</a>
+
+
+
+<br>Week 2
+
+<br>Live Lecture 3: 
+
+<br><a data-href="robot" href="\COMP34212\robot.html" class="internal-link" target="_self" rel="noopener">robot</a>, and the <a data-href="history of CR" href="\COMP34212\history of CR.html" class="internal-link" target="_self" rel="noopener">history of CR</a>
+<br><a data-href="cybernetics" href="\COMP34212\cybernetics.html" class="internal-link" target="_self" rel="noopener">cybernetics</a>
+<br><a data-href="grey walters tortoise" href="\COMP34212\grey walters tortoise.html" class="internal-link" target="_self" rel="noopener">grey walters tortoise</a>
+<br><a data-href="braitenberg vehicles" href="\COMP34212\braitenberg vehicles.html" class="internal-link" target="_self" rel="noopener">braitenberg vehicles</a>
+<br>behaviour based?
+<br><a data-href="types of robot" href="\COMP34212\types of robot.html" class="internal-link" target="_self" rel="noopener">types of robot</a>
+<br><a data-href="uncanny valley" href="\COMP34212\uncanny valley.html" class="internal-link" target="_self" rel="noopener">uncanny valley</a>
+
+
+<br>Live Lecture 4 - <a data-tooltip-position="top" aria-label="COMP34212_Lecture04_SensorsActuators_2022.pdf" data-href="COMP34212_Lecture04_SensorsActuators_2022.pdf" href="\COMP34212\COMP34212_Lecture04_SensorsActuators_2022.pdf" class="internal-link" target="_self" rel="noopener">Sensors and Actuators</a>:
+
+<br><a data-tooltip-position="top" aria-label="year2notes/archive/sem1/COMP24011/effectors" data-href="year2notes/archive/sem1/COMP24011/effectors" href="\year2notes\archive\sem1\COMP24011\effectors.html" class="internal-link" target="_self" rel="noopener">effectors</a> 
+<br><a data-href="actuators" href="\COMP34212\actuators.html" class="internal-link" target="_self" rel="noopener">actuators</a>:
+
+<br><a data-href="motors" href="\COMP34212\motors.html" class="internal-link" target="_self" rel="noopener">motors</a>
+<br><a data-href="hydraulics" href="\COMP34212\hydraulics.html" class="internal-link" target="_self" rel="noopener">hydraulics</a>
+<br><a data-href="pneumatics" href="\COMP34212\pneumatics.html" class="internal-link" target="_self" rel="noopener">pneumatics</a>
+<br><a data-href="reactive materials" href="\COMP34212\reactive materials.html" class="internal-link" target="_self" rel="noopener">reactive materials</a>
+
+
+<br><a data-href="degrees of freedom" href="\year2notes\archive\sem1\COMP24011\degrees of freedom.html" class="internal-link" target="_self" rel="noopener">degrees of freedom</a>
+<br><a data-href="sensors" href="\year2notes\archive\sem1\COMP24011\sensors.html" class="internal-link" target="_self" rel="noopener">sensors</a>
+<br><a data-href="embodied intelligence" href="\COMP34212\embodied intelligence.html" class="internal-link" target="_self" rel="noopener">embodied intelligence</a>
+<br><a data-href="ecological balance" href="\COMP34212\ecological balance.html" class="internal-link" target="_self" rel="noopener">ecological balance</a>
+<br><a data-href="morphological computation" href="\COMP34212\morphological computation.html" class="internal-link" target="_self" rel="noopener">morphological computation</a>
+<br><a data-href="active vision" href="\COMP34212\active vision.html" class="internal-link" target="_self" rel="noopener">active vision</a> vs <a data-href="passive vision" href="\COMP34212\passive vision.html" class="internal-link" target="_self" rel="noopener">passive vision</a>
+<br><a data-href="sonars" href="\COMP34212\sonars.html" class="internal-link" target="_self" rel="noopener">sonars</a> + <a data-href="lidar" href="\COMP34212\lidar.html" class="internal-link" target="_self" rel="noopener">lidar</a>
+
+
+
+<br>Week 3
+
+<br>Live Lecture 5:
+
+<br><a data-href="developmental robotics" href="\COMP34212\developmental robotics.html" class="internal-link" target="_self" rel="noopener">developmental robotics</a>
+<br><a data-href="dynamical systems" href="\dynamical systems" class="internal-link" target="_self" rel="noopener">dynamical systems</a>
+
+
+<br>Live Lecture 6 - <a data-href="Robot Navigation" href="\COMP34212\Robot Navigation.html" class="internal-link" target="_self" rel="noopener">Robot Navigation</a> ~ <a data-tooltip-position="top" aria-label="COMP34212_Lecture_Navigation.pdf" data-href="COMP34212_Lecture_Navigation.pdf" href="\COMP34212\COMP34212_Lecture_Navigation.pdf" class="internal-link" target="_self" rel="noopener">Slides</a>:
+
+<br><a data-href="robot motion" href="\COMP34212\robot motion.html" class="internal-link" target="_self" rel="noopener">robot motion</a>
+<br><a data-href="robot locomotion" href="\COMP34212\robot locomotion.html" class="internal-link" target="_self" rel="noopener">robot locomotion</a>
+<br><a data-href="path planning" href="\COMP34212\path planning.html" class="internal-link" target="_self" rel="noopener">path planning</a>
+<br><a data-href="robot localisation" href="\COMP34212\robot localisation.html" class="internal-link" target="_self" rel="noopener">robot localisation</a>:
+
+<br><a data-href="marcov localisation" href="\COMP34212\marcov localisation.html" class="internal-link" target="_self" rel="noopener">marcov localisation</a>
+<br><a data-href="extended kalman filters" href="\COMP34212\extended kalman filters.html" class="internal-link" target="_self" rel="noopener">extended kalman filters</a>
+<br><a data-href="iconic + monte carlo localisation" href="\COMP34212\iconic + monte carlo localisation.html" class="internal-link" target="_self" rel="noopener">iconic + monte carlo localisation</a>
+
+
+<br><a data-href="lidar" href="\COMP34212\lidar.html" class="internal-link" target="_self" rel="noopener">lidar</a>
+<br><a data-href="SLAM" href="\COMP34212\SLAM.html" class="internal-link" target="_self" rel="noopener">SLAM</a>
+<br><a data-href="ratSLAM" href="\COMP34212\ratSLAM.html" class="internal-link" target="_self" rel="noopener">ratSLAM</a>
+
+
+
+<br>Week 4
+
+<br>
+Live Lecture 7 ~ <a data-tooltip-position="top" aria-label="COMP34212_Lecture7_DeepLearning.pdf" data-href="COMP34212_Lecture7_DeepLearning.pdf" href="\COMP34212\COMP34212_Lecture7_DeepLearning.pdf" class="internal-link" target="_self" rel="noopener">Slides</a> - Intro to Deep Learning
+
+<br>
+<a data-href="artificial neural networks" href="\year2notes\COMP24112\artificial neural networks.html" class="internal-link" target="_self" rel="noopener">artificial neural networks</a>
+
+<br>
+<a data-href="brief history of neural networks" href="\COMP34212\brief history of neural networks.html" class="internal-link" target="_self" rel="noopener">brief history of neural networks</a>
+
+<br>
+<a data-href="shallow vs deep neural networks" href="\COMP34212\shallow vs deep neural networks.html" class="internal-link" target="_self" rel="noopener">shallow vs deep neural networks</a>
+
+<br>
+<a data-href="perceptrons" href="\COMP34212\perceptrons.html" class="internal-link" target="_self" rel="noopener">perceptrons</a>
+
+<br>
+brief recap of learning algorithms
+
+<br><a data-href="gradient descent" href="\year2notes\COMP24112\gradient descent.html" class="internal-link" target="_self" rel="noopener">gradient descent</a>
+<br><a data-href="stochastic gradient descent + mini-batch gradient descent" href="\year2notes\COMP24112\stochastic gradient descent + mini-batch gradient descent.html" class="internal-link" target="_self" rel="noopener">stochastic gradient descent + mini-batch gradient descent</a>
+
+
+<br>
+training techniques/terminology
+
+<br><a data-href="NN training datasets" href="\COMP34212\NN training datasets.html" class="internal-link" target="_self" rel="noopener">NN training datasets</a>
+<br><a data-href="dropout in neural networks" href="\COMP34212\dropout in neural networks.html" class="internal-link" target="_self" rel="noopener">dropout in neural networks</a>
+<br><a data-href="data augmentation" href="\COMP34212\data augmentation.html" class="internal-link" target="_self" rel="noopener">data augmentation</a>
+<br><a data-href="training terminology" href="\COMP34212\training terminology.html" class="internal-link" target="_self" rel="noopener">training terminology</a>
+<br><a data-href="benchmark datasets" href="\COMP34212\benchmark datasets.html" class="internal-link" target="_self" rel="noopener">benchmark datasets</a>
+
+
+<br>
+<a data-href="convolutional neural networks (CNN)" href="\year2notes\COMP24112\convolutional neural networks (CNN).html" class="internal-link" target="_self" rel="noopener">convolutional neural networks (CNN)</a>
+
+<br>
+<a data-href="pooling (sub-sampling)" href="\COMP34212\pooling (sub-sampling).html" class="internal-link" target="_self" rel="noopener">pooling (sub-sampling)</a>
+
+<br>
+<a data-href="transformers" href="\COMP34212\transformers.html" class="internal-link" target="_self" rel="noopener">transformers</a>
+
+
+
+<br>
+Live Lecture 8 ~ <a data-tooltip-position="top" aria-label="COMP34212_Lecture07_SoftwarePepper2022(1).pdf" data-href="COMP34212_Lecture07_SoftwarePepper2022(1).pdf" href="\COMP34212\COMP34212_Lecture07_SoftwarePepper2022(1).pdf" class="internal-link" target="_self" rel="noopener">Slides</a> - PEPPER
+
+<br><a data-href="autonomous robot workflow" href="\COMP34212\autonomous robot workflow.html" class="internal-link" target="_self" rel="noopener">autonomous robot workflow</a>
+<br><a data-href="softbank PEPPER robot" href="\COMP34212\softbank PEPPER robot.html" class="internal-link" target="_self" rel="noopener">softbank PEPPER robot</a>
+<br><a data-href="robotics middleware" href="\COMP34212\robotics middleware.html" class="internal-link" target="_self" rel="noopener">robotics middleware</a>
+<br><a data-href="choregraphe" href="\COMP34212\choregraphe.html" class="internal-link" target="_self" rel="noopener">choregraphe</a>
+<br><a data-href="naoqi python example" href="\COMP34212\naoqi python example.html" class="internal-link" target="_self" rel="noopener">naoqi python example</a>
+
+
+
+<br>Week 5 - Week 6 - Week 7 - Week 8
+
+<br>Labs and Pepper Robot Demo. Unsure if examined
+
+<br>Week 9
+
+<br>Lecture 9: Manipulation
+
+<br><a data-href="manipulators" href="\COMP34212\manipulators.html" class="internal-link" target="_self" rel="noopener">manipulators</a>
+<br><a data-href="actuator control" href="\COMP34212\actuator control.html" class="internal-link" target="_self" rel="noopener">actuator control</a>
+<br><a data-href="deep learning for manipulation" href="\COMP34212\deep learning for manipulation.html" class="internal-link" target="_self" rel="noopener">deep learning for manipulation</a>
+<br><a data-href="motor babbling" href="\COMP34212\motor babbling.html" class="internal-link" target="_self" rel="noopener">motor babbling</a>
+
+
+<br>Lecture 10: Evolutionary and Swarm Robotics
+
+<br><a data-href="evolutionary robotics" href="\COMP34212\evolutionary robotics.html" class="internal-link" target="_self" rel="noopener">evolutionary robotics</a>
+<br><a data-href="evolving morphologies + evolutionary algorithms" href="\COMP34212\evolving morphologies + evolutionary algorithms.html" class="internal-link" target="_self" rel="noopener">evolving morphologies + evolutionary algorithms</a>
+<br><a data-href="swarm robotics" href="\COMP34212\swarm robotics.html" class="internal-link" target="_self" rel="noopener">swarm robotics</a>
+
+
+
+<br>Week 10
+
+<br>Lecture 11: Social robotics and human-robotic interaction
+
+<br>a. <a data-href="social interaction skills" href="\COMP34212\social interaction skills.html" class="internal-link" target="_self" rel="noopener">social interaction skills</a>
+<br><a data-href="HAMMER architecture" href="\COMP34212\HAMMER architecture.html" class="internal-link" target="_self" rel="noopener">HAMMER architecture</a>
+<br>b. <a data-href="human-robotic interaction (HRI)" href="\COMP34212\human-robotic interaction (HRI).html" class="internal-link" target="_self" rel="noopener">human-robotic interaction (HRI)</a>
+<br>c. <a data-href="trust in human-robot interaction" href="\COMP34212\trust in human-robot interaction.html" class="internal-link" target="_self" rel="noopener">trust in human-robot interaction</a>
+
+
+<br>Lecture 12: Robot tutors for education (guest lecture): <a data-tooltip-position="top" aria-label="Tony Belpaeme - Slides Machester 2024.pdf" data-href="Tony Belpaeme - Slides Machester 2024.pdf" href="\COMP34212\Tony Belpaeme - Slides Machester 2024.pdf" class="internal-link" target="_self" rel="noopener">Slides</a>
+
+<br>
+
+
+
+<br>Week 11
+
+<br>Lecture 13: Ethics for AI and Robotcs
+
+<br><a data-href="fields of AI+Robotics and ethics" href="\COMP34212\fields of AI+Robotics and ethics.html" class="internal-link" target="_self" rel="noopener">fields of AI+Robotics and ethics</a>
+<br><a data-href="ethics approaches" href="\COMP34212\ethics approaches.html" class="internal-link" target="_self" rel="noopener">ethics approaches</a>
+<br><a data-href="potential harms of AI and robotics" href="\COMP34212\potential harms of AI and robotics.html" class="internal-link" target="_self" rel="noopener">potential harms of AI and robotics</a>
+<br><a data-href="objectives for ethical AI" href="\COMP34212\objectives for ethical AI.html" class="internal-link" target="_self" rel="noopener">objectives for ethical AI</a>
+
+
+
+]]></description><link>COMP34212\COMP34212.html</link><guid isPermaLink="false">COMP34212/COMP34212.md</guid><pubDate>Sun, 05 May 2024 14:03:15 GMT</pubDate></item><item><title><![CDATA[Deep Learning]]></title><description><![CDATA[ 
+ <br><br><a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/AlexNet" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/AlexNet" target="_blank">AlexNet</a><br>
+<a data-tooltip-position="top" aria-label="" rel="noopener" class="external-link" href="." target="_blank">ResNet</a><br>
+<a data-tooltip-position="top" aria-label="https://arxiv.org/abs/1706.03762" rel="noopener" class="external-link" href="https://arxiv.org/abs/1706.03762" target="_blank">transformers for translation</a><br><br><a data-tooltip-position="top" aria-label="https://journals.sagepub.com/doi/pdf/10.1177/0278364918770733" rel="noopener" class="external-link" href="https://journals.sagepub.com/doi/pdf/10.1177/0278364918770733" target="_blank">Sunderhauf et al. (2018) DNN for robotics</a> (Described as mandatory in the lecture)]]></description><link>COMP34212\COMP34212 Readings.html</link><guid isPermaLink="false">COMP34212/COMP34212 Readings.md</guid><pubDate>Sun, 05 May 2024 13:44:41 GMT</pubDate></item><item><title><![CDATA[COMP34212 revision lecture]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>have 2 papers/models from the module to discuss in detail
+]]></description><link>COMP34212\COMP34212 revision lecture.html</link><guid isPermaLink="false">COMP34212/COMP34212 revision lecture.md</guid><pubDate>Sun, 05 May 2024 11:49:41 GMT</pubDate></item><item><title><![CDATA[cybernetics]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Cybernetics" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Cybernetics" target="_blank">wiki</a><br>
+<br>the main idea of cybernetics was to develop a system which focuses on the parallels between self-regulatory systems in biological and technical systems
+<br>
+]]></description><link>COMP34212\cybernetics.html</link><guid isPermaLink="false">COMP34212/cybernetics.md</guid><pubDate>Sun, 05 May 2024 17:43:15 GMT</pubDate></item><item><title><![CDATA[data augmentation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+data augmentation is the idea of extending an existing training set by generating new examples, in order to reduce overfitting, thus improving the generalisation of a model
+
+<br>
+for image classification, there are many common ways to augment existing examples:
+
+<br>add noise to the image
+<br>change lighting within the image
+<br>rotate/shift the image
+<br>randomly erasing parts of the image
+<br>altering intensities of RGB channels
+
+
+]]></description><link>COMP34212\data augmentation.html</link><guid isPermaLink="false">COMP34212/data augmentation.md</guid><pubDate>Sun, 05 May 2024 17:43:15 GMT</pubDate></item><item><title><![CDATA[deep learning for manipulation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a>]]></description><link>COMP34212\deep learning for manipulation.html</link><guid isPermaLink="false">COMP34212/deep learning for manipulation.md</guid><pubDate>Sun, 05 May 2024 17:43:15 GMT</pubDate></item><item><title><![CDATA[principles]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>developmental robotics is the interdisciplinary approach to the autonomous design of behavioural and cognitive capabilities in <a data-href="robots" href="\year2notes\archive\sem1\COMP24011\robots.html" class="internal-link" target="_self" rel="noopener">robots</a>, taking direct inspiration from the developmental principles and mechanisms observed in natural cognitive systems
+<br><br>
+<br>
+development as a dynamical system
+
+<br>dynamical systems are decentralised systems with self-organisation and emergence
+<br>child development is the emergent product of the intricate and dynamic interaction of many decentralised and local interactions related to the child's growing body, brain and her environment
+<br>your behaviour is determined by a combination of your cognitive state and environment, but isn't simply a linear sum (?)
+
+
+<br>
+phylogenetic (evolutionary) and ontogenetic (development) interaction
+
+<br>
+<br>ontogenesis = learning over the lifetime of an individual; maturation, learning and critical periods are all ontogenetic
+<br>phylogenetic = learning over generations of individuals
+<br>
+<br>embodied and situated development
+<br>
+<br><a data-href="embodied intelligence" href="\COMP34212\embodied intelligence.html" class="internal-link" target="_self" rel="noopener">embodied intelligence</a> - body-brain-environment interaction
+<br>situatedness - learning in context
+<br>
+<br>intrinsic motivation and social learning
+<br>
+<br><a data-href="intrinsic motivation" href="\intrinsic motivation" class="internal-link" target="_self" rel="noopener">intrinsic motivation</a> - curiousity, novelty-seeking, values and personal drives
+<br>social learning + imitation - 
+<br>
+<br>nonlinear, stage-like development
+<br>
+<br><a data-href="piaget's stages of cognitive development" href="\COMP34212\piaget's stages of cognitive development.html" class="internal-link" target="_self" rel="noopener">piaget's stages of cognitive development</a>
+<br>U-Shape development - "Temporary regressions imply that children can have a temporary relapse before a newly acquired ability consolidates"
+<br>
+<br>online open-ended cumulative learning
+<br>
+<br>linked to <a data-href="intrinsic motivation" href="\intrinsic motivation" class="internal-link" target="_self" rel="noopener">intrinsic motivation</a>
+<br>online learning - learning/training happens in the moment, as opposed to pre-training then testing
+]]></description><link>COMP34212\developmental robotics.html</link><guid isPermaLink="false">COMP34212/developmental robotics.md</guid><pubDate>Sun, 05 May 2024 17:43:15 GMT</pubDate></item><item><title><![CDATA[dropout in neural networks]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://towardsdatascience.com/dropout-in-neural-networks-47a162d621d9" rel="noopener" class="external-link" href="https://towardsdatascience.com/dropout-in-neural-networks-47a162d621d9" target="_blank">towards data science</a><br>
+<br>dropout is a method used to prevent <a data-tooltip-position="top" aria-label="overfitting and underfitting" data-href="overfitting and underfitting" href="\year2notes\COMP24112\overfitting and underfitting.html" class="internal-link" target="_self" rel="noopener">overfitting</a> within a neural network
+<br>
+dropout refers to each neuron/node in the network becoming 'dropped' i.e. inactive with some random probability during each training minibatch - all the forward/backward weights associated with the neuron are ignored
+<br>
+<br>the associated hyperparameter with dropout is the probability of which you drop the nodes
+<br>this forces the network to become accurate even in the absence of certain information/neurons
+<br><img src="https://i.imgur.com/tvJ8DSv.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\dropout in neural networks.html</link><guid isPermaLink="false">COMP34212/dropout in neural networks.md</guid><pubDate>Sun, 05 May 2024 13:13:31 GMT</pubDate><enclosure url="https://i.imgur.com/tvJ8DSv.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/tvJ8DSv.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[ecological balance]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>ecological balance refers to the idea of balancing morphology, materials and brain control
+]]></description><link>COMP34212\ecological balance.html</link><guid isPermaLink="false">COMP34212/ecological balance.md</guid><pubDate>Sat, 04 May 2024 00:25:11 GMT</pubDate></item><item><title><![CDATA[embeddings in ML]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>Embeddings are becoming increasingly useful in Natural Language Processing tasks, due to being able to convert vectors of a high dimension in to lower-dimensional vectors.<br>On the highest level, an embedding takes something represented as an array of some variable size, and turns it into an array of some fixed size, containing floating point numbers.<br>In addition to being able to reduce the dimensionality of vectors, embeddings can calculate weights such that similar words/vectors have similar embeddings, allowing various distance measures to be used.<br><br>sources<br>
+<br><a rel="noopener" class="external-link" href="https://simonwillison.net/2023/Oct/23/embeddings/" target="_blank">https://simonwillison.net/2023/Oct/23/embeddings/</a>
+<br>
+]]></description><link>COMP34212\embeddings in ML.html</link><guid isPermaLink="false">COMP34212/embeddings in ML.md</guid><pubDate>Sun, 05 May 2024 17:43:15 GMT</pubDate></item><item><title><![CDATA[embodied intelligence]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://escholarship.org/content/qt60w6v9jz/qt60w6v9jz.pdf" rel="noopener" class="external-link" href="https://escholarship.org/content/qt60w6v9jz/qt60w6v9jz.pdf" target="_blank">What's that Thing Called Embodiment?</a><br>
+<br>the concept of embodiment has existed since around the 1980s, used extensively in cognitive and AI literature
+<br>the broadest notion of embodiment is the idea that a system is embodied if it is structurally coupled to its environment:
+<br>"A system X is embodied in an environment E if for every time t at which both X and E exist, some subset of E's possible states with respect to X have the capacity to perturb X's state, and some subset of X's possible states with respect to E have the capacity to perturb E's state<br>
+<br>definitions can very much vary though, others including
+<br>"A system is embodied if it has gained competence within the environment in which it has developed"<br>
+<br>
+sensorimotor embodiment may be defined as a system being connected to its environment through their own <a data-href="sensors" href="\year2notes\archive\sem1\COMP24011\sensors.html" class="internal-link" target="_self" rel="noopener">sensors</a> and <a data-href="actuators" href="\COMP34212\actuators.html" class="internal-link" target="_self" rel="noopener">actuators</a>
+
+<br>
+embodied cognition typically has two approaches within research: radical embodied cognition (which doesn't believe in representational views of embodied cognition - eliminativism), and mainstream embodied cognitive science (the more popular approach, involving representational views)
+
+<br>
+how embodiment affects cognition is also a wide area of research - based on interactions with an environment, different cognitive capacities may be affected<br>
+<img src="https://i.imgur.com/mteP98t.png" referrerpolicy="no-referrer">
+
+<br>
+within <a data-href="Cognitive-Robotics-Cangesoli.pdf" href="\COMP34212\Cognitive-Robotics-Cangesoli.pdf" class="internal-link" target="_self" rel="noopener">Cognitive-Robotics-Cangesoli.pdf</a>, there can be thought to be 4 different bodies from which 'embodiment' may concern:
+
+<br>the social body, as it appears to other
+<br>the sensorimotor body, which interacts with the environment
+<br>the living body, which has its right to self-regulate and self-maintain
+<br>the lived body, as it is experienced by an agent itself
+
+
+]]></description><link>COMP34212\embodied intelligence.html</link><guid isPermaLink="false">COMP34212/embodied intelligence.md</guid><pubDate>Sat, 27 Apr 2024 12:45:16 GMT</pubDate><enclosure url="https://i.imgur.com/mteP98t.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/mteP98t.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[deontological ethics]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><br>
+<br>Kant believed the responsibility of the individual to discover the true moral law for themself
+<br>any true, moral law is universally applicable
+<br>this can be applied to robot ethics by deciding what definitive rules there are
+<br><br>
+<br>instead of having universal rules across all cultures, cultures apply some sort of "utilitarian calculus" to compare the sum of all individual utility over all people in society, given some rules
+<br>utility = presentation of an individual agent's preference
+<br><br>
+<br>users are left to decide their own ethics, a sort of intuitive ethics
+<br>"Phronesis" - the ability to evaluate a given situation and respond fittingly, developed through both education and experience
+<br>considered the dominant approach after utilitarianism
+]]></description><link>COMP34212\ethics approaches.html</link><guid isPermaLink="false">COMP34212/ethics approaches.md</guid><pubDate>Sun, 05 May 2024 17:43:15 GMT</pubDate></item><item><title><![CDATA[adaptation + co-evolution]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>Evolutionary Robotics is a biology inspired method for automatic robotic development - the method also is useful in 
+<br>Evolutionary Robotics is the automatic design of robots and of their sensorimotor control systems through an evolutionary computation process (Nolfi &amp; Floreano, 2000)
+<br><br>
+<br>
+an adaptation in one lineage (e.g. predators) may change the selection pressure on another lineage (e.g. prey), giving rise to a counter-adaptation. If this occurs reciprocally, an unstable runaway escalation of 'arm races' may result (Dawkins and Krebs, 1979)
+
+<br>
+In evolutionary robotics, adaptations can produce a training process where one population progresses due to the gradual complexification of the adaptive task, which is caused by parallel progress in some competing population
+
+<br>
+example: <a data-tooltip-position="top" aria-label="https://www.researchgate.net/profile/Luca_Simione/publication/322998553_Achieving_long-term_progress_in_competitive_co-evolution/links/5b505f140f7e9b240fed31fd/Achieving-long-term-progress-in-competitive-co-evolution.pdf" rel="noopener" class="external-link" href="https://www.researchgate.net/profile/Luca_Simione/publication/322998553_Achieving_long-term_progress_in_competitive_co-evolution/links/5b505f140f7e9b240fed31fd/Achieving-long-term-progress-in-competitive-co-evolution.pdf" target="_blank">co-evolution of two khepera species</a>
+
+<br>
+the benefits of co-evolution includes:<br>
+- selecting the most effective solutions based on competing population<br>
+- solutions are selected in order to match counter-strategies<br>
+- complexity of robots increases, without having to increase the supervision<br>
+<img alt="500" src="https://i.imgur.com/xibZhA7.png" referrerpolicy="no-referrer">
+
+<br><br>
+<br>
+a computational model of Darwin's Natural Selection<br>
+<img src="https://i.imgur.com/m8b7w7A.png" referrerpolicy="no-referrer">
+
+<br>
+the genotype can be thought of as computer code, which gives way to some phenotype, which is the model that results from that code (e.g. DNN model)
+
+<br><br><br>
+<br>the robot uses the FARSA simulator - a collection of open-source C++ libraries for evolutionary experiments with robots
+]]></description><link>COMP34212\evolutionary robotics.html</link><guid isPermaLink="false">COMP34212/evolutionary robotics.md</guid><pubDate>Sat, 27 Apr 2024 11:46:27 GMT</pubDate><enclosure url="https://i.imgur.com/xibZhA7.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/xibZhA7.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[evolving morphologies + evolutionary algorithms]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>"The number of body parts forming the body of the robot, the relative position of these parts, the physical properties of each body part, and the characteristics of the joints among body parts can be encoded in the genotype and evolved together with the characteristics of the neural network of the robot. This is typically realized by using genotypes that encode growing rules, which determine how the initial “embryo” grows and differentiates, rather than using genotypes that directly encode the property of a fully formed robot."<br>
+<br>genotype = only chromosomes i.e. the base encoding of some robot
+<br>phenotype = expression of genotype - the robots presentation and resulting body/behaviour
+<br><img src="https://i.imgur.com/lhSO1at.png" referrerpolicy="no-referrer"><br><br>
+<br>robot characteristics e.g. a neural network can be directly encoded and thought of as the robot's genotype 
+<br>evolutionary algorithms involve evaluating robots with different genotypes (thus different morphologies), and the encodings of successful robots can be taken and mutated/adapted to form a new generation of robots, with the same steps previously taken being repeated 
+<br><br>
+<br>Kitano's approach involved encoding weight values and neural network structure within the genotype of a robot
+<br><br>a research project involving simulated Darwinian evolutions of virtual block creatures. A population of several hundred creatures is created within a computer, and each creature is tested for their ability to perform a given task, such as the ability to swim in a simulated water environment, or locomote on a simulated land environment. Those creatures that are most successful at their task are selected for survival, and their virtual genes of coded growth instructions are copied, combined, and randomly mutated to make offspring for a new population. The new creatures are again tested, and some may be improvements on their parents. As this cycle of variation and selection continues, creatures with more and more successful behaviors can emerge. The creatures shown in this video are results from many independent simulations in which they were selected for swimming, walking, jumping, following, or competing for control of a green cube.<br><br>
+<br>automatic robot body design (lipson &amp; pollack 2000)
+<br>resilient machines (bongard et al. 2006)
+<br><img alt="400" src="https://i.imgur.com/56gXWmc.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\evolving morphologies + evolutionary algorithms.html</link><guid isPermaLink="false">COMP34212/evolving morphologies + evolutionary algorithms.md</guid><pubDate>Sat, 27 Apr 2024 13:48:37 GMT</pubDate><enclosure url="https://i.imgur.com/lhSO1at.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/lhSO1at.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[extended kalman filters]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>typically used for local <a data-href="robot localisation" href="\COMP34212\robot localisation.html" class="internal-link" target="_self" rel="noopener">robot localisation</a>, extended kalman filters predict what a robot will sense at the next timestep, given some control action
+<br>by taking the difference between a prediction and actual sensor value, future estimates can be corrected/finetuned
+]]></description><link>COMP34212\extended kalman filters.html</link><guid isPermaLink="false">COMP34212/extended kalman filters.md</guid><pubDate>Fri, 03 May 2024 23:37:52 GMT</pubDate></item><item><title><![CDATA[AI ethics]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><br>
+<br>ethics for AI/robotics; responsible AI
+<br>how we decide what is ethical when we deploy robotics systems into society
+<br>AI ethics is a set of values, principles, and techniques that employ widely accepted standard of right and wrong to guide moral conduct in the development and use of AI technologies (Leslie 2019)<br><br>
+<br>are robots able to develop their own ethics independent of human intervention?
+<br>robots may be trained to read certain documents explaining various ethical principles/frameworks, then it is left for the robot to decide their own morals/ethics
+<br>"An ethical machine is guided by own, intrinsic ethical rule, or set of rules, in deciding how to act in a given situation"<br>
+<br>moor's "The nature, importance, and difficulty of machine ethics":
+
+<br>ethical impact agents: any machine that can be evaluated for its ethical consequences
+<br>implicit ethical agents: machines that are designed to avoid unethical outcomes
+<br>explicit ethical agents: machines that can reason about ethics
+<br>full ethical agents: machines that can make explicit moral judgements and justify them - thus have some knowledge/intuition to decide what they think is right
+
+
+]]></description><link>COMP34212\fields of AI+Robotics and ethics.html</link><guid isPermaLink="false">COMP34212/fields of AI+Robotics and ethics.md</guid><pubDate>Sun, 05 May 2024 17:43:16 GMT</pubDate></item><item><title><![CDATA[grey walters tortoise]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a>]]></description><link>COMP34212\grey walters tortoise.html</link><guid isPermaLink="false">COMP34212/grey walters tortoise.md</guid><pubDate>Sun, 05 May 2024 17:43:16 GMT</pubDate></item><item><title><![CDATA[HAMMER architecture]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>HAMMER = Hierarchical Attentive Multiple Models - used for the control of attention during imitation, one of the core <a data-href="social interaction skills" href="\COMP34212\social interaction skills.html" class="internal-link" target="_self" rel="noopener">social interaction skills</a> during development
+<br>the main idea involves a series of parallel models:
+
+<br>inverse models: takes the current state + the target goal as inputs, and outputs the motor control commands for the goal
+<br>forward models: takes the current state + control command as inputs, and outputs the predicted next state of the robot
+
+
+<br><img src="https://i.imgur.com/ivqJlTZ.png" referrerpolicy="no-referrer"><br>
+<br>HAMMER has been used widely in a number of applications involving imitation:
+
+<br>robotic head ESCHeR, that observes + imitates human head movements
+<br>mobile robot Peoplebot with arm imitating actions as "pick X" or "move hand towards X"
+<br>imitation for robotic wheelchairs
+<br>imitation of dancing (Nao robot)
+
+
+]]></description><link>COMP34212\HAMMER architecture.html</link><guid isPermaLink="false">COMP34212/HAMMER architecture.md</guid><pubDate>Sat, 27 Apr 2024 14:42:48 GMT</pubDate><enclosure url="https://i.imgur.com/ivqJlTZ.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/ivqJlTZ.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[history of CR]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>covered extensively within Chapter 1.3 of <a data-tooltip-position="top" aria-label="Cognitive-Robotics-Cangesoli.pdf" data-href="Cognitive-Robotics-Cangesoli.pdf" href="\COMP34212\Cognitive-Robotics-Cangesoli.pdf" class="internal-link" target="_self" rel="noopener">Cangesoli - CR</a>, the history of CR can be thought of as being divided into 3 main periods:
+
+<br>(50s-80s) - Prehistory: earliest attempts of modelling humanlike robots - roots of CR but also general robotics/AI lie here
+<br>(90s) - Establishment: an actual concept of CR is conceived
+<br>(00s+) - Contemporary Evolution
+
+
+<br>note that before the 50s there is a brief 'pure robotics' period
+<br><img src="https://i.imgur.com/dkcI4Z6.png" referrerpolicy="no-referrer"><br><br>
+<br>more of less thought of as one of the first robots, W
+<br><br><br>
+<br>shakey was considered the first AI (cognitive) robot, due to its ability of sensory perception
+<br><br>
+<br>first sold in 2002, the Roomba was the first commerical consumer robot, taking a behaviour-based robotics AI approach
+<br>so far, the roomba is the most (by definition) successful robot to this day
+<br><br>
+<br>Weiner's <a data-tooltip-position="top" aria-label="cybernetics" data-href="cybernetics" href="\COMP34212\cybernetics.html" class="internal-link" target="_self" rel="noopener">Cybernetics</a> (1948)
+<br>Grey Walter's Tortoises (1948)
+<br>Braitenberg's Vehicles (1986)
+]]></description><link>COMP34212\history of CR.html</link><guid isPermaLink="false">COMP34212/history of CR.md</guid><pubDate>Sun, 05 May 2024 17:43:16 GMT</pubDate><enclosure url="https://i.imgur.com/dkcI4Z6.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/dkcI4Z6.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[HRI Challenges]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>Human-Robot Interaction (HRI) involves the application of social robotics and language models to scenarios involving the joint collaboration of humans and robots (e.g. factories, education, social companionship)
+<br><br>
+<br>technical/scientific challenges: speech recognition/generation, action recognition, intention reading, trust and acceptability (<a data-href="trust in human-robot interaction" href="\COMP34212\trust in human-robot interaction.html" class="internal-link" target="_self" rel="noopener">trust in human-robot interaction</a>), emotion recognition/production, long-term interaction
+<br><br>
+<br>two main types of application are important:
+
+<br>automatic speech recognition systems (ASR)
+<br>speech synthesis systems (e.g. text-to-speech)
+
+
+<br>issues with ASR for children include the fact that child speech is very different from adult speech - their pitch is higher, and they may often utter in ungrammatical ways
+<br>microphone quality can also have significant impact on speech recognition, as well as a number of other factors that are recommended:
+<br><img alt="400" src="https://i.imgur.com/ou9jRIF.png" referrerpolicy="no-referrer"><br><br>
+<br>there have been two main revolutions with respect to the recognition of action/poses:
+
+<br>kinect and RGBD cameras (essentially acting as cheap 3D sensors)
+<br>deep learning for real-time multi-person keypoint detection in the face, gaze, hands, and feet etc.
+
+
+<br>OpenPose is a well known framework for action recognition
+]]></description><link>COMP34212\human-robotic interaction (HRI).html</link><guid isPermaLink="false">COMP34212/human-robotic interaction (HRI).md</guid><pubDate>Sat, 27 Apr 2024 15:08:16 GMT</pubDate><enclosure url="https://i.imgur.com/ou9jRIF.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/ou9jRIF.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[hydraulics]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>hydraulics are actuators producing movement due to changes in fluid pressure
+<br>pros:
+
+<br>powerful, precise actuation
+
+
+<br>cons:
+
+<br>large
+<br>dangerous
+<br>risk of leaking
+
+
+<br>main type = pistons
+]]></description><link>COMP34212\hydraulics.html</link><guid isPermaLink="false">COMP34212/hydraulics.md</guid><pubDate>Sat, 04 May 2024 00:30:12 GMT</pubDate></item><item><title><![CDATA[iconic localisation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><br>
+<br>iconic localisation involves raw sensor readings to match actual observations to expected observations - the computation involved with this method is high since many sensor readings need to be taken
+<br>iconic localisation is a grid-based method, since the world is partitioned into a tesselation of convex polygons, and the likelihood of possible poses within each polygon is calculated
+<br><br>
+<br>particles/sample poses are scattered throughout some space
+<br>the belief that the robot is within one of these poses is calculated, and over time more 'particles' i.e. poses are added while others are removed if they have a low belief associated with them
+]]></description><link>COMP34212\iconic + monte carlo localisation.html</link><guid isPermaLink="false">COMP34212/iconic + monte carlo localisation.md</guid><pubDate>Fri, 03 May 2024 23:43:26 GMT</pubDate></item><item><title><![CDATA[lidar]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>LIDAR = Light Detection and Ranging, aka laser radar, ladar
+<br>typically used for indoor navigation and mapping, as well as <a data-tooltip-position="top" aria-label="SLAM vs vSLAM vs VO" data-href="SLAM vs vSLAM vs VO" href="\year2notes\archive\sem1\COMP24011\SLAM vs vSLAM vs VO.html" class="internal-link" target="_self" rel="noopener">SLAM</a> by emitting highly amplified and coherent radiation at a target frequency
+<br>the sensor emits highly amplified and coherent radiation at a target frequency, with a planar 2D horizontal
+<br>LIDARs are fast due to the time-of-flight principle, and phase-shift measurements are taken for short-range distances
+]]></description><link>COMP34212\lidar.html</link><guid isPermaLink="false">COMP34212/lidar.md</guid><pubDate>Fri, 03 May 2024 23:31:11 GMT</pubDate></item><item><title><![CDATA[locomotion]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>mechanical locomotion = wheels (synchro-drive, omnidirectional)
+<br>biomimetic locomotion = crawling, sliding, running
+<br>legged locomotion = leg events for  legs  = 
+]]></description><link>COMP34212\locomotion.html</link><guid isPermaLink="false">COMP34212/locomotion.md</guid><pubDate>Fri, 03 May 2024 23:05:10 GMT</pubDate></item><item><title><![CDATA[degrees of freedom]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+a robotic manipulator consists of one or more links connected by joints, with an end effector - the end effector is used to affect and move objects within the environment
+
+<br>
+each joint has its own joint limit, specifying the extent to which the joint can move
+
+<br>
+the workspace of an end effector describes the set of all poses attainable by that end effector mounted on the manipulator
+
+<br>
+manipulation problems involve defining endpoints for specific joints, and figuring out paths for a manipulator to take in order to reach some endpoint, with specific joint angles
+
+<br>
+<a data-href="forward kinematics and inverse kinematics" href="\COMP37111\forward kinematics and inverse kinematics.html" class="internal-link" target="_self" rel="noopener">forward kinematics and inverse kinematics</a>
+
+<br><br>
+<br>common degrees of freedom include:
+
+<br>shoulder joint (ball) - 3 DOF
+<br>wrist joint - 2 DOF (?)
+<br>elbow joint - 1 DOF
+
+
+<br><br>
+<br>dynamics describe the properties of motion and energy of a moving object, while its moves - depending on the robot and its movement, dynamics can have different effects:
+
+<br>slow-moving robots probably wont be strongly impacted by dynamics
+<br>fast-moving robots likely need to consider dynamics more
+
+
+<br>computing direct and indirect dynamics can also be expensive
+<br><br>
+<br>compliance is the need for a manipulator to yield to environmental forces i.e. certain safety measures need to be made for if a human comes into contact with the manipulator
+<br>certain measures include:
+
+<br>springs in joints
+<br>using soft materials
+<br>software compliance
+
+
+]]></description><link>COMP34212\manipulators.html</link><guid isPermaLink="false">COMP34212/manipulators.md</guid><pubDate>Sun, 05 May 2024 17:43:17 GMT</pubDate></item><item><title><![CDATA[marcov localisation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>marcov localisation is used for global localisation without an initial known pose, by computing the belief in each possible pose, to try and predict what the robots current pose/position is
+]]></description><link>COMP34212\marcov localisation.html</link><guid isPermaLink="false">COMP34212/marcov localisation.md</guid><pubDate>Fri, 03 May 2024 23:39:20 GMT</pubDate></item><item><title><![CDATA[marr's levels of abstraction]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>also known as Marr's levels of analysis, marr proposed that any complex information processing system can be analysed/modelled at 3 different levels
+<br>
+<br>computational / theory - what is the phenomena we're trying to represent?
+<br>algorithmic - how can such phenomena be represented as a process with inputs and outputs?
+<br>implementation - how is the phenomena actually implemented?
+<br><img src="https://i.imgur.com/1R5Ni5b.png" referrerpolicy="no-referrer"><br><img src="https://i.imgur.com/E39QsKe.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\marr&apos;s levels of abstraction.html</link><guid isPermaLink="false">COMP34212/marr&apos;s levels of abstraction.md</guid><pubDate>Sun, 28 Apr 2024 00:20:47 GMT</pubDate><enclosure url="https://i.imgur.com/1R5Ni5b.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/1R5Ni5b.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[modelling artificial cognitive systems]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+Vernon in 'Artificial Cognitive Systems: A Primer' outlines 4 main aspects to consider when modelling artificial cognitive systems:
+
+<br>how much inspiration we take from natural systems
+<br>how faithful we try to be in copying the target system
+<br>how important we think the system's physical structure is
+<br>how we separate the identification of cognitive capability from the way we decide to actually implement it
+
+
+<br>
+these 4 aspects allow us to identify cognitive systems/robots on a 2-axes graph, where one axis indicates how 'bioinspired' our model is (i.e. intelligent robotics = no biological inspiration), and the other indicates the level of abstraction from the target model
+
+]]></description><link>COMP34212\modelling artificial cognitive systems.html</link><guid isPermaLink="false">COMP34212/modelling artificial cognitive systems.md</guid><pubDate>Sun, 05 May 2024 17:43:17 GMT</pubDate></item><item><title><![CDATA[morphological computation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>morphological computation in nature is the idea of many human/animal body structures implicitly exploiting passive and compliant effectors - this exploitation of the body-environment interaction results in effective actuation
+<br>morphological computation in robotics takes inspiration from these structures, in order to develop low energy consuming robots, with passive or hybrid passive-active actuators
+<br>examples include:
+
+<br><a data-tooltip-position="top" aria-label="https://www.youtube.com/watch?v=wMlDT17C_Vs" rel="noopener" class="external-link" href="https://www.youtube.com/watch?v=wMlDT17C_Vs" target="_blank">passive dynamic walkers</a>
+
+
+]]></description><link>COMP34212\morphological computation.html</link><guid isPermaLink="false">COMP34212/morphological computation.md</guid><pubDate>Sat, 04 May 2024 00:28:15 GMT</pubDate></item><item><title><![CDATA[motor babbling]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Motor_babbling" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Motor_babbling" target="_blank">wiki</a>]]></description><link>COMP34212\motor babbling.html</link><guid isPermaLink="false">COMP34212/motor babbling.md</guid><pubDate>Sun, 05 May 2024 17:43:18 GMT</pubDate></item><item><title><![CDATA[motors]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>electric motors rotate in order to produce movement due to electric current
+<br>advantages include:
+
+<br>being simple
+<br>affordability
+<br>commonality
+
+
+<br>cons include:
+
+<br>producing heat
+<br>lack of energy efficiency
+
+
+<br>examples include:
+
+<br>DC motors
+<br>geared DC motors
+<br>servo motors
+<br>stepper motors
+
+
+]]></description><link>COMP34212\motors.html</link><guid isPermaLink="false">COMP34212/motors.md</guid><pubDate>Sat, 04 May 2024 00:29:33 GMT</pubDate></item><item><title><![CDATA[naoqi python example]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>many of the operations with the naoqi library are asynchronous - in certain cases you may want to wait until some action is complete before you begin the next action
+<br>from naoqi import ALProxy
+IP = "pepper.local"
+PORT = 9559
+motion = ALProxy("ALMotion",IP,PORT)
+tts = ALProxy("ALTextToSpeech", IP, PORT)
+motion.moveInit()
+id = motion.post.moveTo(0.5,0)
+motion.wait(id, 0)
+tts.say("I have walked")
+Copy]]></description><link>COMP34212\naoqi python example.html</link><guid isPermaLink="false">COMP34212/naoqi python example.md</guid><pubDate>Sun, 05 May 2024 17:43:18 GMT</pubDate></item><item><title><![CDATA[NN training datasets]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+all data is typically divided into 3 sets for neural networks
+
+<br>
+training dataset: data used repeatedly during the training
+
+<br>
+an epoch consists of using all stimuli (data) once. If you have 100 samples in your training set, your epoch consists of all 100 samples
+
+<br>
+validation dataset: data used to monitor performance during training - a separate set used at the end of each epoch
+
+<br>
+can be thought of as a mini test set - just something to intermediately test the model with something other than training data
+
+<br>
+test dataset (generalisation dataset): unique data to assess model performance
+
+<br>
+this will determine how well your model has generalised based on the resulting accuracy
+
+]]></description><link>COMP34212\NN training datasets.html</link><guid isPermaLink="false">COMP34212/NN training datasets.md</guid><pubDate>Sun, 05 May 2024 13:09:44 GMT</pubDate></item><item><title><![CDATA[RRI]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>ethically permissible for impact on wellbeing of affected stakeholders and communities
+<br>fair and non-discriminatory on individuals/groups
+<br>public trust by guaranteeing safety
+<br><br>responsible research &amp; innovation<br><br>
+<br>the aims of XAI is:
+
+<br>to produce explainable models
+<br>enable human users to understand, trust and effectively manage AI systems
+
+
+<br>black box (deep learning) problems currently mean that parameters are generally unexplainable
+]]></description><link>COMP34212\objectives for ethical AI.html</link><guid isPermaLink="false">COMP34212/objectives for ethical AI.md</guid><pubDate>Sun, 05 May 2024 17:43:18 GMT</pubDate></item><item><title><![CDATA[passive vision]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>passive vision is the idea of attention being directed towards targets due to activity of that object within an attentional spotlight
+<br>the most common example is bottom-up image-processing (Marr, 1972)
+]]></description><link>COMP34212\passive vision.html</link><guid isPermaLink="false">COMP34212/passive vision.md</guid><pubDate>Sat, 04 May 2024 00:37:14 GMT</pubDate></item><item><title><![CDATA[topological navigation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>path planning can take 2 main approaches:
+
+<br>qualitative (topological/route navigation)
+
+<br>agent's perspective
+<br>topological route with distinct landmarks/associations - landmarks can be thought of as waypoints which are easy for the robot to recognise, e.g. natural landmark, sign, visual pattern, or landmark to change behaviour
+<br>the world can be thought of as a relational graph of nodes and edges - the nodes always represent gateways/landmarks/goals, while the edges represent the paths to get to the path
+
+
+
+
+<br><br>
+<br>distinctive places (landmark methods):
+
+<br>landmarks are treated as waypoints, where each landmark has a perceptually distinct feature, and is easy to recognise
+
+
+<br>associative methods:
+
+<br>associations are made between perceptual state and movement - for instance, visual homing involves associating visual patterns with locations/routes (example: bees navigation)
+
+
+<br>relational graph methods:
+
+<br>represent the world as a graph of nodes and edges, where nodes represent gateways, landmarks or goals, and edges represent a navigable path between two nodes
+<br>a multi-level spatial hierarchy can be introduced, useful for animal navigation
+
+
+]]></description><link>COMP34212\path planning.html</link><guid isPermaLink="false">COMP34212/path planning.md</guid><pubDate>Fri, 03 May 2024 23:20:49 GMT</pubDate></item><item><title><![CDATA[perceptrons]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+a perceptron is also known as a feed-forward model, taking an input and returning some output
+
+<br>
+a multi-layer perceptron MLP could ideally take the same number of inputs as the single perceptron (single layer perceptron), but has hidden layers in between, controlled by hyperparameters
+
+<br><img src="https://i.imgur.com/ADunhWj.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\perceptrons.html</link><guid isPermaLink="false">COMP34212/perceptrons.md</guid><pubDate>Sun, 05 May 2024 13:00:12 GMT</pubDate><enclosure url="https://i.imgur.com/ADunhWj.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/ADunhWj.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[sensorimotor stage]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><br>
+<br>ages: birth to 2 years
+<br><br>
+<br>ages: 2 to 7 years
+<br><br>
+<br>ages: 7 to 11 years
+<br><br>
+<br>ages: 12 years up
+<br>at this stage, the adolescent/young adult begins to think abstractly and reason about hypothetical problems
+]]></description><link>COMP34212\piaget&apos;s stages of cognitive development.html</link><guid isPermaLink="false">COMP34212/piaget&apos;s stages of cognitive development.md</guid><pubDate>Sun, 05 May 2024 17:43:19 GMT</pubDate></item><item><title><![CDATA[pneumatics]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>pneumatics are actuators producing movement due to changes in air pressure
+<br>pros:
+
+<br>simialr to <a data-href="hydraulics" href="\COMP34212\hydraulics.html" class="internal-link" target="_self" rel="noopener">hydraulics</a>, suitable for powerful movements with a quick and accurate response, and passive dynamics also exist
+
+
+<br>cons:
+
+<br>dangerous
+<br>noisy
+<br>risk of leaking
+
+
+<br>main type = McKibben muscles
+]]></description><link>COMP34212\pneumatics.html</link><guid isPermaLink="false">COMP34212/pneumatics.md</guid><pubDate>Sat, 04 May 2024 00:30:58 GMT</pubDate></item><item><title><![CDATA[pooling (sub-sampling)]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+pooling is a technique to reduce the spatial resolution of feature maps
+
+<br>
+this reduces the sensitivity of the output to minor shifts and distortions in the feature map, promoting local invariance
+
+<br>
+various types of pooling exist, including:
+
+<br>max pooling
+<br>min pooling
+
+
+<br><img src="https://i.imgur.com/3rfotXZ.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\pooling (sub-sampling).html</link><guid isPermaLink="false">COMP34212/pooling (sub-sampling).md</guid><pubDate>Sun, 05 May 2024 13:38:50 GMT</pubDate><enclosure url="https://i.imgur.com/3rfotXZ.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/3rfotXZ.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[potential harms of AI and robotics]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>bias and discrimination
+<br>denial of individual autonomy and rights
+<br>non-transparent, unexplainable, or unjustifiable outcomes
+<br>invasions of privacy
+<br>isolation and disintegration of social connection
+<br>unreliable, unsafe or poor-quality outcomes
+<br>job losses/changes
+]]></description><link>COMP34212\potential harms of AI and robotics.html</link><guid isPermaLink="false">COMP34212/potential harms of AI and robotics.md</guid><pubDate>Sun, 05 May 2024 17:43:19 GMT</pubDate></item><item><title><![CDATA[navigation cells in rats]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>ratSLAM aims to emulate the spatial navigation ability of the rat's hippocampal system, who essentially build cognitive maps of environments
+<br>similar to SLAM, the overall goal is building and using maps of large and complex environments simultaneously - its less acurate than SLAM, but theres flexibility to:
+
+<br>cope with noisy input
+<br>deal with changing environments
+<br>accommodate complexity
+
+
+<br>example applications include the iRat: a rat-like robot for spatial navigation experiments, which uses ratSLAM
+<br>OpenRatSLAM is also an open-source version of RatSLAM, with bindings to the Robot Operating System (ROS), meaning any robot could technically take advantage of the navigation cell concepts/visual odometry estimates
+<br><br>
+<br>the place cell, head direction cell and grid cell were discovered in the hippocampus in 1971, 1985 and 2005 respectively
+<br>grid cells and place cells form a path integration mechanism for cognitive maps
+
+<br>these give rats the innate sense of the world and their location within it, similar to SLAM mechanisms
+
+
+<br><br>
+<br>place cells fire consistently when the rat is at a specific familiar location within the environment
+<br>the cognitive map in the hippocampus is made up of thousands of place cells, covering the surface of any space
+<br><br>
+<br>head direction cells fire when the rat's head is at specific orientations - all orientations are represented by the head direction cell population
+<br>thus, head direction cells have no correlation with the rat's location
+<br><br>
+<br>grid cells fire in a metrically regular way across the whole surface of a given environment - the cells fire when a rat is located at any vertex of a hexagnoal pattern across the environment
+<br>the cells are used as a signal for measuring displacement distances and direction
+<br><br>
+<br>path integration is used to join together individual movements to understand which direction a rat is moving in, at what speed, and for how long
+<br>this ultimately helps to form an inner cognitive map within environments
+]]></description><link>COMP34212\ratSLAM.html</link><guid isPermaLink="false">COMP34212/ratSLAM.md</guid><pubDate>Sat, 04 May 2024 00:05:25 GMT</pubDate></item><item><title><![CDATA[reactive materials]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>reactive materials cover any materials producing small movement (shrinking/elongation) due to the reaction to light, or chemical substances or temperatue
+<br>pros:
+
+<br>suitable for microrobots
+<br>actuation is linear (?)
+
+
+<br>cons
+
+<br>only really suited to small robots/weak movement
+
+
+<br>examples include:
+
+<br>photo-reactive matierals
+<br>chemically-reactive materials
+<br>thermally-reactive materials
+
+
+]]></description><link>COMP34212\reactive materials.html</link><guid isPermaLink="false">COMP34212/reactive materials.md</guid><pubDate>Sat, 04 May 2024 00:32:09 GMT</pubDate></item><item><title><![CDATA[robot]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>a robot is an autonomous system which exists in the physical world - it can sense its environment and act on it in order to achieve a predefined goal
+<br>Robota = slave or forced labour
+]]></description><link>COMP34212\robot.html</link><guid isPermaLink="false">COMP34212/robot.md</guid><pubDate>Sun, 05 May 2024 17:43:19 GMT</pubDate></item><item><title><![CDATA[robot localisation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+localisation asks the following questions?
+
+<br>how can you build the map of a new world?
+<br>how do you recognise where you are?
+<br>how can you simultaneously map the world and be sure where you are?
+<br>how do you explore new areas efficiently and consistently?
+<br>how do you label the map with objects and features or terrain?
+
+
+<br>
+<a data-tooltip-position="top" aria-label="SLAM vs vSLAM vs VO" data-href="SLAM vs vSLAM vs VO" href="\year2notes\archive\sem1\COMP24011\SLAM vs vSLAM vs VO.html" class="internal-link" target="_self" rel="noopener">SLAM</a>: Simultaneous Localisation and Mapping
+
+<br><br>
+<br>"The problem of determining the pose of robot relative to a given map of the environment." (Thrun et al.)
+<br>Pose x of a robot: its position  and orientation () - 
+<br>bayesian algorithms to estimate the probable location of a robot
+<br><br>
+<br>to extract features from raw data and match these to the map e.g. corners, walls doors
+<br>common methods include <a data-href="marcov localisation" href="\COMP34212\marcov localisation.html" class="internal-link" target="_self" rel="noopener">marcov localisation</a> and <a data-href="extended kalman filters" href="\COMP34212\extended kalman filters.html" class="internal-link" target="_self" rel="noopener">extended kalman filters</a>
+]]></description><link>COMP34212\robot localisation.html</link><guid isPermaLink="false">COMP34212/robot localisation.md</guid><pubDate>Fri, 03 May 2024 23:35:30 GMT</pubDate></item><item><title><![CDATA[robot locomotion]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>mechanical locomotion: wheels
+<br>biomimetic locomotion: crawling, sliding, running
+<br>legged locomotion: leg events for  legs  - gait = precomputed coordination movements (oscillations)
+]]></description><link>COMP34212\robot locomotion.html</link><guid isPermaLink="false">COMP34212/robot locomotion.md</guid><pubDate>Sat, 04 May 2024 10:44:40 GMT</pubDate></item><item><title><![CDATA[robot motion]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+navigation: moving the entire robot from one location to another (destination planning) - including:
+
+<br><a data-href="locomotion" href="\COMP34212\locomotion.html" class="internal-link" target="_self" rel="noopener">locomotion</a> (movement from one place to another)
+<br>localisation and mapping
+
+
+<br>
+manipulation: moving a particular body part to manipulate an environment, including:
+
+<br>reaching
+<br>grasping
+
+
+]]></description><link>COMP34212\robot motion.html</link><guid isPermaLink="false">COMP34212/robot motion.md</guid><pubDate>Fri, 03 May 2024 23:00:05 GMT</pubDate></item><item><title><![CDATA[Robot Navigation]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>robot navigation aims to answer 4 main questions:
+
+<br>where am i going? and why? (answered by mission planning)
+<br>what is the best way to get to where im going? (<a data-href="path planning" href="\COMP34212\path planning.html" class="internal-link" target="_self" rel="noopener">path planning</a>)
+<br>where have I been? (map making - <a data-tooltip-position="top" aria-label="SLAM vs vSLAM vs VO" data-href="SLAM vs vSLAM vs VO" href="\year2notes\archive\sem1\COMP24011\SLAM vs vSLAM vs VO.html" class="internal-link" target="_self" rel="noopener">SLAM</a>)
+<br>where am I? (<a data-href="robot localisation" href="\COMP34212\robot localisation.html" class="internal-link" target="_self" rel="noopener">robot localisation</a>)
+
+
+]]></description><link>COMP34212\Robot Navigation.html</link><guid isPermaLink="false">COMP34212/Robot Navigation.md</guid><pubDate>Fri, 03 May 2024 23:05:39 GMT</pubDate></item><item><title><![CDATA[robotics middleware]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+robotic middleware is designed to manage the complexity and heterogeneity of the hardware and applications, promote the integration of new technologies, simplify software design, hide complexity of low-level communication and the sensor heterogeneity of the sensors, improve software quality, reuse robotic software infrastructure across multiple research efforts, and to reduce production costs
+<br>
+<br>robotics middleware considers application and hardware elements as nodes, which are connected by middleware infrastructure
+<br><br>
+<br>Robot Operating System (not an actual operating system) is one of the most widespread robotics middleware projects, and is open source with documentation supported by the community
+<br>one of the main communication mechanisms is through topics
+<br>nodes publish on topics which are read by subscriber nodes - for instance, a camera node publishes images to a specific topic, essentially streaming it
+<br>other communication mechanisms exist e.g. on-demand "services"
+<br><img src="https://i.imgur.com/OCdpEkN.png" referrerpolicy="no-referrer"><br><br>
+<br>Yet Another Robot Platform is a similar middleware to ROS, using a publisher/subscriber model
+<br>the middleware is more C++ specific and tailored to certain robots (e.g. iCub), with a smaller community
+<br><br>
+<br>proprietary software of SoftBank robotics, used for all their robots i.e. <a data-tooltip-position="top" aria-label="softbank PEPPER robot" data-href="softbank PEPPER robot" href="\COMP34212\softbank PEPPER robot.html" class="internal-link" target="_self" rel="noopener">PEPPER</a>, Nao, Romeo
+<br>interfaces exist in python and c++
+]]></description><link>COMP34212\robotics middleware.html</link><guid isPermaLink="false">COMP34212/robotics middleware.md</guid><pubDate>Sun, 05 May 2024 17:43:20 GMT</pubDate><enclosure url="https://i.imgur.com/OCdpEkN.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/OCdpEkN.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[sequential keras model]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://keras.io/guides/sequential_model/" rel="noopener" class="external-link" href="https://keras.io/guides/sequential_model/" target="_blank">keras wiki</a><br>
+A sequential model is appropriate for a plain stack of layers where each layer has exactly one input tensor and one output tensor
+]]></description><link>COMP34212\sequential keras model.html</link><guid isPermaLink="false">COMP34212/sequential keras model.md</guid><pubDate>Fri, 01 Mar 2024 13:14:18 GMT</pubDate></item><item><title><![CDATA[shallow vs deep neural networks]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>
+shallow/deep neural networks are the 2 main ways to describe different architectures/topologies of artificial neural networks
+
+<br>
+shallow (classical) neural networks typically include:
+
+<br>simple perceptron (2 layers)
+<br>MLP - multi-layer perceptron (3 layers)
+
+
+<br>
+deep neural networks:
+
+<br>CNN - convolutional neural networks
+<br>RNN - recurrent neural networks (e.g. LSTM - not as many layers but functionality is different)
+<br>transformers
+<br>GAN
+<br>'celebrities': AlexNet, GPT, VGG16, ResNet50, BERT
+
+
+]]></description><link>COMP34212\shallow vs deep neural networks.html</link><guid isPermaLink="false">COMP34212/shallow vs deep neural networks.md</guid><pubDate>Sun, 05 May 2024 12:36:56 GMT</pubDate></item><item><title><![CDATA[SLAM]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>SLAM = Simultaneous Localisation and Mapping
+<br>example: Rao-Blackwellized Particle Filter: each particle presents a path and a local map - at each observation, only the sensed area of the maps are updated, and the belief of each particle is computed. A tree is then used to save all the particles that form the history of the current set of particles
+<br>loop closure is useful for checking and adjusting the map for misalignments, and the path will likely propagate backwards, improving the overall map
+]]></description><link>COMP34212\SLAM.html</link><guid isPermaLink="false">COMP34212/SLAM.md</guid><pubDate>Fri, 03 May 2024 23:49:06 GMT</pubDate></item><item><title><![CDATA[joint attention / gaze]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>within a child's development, there are 4 main skills which develop incrementally:
+
+<br>joint attention: gaze and pointing gestures
+<br>imitation: body movement, action/goals
+<br>cooperation: spontaneous altruistic behaviour
+<br>theory of mind: ability to attribute beliefs, goals and percepts to other people
+
+
+<br><br>
+<br>there are 4 main developmental stages:
+
+<br>sensitivity stage - child only understands that it can look to the left/right side of the caregiver's gaze direction
+<br>ecological stage - child begins to scan along the line of gaze for the object they're looking for
+<br>geometrical stage - the child recognises the angle they must orientate to be able to see the object of interest
+<br>representational stage - the child has the abilities of all previous stages, and can also find objects outside its current field of view
+
+
+<br><br><img alt="500" src="https://i.imgur.com/eQP1Qmv.png" referrerpolicy="no-referrer"><br>
+<br>the underlying architecture has 5 underlying components:
+
+<br>salient feature detectors: colour, edge, motion and face
+<br>visual feedback controller: moves the head towards the salient object in the robot's view
+<br>self-evaluator learning module: neural network to learn the mapping between face image and head position, and the desired motor signal
+<br>internal evaluator: check if there is an object in the centre of the vision/image
+<br>gate module: selects between outputs from visual feedback controller and the learning module to return the corresponding motor command
+
+
+<br><img alt="500" src="https://i.imgur.com/EeZi1PG.png" referrerpolicy="no-referrer"><br><br>
+<br>imperative pointing: requesting an object when another agent isn't initially looking at it
+<br>declarative pointing: creating shared attention on an object, thus making it the focus of the interaction
+]]></description><link>COMP34212\social interaction skills.html</link><guid isPermaLink="false">COMP34212/social interaction skills.md</guid><pubDate>Sat, 27 Apr 2024 14:31:30 GMT</pubDate><enclosure url="https://i.imgur.com/eQP1Qmv.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/eQP1Qmv.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[softbank PEPPER robot]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>the softbank PEPPER robot was manufactured in 2014 by Japanese company SoftBank
+
+Pepper is intended to make people enjoy life, enhance people's lives, facilitate relationships, entertain and connect people with the outside world
+
+
+<br><img src="https://i.imgur.com/jJpGePw.png" referrerpolicy="no-referrer"><br>]]></description><link>COMP34212\softbank PEPPER robot.html</link><guid isPermaLink="false">COMP34212/softbank PEPPER robot.md</guid><pubDate>Sun, 05 May 2024 17:43:21 GMT</pubDate><enclosure url="https://i.imgur.com/jJpGePw.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/jJpGePw.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[sonars]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>Sonar = SOund NAvigation and Ranging, used for detecting ultrasonar sound frequencies
+]]></description><link>COMP34212\sonars.html</link><guid isPermaLink="false">COMP34212/sonars.md</guid><pubDate>Sun, 05 May 2024 17:43:21 GMT</pubDate></item><item><title><![CDATA[micro vs macro interactions/structures]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>"Swarm robotics is the study of how independent robots can interact as a group, giving rise to collective behaviour that a single such robot could not achieve on its own" - Dorigo et al. 2014; Heinrich et al. 2020
+<br>swarm robotics aims to provide maximal scalability, using a strictly decentralized approach, and limited communication
+<br>due to there also being more than one robot in the system, a sense of fault-tolerance is exhibited by this introduced redundancy
+<br><br>
+<br>self organisation within robots is the result of macroscale (global, system wide) spatial/temporal structures are formed as the result of microscale (local/peer-to-peer) interactions
+<br>biological examples: Rayleigh-Benard convection, cell differentiation, embryogenesis, reaction-diffusion
+<br><br>
+<br>positive and negative feedback
+<br>fluctuations (i.e. random events)
+<br>multiple microscale interactions
+<br><br>
+<br>
+ant colony optimisation (ACO)<br>
+real ants are capable of finding the shortest path from a food source to the nest without visual clues - indirect communication occurs through stigmergy. Ants deposit certain amounts of pheromone while walking to form a trail, which each ant prefers to follow<br>
+applicable to traveling salesperson problem, using artificial ants which have some memory, aren't completely blind, and treat time discretely
+
+<br>
+kilbot - large scale swarm
+
+<br>
+disaster relief
+
+<br>
+lagoon monitoring
+
+<br>
+swarm of quadrotor UAVs for agriculture purposes ("SAGA")
+
+]]></description><link>COMP34212\swarm robotics.html</link><guid isPermaLink="false">COMP34212/swarm robotics.md</guid><pubDate>Sat, 27 Apr 2024 14:05:31 GMT</pubDate></item><item><title><![CDATA[the definition of cognitive robotics]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>mainly covered within chapter 1 of <a data-tooltip-position="top" aria-label="Cognitive-Robotics-Cangesoli.pdf" data-href="Cognitive-Robotics-Cangesoli.pdf" href="\COMP34212\Cognitive-Robotics-Cangesoli.pdf" class="internal-link" target="_self" rel="noopener">Cangesoli - Cognitive Robotics</a>, Cognitive Robotics, shortened to CR, has a strong emphasis on being an interdisciplinary approach
+<br>CR in its early days had a number of experts who came from the AI knowledge representation field, so naturally this has seeped into the definition - but still, one can only propose a definition rather than have one 'set in stone'
+<br>
+Cognitive Robotics is the field that combines insights and methods from AI, as well as cognitive and biological sciences, to robotics
+<br>
+<br>
+CR differs from intelligent robotics/'AI Robotics' - i.e. a pure combo of AI and robotics - due to CR's emphasis on designing bioinspired/cognitively inspired robots
+
+<br>
+the two fields essentially create a spectrum between one another, where some robots can be created completely based off biological mechanisms (Mori/Kuniyoshi's realistic rendering of the human fetus), some can be created completely based off AI techniques without any need for biological inspiration, and some can use both
+
+<br>
+CR is closely linked to the idea of cognitive systems, i.e. machines/software with humanlike cognition, which is “capacity for self-reliance, for being able to figure things out, for in de pen dent adaptive anticipatory action” (Vernon 2014, 2)
+
+]]></description><link>COMP34212\the definition of cognitive robotics.html</link><guid isPermaLink="false">COMP34212/the definition of cognitive robotics.md</guid><pubDate>Sun, 05 May 2024 17:43:21 GMT</pubDate></item><item><title><![CDATA[training terminology]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>accuracy is a term typically used for classification problems
+<br>error loss describes the difference between predicted and observed values
+<br>categorical loss = cross-entropy for classification tasks
+]]></description><link>COMP34212\training terminology.html</link><guid isPermaLink="false">COMP34212/training terminology.md</guid><pubDate>Sun, 05 May 2024 13:18:19 GMT</pubDate></item><item><title><![CDATA[visual transformers]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)" target="_blank">wiki</a><br>
+<br>
+transformers are deep neural networks that replace <a data-tooltip-position="top" aria-label="convolutional neural networks (CNN)" data-href="convolutional neural networks (CNN)" href="\year2notes\COMP24112\convolutional neural networks (CNN).html" class="internal-link" target="_self" rel="noopener">CNNs</a> and RNNs (i.e. LSTMs) with self-attention
+
+<br>
+transformers were initially developed by google, and based on a 2017 paper titled <a data-tooltip-position="top" aria-label="https://arxiv.org/abs/1706.03762" rel="noopener" class="external-link" href="https://arxiv.org/abs/1706.03762" target="_blank">Attention is All You Need</a>
+
+<br>
+text can be converted into numerical representations called tokens, and each token can be converted into a vector using a word embedding table
+
+<br>
+transformers can be preferable to recurrent networks, since there are no recurrent units, meaning less training time is required in comparison to the average RNN e.g. a LSTM
+
+<br>
+encoder-only transformers are typically used in tasks where only an input sequence needs to be processed (i.e. text classification/sentiment analysis)
+
+<br><br>
+<br>visual transformers present themselves as alternatives to <a data-tooltip-position="top" aria-label="convolutional neural networks (CNN)" data-href="convolutional neural networks (CNN)" href="\year2notes\COMP24112\convolutional neural networks (CNN).html" class="internal-link" target="_self" rel="noopener">CNNs</a> - they take images as patches without position encoding as inputs, and a multi-head attention mechanism amplifies the key patches
+<br>output labels are then produced using a <a data-tooltip-position="top" aria-label="perceptrons" data-href="perceptrons" href="\COMP34212\perceptrons.html" class="internal-link" target="_self" rel="noopener">multi-layer perceptron (MLP)</a>
+<br>common examples include the visual transformer and DINOv2
+<br><br>
+<br>transformers within language can be applied to a number of scenarios:
+
+<br>translation
+<br>time-series prediction
+<br>document parsing
+<br>document summarisation
+<br>document generation
+<br>biological sequence analysis
+
+
+<br>LLMs typically make use of transformers in all these ways
+]]></description><link>COMP34212\transformers.html</link><guid isPermaLink="false">COMP34212/transformers.md</guid><pubDate>Sun, 05 May 2024 14:02:11 GMT</pubDate></item><item><title><![CDATA[development of ToM]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>there are two main aspects of trust in human-robot interaction: the trust between the robot and humans, and vice-versa
+<br>to enable trust, a  theory of mind, also known as perspective taking, is developed — "that is, the ability to infer the cognitive states of other agents (i.e. humans) with which it is interacting, predicting their behaviour, and acting appropriately"
+<br>bayesian models are typically used for belief and theory of mind
+<br><br>
+<br>as mentioned, separate bayesian networks can be made per speaker/interaction - actions are made based on a consequence of internal belief, and an informants action
+<br>essentially, MLE is used with information to track the reliability of who is being interacted with, in order to set the beliefs within the network - over a number of interactions with different agents, different amounts of belief can be assigned to different agents
+<br>Sally-Anne test:<br>
+<img alt="500" src="https://i.imgur.com/LJfjzTX.png" referrerpolicy="no-referrer">
+<br>no 3-4 year old children understand that sally doesn't know
+<br><br>
+<br>there are a number of anthropomorphic and social factors which decide whether a human trusts a robot:
+
+<br>social gaze
+<br>speech
+<br>anthropomorphic priming
+<br>share actions
+<br>imitation
+
+
+<br>experiments within lecture show:
+
+<br>social gaze is only important for humanoid robots (produces more trust)
+<br>after interacting with non-humanoid robots first, trust diminishes even if interacting with humanoid robot afterwards
+<br>"nasty" investment robot with non-joint attention is trusted less over time, while whether a "nice" investment robot is joint or not doesn't affect trust
+
+
+]]></description><link>COMP34212\trust in human-robot interaction.html</link><guid isPermaLink="false">COMP34212/trust in human-robot interaction.md</guid><pubDate>Sat, 27 Apr 2024 15:30:47 GMT</pubDate><enclosure url="https://i.imgur.com/LJfjzTX.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/LJfjzTX.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[proportional control (P)]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<br>feedback control is good for low-level motor actions and resolving errors, while AI/cognition typically handles the higher-level behaviour
+<br><br>
+<br>system responds based on the proportion of error (considering direction and magnitude)
+<br>gain = the parameter that determines the magnitude of the system's response
+<br>the state typically oscillates, fluctuating between an underestimate/overestimate of the motion required to reach the desired state
+<br>damping = process of systematically decreasing the oscillation
+<br><br>
+<br>system responds based on the proportion of error + derivative of error signal
+<br>this solves the previously mentioned gain/oscillation problem - when the system is close to the desired state, it is controlled differently to when it is farther away 
+<br>momentum is adjusted as the system approaches the desired state (-(gain * velocity))
+<br>used widely in industrial robotics
+<br><br>
+<br>the system has an integral term  that integrates incremental errors over time - when this term reaches a threshold, the system compensates/corrects
+<br>many joints use PID controllers
+<br><img alt="400" src="https://i.imgur.com/rJZw7P7.png" referrerpolicy="no-referrer">]]></description><link>COMP34212\types of feedback control.html</link><guid isPermaLink="false">COMP34212/types of feedback control.md</guid><pubDate>Sun, 05 May 2024 17:43:22 GMT</pubDate><enclosure url="https://i.imgur.com/rJZw7P7.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;https://i.imgur.com/rJZw7P7.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[humanoid robots]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br><br>
+<br>a humanoid robot has an anthropomorphic body plan and actuators with human-like senses (cameras for vision, microphones for audio perception, touch sensors for tact) for human-robot interaction (e.g. robot companions/collaborative tools)
+<br>anthropomorphic body plan = head, torso, two arms, two legs
+<br><br>
+<br>android robots are intentionally designed to be indistinguishable from humans, in terms of external appearance and behaviour
+<br>examples include:
+
+<br><a data-tooltip-position="top" aria-label="https://spectrum.ieee.org/geminoid-robots-and-human-originals-get-together" rel="noopener" class="external-link" href="https://spectrum.ieee.org/geminoid-robots-and-human-originals-get-together" target="_blank">geminoid family</a>
+<br><a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Hanson_Robotics" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Hanson_Robotics" target="_blank">hanson robotics</a>
+<br><a data-tooltip-position="top" aria-label="https://www.herts.ac.uk/kaspar/the-social-robot" rel="noopener" class="external-link" href="https://www.herts.ac.uk/kaspar/the-social-robot" target="_blank">kaspar the social robot</a>
+
+
+<br><br>
+<br>biomimetic robots have animal-like (including humans) body plans and actuators, with the aim of exploiting biological structures and mechanisms
+<br>examples may include soft robots e.g. robotic fish, octopi, soft arms and grippers
+<br><br>
+<br>robots used in factories for manufacturing tasks, or navigation (e.g. drones/autonomous cars)
+]]></description><link>COMP34212\types of robot.html</link><guid isPermaLink="false">COMP34212/types of robot.md</guid><pubDate>Sun, 28 Apr 2024 00:33:32 GMT</pubDate></item><item><title><![CDATA[uncanny valley]]></title><description><![CDATA[ 
+ <br><a data-href="COMP34212" href="\COMP34212\COMP34212.html" class="internal-link" target="_self" rel="noopener">COMP34212</a><br>
+<a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Uncanny_valley" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Uncanny_valley" target="_blank">wiki</a><br>
+<br>essentially, a hypothesised psychological/aesthetic relation between an objects degree of resemblance to a human, and the emotional response to that object (likeness, discomfort)
+]]></description><link>COMP34212\uncanny valley.html</link><guid isPermaLink="false">COMP34212/uncanny valley.md</guid><pubDate>Wed, 07 Feb 2024 23:24:33 GMT</pubDate></item></channel></rss>
