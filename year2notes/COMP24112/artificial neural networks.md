@@ -1,7 +1,6 @@
 [[COMP24112]]
 [[COMP34212]]
 
-
 - an artificial neural network is a computing system that is ==inspired by==, but not identical to, biological neural networks that constitute animal brains
 - artificial neural networks were initially proposed in the hope that they could solve problems in the same way a human does - however, over time the attention has shifted to performing ==specific tasks==, thus deviating them from biology
 - the first computational model for a neural network was created in ==1943== by Warren McCulloch and Walter Pitts - in ==1957==, the perceptron algorithm was invented, and around the 60s-80s concepts like convolutional neural networks and recurrent neural networks became popularised
