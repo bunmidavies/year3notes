@@ -1,6 +1,6 @@
 {
   "vaultName": "year3notes",
-  "lastExport": 1714930992242,
+  "lastExport": 1715001849888,
   "pluginVersion": "1.8.01",
   "validBodyClasses": "publish css-settings-manager theme-dark show-inline-title ribbon-hide special-h6 hide-callout-icons float-center",
   "useCustomHeadContent": false,
@@ -21,6 +21,7 @@
     "COMP34212/actuator control.md",
     "COMP34212/actuators.md",
     "COMP34212/autonomous robot workflow.md",
+    "COMP34212/behaviour-based robotics.md",
     "COMP34212/benchmark datasets.md",
     "COMP34212/braitenberg vehicles.md",
     "COMP34212/brief history of neural networks.md",
@@ -174,772 +175,778 @@
     "lib/fonts/MathJax_Vector-Bold.woff"
   ],
   "fileInfo": {
-    "COMP34212/flashcards/definitions.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 908,
-      "exportedPath": "COMP34212/flashcards/definitions.html",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1).ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 2193953,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1).ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1) (1).ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1061834,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1) (1).ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023.ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 65940,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023.ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023 (1).ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 58830,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023 (1).ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024.ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 12057482,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024.ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024 (1).ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 12056348,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024 (1).ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab2b_Keras_CNN_CIFAR_2023.ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 158982,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab2b_Keras_CNN_CIFAR_2023.ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab3_RNN-2024.ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 78574,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab3_RNN-2024.ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212_Lab3_RNN-2024 (1).ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 83776,
-      "exportedPath": "COMP34212/labs/COMP34212_Lab3_RNN-2024 (1).ipynb",
-      "dependencies": []
-    },
-    "COMP34212/labs/COMP34212-LAB.ipynb": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 623,
-      "exportedPath": "COMP34212/labs/COMP34212-LAB.ipynb",
-      "dependencies": []
-    },
-    "COMP34212/active vision.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 330,
-      "exportedPath": "COMP34212/active vision.html",
-      "dependencies": []
-    },
-    "COMP34212/actuator control.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 922,
-      "exportedPath": "COMP34212/actuator control.html",
-      "dependencies": []
-    },
-    "COMP34212/actuators.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 518,
-      "exportedPath": "COMP34212/actuators.html",
-      "dependencies": []
-    },
-    "COMP34212/autonomous robot workflow.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 52,
-      "exportedPath": "COMP34212/autonomous robot workflow.html",
-      "dependencies": []
-    },
-    "COMP34212/benchmark datasets.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 632,
-      "exportedPath": "COMP34212/benchmark datasets.html",
-      "dependencies": []
-    },
-    "COMP34212/braitenberg vehicles.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 262,
-      "exportedPath": "COMP34212/braitenberg vehicles.html",
-      "dependencies": []
-    },
-    "COMP34212/brief history of neural networks.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 2254,
-      "exportedPath": "COMP34212/brief history of neural networks.html",
-      "dependencies": []
-    },
-    "COMP34212/choregraphe.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 418,
-      "exportedPath": "COMP34212/choregraphe.html",
-      "dependencies": []
-    },
-    "COMP34212/cognition.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 520,
-      "exportedPath": "COMP34212/cognition.html",
-      "dependencies": []
-    },
-    "COMP34212/Cognitive-Robotics-Cangesoli.pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 62185557,
-      "exportedPath": "COMP34212/Cognitive-Robotics-Cangesoli.pdf",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 3765,
-      "exportedPath": "COMP34212/COMP34212.html",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212 Readings.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 325,
-      "exportedPath": "COMP34212/COMP34212 Readings.html",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212 revision lecture.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 74,
-      "exportedPath": "COMP34212/COMP34212 revision lecture.html",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212_Lecture_DevelopmentalRobotics.pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 11643291,
-      "exportedPath": "COMP34212/COMP34212_Lecture_DevelopmentalRobotics.pdf",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212_Lecture_Navigation.pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 51222586,
-      "exportedPath": "COMP34212/COMP34212_Lecture_Navigation.pdf",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212_Lecture01b_CognitiveRobotics(1).pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 4339640,
-      "exportedPath": "COMP34212/COMP34212_Lecture01b_CognitiveRobotics(1).pdf",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212_Lecture04_SensorsActuators_2022.pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 27200439,
-      "exportedPath": "COMP34212/COMP34212_Lecture04_SensorsActuators_2022.pdf",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212_Lecture7_DeepLearning.pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 13487481,
-      "exportedPath": "COMP34212/COMP34212_Lecture7_DeepLearning.pdf",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212_Lecture07_SoftwarePepper2022(1).pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 3618812,
-      "exportedPath": "COMP34212/COMP34212_Lecture07_SoftwarePepper2022(1).pdf",
-      "dependencies": []
-    },
-    "COMP34212/COMP34212-Handbook-2024.pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 637803,
-      "exportedPath": "COMP34212/COMP34212-Handbook-2024.pdf",
-      "dependencies": []
-    },
-    "COMP34212/cybernetics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 221,
-      "exportedPath": "COMP34212/cybernetics.html",
-      "dependencies": []
-    },
-    "COMP34212/data augmentation.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 444,
-      "exportedPath": "COMP34212/data augmentation.html",
-      "dependencies": []
-    },
-    "COMP34212/deep learning for manipulation.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 15,
-      "exportedPath": "COMP34212/deep learning for manipulation.html",
-      "dependencies": []
-    },
-    "COMP34212/developmental robotics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1705,
-      "exportedPath": "COMP34212/developmental robotics.html",
-      "dependencies": []
-    },
-    "COMP34212/dropout in neural networks.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 664,
-      "exportedPath": "COMP34212/dropout in neural networks.html",
-      "dependencies": []
-    },
-    "COMP34212/ecological balance.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 107,
-      "exportedPath": "COMP34212/ecological balance.html",
-      "dependencies": []
-    },
-    "COMP34212/embeddings in ML.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 641,
-      "exportedPath": "COMP34212/embeddings in ML.html",
-      "dependencies": []
-    },
-    "COMP34212/embodied intelligence.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1789,
-      "exportedPath": "COMP34212/embodied intelligence.html",
-      "dependencies": []
-    },
-    "COMP34212/ethics approaches.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 839,
-      "exportedPath": "COMP34212/ethics approaches.html",
-      "dependencies": []
-    },
-    "COMP34212/evolutionary robotics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1843,
-      "exportedPath": "COMP34212/evolutionary robotics.html",
-      "dependencies": []
-    },
-    "COMP34212/evolving morphologies + evolutionary algorithms.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 2483,
-      "exportedPath": "COMP34212/evolving morphologies + evolutionary algorithms.html",
-      "dependencies": []
-    },
-    "COMP34212/extended kalman filters.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 290,
-      "exportedPath": "COMP34212/extended kalman filters.html",
-      "dependencies": []
-    },
-    "COMP34212/fields of AI+Robotics and ethics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1209,
-      "exportedPath": "COMP34212/fields of AI+Robotics and ethics.html",
-      "dependencies": []
-    },
-    "COMP34212/grey walters tortoise.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 15,
-      "exportedPath": "COMP34212/grey walters tortoise.html",
-      "dependencies": []
-    },
-    "COMP34212/HAMMER architecture.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 834,
-      "exportedPath": "COMP34212/HAMMER architecture.html",
-      "dependencies": []
-    },
-    "COMP34212/history of CR.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1058,
-      "exportedPath": "COMP34212/history of CR.html",
-      "dependencies": []
-    },
-    "COMP34212/human-robotic interaction (HRI).md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1335,
-      "exportedPath": "COMP34212/human-robotic interaction (HRI).html",
-      "dependencies": []
-    },
-    "COMP34212/hydraulics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 203,
-      "exportedPath": "COMP34212/hydraulics.html",
-      "dependencies": []
-    },
-    "COMP34212/iconic + monte carlo localisation.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 711,
-      "exportedPath": "COMP34212/iconic + monte carlo localisation.html",
-      "dependencies": []
-    },
-    "COMP34212/lidar.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 472,
-      "exportedPath": "COMP34212/lidar.html",
-      "dependencies": []
-    },
-    "COMP34212/locomotion.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 198,
-      "exportedPath": "COMP34212/locomotion.html",
-      "dependencies": []
-    },
-    "COMP34212/manipulators.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1441,
-      "exportedPath": "COMP34212/manipulators.html",
-      "dependencies": []
-    },
-    "COMP34212/marcov localisation.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 210,
-      "exportedPath": "COMP34212/marcov localisation.html",
-      "dependencies": []
-    },
-    "COMP34212/marr's levels of abstraction.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 488,
-      "exportedPath": "COMP34212/marr's levels of abstraction.html",
-      "dependencies": []
-    },
-    "COMP34212/modelling artificial cognitive systems.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 702,
-      "exportedPath": "COMP34212/modelling artificial cognitive systems.html",
-      "dependencies": []
-    },
-    "COMP34212/morphological computation.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 514,
-      "exportedPath": "COMP34212/morphological computation.html",
-      "dependencies": []
-    },
-    "COMP34212/motor babbling.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 66,
-      "exportedPath": "COMP34212/motor babbling.html",
-      "dependencies": []
-    },
-    "COMP34212/motors.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 312,
-      "exportedPath": "COMP34212/motors.html",
-      "dependencies": []
-    },
-    "COMP34212/naoqi python example.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 427,
-      "exportedPath": "COMP34212/naoqi python example.html",
-      "dependencies": []
-    },
-    "COMP34212/NN training datasets.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 715,
-      "exportedPath": "COMP34212/NN training datasets.html",
-      "dependencies": []
-    },
-    "COMP34212/objectives for ethical AI.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 495,
-      "exportedPath": "COMP34212/objectives for ethical AI.html",
-      "dependencies": []
-    },
-    "COMP34212/passive vision.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 219,
-      "exportedPath": "COMP34212/passive vision.html",
-      "dependencies": []
-    },
-    "COMP34212/path planning.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1200,
-      "exportedPath": "COMP34212/path planning.html",
-      "dependencies": []
-    },
-    "COMP34212/perceptrons.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 354,
-      "exportedPath": "COMP34212/perceptrons.html",
-      "dependencies": []
-    },
-    "COMP34212/piaget's stages of cognitive development.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 318,
-      "exportedPath": "COMP34212/piaget's stages of cognitive development.html",
-      "dependencies": []
-    },
-    "COMP34212/pneumatics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 310,
-      "exportedPath": "COMP34212/pneumatics.html",
-      "dependencies": []
-    },
-    "COMP34212/pooling (sub-sampling).md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 327,
-      "exportedPath": "COMP34212/pooling (sub-sampling).html",
-      "dependencies": []
-    },
-    "COMP34212/potential harms of AI and robotics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 285,
-      "exportedPath": "COMP34212/potential harms of AI and robotics.html",
-      "dependencies": []
-    },
-    "COMP34212/ratSLAM.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 2099,
-      "exportedPath": "COMP34212/ratSLAM.html",
-      "dependencies": []
-    },
-    "COMP34212/reactive materials.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 405,
-      "exportedPath": "COMP34212/reactive materials.html",
-      "dependencies": []
-    },
-    "COMP34212/robot.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 206,
-      "exportedPath": "COMP34212/robot.html",
-      "dependencies": []
-    },
-    "COMP34212/robot localisation.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 945,
-      "exportedPath": "COMP34212/robot localisation.html",
-      "dependencies": []
-    },
-    "COMP34212/robot locomotion.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 228,
-      "exportedPath": "COMP34212/robot locomotion.html",
-      "dependencies": []
-    },
-    "COMP34212/robot motion.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 320,
-      "exportedPath": "COMP34212/robot motion.html",
-      "dependencies": []
-    },
-    "COMP34212/Robot Navigation.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 303,
-      "exportedPath": "COMP34212/Robot Navigation.html",
-      "dependencies": []
-    },
-    "COMP34212/robotics middleware.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1459,
-      "exportedPath": "COMP34212/robotics middleware.html",
-      "dependencies": []
-    },
-    "COMP34212/sequential keras model.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 210,
-      "exportedPath": "COMP34212/sequential keras model.html",
-      "dependencies": []
-    },
-    "COMP34212/shallow vs deep neural networks.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 527,
-      "exportedPath": "COMP34212/shallow vs deep neural networks.html",
-      "dependencies": []
-    },
-    "COMP34212/SLAM.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 518,
-      "exportedPath": "COMP34212/SLAM.html",
-      "dependencies": []
-    },
-    "COMP34212/social interaction skills.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1795,
-      "exportedPath": "COMP34212/social interaction skills.html",
-      "dependencies": []
-    },
-    "COMP34212/softbank PEPPER robot.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 306,
-      "exportedPath": "COMP34212/softbank PEPPER robot.html",
-      "dependencies": []
-    },
-    "COMP34212/sonars.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 102,
-      "exportedPath": "COMP34212/sonars.html",
-      "dependencies": []
-    },
-    "COMP34212/swarm robotics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1569,
-      "exportedPath": "COMP34212/swarm robotics.html",
-      "dependencies": []
-    },
-    "COMP34212/the definition of cognitive robotics.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1341,
-      "exportedPath": "COMP34212/the definition of cognitive robotics.html",
-      "dependencies": []
-    },
-    "COMP34212/Tony Belpaeme - Slides Machester 2024.pdf": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 7566701,
-      "exportedPath": "COMP34212/Tony Belpaeme - Slides Machester 2024.pdf",
-      "dependencies": []
-    },
-    "COMP34212/training terminology.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 226,
-      "exportedPath": "COMP34212/training terminology.html",
-      "dependencies": []
-    },
-    "COMP34212/transformers.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1562,
-      "exportedPath": "COMP34212/transformers.html",
-      "dependencies": []
-    },
-    "COMP34212/trust in human-robot interaction.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1635,
-      "exportedPath": "COMP34212/trust in human-robot interaction.html",
-      "dependencies": []
-    },
-    "COMP34212/types of feedback control.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1228,
-      "exportedPath": "COMP34212/types of feedback control.html",
-      "dependencies": []
-    },
-    "COMP34212/types of robot.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 1123,
-      "exportedPath": "COMP34212/types of robot.html",
-      "dependencies": []
-    },
-    "COMP34212/uncanny valley.md": {
-      "modifiedTime": 1714930992242,
-      "sourceSize": 251,
-      "exportedPath": "COMP34212/uncanny valley.html",
-      "dependencies": []
-    },
     "lib/fonts/94f2f163d4b698242fef.otf": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 66800,
       "exportedPath": "lib/fonts/94f2f163d4b698242fef.otf",
       "dependencies": []
     },
     "lib/fonts/72505e6a122c6acd5471.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 104232,
       "exportedPath": "lib/fonts/72505e6a122c6acd5471.woff2",
       "dependencies": []
     },
     "lib/fonts/2d5198822ab091ce4305.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 104332,
       "exportedPath": "lib/fonts/2d5198822ab091ce4305.woff2",
       "dependencies": []
     },
     "lib/fonts/c8ba52b05a9ef10f4758.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 98868,
       "exportedPath": "lib/fonts/c8ba52b05a9ef10f4758.woff2",
       "dependencies": []
     },
     "lib/fonts/cb10ffd7684cd9836a05.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 106876,
       "exportedPath": "lib/fonts/cb10ffd7684cd9836a05.woff2",
       "dependencies": []
     },
     "lib/fonts/b5f0f109bc88052d4000.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 105804,
       "exportedPath": "lib/fonts/b5f0f109bc88052d4000.woff2",
       "dependencies": []
     },
     "lib/fonts/cbe0ae49c52c920fd563.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 106108,
       "exportedPath": "lib/fonts/cbe0ae49c52c920fd563.woff2",
       "dependencies": []
     },
     "lib/fonts/535a6cf662596b3bd6a6.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 111708,
       "exportedPath": "lib/fonts/535a6cf662596b3bd6a6.woff2",
       "dependencies": []
     },
     "lib/fonts/70cc7ff27245e82ad414.ttf": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 192740,
       "exportedPath": "lib/fonts/70cc7ff27245e82ad414.ttf",
       "dependencies": []
     },
     "lib/fonts/454577c22304619db035.ttf": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 161376,
       "exportedPath": "lib/fonts/454577c22304619db035.ttf",
       "dependencies": []
     },
     "lib/fonts/52ac8f3034507f1d9e53.ttf": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 191568,
       "exportedPath": "lib/fonts/52ac8f3034507f1d9e53.ttf",
       "dependencies": []
     },
     "lib/fonts/05b618077343fbbd92b7.ttf": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 155288,
       "exportedPath": "lib/fonts/05b618077343fbbd92b7.ttf",
       "dependencies": []
     },
     "lib/fonts/4bb6ac751d1c5478ff3a.woff2": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 7876,
       "exportedPath": "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
       "dependencies": []
     },
     "lib/media/874d8b8e340f75575caa.svg": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 317,
       "exportedPath": "lib/media/874d8b8e340f75575caa.svg",
       "dependencies": []
     },
     "lib/fonts/MathJax_Zero.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 1368,
       "exportedPath": "lib/fonts/MathJax_Zero.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Main-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 34160,
       "exportedPath": "lib/fonts/MathJax_Main-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Main-Bold.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 34464,
       "exportedPath": "lib/fonts/MathJax_Main-Bold.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Math-Italic.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 19360,
       "exportedPath": "lib/fonts/MathJax_Math-Italic.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Main-Italic.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 20832,
       "exportedPath": "lib/fonts/MathJax_Main-Italic.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Math-BoldItalic.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 19776,
       "exportedPath": "lib/fonts/MathJax_Math-BoldItalic.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Size1-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 5792,
       "exportedPath": "lib/fonts/MathJax_Size1-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Size2-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 5464,
       "exportedPath": "lib/fonts/MathJax_Size2-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Size3-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 3244,
       "exportedPath": "lib/fonts/MathJax_Size3-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Size4-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 5148,
       "exportedPath": "lib/fonts/MathJax_Size4-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_AMS-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 40808,
       "exportedPath": "lib/fonts/MathJax_AMS-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Calligraphic-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 9600,
       "exportedPath": "lib/fonts/MathJax_Calligraphic-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Calligraphic-Bold.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 9908,
       "exportedPath": "lib/fonts/MathJax_Calligraphic-Bold.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Fraktur-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 21480,
       "exportedPath": "lib/fonts/MathJax_Fraktur-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Fraktur-Bold.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 22340,
       "exportedPath": "lib/fonts/MathJax_Fraktur-Bold.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_SansSerif-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 12660,
       "exportedPath": "lib/fonts/MathJax_SansSerif-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_SansSerif-Bold.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 15944,
       "exportedPath": "lib/fonts/MathJax_SansSerif-Bold.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_SansSerif-Italic.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 14628,
       "exportedPath": "lib/fonts/MathJax_SansSerif-Italic.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Script-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 11852,
       "exportedPath": "lib/fonts/MathJax_Script-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Typewriter-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 17604,
       "exportedPath": "lib/fonts/MathJax_Typewriter-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Vector-Regular.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 1136,
       "exportedPath": "lib/fonts/MathJax_Vector-Regular.woff",
       "dependencies": []
     },
     "lib/fonts/MathJax_Vector-Bold.woff": {
-      "modifiedTime": 1714930992242,
+      "modifiedTime": 1715001849888,
       "sourceSize": 1116,
       "exportedPath": "lib/fonts/MathJax_Vector-Bold.woff",
+      "dependencies": []
+    },
+    "COMP34212/flashcards/definitions.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 908,
+      "exportedPath": "COMP34212/flashcards/definitions.html",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1).ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 2193953,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1).ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1) (1).ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1061834,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab1a_Keras_XOR(1) (1).ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023.ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 65940,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023.ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023 (1).ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 58830,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab1b_Keras_MLP_MNIST-2023 (1).ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024.ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 12057482,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024.ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024 (1).ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 12056348,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024 (1).ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab2b_Keras_CNN_CIFAR_2023.ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 158982,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab2b_Keras_CNN_CIFAR_2023.ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab3_RNN-2024.ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 78574,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab3_RNN-2024.ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212_Lab3_RNN-2024 (1).ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 83776,
+      "exportedPath": "COMP34212/labs/COMP34212_Lab3_RNN-2024 (1).ipynb",
+      "dependencies": []
+    },
+    "COMP34212/labs/COMP34212-LAB.ipynb": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 623,
+      "exportedPath": "COMP34212/labs/COMP34212-LAB.ipynb",
+      "dependencies": []
+    },
+    "COMP34212/active vision.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 330,
+      "exportedPath": "COMP34212/active vision.html",
+      "dependencies": []
+    },
+    "COMP34212/actuator control.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 922,
+      "exportedPath": "COMP34212/actuator control.html",
+      "dependencies": []
+    },
+    "COMP34212/actuators.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 518,
+      "exportedPath": "COMP34212/actuators.html",
+      "dependencies": []
+    },
+    "COMP34212/autonomous robot workflow.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 52,
+      "exportedPath": "COMP34212/autonomous robot workflow.html",
+      "dependencies": []
+    },
+    "COMP34212/behaviour-based robotics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 784,
+      "exportedPath": "COMP34212/behaviour-based robotics.html",
+      "dependencies": []
+    },
+    "COMP34212/benchmark datasets.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 632,
+      "exportedPath": "COMP34212/benchmark datasets.html",
+      "dependencies": []
+    },
+    "COMP34212/braitenberg vehicles.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 262,
+      "exportedPath": "COMP34212/braitenberg vehicles.html",
+      "dependencies": []
+    },
+    "COMP34212/brief history of neural networks.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 2254,
+      "exportedPath": "COMP34212/brief history of neural networks.html",
+      "dependencies": []
+    },
+    "COMP34212/choregraphe.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 418,
+      "exportedPath": "COMP34212/choregraphe.html",
+      "dependencies": []
+    },
+    "COMP34212/cognition.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 520,
+      "exportedPath": "COMP34212/cognition.html",
+      "dependencies": []
+    },
+    "COMP34212/Cognitive-Robotics-Cangesoli.pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 62185557,
+      "exportedPath": "COMP34212/Cognitive-Robotics-Cangesoli.pdf",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 3713,
+      "exportedPath": "COMP34212/COMP34212.html",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212 Readings.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 8146,
+      "exportedPath": "COMP34212/COMP34212 Readings.html",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212 revision lecture.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 74,
+      "exportedPath": "COMP34212/COMP34212 revision lecture.html",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212_Lecture_DevelopmentalRobotics.pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 11643291,
+      "exportedPath": "COMP34212/COMP34212_Lecture_DevelopmentalRobotics.pdf",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212_Lecture_Navigation.pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 51222586,
+      "exportedPath": "COMP34212/COMP34212_Lecture_Navigation.pdf",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212_Lecture01b_CognitiveRobotics(1).pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 4339640,
+      "exportedPath": "COMP34212/COMP34212_Lecture01b_CognitiveRobotics(1).pdf",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212_Lecture04_SensorsActuators_2022.pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 27200439,
+      "exportedPath": "COMP34212/COMP34212_Lecture04_SensorsActuators_2022.pdf",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212_Lecture7_DeepLearning.pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 13487481,
+      "exportedPath": "COMP34212/COMP34212_Lecture7_DeepLearning.pdf",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212_Lecture07_SoftwarePepper2022(1).pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 3618812,
+      "exportedPath": "COMP34212/COMP34212_Lecture07_SoftwarePepper2022(1).pdf",
+      "dependencies": []
+    },
+    "COMP34212/COMP34212-Handbook-2024.pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 637803,
+      "exportedPath": "COMP34212/COMP34212-Handbook-2024.pdf",
+      "dependencies": []
+    },
+    "COMP34212/cybernetics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 221,
+      "exportedPath": "COMP34212/cybernetics.html",
+      "dependencies": []
+    },
+    "COMP34212/data augmentation.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 444,
+      "exportedPath": "COMP34212/data augmentation.html",
+      "dependencies": []
+    },
+    "COMP34212/deep learning for manipulation.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 15,
+      "exportedPath": "COMP34212/deep learning for manipulation.html",
+      "dependencies": []
+    },
+    "COMP34212/developmental robotics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1705,
+      "exportedPath": "COMP34212/developmental robotics.html",
+      "dependencies": []
+    },
+    "COMP34212/dropout in neural networks.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 664,
+      "exportedPath": "COMP34212/dropout in neural networks.html",
+      "dependencies": []
+    },
+    "COMP34212/ecological balance.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 107,
+      "exportedPath": "COMP34212/ecological balance.html",
+      "dependencies": []
+    },
+    "COMP34212/embeddings in ML.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 641,
+      "exportedPath": "COMP34212/embeddings in ML.html",
+      "dependencies": []
+    },
+    "COMP34212/embodied intelligence.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1789,
+      "exportedPath": "COMP34212/embodied intelligence.html",
+      "dependencies": []
+    },
+    "COMP34212/ethics approaches.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 839,
+      "exportedPath": "COMP34212/ethics approaches.html",
+      "dependencies": []
+    },
+    "COMP34212/evolutionary robotics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1843,
+      "exportedPath": "COMP34212/evolutionary robotics.html",
+      "dependencies": []
+    },
+    "COMP34212/evolving morphologies + evolutionary algorithms.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 2483,
+      "exportedPath": "COMP34212/evolving morphologies + evolutionary algorithms.html",
+      "dependencies": []
+    },
+    "COMP34212/extended kalman filters.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 290,
+      "exportedPath": "COMP34212/extended kalman filters.html",
+      "dependencies": []
+    },
+    "COMP34212/fields of AI+Robotics and ethics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1209,
+      "exportedPath": "COMP34212/fields of AI+Robotics and ethics.html",
+      "dependencies": []
+    },
+    "COMP34212/grey walters tortoise.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 15,
+      "exportedPath": "COMP34212/grey walters tortoise.html",
+      "dependencies": []
+    },
+    "COMP34212/HAMMER architecture.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 834,
+      "exportedPath": "COMP34212/HAMMER architecture.html",
+      "dependencies": []
+    },
+    "COMP34212/history of CR.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1058,
+      "exportedPath": "COMP34212/history of CR.html",
+      "dependencies": []
+    },
+    "COMP34212/human-robotic interaction (HRI).md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1335,
+      "exportedPath": "COMP34212/human-robotic interaction (HRI).html",
+      "dependencies": []
+    },
+    "COMP34212/hydraulics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 203,
+      "exportedPath": "COMP34212/hydraulics.html",
+      "dependencies": []
+    },
+    "COMP34212/iconic + monte carlo localisation.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 711,
+      "exportedPath": "COMP34212/iconic + monte carlo localisation.html",
+      "dependencies": []
+    },
+    "COMP34212/lidar.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 472,
+      "exportedPath": "COMP34212/lidar.html",
+      "dependencies": []
+    },
+    "COMP34212/locomotion.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 198,
+      "exportedPath": "COMP34212/locomotion.html",
+      "dependencies": []
+    },
+    "COMP34212/manipulators.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1441,
+      "exportedPath": "COMP34212/manipulators.html",
+      "dependencies": []
+    },
+    "COMP34212/marcov localisation.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 210,
+      "exportedPath": "COMP34212/marcov localisation.html",
+      "dependencies": []
+    },
+    "COMP34212/marr's levels of abstraction.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 488,
+      "exportedPath": "COMP34212/marr's levels of abstraction.html",
+      "dependencies": []
+    },
+    "COMP34212/modelling artificial cognitive systems.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 702,
+      "exportedPath": "COMP34212/modelling artificial cognitive systems.html",
+      "dependencies": []
+    },
+    "COMP34212/morphological computation.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 514,
+      "exportedPath": "COMP34212/morphological computation.html",
+      "dependencies": []
+    },
+    "COMP34212/motor babbling.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 66,
+      "exportedPath": "COMP34212/motor babbling.html",
+      "dependencies": []
+    },
+    "COMP34212/motors.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 312,
+      "exportedPath": "COMP34212/motors.html",
+      "dependencies": []
+    },
+    "COMP34212/naoqi python example.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 427,
+      "exportedPath": "COMP34212/naoqi python example.html",
+      "dependencies": []
+    },
+    "COMP34212/NN training datasets.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 715,
+      "exportedPath": "COMP34212/NN training datasets.html",
+      "dependencies": []
+    },
+    "COMP34212/objectives for ethical AI.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 495,
+      "exportedPath": "COMP34212/objectives for ethical AI.html",
+      "dependencies": []
+    },
+    "COMP34212/passive vision.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 219,
+      "exportedPath": "COMP34212/passive vision.html",
+      "dependencies": []
+    },
+    "COMP34212/path planning.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1200,
+      "exportedPath": "COMP34212/path planning.html",
+      "dependencies": []
+    },
+    "COMP34212/perceptrons.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 354,
+      "exportedPath": "COMP34212/perceptrons.html",
+      "dependencies": []
+    },
+    "COMP34212/piaget's stages of cognitive development.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 318,
+      "exportedPath": "COMP34212/piaget's stages of cognitive development.html",
+      "dependencies": []
+    },
+    "COMP34212/pneumatics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 310,
+      "exportedPath": "COMP34212/pneumatics.html",
+      "dependencies": []
+    },
+    "COMP34212/pooling (sub-sampling).md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 327,
+      "exportedPath": "COMP34212/pooling (sub-sampling).html",
+      "dependencies": []
+    },
+    "COMP34212/potential harms of AI and robotics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 285,
+      "exportedPath": "COMP34212/potential harms of AI and robotics.html",
+      "dependencies": []
+    },
+    "COMP34212/ratSLAM.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 2099,
+      "exportedPath": "COMP34212/ratSLAM.html",
+      "dependencies": []
+    },
+    "COMP34212/reactive materials.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 405,
+      "exportedPath": "COMP34212/reactive materials.html",
+      "dependencies": []
+    },
+    "COMP34212/robot.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 206,
+      "exportedPath": "COMP34212/robot.html",
+      "dependencies": []
+    },
+    "COMP34212/robot localisation.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 945,
+      "exportedPath": "COMP34212/robot localisation.html",
+      "dependencies": []
+    },
+    "COMP34212/robot locomotion.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 228,
+      "exportedPath": "COMP34212/robot locomotion.html",
+      "dependencies": []
+    },
+    "COMP34212/robot motion.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 320,
+      "exportedPath": "COMP34212/robot motion.html",
+      "dependencies": []
+    },
+    "COMP34212/Robot Navigation.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 303,
+      "exportedPath": "COMP34212/Robot Navigation.html",
+      "dependencies": []
+    },
+    "COMP34212/robotics middleware.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1459,
+      "exportedPath": "COMP34212/robotics middleware.html",
+      "dependencies": []
+    },
+    "COMP34212/sequential keras model.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 210,
+      "exportedPath": "COMP34212/sequential keras model.html",
+      "dependencies": []
+    },
+    "COMP34212/shallow vs deep neural networks.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 527,
+      "exportedPath": "COMP34212/shallow vs deep neural networks.html",
+      "dependencies": []
+    },
+    "COMP34212/SLAM.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 518,
+      "exportedPath": "COMP34212/SLAM.html",
+      "dependencies": []
+    },
+    "COMP34212/social interaction skills.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1795,
+      "exportedPath": "COMP34212/social interaction skills.html",
+      "dependencies": []
+    },
+    "COMP34212/softbank PEPPER robot.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 306,
+      "exportedPath": "COMP34212/softbank PEPPER robot.html",
+      "dependencies": []
+    },
+    "COMP34212/sonars.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 102,
+      "exportedPath": "COMP34212/sonars.html",
+      "dependencies": []
+    },
+    "COMP34212/swarm robotics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1569,
+      "exportedPath": "COMP34212/swarm robotics.html",
+      "dependencies": []
+    },
+    "COMP34212/the definition of cognitive robotics.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1341,
+      "exportedPath": "COMP34212/the definition of cognitive robotics.html",
+      "dependencies": []
+    },
+    "COMP34212/Tony Belpaeme - Slides Machester 2024.pdf": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 7566701,
+      "exportedPath": "COMP34212/Tony Belpaeme - Slides Machester 2024.pdf",
+      "dependencies": []
+    },
+    "COMP34212/training terminology.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 226,
+      "exportedPath": "COMP34212/training terminology.html",
+      "dependencies": []
+    },
+    "COMP34212/transformers.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1562,
+      "exportedPath": "COMP34212/transformers.html",
+      "dependencies": []
+    },
+    "COMP34212/trust in human-robot interaction.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1635,
+      "exportedPath": "COMP34212/trust in human-robot interaction.html",
+      "dependencies": []
+    },
+    "COMP34212/types of feedback control.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1228,
+      "exportedPath": "COMP34212/types of feedback control.html",
+      "dependencies": []
+    },
+    "COMP34212/types of robot.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 1123,
+      "exportedPath": "COMP34212/types of robot.html",
+      "dependencies": []
+    },
+    "COMP34212/uncanny valley.md": {
+      "modifiedTime": 1715001849888,
+      "sourceSize": 248,
+      "exportedPath": "COMP34212/uncanny valley.html",
       "dependencies": []
     }
   }
