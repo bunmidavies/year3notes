@@ -1,4 +1,5 @@
 [[COMP35112]]
+[random lecture notes](https://harmanani.github.io/classes/csc447/Notes/Lecture15.pdf)
 
 - thread < warp < block < grid
 
