@@ -1,7 +1,7 @@
 [[COMP34212]]
 
 - ratSLAM aims to emulate the spatial navigation ability of the rat's hippocampal system, who essentially build cognitive maps of environments
-- similar to SLAM, the overall goal is building and using maps of large and complex environments simultaneously - its less acurate than SLAM, but theres flexibility to:
+- similar to SLAM, the overall goal is building and using maps of large and complex environments simultaneously - its less accurate than SLAM, but theres flexibility to:
 	- cope with noisy input
 	- deal with changing environments
 	- accommodate complexity
@@ -23,7 +23,7 @@
 - thus, head direction cells have no correlation with the rat's location
 
 ### grid cells
-- grid cells fire in a metrically regular way across the whole surface of a given environment - the cells fire when a rat is located at any vertex of a hexagnoal pattern across the environment
+- grid cells fire in a metrically regular way across the whole surface of a given environment - the cells fire when a rat is located at any vertex of a hexagonal pattern across the environment
 - the cells are used as a signal for measuring displacement distances and direction
 
 # path integration
