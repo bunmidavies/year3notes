@@ -52,8 +52,5 @@ $$\textrm{work per thread >> commit effort}$$
 	- threads then all commit in program order
 
 - overheads of TLS include:
-	- dupilcate shared data 
+	- duplicate shared data 
 	- reads and writes need to be tracked
-# method-level TLS
-
-- as the name suggests, method-level TLS 

@@ -4,189 +4,147 @@
     "type": "split",
     "children": [
       {
-        "id": "2ac8c172002c879f",
+        "id": "3a6a60c6ed28ab8d",
         "type": "tabs",
         "children": [
           {
-            "id": "66f61d4cf4230b49",
+            "id": "1b7357649705d313",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP34212/Belpaeme et al. - Social robots for education (summary).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4354bde23b83e79d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMP34212/objectives for ethical AI.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "98bc92722791b8d6",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "UCIL20882/UCIL20882_Conservation_2.pdf"
+                "file": "web/COMP34212/Cognitive-Robotics-Cangesoli.pdf"
               }
             }
           },
           {
-            "id": "50928cceec78a1b7",
+            "id": "4847c0efffaae375",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP34312/NotesPack.pdf"
+              }
+            }
+          },
+          {
+            "id": "b19eb544a4329a3e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "Untitled.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "b24afbe27de46021",
+            "id": "49e62b72f85b70d1",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP34212/COMP34212_Lecture7_DeepLearning.pdf"
+              }
+            }
+          },
+          {
+            "id": "cacc1337857f0c49",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "COMP34212/COMP34212 Readings.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "79e3f9bacf915ed5",
+            "id": "96a11c26ebc2a67d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/invasive species.md",
+                "file": "COMP34212/COMP34212.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "cbd853f410e2d302",
+            "id": "4bb527aac811fab9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UCIL20882/UCIL20882.md",
+                "file": "year2notes/COMP24112/artificial neural networks.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "b50f524edd7a55d9",
+            "id": "49527955ef62dc21",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "COMP34312/NotesPack.pdf"
+              }
+            }
+          },
+          {
+            "id": "6dc2bc2671a4d1fa",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34312/COMP34312.md",
+                "file": "COMP34212/COMP34212.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "ae17fef9640078b7",
+            "id": "1811d381daa1ee0e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b3291daab69c65ff",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "2eb9325f56d55353",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4fd5b8533f5a626a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f3ffc9605b91e38e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0be719fc5fac94ce",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/COMP35112.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "265df445bfa515bc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP35112/OpenMP.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "756b30eca5e8dbdc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "year2notes/COMP25212/memory consistency.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4739e26954ee36a0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UCIL20882/invasive species.md",
+                "file": "COMP34212/cybernetics.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 12
+        "currentTab": 11
       }
     ],
     "direction": "vertical"
@@ -215,7 +173,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "SIMD",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -260,7 +218,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMP35112/OpenMP.md",
+                "file": "COMP34212/cybernetics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -277,7 +235,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMP35112/OpenMP.md",
+                "file": "COMP34212/cybernetics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -312,7 +270,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMP35112/OpenMP.md"
+                "file": "COMP34212/cybernetics.md"
               }
             }
           }
@@ -331,47 +289,86 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "webpage-html-export:Export Vault to HTML": false
     }
   },
-  "active": "265df445bfa515bc",
+  "floating": {
+    "id": "937e938502d26dc7",
+    "type": "floating",
+    "children": [
+      {
+        "id": "ef69161409105eed",
+        "type": "window",
+        "children": [
+          {
+            "id": "1526a50db6bcac4b",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "04275017d775c1cd",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "COMP34212/uncanny valley.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 510,
+        "y": 540,
+        "width": 900,
+        "height": 500,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "1811d381daa1ee0e",
   "lastOpenFiles": [
-    "COMP35112/church-rosser property.md",
-    "Untitled.md",
-    "COMP35112/COMP35112.md",
-    "COMP35112/dataflow architectures.md",
-    "COMP35112/functional programming for parallel programming.md",
-    "COMP35112/referential transparency.md",
-    "COMP35112/coherence is not consistency.md",
-    "COMP35112/memory consistency models.md",
-    "year2notes/COMP25212/memory consistency.md",
-    "COMP35112/memory inconsistency.md",
-    "COMP35112/OpenMP.md",
-    "COMP35112/polyhedral transformations.md",
-    "COMP35112/non-loop code.md",
-    "COMP35112/method-level TLS.md",
-    "COMP35112/hybrid transactional memory.md",
-    "COMP35112/hardware transactional memory.md",
-    "COMP35112/arbitrary point TLS.md",
-    "COMP34312/rademacher complexity.md",
-    "COMP35112/processor speculation.md",
-    "COMP34312/how can the true distribution have noise.md",
+    "COMP34212/COMP34212.md",
+    "COMP34212/behaviour-based robotics.md",
+    "web/COMP34212/Cognitive-Robotics-Cangesoli.pdf",
     "COMP34312/COMP34312.md",
-    "UCIL20882/UCIL20882.md",
-    "UCIL20882/new approaches to killing bacteria.md",
-    "UCIL20882/microbes.md",
-    "UCIL20882/invasive species.md",
-    "UCIL20882/UCIL20882_Conservation_2.pdf",
-    "UCIL20882/native and non-native species.md",
-    "UCIL20882/UCIL20882_Conservation_1(1).pdf",
-    "UCIL20882/Human Brain II.pdf",
-    "UCIL20882/Exam preparation 2024(2).pdf",
-    "COMP34212/labs/COMP34212-LAB.ipynb",
-    "COMP34212/labs/Untitled.ipynb",
-    "COMP34212/labs/COMP34212_Lab3_RNN-2024 (1).ipynb",
-    "COMP34212/labs/COMP34212_Lab2a_Keras_CNN_MNIST_2024.ipynb",
-    "COMP34212/labs/COMP34212_Lab2b_Keras_CNN_CIFAR_2023.ipynb",
-    "COMP34312/Mathematics of Machine Learning - for Undergrads-Lecture7-8.pdf",
+    "COMP34212/objectives for ethical AI.md",
+    "COMP34212/pooling (sub-sampling).md",
+    "COMP34212/Belpaeme et al. - Social robots for education (summary).md",
+    "COMP34212/COMP34212 Readings.md",
+    "COMP34212/uncanny valley.md",
+    "web/COMP34212/robotics middleware.html",
+    "web/COMP34212/Robot Navigation.html",
+    "web/COMP34212/robot motion.html",
+    "web/COMP34212/robot locomotion.html",
+    "web/COMP34212/robot localisation.html",
+    "web/COMP34212/robot.html",
+    "web/COMP34212/reactive materials.html",
+    "web/COMP34212/ratSLAM.html",
+    "web/COMP34212/potential harms of AI and robotics.html",
+    "COMP34212/types of feedback control.md",
+    "COMP34212/trust in human-robot interaction.md",
+    "COMP34212/transformers.md",
+    "COMP34212/the definition of cognitive robotics.md",
+    "COMP34212/sonars.md",
+    "COMP34212/softbank PEPPER robot.md",
+    "COMP34212/social interaction skills.md",
+    "COMP34212/SLAM.md",
+    "COMP34212/shallow vs deep neural networks.md",
+    "COMP34212/robotics middleware.md",
+    "COMP34212/Robot Navigation.md",
+    "COMP34212/robot locomotion.md",
+    "COMP34212/robot localisation.md",
+    "COMP34212/robot.md",
+    "COMP34212/reactive materials.md",
+    "COMP34212/potential harms of AI and robotics.md",
+    "COMP34212/piaget's stages of cognitive development.md",
+    "COMP34212/perceptrons.md",
+    "COMP34312/download.png",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",
     "COMP32211/COMP32211_notes_0-5/figures/video_timing.png",
@@ -381,7 +378,6 @@
     "COMP32211/COMP32211_notes_0-5/figures/VDU_control.png",
     "COMP32211/COMP32211_notes_0-5/figures/VDU.png",
     "COMP32211/COMP32211_notes_0-5/figures/two_flip_flops.png",
-    "COMP32211/COMP32211_notes_0-5/figures/truth_XOR.png",
-    "COMP32211/COMP32211_notes_0-5/figures/truth_OR.png"
+    "COMP32211/COMP32211_notes_0-5/figures/truth_XOR.png"
   ]
 }

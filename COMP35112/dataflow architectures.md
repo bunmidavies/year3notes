@@ -29,3 +29,6 @@ the machine used SISAL (stream and iteration in a single assignment language), i
 
 moving tokens around a large network, as well as using a huge amount of chips meant the computer became too expensive for what it was worth. However, the concept of limited dataflow is a precursor to things like OoO execution, signal processing, tasked-based computing, etc.
 
+![](https://i.imgur.com/S55FuVU.png)
+
+
