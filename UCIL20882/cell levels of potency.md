@@ -2,7 +2,7 @@
 
 - cell potency becomes progressively restricted as an embryo develops
 
-![](https://i.imgur.com/IKpCkou.png)
+![600](https://i.imgur.com/IKpCkou.png)
 
 # totipotency
 
