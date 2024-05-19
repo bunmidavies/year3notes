@@ -24,7 +24,6 @@
 
 [Sunderhauf et al. (2018)](https://journals.sagepub.com/doi/pdf/10.1177/0278364918770733) - The limits and potentials of deep learning for robotics
 
-
 # Labs
 
 

@@ -2,7 +2,7 @@
 
 - antibiotics destroy bacteria by:
 	- destroying the cell wall firstly, preventing the bacteria from replicating (this is what the first versions of antibiotics achieved)
-	- inhibiting protein synthesis (destroying ribosomes?)
+	- inhibiting protein synthesis (destroying ribosomes)
 
 ![500](https://i.imgur.com/uZSvw94.png)
 
