@@ -8,143 +8,133 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1b7357649705d313",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP34212/Belpaeme et al. - Social robots for education (summary).md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4354bde23b83e79d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP34212/objectives for ethical AI.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "98bc92722791b8d6",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "web/COMP34212/Cognitive-Robotics-Cangesoli.pdf"
-              }
-            }
-          },
-          {
-            "id": "4847c0efffaae375",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34312/NotesPack.pdf"
-              }
-            }
-          },
-          {
-            "id": "b19eb544a4329a3e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "49e62b72f85b70d1",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34212/COMP34212_Lecture7_DeepLearning.pdf"
-              }
-            }
-          },
-          {
-            "id": "cacc1337857f0c49",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP34212/COMP34212 Readings.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "96a11c26ebc2a67d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP34212/COMP34212.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4bb527aac811fab9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "year2notes/COMP24112/artificial neural networks.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "49527955ef62dc21",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "COMP34312/NotesPack.pdf"
-              }
-            }
-          },
-          {
-            "id": "6dc2bc2671a4d1fa",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COMP34212/COMP34212.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "1811d381daa1ee0e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMP34212/cybernetics.md",
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "fcd097df217241e6",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "UCIL20882/LT4 - Stem cells applications.pdf"
+              }
+            }
+          },
+          {
+            "id": "048a874aa2ff7654",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/cloning dolly.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "8e6537e0d1dd82b7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/gene mutation location effects.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d942847cc60d3459",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/gene promoter.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "cab182f0cb665a44",
+            "type": "leaf",
+            "state": {
+              "type": "surfing-view",
+              "state": {
+                "url": "https://en.wikipedia.org/wiki/Enhancer_(genetics)"
+              }
+            }
+          },
+          {
+            "id": "fe1f9c053ea1cf0f",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "UCIL20882/LT2- Mutations and human genome project(1) (1).pdf"
+              }
+            }
+          },
+          {
+            "id": "e0a7e66008f42faa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9c0adda5701f3ec4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "918c87f198c5e493",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/UCIL20882.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c6629e87c331b40d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UCIL20882/synaptic cleft.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -218,7 +208,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMP34212/cybernetics.md",
+                "file": "UCIL20882/synaptic cleft.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -235,7 +225,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMP34212/cybernetics.md",
+                "file": "UCIL20882/synaptic cleft.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -270,7 +260,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMP34212/cybernetics.md"
+                "file": "UCIL20882/synaptic cleft.md"
               }
             }
           }
@@ -293,81 +283,44 @@
       "webpage-html-export:Export Vault to HTML": false
     }
   },
-  "floating": {
-    "id": "937e938502d26dc7",
-    "type": "floating",
-    "children": [
-      {
-        "id": "ef69161409105eed",
-        "type": "window",
-        "children": [
-          {
-            "id": "1526a50db6bcac4b",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "04275017d775c1cd",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "COMP34212/uncanny valley.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 510,
-        "y": 540,
-        "width": 900,
-        "height": 500,
-        "maximize": false,
-        "zoom": 0
-      }
-    ]
-  },
-  "active": "1811d381daa1ee0e",
+  "active": "2a548a320f82d9ca",
   "lastOpenFiles": [
-    "COMP34212/COMP34212.md",
-    "COMP34212/behaviour-based robotics.md",
+    "UCIL20882/UCIL20882.md",
+    "UCIL20882/plasma membrane of the neuron.md",
+    "UCIL20882/cerebellum & brain stem.md",
+    "UCIL20882/LT2- Mutations and human genome project(1) (1).pdf",
+    "UCIL20882/human genome project.md",
+    "UCIL20882/neuroglia.md",
+    "UCIL20882/microorganisms.md",
+    "UCIL20882/re-emerging infectious diseases.md",
+    "UCIL20882/phage therapy.md",
+    "UCIL20882/invasive species.md",
+    "UCIL20882/parkinsons disease.md",
+    "UCIL20882/LT4 - Stem cells applications.pdf",
+    "UCIL20882/cloning dolly.md",
+    "UCIL20882/the gurdon cloning experiment.md",
+    "UCIL20882/LT3- Human development 2.pdf",
+    "UCIL20882/overview of human development.md",
+    "UCIL20882/organogenesis.md",
+    "UCIL20882/alzheimers disease.md",
+    "UCIL20882/neurone.md",
+    "UCIL20882/seizures.md",
+    "UCIL20882/gene mutation location effects.md",
+    "UCIL20882/occipital lobe.md",
+    "UCIL20882/temporal lobe.md",
+    "UCIL20882/parietal lobe.md",
+    "UCIL20882/frontal lobe of the brain.md",
+    "UCIL20882/biomarkers.md",
+    "UCIL20882/pharmacogenomics (PGx).md",
+    "UCIL20882/extinction vortex.md",
+    "UCIL20882/antibiotic resistance.md",
+    "UCIL20882/AICTIB 2024 Micro lectures 1-2 prelecture release (3).pdf",
+    "COMP34212/COMP34212_Lecture13_Ethics_2024.pdf",
+    "COMP34312/NotesPack.pdf",
+    "COMP34212/COMP34212_Lecture7_DeepLearning.pdf",
     "web/COMP34212/Cognitive-Robotics-Cangesoli.pdf",
-    "COMP34312/COMP34312.md",
-    "COMP34212/objectives for ethical AI.md",
-    "COMP34212/pooling (sub-sampling).md",
-    "COMP34212/Belpaeme et al. - Social robots for education (summary).md",
-    "COMP34212/COMP34212 Readings.md",
-    "COMP34212/uncanny valley.md",
     "web/COMP34212/robotics middleware.html",
     "web/COMP34212/Robot Navigation.html",
-    "web/COMP34212/robot motion.html",
-    "web/COMP34212/robot locomotion.html",
-    "web/COMP34212/robot localisation.html",
-    "web/COMP34212/robot.html",
-    "web/COMP34212/reactive materials.html",
-    "web/COMP34212/ratSLAM.html",
-    "web/COMP34212/potential harms of AI and robotics.html",
-    "COMP34212/types of feedback control.md",
-    "COMP34212/trust in human-robot interaction.md",
-    "COMP34212/transformers.md",
-    "COMP34212/the definition of cognitive robotics.md",
-    "COMP34212/sonars.md",
-    "COMP34212/softbank PEPPER robot.md",
-    "COMP34212/social interaction skills.md",
-    "COMP34212/SLAM.md",
-    "COMP34212/shallow vs deep neural networks.md",
-    "COMP34212/robotics middleware.md",
-    "COMP34212/Robot Navigation.md",
-    "COMP34212/robot locomotion.md",
-    "COMP34212/robot localisation.md",
-    "COMP34212/robot.md",
-    "COMP34212/reactive materials.md",
-    "COMP34212/potential harms of AI and robotics.md",
-    "COMP34212/piaget's stages of cognitive development.md",
-    "COMP34212/perceptrons.md",
     "COMP34312/download.png",
     "Untitled.canvas",
     "COMP32211/COMP32211_notes_0-5/figures/V_diagram.png",

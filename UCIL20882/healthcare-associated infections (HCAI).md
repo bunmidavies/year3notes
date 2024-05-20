@@ -1,6 +1,6 @@
 [[UCIL20882]]
 
-- otherwise known as hospital-acquired infections, HAIs/HCAIs typically occur as a result of micro-organisms being carried by patients entering a hospital, or immuno-compromised patients
+- otherwise known as hospital-acquired infections and ==nosocomial infections==, HAIs/HCAIs typically occur as a result of micro-organisms being carried by patients entering a hospital, or immuno-compromised patients
 - common 'problem bacteria', otherwise known as ==nosocomial bacteria== describe the bacteria that typically cause such infections
 - the most common examples include:
 	- methicillin-resistant *Staphylococcus auereus* ([[MRSA]])

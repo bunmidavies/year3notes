@@ -43,5 +43,94 @@
     ],
     "defaultFilterType": "tree"
   },
-  "treeData": []
+  "treeData": [
+    {
+      "id": "cab182f0cb665a44",
+      "parent": 0,
+      "droppable": true,
+      "text": "Enhancer (genetics) - Wikipedia",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "0b81d1d7473a1ce1",
+      "parent": 0,
+      "droppable": true,
+      "text": "oct 1 protein at DuckDuckGo",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "a2147f06bb875673",
+      "parent": 0,
+      "droppable": true,
+      "text": "predisposition meaning at DuckDuckGo",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "3454a4180ee95416",
+      "parent": 0,
+      "droppable": true,
+      "text": "immunogenic at DuckDuckGo",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "e368f0396802fbc2",
+      "parent": 0,
+      "droppable": true,
+      "text": "stereognosis at DuckDuckGo",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "062f1e000409e4dd",
+      "parent": 0,
+      "droppable": true,
+      "text": "Occipital Lobe: Function, Location, and Structure",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "f8378966a3eca643",
+      "parent": 0,
+      "droppable": true,
+      "text": "Glia - Wikipedia",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    },
+    {
+      "id": "a62435e7bd1d5142",
+      "parent": 0,
+      "droppable": true,
+      "text": "muller cells at DuckDuckGo",
+      "data": {
+        "fileType": "site",
+        "fileSize": "",
+        "icon": {}
+      }
+    }
+  ]
 }

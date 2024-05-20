@@ -5,7 +5,7 @@
 
 # hallmarks of Alzheimers
 
-- $\beta$-amyloid plaques outside neruones, as well as protein tau (tangles) inside neurones are common hallmarks of alzheimer's disease - both of these block communication at synapses, and block the transport of nutrients into neurones
+- $\beta$-amyloid plaques outside neurons, as well as protein tau (tangles) inside neurones are common hallmarks of alzheimer's disease - both of these block communication at synapses, and block the transport of nutrients into neurones
 - risk factors also include:
 	- genetics (APP, presenilin 1 & 2)
 	- downs syndrome (3 copies of chromosome 21)
